@@ -120,6 +120,14 @@ En esta lección, aprenderás tareas comunes de exploración y análisis de dato
 
 ### V1.4 Lesson summary
 
+![26.png](ims%2FC1%2F26.png)
+
+En esta lección, aprendiste cómo utilizar Python para explorar, visualizar y manipular datos. La exploración de datos es fundamental en la ciencia de datos y es un elemento clave en el análisis de datos y el aprendizaje automático. El aprendizaje automático es una subcategoría de la ciencia de datos que se ocupa de la modelización predictiva. En otras palabras, el aprendizaje automático utiliza datos para crear modelos predictivos con el fin de predecir valores desconocidos. 
+
+![27.png](ims%2FC1%2F27.png)
+
+Puedes utilizar el aprendizaje automático para predecir cuánta comida necesita pedir un supermercado o para identificar plantas en una fotografía. El aprendizaje automático funciona identificando relaciones entre los valores de datos que describen características de algo, como la altura y el color de una planta, y el valor que queremos predecir, que es la etiqueta, como la especie de la planta. Estas relaciones se incorporan a un modelo a través de un proceso de entrenamiento.
+
 ### V1.5 Lesson introduction
 
 ### V1.6 What is regression?
@@ -386,8 +394,6 @@ La exploración y análisis de datos es típicamente un proceso iterativo, en el
 
 ### R1.5 Exercise - Explore data with NumPy and Pandas
 
-> ## Nota:
-> Puedes ver todo el notebook en formato HTML en [R1.5 Explore data with Numpy and Pandas.html](python_htmls%2FR1.5%20Explore%20data%20with%20Numpy%20and%20Pandas.html)
 
 Explorando Datos con Python
 Una parte significativa del rol de un científico de datos consiste en explorar, analizar y visualizar datos. Existe una amplia gama de herramientas y lenguajes de programación que pueden utilizar para hacer esto, y uno de los enfoques más populares es utilizar cuadernos Jupyter (como este) y Python.
@@ -399,6 +405,10 @@ En este ejercicio, explorarás arreglos de datos con NumPy y datos tabulares con
 Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para completarse. Puedes acceder al ejercicio desde el siguiente enlace.
 
 https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-python/3-exercise-explore-data
+
+> ## Nota:
+> Puedes ver todo el notebook en [R1.5 Explore data with Numpy and Pandas.ipynb](python_htmls%2FR1.5%20Explore%20data%20with%20Numpy%20and%20Pandas.ipynb)
+
 
 ### R1.6 Visualize data
 
@@ -430,14 +440,15 @@ A menudo, cuando intentamos comprender datos en bruto o resultados, podemos expe
 
 ### R1.7 Exercise - Visualize data with Matplotlib
 
-> ## Nota:
-> Puedes ver todo el notebook en formato HTML en [R1.7 Visualize data with Matplotlib.html](python_htmls%2FR1.7%20Visualize%20data%20with%20Matplotlib.html)
 
 Los DataFrames proporcionan una excelente forma de explorar y analizar datos tabulares, pero a veces una imagen vale más que mil filas y columnas. La biblioteca Matplotlib proporciona la base para crear visualizaciones de datos que pueden mejorar en gran medida tu capacidad para analizar los datos.
 
 Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para completarse. Puedes acceder al ejercicio desde el siguiente enlace.
 
 https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-python/5-exercise-visualize-data
+
+> ## Nota:
+> Puedes ver todo el notebook en [R1.7 Visualize data with Matplotlib.ipynb](python_htmls%2FR1.7%20Visualize%20data%20with%20Matplotlib.ipynb)
 
 
 ### R1.8 Examine real world data
@@ -458,6 +469,18 @@ Recuerda, los datos del mundo real siempre tendrán problemas, pero este problem
 - Verifica si los datos en bruto tienen sesgo y considera tus opciones para corregirlo, si se encuentra.
 
 ### R1.9 Exercise - Examine real world data
+
+**Explorando datos con Python: datos del mundo real**
+
+La última vez, examinamos las calificaciones de nuestros datos de estudiantes e investigamos esto visualmente con histogramas y gráficos de caja. Ahora vamos a adentrarnos en casos más complejos, describir los datos de manera más completa y discutir cómo hacer comparaciones básicas entre los datos.
+
+Este ejercicio requiere el uso del entorno de aprendizaje de Microsoft Learn para completarse. Puedes acceder al ejercicio a través del siguiente enlace.
+
+https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-python/7-exercise-real-world-data
+
+> ## Nota:
+> Puedes ver todo el notebook en [R1.9 Examine real world data.ipynb](python_htmls%2FR1.9%20Examine%20real%20world%20data.ipynb)
+
 
 ### R1.10 Exercise - Train and evaluate a regression model
 
@@ -493,7 +516,13 @@ Recuerda, los datos del mundo real siempre tendrán problemas, pero este problem
 
 ### Q1.4 Exercise Quiz 3
 
+![23.png](ims%2FC1%2F23.png)
+
 ### Q1.5 Knowledge check 1
+
+![24.png](ims%2FC1%2F24.png)
+
+![25.png](ims%2FC1%2F25.png)
 
 ### Q1.6 Exercise quiz 4
 
