@@ -1,37 +1,28 @@
 # Create Machine Learning Models in Microsoft Azure
 
-# Índice
+## INDICE:
 
-- [1 Explore data and create models to predict numeric values](#1-explore-data-and-create-models-to-predict-numeric-values)
-  - [1.1 Videos](#11-videos)
-  - [1.2 Readings](#12-readings)
-  - [1.3 Quizzes](#13-quizzes)
+- [1 Introduction to the program](#1-introduction-to-the-program)
+- [2 Explore & Analyse Data With Python](#2-explore--analyse-data-with-python)
+- [3 Train and Evaluate Regression Models](#3-train-and-evaluate-regression-models)
+- [4 Train and Evaluate Classification Models](#4-train-and-evaluate-classification-models)
+- [5 Train and Evaluate Clustering Models](#5-train-and-evaluate-clustering-models)
+- [6 Train a Deep Neural Network](#6-train-a-deep-neural-network)
+- [7 Train a Convolutional Neural Network](#7-train-a-convolutional-neural-network)
+- [8 Course Wrap-Up](#8-course-wrap-up)
 
-- [2 Train and evaluate classification and clustering models](#2-train-and-evaluate-classification-and-clustering-models)
-  - [2.1 Videos](#21-videos)
-  - [2.2 Readings](#22-readings)
-  - [2.3 Quizzes](#23-quizzes)
-
-- [3 Train and evaluate deep learning models](#3-train-and-evaluate-deep-learning-models)
-  - [3.1 Videos](#31-videos)
-  - [3.2 Readings](#32-readings)
-  - [3.3 Quizzes](#33-quizzes)
-
-# 1 Explore data and create models to predict numeric values
-
+# 1 Introduction to the program
 Exploración y análisis de datos en el núcleo de la ciencia de datos. Los científicos de datos requieren habilidades en lenguajes como Python para explorar, visualizar y manipular datos. En este módulo, aprenderás a utilizar Python para explorar, visualizar y manipular datos. También aprenderás cómo la regresión se puede utilizar para crear un modelo de aprendizaje automático que predice valores numéricos. Utilizarás el framework scikit-learn en Python para entrenar y evaluar un modelo de regresión.
 
-## 1.1 Videos
+## INDICE:
 
-- [V1.1 Introduction to the course](#v11-introduction-to-the-course)
-- [V1.2 Exam DP-100: Designing and Implementing a Data Science Solution on Azure certification](#v12-exam-dp-100-designing-and-implementing-a-data-science-solution-on-azure-certification)
-- [V1.3 Lesson introduction](#v13-lesson-introduction)
-- [V1.4 Lesson summary](#v14-lesson-summary)
-- [V1.5 Lesson introduction](#v15-lesson-introduction)
-- [V1.6 What is regression?](#v16-what-is-regression)
-- [V1.7 Lesson summary](#v17-lesson-summary)
+- [Introduction to the course](#introduction-to-the-course)
+- [Exam DP-100: Designing and Implementing a Data Science Solution on Azure certification](#exam-dp-100-designing-and-implementing-a-data-science-solution-on-azure-certification)
+- [Course Syllabus](#course-syllabus)
+- [Exam DP-100: Skills Measured](#exam-dp-100-skills-measured)
+- [How to be successful in this course](#how-to-be-successful-in-this-course)
 
-### V1.1 Introduction to the course
+## Introduction to the course
 
 ![1.png](ims%2FC1%2F1.png)
 
@@ -70,7 +61,7 @@ En este curso, aprenderás a crear modelos de aprendizaje automático en Microso
 
 Finalmente, al concluir cada sección habrá un apartado de ejercicios interactivos, repasos de información y exámenes prácticos.
 
-### V1.2 Exam DP-100: Designing and Implementing a Data Science Solution on Azure certification
+## Exam DP-100: Designing and Implementing a Data Science Solution on Azure certification
 
 ![7.png](ims%2FC1%2F7.png)
 
@@ -94,64 +85,7 @@ Para prepararte, tendrás acceso a la información necesaria a través de este p
 
 - **Vikram**, un principiante, está trabajando en obtener la experiencia laboral necesaria para completar la certificación Microsoft Certified: Azure Data Scientist Associate y avanzar en su carrera.
 
-### V1.3 Lesson introduction
-
-![11.png](ims%2FC1%2F11.png)
-
-En esta lección, aprenderás a explorar y analizar datos con Python. La función principal de los científicos de datos es, como era de esperar, explorar y analizar datos. Los resultados de un análisis pueden servir de base para un informe o un modelo de aprendizaje automático. Pero todo comienza con los datos, y Python es el lenguaje de programación más popular para los científicos de datos.
-
-![12.png](ims%2FC1%2F12.png)
-
-Después de décadas de desarrollo de código abierto, Python ofrece una amplia funcionalidad con potentes bibliotecas estadísticas y numéricas. NumPy y Pandas simplifican el análisis y la manipulación de datos. Matplotlib proporciona visualizaciones de datos atractivas. Scikit-learn ofrece un análisis de datos predictivo simple y efectivo. TensorFlow y PyTorch proporcionan capacidades de aprendizaje automático y aprendizaje profundo.
-
-![13.png](ims%2FC1%2F13.png)
-
-Por lo general, un proyecto de análisis de datos está diseñado para establecer ideas en torno a un escenario específico o para probar una hipótesis. Por ejemplo, supongamos que un profesor universitario recopila datos de sus estudiantes, incluyendo el número de clases a las que asisten, las horas que pasan estudiando y la calificación final obtenida en el examen de fin de curso.
-
-![14.png](ims%2FC1%2F14.png)
-
-El profesor podría analizar los datos para determinar si existe una relación entre la cantidad de estudio que realiza un estudiante y la calificación final que obtienen. El profesor podría usar los datos para probar una hipótesis de que solo los estudiantes que estudian durante un número mínimo de horas pueden esperar obtener una calificación aprobatoria.
-
-![15.png](ims%2FC1%2F15.png)
-
-![16.png](ims%2FC1%2F16.png)
-
-En esta lección, aprenderás tareas comunes de exploración y análisis de datos, y explorarás cómo utilizar paquetes de Python como NumPy, Pandas y Matplotlib para analizar datos.
-
-### V1.4 Lesson summary
-
-![26.png](ims%2FC1%2F26.png)
-
-En esta lección, aprendiste cómo utilizar Python para explorar, visualizar y manipular datos. La exploración de datos es fundamental en la ciencia de datos y es un elemento clave en el análisis de datos y el aprendizaje automático. El aprendizaje automático es una subcategoría de la ciencia de datos que se ocupa de la modelización predictiva. En otras palabras, el aprendizaje automático utiliza datos para crear modelos predictivos con el fin de predecir valores desconocidos. 
-
-![27.png](ims%2FC1%2F27.png)
-
-Puedes utilizar el aprendizaje automático para predecir cuánta comida necesita pedir un supermercado o para identificar plantas en una fotografía. El aprendizaje automático funciona identificando relaciones entre los valores de datos que describen características de algo, como la altura y el color de una planta, y el valor que queremos predecir, que es la etiqueta, como la especie de la planta. Estas relaciones se incorporan a un modelo a través de un proceso de entrenamiento.
-
-### V1.5 Lesson introduction
-
-### V1.6 What is regression?
-
-### V1.7 Lesson summary
-
-## 1.2 Readings
-
-- [R1.1 Course syllabus](#r11-course-syllabus)
-- [R1.2 Exam DP-100: Skills Measured](#r12-exam-dp-100-skills-measured)
-- [R1.3 How to be successful in this course](#r13-how-to-be-successful-in-this-course)
-- [R1.4 Explore data with NumPy and Pandas](#r14-explore-data-with-numpy-and-pandas)
-- [R1.5 Exercise - Explore data with NumPy and Pandas](#r15-exercise-explore-data-with-numpy-and-pandas)
-- [R1.6 Visualize data](#r16-visualize-data)
-- [R1.7 Exercise - Visualize data with Matplotlib](#r17-exercise-visualize-data-with-matplotlib)
-- [R1.8 Examine real world data](#r18-examine-real-world-data)
-- [R1.9 Exercise - Examine real world data](#r19-exercise-examine-real-world-data)
-- [R1.10 Exercise - Train and evaluate a regression model](#r110-exercise-train-and-evaluate-a-regression-model)
-- [R1.11 Discover new regression models](#r111-discover-new-regression-models)
-- [R1.12 Exercise - Experiment with more powerful regression models](#r112-exercise-experiment-with-more-powerful-regression-models)
-- [R1.13 Improve models with hyperparameters](#r113-improve-models-with-hyperparameters)
-- [R1.14 Exercise - Optimize and save models](#r114-exercise-optimize-and-save-models)
-
-### R1.1 Course syllabus
+## Course syllabus
 
 El aprendizaje automático es la base de la modelización predictiva e inteligencia artificial. En este curso, aprenderás los principios fundamentales del aprendizaje automático y cómo utilizar herramientas y marcos comunes para entrenar, evaluar y utilizar modelos de aprendizaje automático.
 
@@ -167,7 +101,7 @@ La clasificación es un tipo de aprendizaje automático que se utiliza para cate
 
 En este módulo, aprenderás los principios fundamentales del aprendizaje profundo y cómo crear modelos de redes neuronales profundas utilizando PyTorch o TensorFlow. También explorarás el uso de redes neuronales convolucionales para crear modelos de clasificación de imágenes.
 
-### R1.2 Exam DP-100: Skills Measured
+## Exam DP-100: Skills Measured
 
 **Perfil del público objetivo**
 
@@ -177,9 +111,9 @@ Las responsabilidades de este rol incluyen planificar y crear un entorno de trab
 
 Un candidato para esta certificación debe tener conocimientos y experiencia en ciencia de datos y en el uso de Azure Machine Learning y Azure Databricks.
 
-## Habilidades evaluadas
+###  Habilidades evaluadas
 
-## Administrar recursos de Azure para el aprendizaje automático (25-30%)
+### Administrar recursos de Azure para el aprendizaje automático (25-30%)
 
 **Crear un espacio de trabajo de Azure Machine Learning**
 
@@ -219,7 +153,7 @@ Un candidato para esta certificación debe tener conocimientos y experiencia en 
 - Crear y ejecutar cuadernos en Azure Databricks
 - Vincular un espacio de trabajo de Azure Databricks a un espacio de trabajo de Azure Machine Learning
 
-## Ejecutar experimentos y entrenar modelos (20-25%)
+### Ejecutar experimentos y entrenar modelos (20-25%)
 
 **Crear modelos utilizando el diseñador de Azure Machine Learning**
 
@@ -262,7 +196,7 @@ Un candidato para esta certificación debe tener conocimientos y experiencia en 
 - Definir opciones de terminación anticipada
 - Encontrar el modelo con valores óptimos de hiperparámetros
 
-## Implementar y operativizar soluciones de aprendizaje automático (35-40%)
+### Implementar y operativizar soluciones de aprendizaje automático (35-40%)
 
 **Seleccionar cómputo para el despliegue de modelos**
 
@@ -304,7 +238,7 @@ Un candidato para esta certificación debe tener conocimientos y experiencia en 
 - Refactorizar cuadernos en scripts
 - Implementar control de fuente para scripts
 
-## Implementar aprendizaje automático responsable (5-10%)
+### Implementar aprendizaje automático responsable (5-10%)
 
 **Utilizar intérpretes de modelos para interpretar modelos**
 
@@ -321,9 +255,9 @@ Un candidato para esta certificación debe tener conocimientos y experiencia en 
 - Describir los principios de la privacidad diferencial
 - Especificar niveles aceptables de ruido en los datos y los efectos en la privacidad
 
-### R1.3 How to be successful in this course
+## How to be successful in this course
 
-## **Cómo tener éxito en este curso**
+### **Cómo tener éxito en este curso**
 
 Tomar un curso en línea puede resultar abrumador. ¿Cómo aprendes a tu propio ritmo y logras con éxito tus objetivos?
 
@@ -368,23 +302,65 @@ Completar todos los cuestionarios, preguntas de práctica del examen y ejercicio
 Leer cuidadosamente los comentarios al responder cuestionarios o exámenes de práctica, ya que esto te ayudará a reforzar lo que estás aprendiendo.
 Utilizar el espacio de trabajo de Microsoft Azure Machine Learning. Para utilizar Azure Machine Learning, debes crear un espacio de trabajo en tu suscripción de Azure. Luego, puedes utilizar este espacio de trabajo para completar los ejercicios relacionados. Se te darán instrucciones claras sobre cómo configurarlo. Después de completar cada lección, también recibirás instrucciones sobre cómo "limpiar" para que puedas reutilizar el espacio
 
-### R1.4 Explore data with NumPy and Pandas
+# 2 Explore & Analyse Data with Python
+
+## INDICE:
+
+- [2 Lesson introduction](#2-lesson-introduction)
+- [Explore data with NumPy and Pandas](#explore-data-with-numpy-and-pandas)
+- [Exercise explore data with NumPy and Pandas](#exercise-explore-data-with-numpy-and-pandas)
+- [2 Exercise Quiz 1](#2-exercise-quiz-1)
+- [Visualize Data](#visualize-data)
+- [Exercise Visualize data with Matplotlib](#exercise-visualize-data-with-matplotlib)
+- [2 Exercise Quiz 2](#2-exercise-quiz-2)
+- [Examine real world data](#examine-real-world-data)
+- [Exercise Examine real world data](#exercise-examine-real-world-data)
+- [2 Exercise Quiz 3](#2-exercise-quiz-3)
+- [2 Knowledge check 1](#2-knowledge-check)
+- [2 Lesson summary](#2-lesson-summary)
+
+## 2 Lesson introduction
+
+![11.png](ims%2FC1%2F11.png)
+
+En esta lección, aprenderás a explorar y analizar datos con Python. La función principal de los científicos de datos es, como era de esperar, explorar y analizar datos. Los resultados de un análisis pueden servir de base para un informe o un modelo de aprendizaje automático. Pero todo comienza con los datos, y Python es el lenguaje de programación más popular para los científicos de datos.
+
+![12.png](ims%2FC1%2F12.png)
+
+Después de décadas de desarrollo de código abierto, Python ofrece una amplia funcionalidad con potentes bibliotecas estadísticas y numéricas. NumPy y Pandas simplifican el análisis y la manipulación de datos. Matplotlib proporciona visualizaciones de datos atractivas. Scikit-learn ofrece un análisis de datos predictivo simple y efectivo. TensorFlow y PyTorch proporcionan capacidades de aprendizaje automático y aprendizaje profundo.
+
+![13.png](ims%2FC1%2F13.png)
+
+Por lo general, un proyecto de análisis de datos está diseñado para establecer ideas en torno a un escenario específico o para probar una hipótesis. Por ejemplo, supongamos que un profesor universitario recopila datos de sus estudiantes, incluyendo el número de clases a las que asisten, las horas que pasan estudiando y la calificación final obtenida en el examen de fin de curso.
+
+![14.png](ims%2FC1%2F14.png)
+
+El profesor podría analizar los datos para determinar si existe una relación entre la cantidad de estudio que realiza un estudiante y la calificación final que obtienen. El profesor podría usar los datos para probar una hipótesis de que solo los estudiantes que estudian durante un número mínimo de horas pueden esperar obtener una calificación aprobatoria.
+
+![15.png](ims%2FC1%2F15.png)
+
+![16.png](ims%2FC1%2F16.png)
+
+En esta lección, aprenderás tareas comunes de exploración y análisis de datos, y explorarás cómo utilizar paquetes de Python como NumPy, Pandas y Matplotlib para analizar datos.
+
+## Explore data with NumPy and Pandas
 
 Los científicos de datos pueden utilizar diversas herramientas y técnicas para explorar, visualizar y manipular datos. Una de las formas más comunes en las que los científicos de datos trabajan con datos es utilizando el lenguaje Python y algunos paquetes específicos para el procesamiento de datos.
 
-#### ¿Qué es NumPy?
+### ¿Qué es NumPy?
 NumPy es una biblioteca de Python que proporciona funcionalidad comparable a herramientas matemáticas como MATLAB y R. Si bien NumPy simplifica significativamente la experiencia del usuario, también ofrece funciones matemáticas completas.
 
-#### ¿Qué es Pandas?
+### ¿Qué es Pandas?
 Pandas es una biblioteca de Python extremadamente popular para el análisis y la manipulación de datos. Pandas es como Excel para Python, proporcionando funcionalidad fácil de usar para tablas de datos.
+
 ![17.png](ims%2FC1%2F17.png)
 
 Tabla de datos con valores de nombre, edad, estado, número de hijos y mascotas.
 
-#### Explora datos en un cuaderno Jupyter
+### Explora datos en un cuaderno Jupyter
 Los cuadernos Jupyter son una forma popular de ejecutar scripts básicos utilizando tu navegador web. Normalmente, estos cuadernos son una sola página web, dividida en secciones de texto y secciones de código que se ejecutan en el servidor en lugar de en tu máquina local. Esto significa que puedes empezar rápidamente sin necesidad de instalar Python u otras herramientas.
 
-#### Pruebas de hipótesis
+### Pruebas de hipótesis
 La exploración y análisis de datos es típicamente un proceso iterativo, en el que el científico de datos toma una muestra de datos y realiza las siguientes tareas para analizarla y probar hipótesis:
 
 - Limpia los datos para manejar errores, valores faltantes y otros problemas.
@@ -392,7 +368,7 @@ La exploración y análisis de datos es típicamente un proceso iterativo, en el
 - Visualiza los datos para determinar las relaciones entre las variables y, en el caso de un proyecto de aprendizaje automático, identifica las características que podrían ser predictivas de la etiqueta.
 - Revisa la hipótesis y repite el proceso.
 
-### R1.5 Exercise - Explore data with NumPy and Pandas
+## Exercise explore data with NumPy and Pandas
 
 
 Explorando Datos con Python
@@ -406,11 +382,14 @@ Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para comple
 
 https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-python/3-exercise-explore-data
 
-> ## Nota:
+> ### Nota:
 > Puedes ver todo el notebook en [R1.5 Explore data with Numpy and Pandas.ipynb](python_htmls%2FR1.5%20Explore%20data%20with%20Numpy%20and%20Pandas.ipynb)
 
+## 2 Exercise Quiz 1
 
-### R1.6 Visualize data
+![18.png](ims%2FC1%2F18.png)
+
+## Visualize data
 
 Los científicos de datos visualizan datos para comprenderlos mejor. Esto puede significar mirar los datos en bruto, medidas resumidas como promedios o representar los datos en gráficos. Los gráficos son una poderosa forma de ver los datos, ya que podemos discernir patrones moderadamente complejos rápidamente sin necesidad de definir medidas resumidas matemáticas.
 
@@ -438,7 +417,7 @@ Los gráficos no se limitan a gráficos de dispersión en 2D como los anteriores
 
 A menudo, cuando intentamos comprender datos en bruto o resultados, podemos experimentar con diferentes tipos de gráficos hasta encontrar uno que explique los datos de una manera visualmente intuitiva.
 
-### R1.7 Exercise - Visualize data with Matplotlib
+## Exercise Visualize data with Matplotlib
 
 
 Los DataFrames proporcionan una excelente forma de explorar y analizar datos tabulares, pero a veces una imagen vale más que mil filas y columnas. La biblioteca Matplotlib proporciona la base para crear visualizaciones de datos que pueden mejorar en gran medida tu capacidad para analizar los datos.
@@ -447,11 +426,14 @@ Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para comple
 
 https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-python/5-exercise-visualize-data
 
-> ## Nota:
+> ### Nota:
 > Puedes ver todo el notebook en [R1.7 Visualize data with Matplotlib.ipynb](python_htmls%2FR1.7%20Visualize%20data%20with%20Matplotlib.ipynb)
 
+## 2 Exercise Quiz 2
 
-### R1.8 Examine real world data
+![22.png](ims%2FC1%2F22.png)
+
+## Examine real world data
 
 Los datos del mundo real pueden contener muchos problemas diferentes que pueden afectar la utilidad de los datos y nuestra interpretación de los resultados.
 
@@ -468,7 +450,7 @@ Recuerda, los datos del mundo real siempre tendrán problemas, pero este problem
 - Piensa en qué factores del mundo real podrían afectar tu análisis y considera si el tamaño de tu conjunto de datos es lo suficientemente grande para manejar esto.
 - Verifica si los datos en bruto tienen sesgo y considera tus opciones para corregirlo, si se encuentra.
 
-### R1.9 Exercise - Examine real world data
+## Exercise Examine real world data
 
 **Explorando datos con Python: datos del mundo real**
 
@@ -481,202 +463,76 @@ https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-pyt
 > ## Nota:
 > Puedes ver todo el notebook en [R1.9 Examine real world data.ipynb](python_htmls%2FR1.9%20Examine%20real%20world%20data.ipynb)
 
-
-### R1.10 Exercise - Train and evaluate a regression model
-
-### R1.11 Discover new regression models
-
-### R1.12 Exercise - Experiment with more powerful regression models
-
-### R1.13 Improve models with hyperparameters
-
-### R1.14 Exercise - Optimize and save models
-
-## 1.3 Quizzes
-
-- [Q1.1 Test prep](#q11-test-prep)
-- [Q1.2 Exercise Quiz 1](#q12-exercise-quiz-1)
-- [Q1.3 Exercise Quiz 2](#q13-exercise-quiz-2)
-- [Q1.4 Exercise Quiz 3](#q14-exercise-quiz-3)
-- [Q1.5 Knowledge check 1](#q15-knowledge-check-1)
-- [Q1.6 Exercise quiz 4](#q16-exercise-quiz-4)
-- [Q1.7 Exercise quiz 5](#q17-exercise-quiz-5)
-- [Q1.8 Exercise quiz 6](#q18-exercise-quiz-6)
-- [Q1.9 Knowledge check 2](#q19-knowledge-check-2)
-
-### Q1.1 Test prep
-
-### Q1.2 Exercise Quiz 1
-
-![18.png](ims%2FC1%2F18.png)
-
-### Q1.3 Exercise Quiz 2
-
-![22.png](ims%2FC1%2F22.png)
-
-### Q1.4 Exercise Quiz 3
+## 2 Exercise Quiz 3
 
 ![23.png](ims%2FC1%2F23.png)
 
-### Q1.5 Knowledge check 1
+## 2 Knowledge check
 
 ![24.png](ims%2FC1%2F24.png)
 
-![25.png](ims%2FC1%2F25.png)
+![25.png](ims%2FC1%2F25.pn
 
-### Q1.6 Exercise quiz 4
+## 2 Lesson summary
 
-### Q1.7 Exercise quiz 5
+![26.png](ims%2FC1%2F26.png)
 
-### Q1.8 Exercise quiz 6
+En esta lección, aprendiste cómo utilizar Python para explorar, visualizar y manipular datos. La exploración de datos es fundamental en la ciencia de datos y es un elemento clave en el análisis de datos y el aprendizaje automático. El aprendizaje automático es una subcategoría de la ciencia de datos que se ocupa de la modelización predictiva. En otras palabras, el aprendizaje automático utiliza datos para crear modelos predictivos con el fin de predecir valores desconocidos. 
 
-### Q1.9 Knowledge check 2
+![27.png](ims%2FC1%2F27.png)
 
+Puedes utilizar el aprendizaje automático para predecir cuánta comida necesita pedir un supermercado o para identificar plantas en una fotografía. El aprendizaje automático funciona identificando relaciones entre los valores de datos que describen características de algo, como la altura y el color de una planta, y el valor que queremos predecir, que es la etiqueta, como la especie de la planta. Estas relaciones se incorporan a un modelo a través de un proceso de entrenamient
 
-# 2 Train and evaluate classification and clustering models
+# 3 Train and Evaluate Regression Models
 
-La clasificación es un tipo de aprendizaje automático utilizado para categorizar elementos en clases. En este módulo, aprenderás cómo la clasificación se puede utilizar para crear un modelo de aprendizaje automático que predice categorías o clases. Utilizarás el framework scikit-learn en Python para entrenar y evaluar un modelo de clasificación. También aprenderás cómo la agrupación se puede utilizar para crear modelos de aprendizaje automático no supervisados que agrupan observaciones de datos en clústeres. Utilizarás el framework scikit-learn en Python para entrenar un modelo de agrupación.
+## INDICE:
 
-## 2.1 Videos
+- [3 Lesson Introduction](#3-lesson-introduction)
+- [What is Regression?](#what-is-regression)
+- [Exercise Train and evaluate a regression model](#exercise-train-and-evaluate-a-regression-model)
+- [3 Exercise quiz 1](#3-exercise-quiz-1)
+- [Discover new regression models](#discover-new-regression-models)
+- [Exercise Experiment with more powerful regression models](#exercise-experiment-with-more-powerful-regression-models)
+- [3 Exercise quiz 2](#3-exercise-quiz-2)
+- [Improve models with hyperparameters](#improve-models-with-hyperparameters)
+- [Exercise Optimize and save models](#exercise-optimize-and-save-models)
+- [3 Exercise quiz 3](#3-exercise-quiz-3)
+- [3 Knowledge Check](#3-knowledge-check)
+- [3 Test prep](#3-test-prep)
+- [3 Lesson summary](#3-lesson-summary)
 
-- [V2.1 Lesson introduction](#v21-lesson-introduction)
-- [V2.2 What is classification?](#v22-what-is-classification)
-- [V2.3 Evaluate classification models](#v23-evaluate-classification-models)
-- [V2.4 Lesson summary](#v24-lesson-summary)
-- [V2.5 Lesson introduction](#v25-lesson-introduction)
-- [V2.6 What is clustering](#v26-what-is-clustering)
-- [V2.7 Lesson summary](#v27-lesson-summary)
+## 3 Lesson Introduction
 
-### V2.1 Lesson introduction
+## What is Regression?
 
-### V2.2 What is classification?
+## Exercise Train and evaluate a regression model
 
-### V2.3 Evaluate classification models
+## 3 Exercise quiz 1
 
-### V2.4 Lesson summary
+## Discover new regression models
 
-### V2.5 Lesson introduction
+## Exercise Experiment with more powerful regression models
 
-### V2.6 What is clustering
+## 3 Exercise quiz 2
 
-### V2.7 Lesson summary
+## Improve models with hyperparameters
 
-## 2.2 Readings
+## Exercise Optimize and save models
 
-- [R2.1 Exercise - Train and evaluate a classification model](#r21-exercise-train-and-evaluate-a-classification-model)
-- [R2.2 Exercise - Perform classification with alternative metrics](#r22-exercise-perform-classification-with-alternative-metrics)
-- [R2.3 Create multiclass classification models](#r23-create-multiclass-classification-models)
-- [R2.4 Exercise - Train and evaluate multiclass classification models](#r24-exercise-train-and-evaluate-multiclass-classification-models)
-- [R2.5 Exercise - Train and evaluate a clustering model](#r25-exercise-train-and-evaluate-a-clustering-model)
-- [R2.6 Evaluate different types of clustering](#r26-evaluate-different-types-of-clustering)
-- [R2.7 Exercise - Train and evaluate advanced clustering models](#r27-exercise-train-and-evaluate-advanced-clustering-models)
+## 3 Exercise quiz 3
 
-### R2.1 Exercise - Train and evaluate a classification model
+## 3 Knowledge Check
 
-### R2.2 Exercise - Perform classification with alternative metrics
+## 3 Test prep
 
-### R2.3 Create multiclass classification models
+## 3 Lesson summary
 
-### R2.4 Exercise - Train and evaluate multiclass classification models
+# 4 Train and Evaluate Classification Models
 
-### R2.5 Exercise - Train and evaluate a clustering model
+# 5 Train and Evaluate Clustering Models
 
-### R2.6 Evaluate different types of clustering
+# 6 Train a Deep Neural Network
 
-### R2.7 Exercise - Train and evaluate advanced clustering models
+# 7 Train a Convolutional Neural Network
 
-## 2.3 Quizzes
-
-- [Q2.1 Test prep](#q21-test-prep)
-- [Q2.2 Exercise quiz 1](#q22-exercise-quiz-1)
-- [Q2.3 Exercise quiz 2](#q23-exercise-quiz-2)
-- [Q2.4 Exercise quiz 3](#q24-exercise-quiz-3)
-- [Q2.5 Knowledge check 1](#q25-knowledge-check-1)
-- [Q2.6 Exercise quiz 4](#q26-exercise-quiz-4)
-- [Q2.7 Exercise quiz 5](#q27-exercise-quiz-5)
-- [Q2.8 Knowledge check 2](#q28-knowledge-check-2)
-
-### Q2.1 Test prep
-
-### Q2.2 Exercise quiz 1
-
-### Q2.3 Exercise quiz 2
-
-### Q2.4 Exercise quiz 3
-
-### Q2.5 Knowledge check 1
-
-### Q2.6 Exercise quiz 4
-
-### Q2.7 Exercise quiz 5
-
-### Q2.8 Knowledge check 2
-
-# 3 Train and evaluate deep learning models
-
-En este módulo, aprenderás sobre los principios fundamentales del aprendizaje profundo y cómo crear modelos de redes neuronales profundas utilizando PyTorch o TensorFlow. También explorarás el uso de redes neuronales convolucionales para crear modelos de clasificación de imágenes.
-## 3.1 Videos
-
-- [V3.1 Lesson introduction](#v31-lesson-introduction)
-- [V3.2 Deep neural network concepts](#v32-deep-neural-network-concepts)
-- [V3.3 Lesson summary](#v33-lesson-summary)
-- [V3.4 Lesson introduction](#v34-lesson-introduction)
-- [V3.5 Layers in a convolutional neural network](#v35-layers-in-a-convolutional-neural-network)
-- [V3.6 Transfer learning](#v36-transfer-learning)
-- [V3.7 Lesson summary](#v37-lesson-summary)
-- [V3.8 Course wrap up](#v38-course-wrap-up)
-
-### V3.1 Lesson introduction
-
-### V3.2 Deep neural network concepts
-
-### V3.3 Lesson summary
-
-### V3.4 Lesson introduction
-
-### V3.5 Layers in a convolutional neural network
-
-### V3.6 Transfer learning
-
-### V3.7 Lesson summary
-
-### V3.8 Course wrap up
-
-
-## 3.2 Readings
-
-- [R3.1 Exercise - Train a deep neural network](#r31-exercise-train-a-deep-neural-network)
-- [R3.2 Exercise - Train a convolutional neural network](#r32-exercise-train-a-convolutional-neural-network)
-- [R3.3 Exercise - Use transfer learning](#r33-exercise-use-transfer-learning)
-- [R3.4 What to expect next](#r34-what-to-expect-next)
-
-### R3.1 Exercise - Train a deep neural network
-
-### R3.2 Exercise - Train a convolutional neural network
-
-### R3.3 Exercise - Use transfer learning
-
-### R3.4 What to expect next
-
-
-## 3.3 Quizzes
-
-- [Q3.1 Test prep](#q31-test-prep)
-- [Q3.2 Exercise quiz 1](#q32-exercise-quiz-1)
-- [Q3.3 Knowledge check 1](#q33-knowledge-check-1)
-- [Q3.4 Exercise quiz 2](#q34-exercise-quiz-2)
-- [Q3.5 Exercise quiz 3](#q35-exercise-quiz-3)
-- [Q3.6 Knowledge check 2](#q36-knowledge-check-2)
-
-### Q3.1 Test prep
-
-### Q3.2 Exercise quiz 1
-
-### Q3.3 Knowledge check 1
-
-### Q3.4 Exercise quiz 2
-
-### Q3.5 Exercise quiz 3
-
-### Q3.6 Knowledge check 2
-
+# 8 Course Wrap-Up
