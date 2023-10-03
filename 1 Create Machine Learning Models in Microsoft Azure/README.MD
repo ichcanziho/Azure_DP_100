@@ -503,33 +503,426 @@ Puedes utilizar el aprendizaje automático para predecir cuánta comida necesita
 
 ## 3 Lesson Introduction
 
+![1.png](ims%2FC3%2F1.png)
+
+En esta lección, aprenderás cómo entrenar y evaluar modelos de regresión. La regresión es un método en el cual los modelos predicen un número. En el aprendizaje automático, el objetivo de la regresión es crear un modelo que pueda predecir un valor numérico cuantificable, como un precio, cantidad, tamaño u otro número escalar. La regresión es una técnica estadística de gran importancia en la ciencia debido a su facilidad de interpretación, robustez y rapidez en los cálculos. Los modelos de regresión proporcionan una base sólida para comprender cómo funcionan técnicas más complejas de aprendizaje automático.
+
+![2.png](ims%2FC3%2F2.png)
+
+En situaciones del mundo real, especialmente cuando hay poca cantidad de datos disponibles, los modelos de regresión son muy útiles para hacer predicciones. Por ejemplo, si una empresa que alquila bicicletas desea predecir la cantidad esperada de alquileres en un día futuro, un modelo de regresión puede realizar esta predicción. Un modelo podría ser creado utilizando datos existentes, como la cantidad de bicicletas alquiladas en días anteriores, o también se podrían tener en cuenta la estación del año, el día de la semana, y otros factores.
+
+![3.png](ims%2FC3%2F3.png)
+
+En esta lección, aprenderás cuándo usar modelos de regresión y cómo entrenar y evaluar estos modelos utilizando el framework Scikit-Learn. Para aprovechar al máximo esta lección, necesitarás conocimientos básicos de matemáticas y algo de experiencia en programación en Python.
+
 ## What is Regression?
+
+![4.png](ims%2FC3%2F4.png)
+
+La regresión funciona estableciendo una relación entre variables en los datos que representan características conocidas como las características del objeto observado y la variable que estamos tratando de predecir, conocida como la etiqueta. Imagina una empresa que alquila bicicletas y desea predecir la cantidad esperada de alquileres en un día dado. En este caso, las características incluyen cosas como el día de la semana, el mes, y así sucesivamente, mientras que la etiqueta es el número de alquileres de bicicletas. Para entrenar el modelo, comenzamos con una muestra de datos que contiene las características, así como los valores conocidos para la etiqueta. En este caso, necesitaríamos datos históricos que incluyan fechas, condiciones climáticas y el número de alquileres de bicicletas. 
+
+![5.png](ims%2FC3%2F5.png)
+
+Luego dividimos esta muestra de datos en dos subconjuntos: un conjunto de datos de entrenamiento al que aplicamos un algoritmo que determina una función que encapsula la relación entre los valores de las características y los valores conocidos de la etiqueta, y un conjunto de datos de validación o prueba que podemos usar para evaluar el modelo al generar predicciones para la etiqueta y compararlas con los valores reales conocidos de la etiqueta.
+
+![6.png](ims%2FC3%2F6.png)
+
+El uso de datos históricos con valores conocidos para entrenar un modelo hace que la regresión sea un ejemplo de aprendizaje automático supervisado. 
+
+![7.png](ims%2FC3%2F7.png)
+
+![8.png](ims%2FC3%2F8.png)
+
+Imaginemos un ejemplo simple para entender cómo funciona el proceso de entrenamiento y evaluación en principio. Supongamos que simplificamos el escenario para usar una sola característica, la temperatura promedio diaria, para predecir la etiqueta de alquileres de bicicletas. Comenzamos con datos que incluyen valores conocidos para la característica de temperatura promedio diaria y la etiqueta de alquileres de bicicletas. Luego seleccionamos aleatoriamente cinco de estas observaciones y las usamos para entrenar un modelo de regresión. 
+
+![9.png](ims%2FC3%2F9.png)
+
+Cuando hablamos de entrenar un modelo, lo que queremos decir es encontrar una función, una ecuación matemática, que pueda utilizar la característica de temperatura para calcular el número de alquileres. En otras palabras, necesitamos definir la siguiente función: f(x) = y. Ahora podemos trazar los valores de entrenamiento para x e y en un gráfico. 
+
+![10.png](ims%2FC3%2F10.png)
+
+Luego necesitamos ajustar estos valores a una función que permita cierta variación aleatoria.
+
+![11.png](ims%2FC3%2F11.png)
+
+En nuestro ejemplo, los puntos trazados forman una línea diagonal casi recta, lo que indica una relación lineal aparente entre x e y. Debemos encontrar una función lineal que sea la mejor opción para la muestra de datos. Hay varios algoritmos que podemos usar para determinar esta función, que finalmente encontrará una línea recta con una varianza mínima en general con respecto a los puntos trazados. La línea representa una función lineal que se puede usar con cualquier valor de x para aplicar la pendiente de la línea y su intersección, donde la línea cruza el eje y cuando x es 0, para calcular y. En este caso, si extendemos la línea hacia la izquierda, descubriremos que cuando x es 0, y es alrededor de 20, y la pendiente de la línea es tal que por cada unidad de x que avanzamos hacia la derecha, y aumenta en alrededor de 1.7. Nuestra función f, por lo tanto, se puede calcular como 20 más 1.7x.
+
+![12.png](ims%2FC3%2F12.png)
+
+Ahora que hemos definido nuestra función predictiva, podemos usarla para predecir etiquetas para los datos de validación que manteníamos en reserva y comparar los valores predichos con los valores reales conocidos. Los valores predichos generalmente se indican con el símbolo `y gorro (^)` en inglés `y_hat`.
+
+![13.png](ims%2FC3%2F13.png)
+
+Los puntos trazados que están en la línea de la función son los valores y gorro predichos calculados por la función. Los otros puntos trazados son los valores y reales. 
+
+![14.png](ims%2FC3%2F14.png)
+
+ Hay varias formas de medir la diferencia entre los valores predichos y los valores reales. Podemos usar estas métricas para evaluar cuán bien predice el modelo. Es importante tener en cuenta que el aprendizaje automático se basa en estadísticas y matemáticas. Es importante estar al tanto de los términos específicos que utilizan los estadísticos, matemáticos y, por lo tanto, los científicos de datos. Puedes pensar en la diferencia entre tu valor de etiqueta predicho y el valor de etiqueta real como una medida de error. 
+
+![15.png](ims%2FC3%2F15.png)
+
+Sin embargo, en la práctica, los valores reales se basan en observaciones de muestra, que a su vez pueden estar sujetas a algunas variantes aleatorias. Para dejar claro que estamos comparando un valor predicho y gorro (y ^) con un valor observado y, nos referimos a la diferencia entre ellos como los residuos. Podemos resumir los residuos para todas las predicciones de datos de validación para calcular la pérdida general en el modelo como una medida de su rendimiento predictivo. 
+
+![16.png](ims%2FC3%2F16.png)
+
+Una de las formas más comunes de medir la pérdida es elevar al cuadrado los residuos individuales, sumar los cuadrados y calcular la media. Elevar al cuadrado los residuos tiene el efecto de basar el cálculo en valores absolutos, sin importar si la diferencia es negativa o positiva, y dar más peso a las diferencias más grandes. Esta métrica se llama error cuadrático medio (MSE, por sus siglas en inglés). 
+
+![17.png](ims%2FC3%2F17.png)
+
+ Volviendo a nuestro ejemplo, la pérdida para nuestro modelo basado en la métrica MSE es 9.79. ¿Es eso bueno? 
+
+![18.png](ims%2FC3%2F18.png)
+
+
+![19.png](ims%2FC3%2F19.png)
+
+ Es difícil decir si el valor de MSE es bueno, ya que no se expresa en una unidad de medida significativa. Sabemos que cuanto menor sea el valor, menos pérdida hay en el modelo y, por lo tanto, mejor es en la predicción.
+
+![20.png](ims%2FC3%2F20.png)
+
+Esto lo convierte en una métrica útil para comparar dos modelos y encontrar el que funciona mejor.
+
+![21.png](ims%2FC3%2F21.png)
+
+A veces es más útil expresar la pérdida en la misma unidad de medida que la etiqueta predicha en sí, en este caso, el número de alquileres. Esto se puede hacer calculando la raíz cuadrada del MSE, lo que produce una métrica conocida, no sorprendentemente, como error cuadrático medio raíz o RMSE (por sus siglas en inglés). 
+
+![22.png](ims%2FC3%2F22.png)
+
+Por ejemplo, la raíz cuadrada de 9.79 es 3.13. El RMSE de nuestro modelo indica que la pérdida es un poco más de tres, lo que puedes interpretar de manera aproximada como que, en promedio, las predicciones incorrectas difieren en alrededor de tres alquileres. 
+
+![23.png](ims%2FC3%2F23.png)
+
+Existen muchas otras métricas que se pueden utilizar para medir la pérdida en una regresión, como R-cuadrado, que a veces se conoce como coeficiente de determinación. Esta es la correlación entre x e y elevada al cuadrado. Esto produce un valor entre cero y uno que mide la cantidad de varianza que puede explicar el modelo. En general, cuanto más cercano esté este valor a uno, mejor será la predicción del modelo.
 
 ## Exercise Train and evaluate a regression model
 
+En las técnicas de aprendizaje automático supervisado, se entrena un modelo para operar en un conjunto de características y predecir una etiqueta utilizando un conjunto de datos que incluye algunos valores de etiqueta ya conocidos. El proceso de entrenamiento ajusta las características a las etiquetas conocidas para definir una función general que se puede aplicar a nuevas características para las cuales las etiquetas son desconocidas y predecirlas. Puedes pensar en esta función de la siguiente manera, donde y representa la etiqueta que queremos predecir y x representa las características que el modelo utiliza para predecirla.
+
+En este ejercicio aprenderás cómo entrenar y evaluar un modelo de regresión.
+
+Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para completarse. Puedes acceder al ejercicio desde el siguiente enlace. 
+
+[Exercise - Train and evaluate a regression model](https://learn.microsoft.com/en-us/training/modules/train-evaluate-regression-models/3-exercise-model)
+
+> ### Nota:
+> El notebook de esta sección lo puedes encontrar en: [1 Train and Evaluate a Regression Model.ipynb](notebooks%2FC3%2F1%20Train%20and%20Evaluate%20a%20Regression%20Model.ipynb)
+
 ## 3 Exercise quiz 1
+
+![24.png](ims%2FC3%2F24.png)
 
 ## Discover new regression models
 
+Hemos visto anteriormente cómo ajustar una línea recta a puntos de datos. Sin embargo, la regresión puede ajustar muchos tipos de relaciones, incluyendo aquellas con múltiples factores y aquellas en las que la importancia de un factor depende de otro.
+
+### Experimentando con modelos
+
+Los modelos de regresión a menudo se eligen porque funcionan con muestras de datos pequeñas, son robustos, fáciles de interpretar y existen variedad de ellos.
+
+**Linear regression** es la forma más simple de regresión, sin límite en la cantidad de características utilizadas. La regresión lineal viene en muchas formas, a menudo nombradas por la cantidad de características utilizadas y la forma de la curva que se ajusta.
+
+**Decision trees** adoptan un enfoque paso a paso para predecir una variable. Si pensamos en nuestro ejemplo de bicicletas, el árbol de decisión podría dividir primero los ejemplos entre aquellos que son durante la primavera/verano y el otoño/invierno, y hacer una predicción basada en el día de la semana. Por ejemplo, la primavera/verano - lunes puede tener una tasa de alquiler de bicicletas de 100 por día, mientras que la primavera/verano - martes puede tener una tasa de alquiler de 20 por día.
+
+**Ensemble algorithms** construyen no solo un árbol de decisión, sino una gran cantidad de árboles, lo que permite mejores predicciones en datos más complejos. Los algoritmos de conjunto, como Random Forest, son ampliamente utilizados en el aprendizaje automático y la ciencia debido a sus sólidas capacidades de predicción.
+
+Los científicos de datos a menudo experimentan con el uso de diferentes modelos. En el siguiente ejercicio, experimentaremos con diferentes tipos de modelos para comparar cómo se desempeñan en los mismos datos.
+
 ## Exercise Experiment with more powerful regression models
+
+En el `Notebook`, utilizamos modelos de regresión simples para analizar la relación entre las características de un conjunto de datos de alquiler de bicicletas. En este cuaderno, experimentaremos con modelos más complejos para mejorar nuestro rendimiento en la regresión.
+
+En esta lección, experimentarás con modelos de regresión más potentes.
+
+Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para completarse. Puedes acceder al ejercicio desde el siguiente enlace. 
+
+[Exercise - Experiment with more powerful regression models](https://learn.microsoft.com/en-us/training/modules/train-evaluate-regression-models/5-exercise-powerful-models)
+
+> ### Nota:
+> El notebook de esta clase lo puedes encontrar en: [2 Experiment with more powerfil regression models.ipynb](notebooks%2FC3%2F2%20Experiment%20with%20more%20powerfil%20regression%20models.ipynb)
 
 ## 3 Exercise quiz 2
 
+![25.png](ims%2FC3%2F25.png)
+
 ## Improve models with hyperparameters
+
+Los modelos simples con conjuntos de datos pequeños a menudo pueden ajustarse en un solo paso, mientras que los conjuntos de datos más grandes y los modelos más complejos deben ajustarse mediante el uso repetido del modelo con datos de entrenamiento y comparando la salida con la etiqueta esperada. Si la predicción es lo suficientemente precisa, consideramos que el modelo está entrenado. Si no lo es, ajustamos ligeramente el modelo y repetimos el proceso.
+
+**Los hiperparámetros** son valores que cambian la forma en que se ajusta el modelo durante estas iteraciones. La tasa de aprendizaje, por ejemplo, es un hiperparámetro que establece cuánto se ajusta el modelo en cada ciclo de entrenamiento. Una tasa de aprendizaje alta significa que un modelo se puede entrenar más rápido, pero si es demasiado alta, los ajustes pueden ser tan grandes que el modelo nunca se "ajusta finamente" y no es óptimo.
+
+**Preprocesamiento de datos**
+
+El preprocesamiento se refiere a los cambios que realizas en tus datos antes de pasarlos al modelo. Hemos mencionado anteriormente que el preprocesamiento puede implicar limpiar tu conjunto de datos, lo cual es importante. Sin embargo, el preprocesamiento también puede incluir cambiar el formato de tus datos para que sea más fácil de usar por el modelo. Por ejemplo, los datos descritos como 'rojo', 'naranja', 'amarillo', 'verde limón' y 'verde' pueden funcionar mejor si se convierten en un formato más nativo para las computadoras, como números que indiquen la cantidad de rojo y la cantidad de verde.
+
+**Escala de características**
+
+El paso de preprocesamiento más común es escalar las características para que caigan entre cero y uno. Por ejemplo, el peso de una bicicleta y la distancia que una persona recorre en una bicicleta pueden ser dos números muy diferentes, pero al escalar ambos números entre cero y uno, los modelos pueden aprender de manera más efectiva a partir de los datos.
+
+**Uso de categorías como características**
+
+En el aprendizaje automático, también puedes usar características categóricas como 'bicicleta', 'patineta' o 'automóvil'. Estas características se representan mediante valores de 0 o 1 en vectores one-hot, que son vectores que tienen un 0 o 1 para cada valor posible. Por ejemplo, bicicleta, patineta y automóvil podrían representarse respectivamente como (1,0,0), (0,1,0) y (0,0,1).
 
 ## Exercise Optimize and save models
 
+Este ejercicio requiere del entorno de aprendizaje de Microsoft Learn para completarse. Puedes acceder al ejercicio desde el siguiente enlace.
+
+Regresión - Optimizar y guardar modelos
+En el cuaderno anterior, utilizamos modelos de regresión complejos para analizar la relación entre las características de un conjunto de datos de alquiler de bicicletas. En este cuaderno, veremos si podemos mejorar aún más el rendimiento de estos modelos.
+
+En este ejercicio, aprenderás cómo optimizar y guardar modelos.
+
+[Exercise - Optimize and save models](https://learn.microsoft.com/en-us/training/modules/train-evaluate-regression-models/7-exercise-optimize-save-models)
+
+> ### Nota:
+> Las notas de esta clase están en: [3 Optimize and save models.ipynb](notebooks%2FC3%2F3%20Optimize%20and%20save%20models.ipynb)
+
 ## 3 Exercise quiz 3
+
+![26.png](ims%2FC3%2F26.png)
 
 ## 3 Knowledge Check
 
+![27.png](ims%2FC3%2F27.png)
+
+![28.png](ims%2FC3%2F28.png)
+
+![29.png](ims%2FC3%2F29.png)
+
 ## 3 Test prep
+
+![30.png](ims%2FC3%2F30.png)
+
+![31.png](ims%2FC3%2F31.png)
+
+![32.png](ims%2FC3%2F32.png)
 
 ## 3 Lesson summary
 
+![33.png](ims%2FC3%2F33.png)
+
+En esta lección, aprendiste cómo la regresión puede utilizarse para crear un modelo de aprendizaje automático que predice valores numéricos. Luego, utilizaste el framework Scikit-Learn en Python para entrenar y evaluar un modelo de regresión. Si bien Scikit-Learn es un framework popular para escribir código y entrenar modelos de regresión, también puedes crear soluciones de aprendizaje automático para regresión utilizando las herramientas gráficas en Microsoft Azure Machine Learning. Más adelante, aprenderás más sobre el desarrollo sin código de modelos de regresión utilizando el módulo de diseño de Azure Machine Learning para crear un modelo de regresión con Azure Machine Learning.
+
 # 4 Train and Evaluate Classification Models
 
+## INDICE:
+- [Lesson introduction](#4-lesson-introduction)
+- [What is Classification?](#what-is-classification)
+- [Exercise Train and evaluate a classification model](#exercise-train-and-evaluate-a-classification-model)
+- [Exercise Quiz 1](#4-exercise-quiz-1)
+- [Evaluate classification models](#evaluate-classification-models)
+- [Exercise Perform classification with alternative metrics](#exercise-perform-classification-with-alternative-metrics)
+- [Exercise Quiz 2](#4-exercise-quiz-2)
+- [Create multiclass classification models](#create-multiclass-classification-models)
+- [Exercise Train and evaluate multiclass classification models](#exercise-train-and-evaluate-multiclass-classification-models)
+- [Exercise Quiz 3](#4-exercise-quiz-3)
+- [Knowledge Check](#4-knowledge-check)
+- [Lesson summary](#4-lesson-summary)
+
+## 4 Lesson introduction
+
+![1.png](ims%2FC4%2F1.png)
+
+En esta lección, aprenderás cómo entrenar y evaluar modelos de clasificación. La clasificación es una forma de aprendizaje automático en la que entrenas un modelo para predecir a qué categoría o clase pertenece un elemento. Por ejemplo, una clínica de salud podría utilizar datos diagnósticos como la altura, el peso, la presión arterial y el nivel de glucosa en sangre de un paciente para predecir si el paciente tiene diabetes o no. 
+
+![2.png](ims%2FC4%2F2.png)
+
+Los datos categóricos tienen clases distintas en lugar de valores numéricos. Algunos tipos de datos pueden ser tanto numéricos como categóricos. Por ejemplo, el tiempo de una carrera podría ser un tiempo en segundos o podríamos dividir los tiempos en clases de rápido, medio y lento, que son categorías. 
+
+![3.png](ims%2FC4%2F3.png)
+
+Mientras que otros tipos de datos solo pueden ser categóricos, como el tipo de forma, por ejemplo, círculo, triángulo o cuadrado.
+
+![4.png](ims%2FC4%2F4.png)
+
+n esta lección, aprenderás cuándo usar la clasificación y cómo entrenar y evaluar un modelo de clasificación utilizando el framework Scikit-learn. Para aprovechar al máximo esta lección, es útil tener conocimientos básicos de matemáticas y algo de experiencia en programación en Python.
+
+## What is Classification?
+
+![5.png](ims%2FC4%2F5.png)
+
+La clasificación binaria es una clasificación con dos categorías. Por ejemplo, podríamos etiquetar a los pacientes como no diabéticos o diabéticos. La predicción de clase se realiza determinando la probabilidad para cada posible clase como un valor entre 0 (imposible) y 1 (seguro). La probabilidad total para todas las clases es 1, ya que el paciente definitivamente es diabético o no diabético. 
+
+![6.png](ims%2FC4%2F6.png)
+
+Por lo tanto, si la probabilidad predicha de que un paciente sea diabético es 0.3, entonces existe una probabilidad correspondiente de 0.7 de que el paciente sea no diabético. 
+
+![7.png](ims%2FC4%2F7.png)
+
+El valor de umbral, generalmente 0.5, se utiliza para determinar la clase predicha. Por lo tanto, si la clase positiva en este caso, diabética, tiene una probabilidad predicha mayor que el umbral, se predice una clasificación como diabética.
+
+![8.png](ims%2FC4%2F8.png)
+
+La clasificación es un ejemplo de una técnica de aprendizaje automático supervisado, lo que significa que se basa en datos que incluyen valores de características conocidos. Por ejemplo, mediciones de diagnóstico para pacientes, así como valores de etiquetas conocidos, como una clasificación de no diabético o diabético. 
+
+![9.png](ims%2FC4%2F9.png)
+
+Se utiliza un algoritmo de clasificación para ajustar un subconjunto de los datos a una función que puede calcular la probabilidad de cada etiqueta de clase a partir de los valores de características. Los datos restantes se utilizan para evaluar el modelo mediante la comparación de las predicciones que genera a partir de las características con las etiquetas de clase conocidas.
+
+![10.png](ims%2FC4%2F10.png)
+
+Veamos un ejemplo sencillo para ayudar a explicar los principios clave. Supongamos que tenemos los siguientes datos de pacientes, que consisten en una sola característica, el nivel de glucosa en sangre, y una etiqueta de clase de 0 para no diabéticos y 1 para diabéticos. 
+
+![11.png](ims%2FC4%2F11.png)
+
+Usaremos las primeras ocho observaciones para entrenar un modelo de clasificación y comenzaremos trazando la característica de glucosa en sangre, que llamaremos X, y la etiqueta diabética predicha, que llamaremos Y. 
+
+![12.png](ims%2FC4%2F12.png)
+
+Lo que necesitamos es una función que calcule el valor de probabilidad para Y en función de X. En otras palabras, necesitamos la función F de X igual a Y.
+
+![13.png](ims%2FC4%2F13.png)
+
+Parece que cuanto mayor es el nivel de glucosa en sangre, más probable es que un paciente sea diabético, con el punto de inflexión en algún punto entre 100 y 110. 
+
+![14.png](ims%2FC4%2F14.png)
+
+Necesitamos ajustar una función que calcule un valor entre 0 y 1 para Y en función de estos valores. Una de esas funciones es una función logística que forma una curva en forma de sigma, en forma de "S".
+
+![15.png](ims%2FC4%2F15.png)
+
+Ahora podemos utilizar la función para calcular un valor de probabilidad de que Y sea positivo, lo que significa que el paciente es diabético, a partir de cualquier valor de X. Al encontrar el punto en la línea de la función para X, podemos establecer un valor de umbral de 0.5 como punto de corte para la predicción de la etiqueta de clase.
+Probemos esto con los valores de datos que hemos retenido. Los puntos trazados por debajo de la línea de umbral darán como resultado una predicción de clase 0, no diabética, y los puntos por encima de la línea se predicen como 1, diabéticos. 
+
+![16.png](ims%2FC4%2F16.png)
+
+Ahora podemos comparar las predicciones de etiquetas basadas en la función logística encapsulada en el modelo Y hat con las etiquetas de clase reales Y. Por lo general, los valores predichos se indican con el símbolo Y hat.
+
+## Exercise Train and evaluate a classification model
+
+La clasificación es una forma de aprendizaje automático supervisado en la que entrenas un modelo para utilizar las características (los valores x en nuestra función) para predecir una etiqueta (y) que calcula la probabilidad de que el caso observado pertenezca a cada una de varias clases posibles y predice una etiqueta apropiada. La forma más simple de clasificación es la clasificación binaria, en la que la etiqueta es 0 o 1, representando una de dos clases; por ejemplo, "Verdadero" o "Falso"; "Interno" o "Externo"; "Rentable" o "No rentable"; y así sucesivamente.
+
+En este ejercicio, entrenarás y evaluarás un modelo de clasificación.
+
+Este ejercicio requiere el uso del entorno de aprendizaje de Microsoft Learn para completarse. Puedes acceder al ejercicio desde el siguiente enlace.
+
+[Exercise - Train and evaluate a classification model](https://learn.microsoft.com/en-us/training/modules/train-evaluate-classification-models/3-exercise-model)
+
+> ### Nota:
+> El notebook de esta clase lo puedes encontrar en: [1 Train and Evaluate a CLassification Model.ipynb](notebooks%2FC4%2F1%20Train%20and%20Evaluate%20a%20CLassification%20Model.ipynb)
+
+## 4 Exercise Quiz 1
+
+![17.png](ims%2FC4%2F17.png)
+
+## Evaluate classification models
+
+![18.png](ims%2FC4%2F18.png)
+
+La precisión del entrenamiento de un modelo de clasificación es mucho menos importante que su capacidad para funcionar bien cuando se le proporcionan nuevos datos no vistos previamente. Después de todo, entrenamos modelos para que puedan ser utilizados en datos nuevos que encontramos en el mundo real. Una vez que hemos entrenado un modelo de clasificación, debemos evaluar cómo se desempeña en un conjunto de datos nuevos y no vistos previamente. 
+
+![19.png](ims%2FC4%2F19.png)
+
+En la lección anterior, creamos un modelo que predeciría si un paciente tenía diabetes o no basado en su nivel de glucosa en sangre. Ahora, cuando se aplica a algunos datos que no formaban parte del conjunto de entrenamiento, obtenemos predicciones. Recuerda que X se refiere a los niveles de glucosa en sangre, Y se refiere a si realmente son diabéticos, y Y hat se refiere a la predicción del modelo sobre si son diabéticos o no.
+
+![20.png](ims%2FC4%2F20.png)
+
+Simplemente calcular cuántas predicciones fueron correctas a veces es engañoso o demasiado simplista para comprender el tipo de errores que cometerá en el mundo real. 
+
+![21.png](ims%2FC4%2F21.png)
+
+Para obtener información más detallada, podemos tabular los resultados en una estructura llamada `matriz de confusión`. La matriz de confusión muestra el número total de: 
+
+- casos en los que el modelo predijo cero y la etiqueta real es cero, `verdaderos negativos`; 
+- el modelo predijo uno y la etiqueta real es uno, `verdaderos positivos`; 
+- el modelo predijo cero y la etiqueta real es uno, `falsos negativos`; 
+- el modelo predijo uno y la etiqueta real es cero, `falsos positivos`. 
+
+
+![22.png](ims%2FC4%2F22.png)
+
+Las celdas en la matriz de confusión suelen estar sombreadas de manera que los valores más altos tienen un tono más oscuro. Esto facilita ver una fuerte tendencia diagonal de arriba a la izquierda a abajo a la derecha, resaltando las celdas donde el valor predicho y el valor real son iguales. 
+
+![23.png](ims%2FC4%2F23.png)
+
+A partir de estos valores principales, puedes calcular una serie de otras métricas que pueden ayudarte a evaluar el rendimiento del modelo. Por ejemplo, 
+
+- Accuracy (exactitud): de todas las predicciones, ¿cuántas fueron correctas? 
+- Recall (sensibilidad): de todos los casos que son positivos, ¿cuántos identificó el modelo? 
+- Precision (precisión): de todos los casos que el modelo predijo como positivos, ¿cuántos realmente son positivos?
+
+## Exercise Perform classification with alternative metrics
+
+En el último cuaderno, ajustamos un clasificador binario para predecir si los pacientes eran diabéticos o no. Utilizamos la precisión como medida de qué tan bien se desempeñaba el modelo, pero la precisión no lo es todo. En este cuaderno, exploraremos alternativas a la precisión que pueden ser mucho más útiles en el aprendizaje automático.
+
+En este ejercicio, llevarás a cabo la clasificación utilizando métricas alternativas. Este ejercicio requiere el uso del entorno de aprendizaje de Microsoft Learn para completarse. Puedes acceder al ejercicio desde el siguiente enlace.
+
+[Exercise - Perform classification with alternative metrics](https://learn.microsoft.com/en-us/training/modules/train-evaluate-classification-models/5-exercise-alternative-classification-metrics)
+
+> ### Nota:
+> El Notebook de esta sección lo puedes encontrar en: [2 Perform classification with alternative metrics.ipynb](notebooks%2FC4%2F2%20Perform%20classification%20with%20alternative%20metrics.ipynb)
+
+## 4 Exercise Quiz 2
+
+![24.png](ims%2FC4%2F24.png)
+
+## Create multiclass classification models
+
+También es posible crear modelos de clasificación multiclase, en los que hay más de dos clases posibles. Por ejemplo, la clínica de salud podría ampliar el modelo de diabetes para clasificar a los pacientes como:
+
+- No diabético
+- Diabético tipo 1
+- Diabético tipo 2
+
+Los valores individuales de probabilidad de clase seguirían sumando un total de 1, ya que el paciente definitivamente está en una de las tres clases, y el modelo predecirá la clase más probable.
+
+Uso de modelos de clasificación multiclase
+La clasificación multiclase se puede pensar como una combinación de múltiples clasificadores binarios. Hay dos formas de abordar el problema:
+
+![25.png](ims%2FC4%2F25.png)
+
+**Uno contra todos (OVR)**, en el que se crea un clasificador para cada valor de clase posible, con un resultado positivo para los casos en los que la predicción es de esta clase y predicciones negativas para los casos en los que la predicción es de cualquier otra clase. Por ejemplo, un problema de clasificación con cuatro posibles clases de formas (cuadrado, círculo, triángulo, hexágono) requeriría cuatro clasificadores que predicen:
+
+- Cuadrado o no
+- Círculo o no
+- Triángulo o no
+- Hexágono o no
+
+**Uno contra uno (OVO)**, en el que se crea un clasificador para cada par posible de clases. El problema de clasificación con cuatro clases de formas requeriría los siguientes clasificadores binarios:
+
+- Cuadrado o círculo
+- Cuadrado o triángulo
+- Cuadrado o hexágono
+- Círculo o triángulo
+- Círculo o hexágono
+- Triángulo o hexágono
+
+- En ambos enfoques, el modelo general debe tener en cuenta todas estas predicciones para determinar a qué categoría pertenece el elemento.
+
+Afortunadamente, en la mayoría de los marcos de aprendizaje automático, incluido scikit-learn, la implementación de un modelo de clasificación multiclase no es significativamente más compleja que la clasificación binaria, y en la mayoría de los casos, los estimadores utilizados para la clasificación binaria admiten implícitamente la clasificación multiclase mediante la abstracción de un algoritmo OVR, un algoritmo OVO o permitiendo la elección de cualquiera de los dos.
+
+## Exercise Train and evaluate multiclass classification models
+
+En el último cuaderno, exploramos la clasificación binaria. Esto funciona bien cuando las observaciones de los datos pertenecen a una de las dos clases o categorías, como "Verdadero" o "Falso". Cuando los datos se pueden categorizar en más de dos clases, debes utilizar un algoritmo de clasificación multiclase.
+
+En este ejercicio, entrenarás y evaluarás modelos de clasificación multiclase. Este ejercicio requiere el uso del entorno de aprendizaje de Microsoft Learn para completarse. Puedes acceder al ejercicio desde el siguiente enlace.
+
+[Exercise - Train and evaluate multiclass classification models
+Completed
+100 XP
+](https://learn.microsoft.com/en-us/training/modules/train-evaluate-classification-models/7-exercise-multiclass-classification)
+
+> ### Nota:
+> El NoteBook de esta clase lo encuentras en: [3 Train and Evaluate Multiclass Classification models.ipynb](notebooks%2FC4%2F3%20Train%20and%20Evaluate%20Multiclass%20Classification%20models.ipynb)
+
+## 4 Exercise Quiz 3
+
+![26.png](ims%2FC4%2F26.png)
+
+## 4 Knowledge Check
+
+![27.png](ims%2FC4%2F27.png)
+
+![28.png](ims%2FC4%2F28.png)
+
+## 4 Lesson summary
+
+![29.png](ims%2FC4%2F29.png)
+
+En esta lección, aprendiste cómo la clasificación se puede utilizar para crear un modelo de aprendizaje automático que predice categorías o clases. Luego, utilizaste el marco de trabajo de Scikit-Learn en Python para entrenar y evaluar un modelo de clasificación. Si bien Scikit-Learn es un marco de trabajo popular para escribir código para entrenar modelos de clasificación, también puedes crear soluciones de aprendizaje automático para la clasificación utilizando las herramientas gráficas en Microsoft Azure Machine Learning. Puedes aprender más sobre el desarrollo sin código de modelos de clasificación utilizando Azure Machine Learning Designer.
+
 # 5 Train and Evaluate Clustering Models
+
+
 
 # 6 Train a Deep Neural Network
 
