@@ -471,7 +471,8 @@ https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-pyt
 
 ![24.png](ims%2FC1%2F24.png)
 
-![25.png](ims%2FC1%2F25.pn
+![25.png](ims%2FC1%2F25.png)
+
 
 ## 2 Lesson summary
 
@@ -922,7 +923,38 @@ En esta lección, aprendiste cómo la clasificación se puede utilizar para crea
 
 # 5 Train and Evaluate Clustering Models
 
+## INDICE:
 
+- [5 Lesson Introduction](#5-lesson-introduction)
+- [What is Clustering](#what-is-clustering)
+- [Exercise Train and evaluate a clustering model](#exercise-train-and-evaluate-a-clustering-model)
+- [5 Exercise Quiz 1](#5-exercise-quiz-1)
+- [Evaluate different types of clustering](#evaluate-different-types-of-clustering)
+- [Exercise Train and evaluate advanced clustering models](#exercise-train-and-evaluate-advanced-clustering-models)
+- [5 Exercise Quiz 2](#5-exercise-quiz-2)
+- [5 Knowledge Check](#5-knowledge-check)
+- [5 Test prep](#5-test-prep)
+- [5 Lesson summary](#5-lesson-summary)
+
+## 5 Lesson Introduction
+
+## What is Clustering
+
+## Exercise Train and evaluate a clustering model
+
+## 5 Exercise Quiz 1
+
+##  Evaluate different types of clustering
+
+## Exercise Train and evaluate advanced clustering models
+
+## 5 Exercise Quiz 2
+
+## 5 Knowledge Check
+
+## 5 Test prep
+
+## 5 Lesson summary
 
 # 6 Train a Deep Neural Network
 
