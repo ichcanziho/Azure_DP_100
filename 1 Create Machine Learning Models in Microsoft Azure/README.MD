@@ -938,26 +938,203 @@ En esta lección, aprendiste cómo la clasificación se puede utilizar para crea
 
 ## 5 Lesson Introduction
 
+![1.png](ims%2FC5%2F1.png)
+
+
+Hola. En esta lección, aprenderás cómo entrenar y evaluar modelos de agrupación (clustering). La agrupación es el proceso de agrupar objetos similares con otros objetos similares. Por ejemplo, imagina un escenario en el que tienes una colección de coordenadas bidimensionales que se han agrupado en tres categorías: amarillo, rojo y azul.
+
+![2.png](ims%2FC5%2F2.png)
+
+Una diferencia importante entre los modelos de agrupación y los modelos de clasificación es que la agrupación es un método no supervisado, donde el entrenamiento se realiza sin etiquetas. En su lugar, los modelos identifican ejemplos que tienen una colección similar de características. Por ejemplo, las imágenes que tienen un color similar se agrupan juntas. 
+
+![3.png](ims%2FC5%2F3.png)
+
+La agrupación es común y útil para explorar nuevos datos donde los patrones entre los puntos de datos, como las categorías de alto nivel, aún no se conocen. Se utiliza en muchos campos que necesitan etiquetar automáticamente datos complejos, incluido el análisis de redes sociales, la conectividad cerebral, la filtración de spam, y más.
+
+
 ## What is Clustering
+
+![4.png](ims%2FC5%2F4.png)
+
+La agrupación es una forma de aprendizaje automático no supervisado en la que las observaciones se agrupan en clústeres en función de las similitudes en sus valores de datos o características. Este tipo de aprendizaje automático se considera no supervisado porque no utiliza valores de etiquetas conocidos previamente para entrenar un modelo.
+
+![5.png](ims%2FC5%2F5.png)
+
+En un modelo de agrupación, la etiqueta es el clúster al que se asigna la observación basada únicamente en sus características. Por ejemplo, supongamos que un botánico observa una muestra de flores y registra el número de pétalos y hojas en cada flor. Puede ser útil agrupar estas flores en clústeres basados en similitudes entre sus características.
+
+![6.png](ims%2FC5%2F6.png)
+
+Hay muchas formas de hacerlo, por ejemplo, si la mayoría de las flores tienen el mismo número de hojas, se podrían agrupar en aquellas con muchos pétalos versus pocas hojas.
+
+![7.png](ims%2FC5%2F7.png)
+
+Alternativamente, si tanto el recuento de pétalos como de hojas varían considerablemente, puede haber un patrón por descubrir, como que aquellas con muchas hojas también tienen muchos pétalos. El objetivo del algoritmo de agrupación es encontrar la forma óptima de dividir el conjunto de datos en grupos. 
+
+![8.png](ims%2FC5%2F8.png)
+
+Lo que significa "óptimo" depende tanto del algoritmo utilizado como del conjunto de datos proporcionado. Aunque este ejemplo de flores puede ser simple para un ser humano lograrlo con solo algunas muestras, a medida que el conjunto de datos crece a miles de muestras o a más de dos características, los algoritmos de agrupación se vuelven muy útiles para dividir rápidamente un conjunto de datos en grupos.
+
+![9.png](ims%2FC5%2F9.png)
+
 
 ## Exercise Train and evaluate a clustering model
 
+A diferencia del aprendizaje automático supervisado, el aprendizaje no supervisado se utiliza cuando no hay una "verdad absoluta" a partir de la cual entrenar y validar las predicciones de etiquetas. La forma más común de aprendizaje no supervisado es la agrupación (clustering), que es similar conceptualmente a la clasificación, excepto que los datos de entrenamiento no incluyen valores conocidos para la etiqueta de clase que se va a predecir.
+
+La agrupación funciona separando los casos de entrenamiento en función de similitudes que se pueden determinar a partir de sus valores de características. En este ejercicio, entrenarás y evaluarás un modelo de agrupación.
+
+Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para completarse. Puedes acceder al ejercicio desde el siguiente enlace.
+
+[Exercise - Train and evaluate a clustering model](https://learn.microsoft.com/en-us/training/modules/train-evaluate-cluster-models/3-exercise-model)
+
+> ### Nota:
+> El notebook de esta clase está en: [1 Train and evaluate a clustering model.ipynb](notebooks%2FC5%2F1%20Train%20and%20evaluate%20a%20clustering%20model.ipynb)
+
+
 ## 5 Exercise Quiz 1
+
+![10.png](ims%2FC5%2F10.png)
 
 ##  Evaluate different types of clustering
 
+Existen múltiples algoritmos que puedes usar para la agrupación (clustering). Uno de los algoritmos más comúnmente utilizados es el agrupamiento K-Means, que en su forma más simple consta de los siguientes pasos:
+
+1. Los valores de las características se vectorizan para definir coordenadas n-dimensionales (donde n es el número de características). En el ejemplo de las flores, tenemos dos características (número de pétalos y número de hojas), por lo que el vector de características tiene dos coordenadas que podemos usar para conceptualmente representar los puntos de datos en un espacio bidimensional.
+
+2. Decides cuántos clústeres deseas usar para agrupar las flores y le asignas a este valor el nombre de "k". Por ejemplo, para crear tres clústeres, usarías un valor de "k" de 3. Luego, se colocan k puntos en coordenadas aleatorias. Estos puntos serán finalmente los puntos centrales de cada clúster, por lo que se les llama centroides.
+
+3. Cada punto de datos (en este caso, una flor) se asigna al centroide más cercano.
+
+4. Cada centroide se mueve al centro de los puntos de datos asignados a él, en función de la distancia media entre los puntos.
+
+5. Después de mover el centroide, los puntos de datos pueden estar más cerca de un centroide diferente, por lo que los puntos de datos se vuelven a asignar a clústeres en función del nuevo centroide más cercano.
+
+6. Los pasos de movimiento de centroides y reasignación de clústeres se repiten hasta que los clústeres se vuelven estables o se alcanza un número máximo predefinido de iteraciones.
+
+La siguiente animación muestra este proceso:
+
+![11.gif](ims%2FC5%2F11.gif)
+
+### Hierarchical Clustering
+
+El agrupamiento jerárquico es otro tipo de algoritmo de agrupamiento en el cual los clústeres mismos pertenecen a un grupo más grande, que a su vez pertenece a grupos aún más grandes, y así sucesivamente. El resultado es que los puntos de datos pueden agruparse en diferentes grados de precisión: con un gran número de grupos muy pequeños y precisos, o un pequeño número de grupos más grandes.
+
+Por ejemplo, si aplicamos el agrupamiento a los significados de las palabras, podríamos obtener un grupo que contiene adjetivos específicos de las emociones ('enojado', 'feliz', y así sucesivamente), que a su vez pertenece a un grupo que contiene todos los adjetivos relacionados con los humanos ('feliz', 'guapo', 'joven'), y esto pertenece a un grupo aún más alto que contiene todos los adjetivos ('feliz', 'verde', 'guapo').
+
+![12.png](ims%2FC5%2F12.png)
+
+El agrupamiento jerárquico es útil no solo para dividir los datos en grupos, sino también para comprender las relaciones entre estos grupos. Una ventaja importante del agrupamiento jerárquico es que no requiere que se defina de antemano el número de clústeres y a veces puede proporcionar resultados más interpretables que enfoques no jerárquicos.
+
+La principal desventaja es que estos enfoques pueden llevar mucho más tiempo en el cálculo que enfoques más simples y a veces no son adecuados para conjuntos de datos grandes.
+
 ## Exercise Train and evaluate advanced clustering models
+
+En el último cuaderno, aprendimos que los datos se pueden dividir en clústeres y cómo determinar si los datos pueden ser compatibles con dicho análisis. En este cuaderno, realizaremos esta agrupación de forma automática.
+
+En este ejercicio, entrenarás y evaluarás modelos de agrupación avanzados. Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para completarse. Puedes acceder al ejercicio desde el siguiente enlace.
+
+[Exercise - Train and evaluate advanced clustering models](https://learn.microsoft.com/en-us/training/modules/train-evaluate-cluster-models/5-exercise-new-models)
+
+> ### Nota:
+> El notebook de esta clase está en: [2 Train and evaluate advanced clustering models.ipynb](notebooks%2FC5%2F2%20Train%20and%20evaluate%20advanced%20clustering%20models.ipynb)
 
 ## 5 Exercise Quiz 2
 
+![13.png](ims%2FC5%2F13.png)
+
 ## 5 Knowledge Check
+
+![14.png](ims%2FC5%2F14.png)
+
+![15.png](ims%2FC5%2F15.png)
+
+![16.png](ims%2FC5%2F16.png)
 
 ## 5 Test prep
 
+![17.png](ims%2FC5%2F17.png)
+
+![18.png](ims%2FC5%2F18.png)
+
+![19.png](ims%2FC5%2F19.png)
+
+![20.png](ims%2FC5%2F20.png)
+
 ## 5 Lesson summary
+
+![21.png](ims%2FC5%2F21.png)
+
+
+En esta lección, aprendiste cómo la agrupación puede utilizarse para crear modelos de aprendizaje automático no supervisados que agrupan observaciones de datos en clústeres. Luego, utilizaste el framework Scikit-learn en Python para entrenar un modelo de agrupación. Si bien Scikit-learn es un framework popular para escribir código y entrenar modelos de agrupación, también puedes crear soluciones de aprendizaje automático para la agrupación utilizando las herramientas gráficas en Microsoft Azure Machine Learning. Puedes obtener más información sobre el desarrollo de modelos de agrupación sin código con Azure Machine Learning Designer.
 
 # 6 Train a Deep Neural Network
 
+## INDICE:
+
+- [6 Lesson Introduction](#6-lesson-introduction)
+- [Deep Neural Network Concepts](#deep-neural-network-concepts)
+- [Exercise Train a Deep Neural Network](#exercise-train-a-deep-neural-network)
+- [6 Exercise Quiz 1](#6-exercise-quiz-1)
+- [6 Knowledge Check](#6-knowledge-check)
+- [6 Lesson Summary](#6-lesson-summary)
+
+## 6 Lesson Introduction
+
+## Deep Neural Network Concepts
+
+## Exercise Train a Deep Neural Network
+
+## 6 Exercise Quiz 1
+
+## 6 Knowledge Check
+
+## 6 Lesson Summary
+
 # 7 Train a Convolutional Neural Network
 
+## INDICE:
+
+- [7 Lesson Introduction](#7-lesson-introduction)
+- [Layers in a Convolutional Neural Network](#layers-in-a-convolutional-neural-network)
+- [Exercise Train a Convolutional Neural Network](#exercise-train-a-convolutional-neural-network)
+- [7 Exercise Quiz 1](#7-exercise-quiz-1)
+- [Transfer Learning](#transfer-learning)
+- [Exercise Use Transfer Learning](#exercise-use-transfer-learning)
+- [7 Exercise Quiz 2](#7-exercise-quiz-2)
+- [7 Knowledge Check](#7-knowledge-check)
+- [7 Test Prep](#7-test-prep)
+- [7 Lesson summary](#7-lesson-summary)
+
+## 7 Lesson Introduction
+
+## Layers in a Convolutional Neural Network
+
+## Exercise Train a Convolutional Neural Network
+
+## 7 Exercise Quiz 1
+
+## Transfer Learning
+
+## Exercise Use Transfer Learning
+
+## 7 Exercise Quiz 2
+
+## 7 Knowledge Check
+
+## 7 Test Prep
+
+## Lesson summary
+
 # 8 Course Wrap-Up
+
+## INDICE:
+
+- [Course Wrap Up](#course-wrap-up)
+- [New Discussion Prompt](#new-discussion-prompt)
+- [What to expect next](#what-to-expect-next)
+
+## Course Wrap Up
+
+## New Discussion Prompt
+
+## What to expect next
