@@ -1080,15 +1080,235 @@ En esta lección, aprendiste cómo la agrupación puede utilizarse para crear mo
 
 ## 6 Lesson Introduction
 
+![1.png](ims%2FC6%2F1.png)
+
+En esta lección, aprenderás cómo entrenar y evaluar modelos de aprendizaje profundo. El aprendizaje profundo es una forma avanzada de aprendizaje automático que trata de emular la forma en que el cerebro humano aprende. En nuestro cerebro, tenemos células nerviosas llamadas neuronas que están conectadas entre sí por extensiones nerviosas que transmiten señales eléctricas y químicas a través de la red. 
+
+![2.png](ims%2FC6%2F2.png)
+
+Cuando se estimula la primera neurona en la red, la señal de entrada se procesa. Si supera un umbral específico, la neurona se activa y transmite una señal a las neuronas a las que está conectada. Estas neuronas, a su vez, pueden activarse y transmitir la señal al resto de la red. Con el tiempo, las conexiones entre las neuronas se fortalecen mediante el uso frecuente a medida que aprendemos a responder de manera efectiva.
+
+![3.png](ims%2FC6%2F3.png)
+
+Por ejemplo, si alguien te lanza una pelota, las conexiones neuronales te permiten procesar la información visual y coordinar tus movimientos para atrapar la pelota. Si repites esta acción varias veces, la red de neuronas involucradas en atrapar una pelota se fortalecerá a medida que aprendas a hacerlo mejor.
+
+![4.png](ims%2FC6%2F4.png)
+
+El aprendizaje profundo emula este proceso biológico utilizando redes neuronales artificiales que procesan entradas numéricas en lugar de estímulos electroquímicos. Las conexiones nerviosas entrantes son reemplazadas por entradas numéricas que generalmente se identifican como X. Cuando hay más de un valor de entrada, X se considera un vector con elementos nombrados X1, X2, y así sucesivamente. Asociado a cada valor X hay un peso W que se utiliza para fortalecer o debilitar el efecto del valor X para simular el aprendizaje. Además, se agrega una entrada de sesgo, b, para permitir un control detallado sobre la red. 
+
+![5.png](ims%2FC6%2F5.png)
+
+Durante el proceso de entrenamiento, los valores de W y b se ajustarán para afinar la red de manera que aprenda a producir salidas correctas. La neurona en sí encapsula una función que calcula una suma ponderada de X, W y b. Esta función, a su vez, está encerrada en una función de activación que limita el resultado, a menudo a un valor entre cero y uno, para determinar si la neurona pasa una salida a la siguiente capa de neuronas en la red.
+
 ## Deep Neural Network Concepts
+
+![6.png](ims%2FC6%2F6.png)
+
+El aprendizaje automático se preocupa por predecir una etiqueta basada en algunas características de una observación en particular. En términos simples, un modelo de aprendizaje automático es una función que calcula y, la etiqueta, a partir de x, las características, es decir, f de x es igual a y. 
+
+![7.png](ims%2FC6%2F7.png)
+
+Por ejemplo, supongamos que tu observación consiste en algunas mediciones de un pingüino, como la longitud del pico del pingüino, la profundidad del pico, la longitud de la aleta y el peso del pingüino. 
+
+![8.png](ims%2FC6%2F8.png)
+
+En este caso, las características x son un vector de cuatro valores, o matemáticamente, x es igual a x_1, x_2, x_3, x_4.
+
+![9.png](ims%2FC6%2F9.png)
+
+Supongamos que la etiqueta que intentamos predecir, y, es la especie del pingüino y que hay tres posibles especies: 0 para Adelie, 1 para Gentoo o 2 para Chinstrap. 
+![10.png](ims%2FC6%2F10.png)
+
+Esto es un ejemplo de un problema de clasificación en el que el modelo de aprendizaje automático debe predecir la clase a la que pertenece la observación. Un modelo de clasificación logra esto al predecir una etiqueta que consiste en la probabilidad para cada clase. En otras palabras, y es un vector de tres valores de probabilidad, uno para cada una de las posibles clases. Y es igual a P(0), P(1), P(2).
+
+![11.png](ims%2FC6%2F11.png)
+
+El proceso de entrenamiento para una red neuronal profunda (DNN) implica múltiples iteraciones llamadas épocas. Comenzamos asignando valores de inicialización aleatoria para los pesos (w) y sesgos (b). Luego, presentamos observaciones de datos para las cuales ya conocemos la etiqueta verdadera. Por ejemplo, podríamos tener mediciones de características para una muestra de Adelie, x es igual a 37.3, 16.8, 19.2 y 30.0, y ya sabemos que esto es un ejemplo de la clase Adelie (0).
+
+![12.png](ims%2FC6%2F12.png)
+
+ Una función de clasificación perfecta debería resultar en una etiqueta que indique una probabilidad del 100 por ciento para la clase 0 y una probabilidad nula para las clases 1 y 2. En este caso, y es igual a 1, 0 y 0.
+
+![13.png](ims%2FC6%2F13.png)
+
+¿Cómo usaríamos el aprendizaje profundo para construir un modelo de clasificación para la clasificación de pingüinos? Echemos un vistazo a un ejemplo. El modelo de red neuronal profunda para el clasificador consta de múltiples capas de neuronas artificiales. 
+
+![14.png](ims%2FC6%2F14.png)
+
+En este caso, hay cuatro capas. Una capa de entrada con una neurona para cada valor de entrada esperado o x. Dos llamadas capas ocultas, cada una con cinco neuronas. Una capa de salida con tres neuronas, una para cada valor de probabilidad de clase o y que se debe predecir mediante el modelo. 
+
+![15.png](ims%2FC6%2F15.png)
+
+Debido a la arquitectura en capas de la red, este tipo de modelo a veces se denomina perceptrón multicapa. Además, todas las neuronas en las capas de entrada y ocultas están conectadas a todas las neuronas en las capas siguientes. Esto es un ejemplo de una red completamente conectada.
+
+![16.png](ims%2FC6%2F16.png)
+
+Cuando creas un modelo como este, debes definir una capa de entrada que admita la cantidad de características que tu modelo procesará y una capa de salida que refleje la cantidad de salidas que esperas que produzca. Puedes decidir cuántas capas ocultas deseas incluir y cuántas neuronas hay en cada una de ellas. Pero no tienes control sobre los valores de entrada y salida para estas capas, ya que son determinados por el proceso de entrenamiento del modelo.
+
+![17.png](ims%2FC6%2F17.png)
+
+El proceso de entrenamiento de una red neuronal profunda consiste en múltiples iteraciones llamadas épocas. Para la primera época, comienzas asignando valores de inicialización aleatoria para los pesos (w) y sesgos (b). Luego, el proceso es el siguiente: las características de las observaciones de datos con etiquetas conocidas se presentan en la capa de entrada. 
+
+![18.png](ims%2FC6%2F18.png)
+
+Generalmente, estas observaciones se agrupan en lotes, a menudo llamados mini-lotes. Las neuronas luego aplican su función y, si se activan, pasan el resultado a la siguiente capa hasta que la capa de salida produzca una predicción. 
+
+![19.png](ims%2FC6%2F19.png)
+
+La predicción se compara con el valor real conocido, y la cantidad de variación entre los valores predichos y reales, a lo que llamamos pérdida, se calcula. 
+
+![20.png](ims%2FC6%2F20.png)
+
+Basándose en los resultados, se calculan valores revisados para los pesos y sesgos para reducir la pérdida, y estos ajustes se retropropagan a las neuronas en las capas de la red. La siguiente época repite el proceso de entrenamiento hacia adelante con lotes revisados de pesos y valores de sesgo, con la esperanza de mejorar la precisión del modelo al reducir la pérdida.
+
+![21.png](ims%2FC6%2F21.png)
+
+Es importante destacar que procesar las características de entrenamiento como un lote mejora la eficiencia del proceso de entrenamiento al procesar múltiples observaciones simultáneamente como una matriz de características con vectores de pesos y sesgos.
+
+![23.png](ims%2FC6%2F23.png)
+
+Las funciones algebraicas lineales que operan con matrices y vectores también se utilizan en el procesamiento gráfico 3D, por lo que las computadoras con unidades de procesamiento gráfico (GPU) ofrecen un rendimiento significativamente mejor para el entrenamiento de modelos de aprendizaje profundo que las computadoras con unidades de procesamiento central (CPU) solamente.
+
+![24.png](ims%2FC6%2F24.png)
+
+Echemos un vistazo más de cerca a las funciones de pérdida y retropropagación. La descripción anterior del proceso de entrenamiento de aprendizaje profundo mencionó que se calcula la pérdida del modelo y se utiliza para ajustar los valores de peso y sesgo. ¿Cómo funciona exactamente esto? 
+
+![25.png](ims%2FC6%2F25.png)
+
+Supongamos que una de las muestras que pasó por el proceso de entrenamiento contiene características de un espécimen de Adelie, clase 0. La salida correcta de la red sería 1, 0 y 0. Ahora supongamos que la salida producida por la red es 0.4, 0.3 y 0.3. Comparando estos valores, podemos calcular una variación absoluta para cada elemento. 
+
+![26.png](ims%2FC6%2F26.png)
+
+En otras palabras, ¿qué tan lejos está cada valor predicho de lo que debería ser, que es 0.6, 0.3 y 0.3? En realidad, dado que estamos tratando con múltiples observaciones, generalmente agregamos la variación. Por ejemplo, al elevar al cuadrado los valores individuales de variación y calcular la media, obtenemos un único valor promedio de pérdida, como 0.18.
+
+![27.png](ims%2FC6%2F27.png)
+
+Ahora, aquí está la parte inteligente. La pérdida se calcula utilizando una función que opera en los resultados de la capa final de la red, que también es una función. En efecto, todo el modelo, desde la capa de entrada hasta el cálculo de la pérdida, es una gran función anidada. Las funciones tienen algunas características realmente útiles. 
+
+![28.png](ims%2FC6%2F28.png)
+
+Puedes conceptualizar una función como una línea trazada que compara su salida con cada uno de sus variables. Puedes usar el cálculo diferencial para calcular la derivada de la función en cualquier punto con respecto a sus variables. Tomemos la primera de estas capacidades. 
+
+![29.png](ims%2FC6%2F29.png)
+
+Podemos trazar la línea de la función para mostrar cómo un valor de peso individual se compara con la pérdida y marcar en esa línea el punto donde el valor de peso actual coincide con el valor de pérdida actual. Ahora, apliquemos la segunda característica de una función. La derivada de una función en un punto dado indica si la pendiente o gradiente de la salida de la función, en este caso, la pérdida, está aumentando o disminuyendo con respecto a una variable de la función, en este caso, el valor del peso. 
+
+![30.png](ims%2FC6%2F30.png)
+
+Una derivada positiva indica que la función está aumentando, y una derivada negativa indica que está disminuyendo. En este caso, en el punto trazado para el valor actual del peso, la función tiene un gradiente descendente. En otras palabras, aumentar el peso tendrá el efecto de disminuir la pérdida. 
+
+![31.png](ims%2FC6%2F31.png)
+
+Usamos un optimizador para aplicar el mismo truco a todos los valores de peso y sesgo en el modelo y determinar en qué dirección debemos ajustarlos, hacia arriba o hacia abajo, para reducir la cantidad total de pérdida en el modelo. Existen múltiples algoritmos de optimización comúnmente utilizados, incluido el descenso de gradiente estocástico, la tasa de aprendizaje adaptativa, la estimación de momento adaptativo y otros. Todos están diseñados para averiguar cómo ajustar los pesos y sesgos para minimizar la pérdida.
+
+![32.png](ims%2FC6%2F32.png)
+
+Ahora, la siguiente pregunta obvia es ¿en qué medida debería el optimizador ajustar los valores de peso y sesgo? Si observas la gráfica para nuestro valor de peso, puedes ver que aumentar el peso en una pequeña cantidad seguirá la línea de la función hacia abajo, reduciendo la pérdida. Pero si lo aumentamos demasiado, la línea de la función comienza a subir de nuevo. 
+
+![33.png](ims%2FC6%2F33.png)
+
+Podríamos aumentar realmente la pérdida, y después de la próxima época, podríamos descubrir que necesitamos reducir el peso. El tamaño del ajuste está controlado por un parámetro que defines para el entrenamiento llamado tasa de aprendizaje. 
+
+![34.png](ims%2FC6%2F34.png)
+
+Una tasa de aprendizaje baja resulta en ajustes pequeños, por lo que puede llevar más épocas minimizar la pérdida. Mientras que una tasa de aprendizaje alta resulta en ajustes grandes, por lo que podrías pasar por alto el mínimo por completo.
 
 ## Exercise Train a Deep Neural Network
 
+Hasta ahora, en este módulo, has aprendido mucho sobre la teoría y los principios del aprendizaje profundo con redes neuronales. La mejor manera de aprender cómo aplicar esta teoría es construir realmente un modelo de aprendizaje profundo, y eso es lo que harás en este ejercicio.
+
+Hay muchos marcos disponibles para entrenar redes neuronales profundas, y en este ejercicio, puedes elegir explorar uno o ambos de los dos marcos de aprendizaje profundo más populares para Python: PyTorch y TensorFlow.
+
+### Antes de comenzar
+
+Para completar el ejercicio, necesitarás:
+
+- Una suscripción a Microsoft Azure. Si aún no tienes una, puedes registrarte para una prueba gratuita en https://azure.microsoft.com/free.
+- Un espacio de trabajo de Azure Machine Learning con una instancia de cálculo y el repositorio ml-basics clonado.
+
+> Nota: Este módulo utiliza un espacio de trabajo de Azure Machine Learning. Si estás completando este módulo en preparación para la certificación de Azure Data Scientist, considera crear el espacio de trabajo una vez y reutilízalo en otros módulos. Después de completar el ejercicio, asegúrate de seguir las instrucciones para limpiar los recursos de cálculo y conserva el espacio de trabajo si planeas reutilizarlo.
+
+### Crear un espacio de trabajo de Azure Machine Learning
+
+- Si aún no tienes un espacio de trabajo de Azure Machine Learning en tu suscripción de Azure, sigue estos pasos para crear uno:
+
+- Inicia sesión en el [portal de Azure](https://portal.azure.com/#home) utilizando la cuenta de Microsoft asociada con tu suscripción de Azure.
+
+- Selecciona "+ Crear un recurso", busca "Machine Learning" y crea un nuevo recurso de Machine Learning con la siguiente configuración:
+
+  - **Nombre del espacio de trabajo:** introduce un nombre único de tu elección
+  - **Suscripción:** tu suscripción de Azure
+  - **Grupo de recursos:** crea un nuevo grupo de recursos con un nombre único
+  - **Ubicación:** elige cualquier ubicación disponible
+
+- Espera a que se cree tu recurso de espacio de trabajo (puede tomar unos minutos). Luego, ve a él en el portal y en la página de Información general de tu espacio de trabajo, inicia Azure Machine Learning Studio (o ve a https://ml.azure.com) e inicia sesión con tu cuenta de Microsoft.
+
+- En Azure Machine Learning Studio, cambia al icono ☰ en la parte superior izquierda para ver las diferentes páginas de la interfaz. Puedes usar estas páginas para gestionar los recursos en tu espacio de trabajo.
+
+### Crear una instancia de cálculo
+
+Para ejecutar el cuaderno utilizado en este ejercicio, necesitarás una instancia de cálculo en tu espacio de trabajo de Azure Machine Learning.
+
+- En [Azure Machine Learning Studio](https://ml.azure.com/home?tid=54f76ea3-fed9-41fc-a628-e91383900a39), ve a la página de Cálculo para tu espacio de trabajo (en Administrar).
+
+- En la pestaña Instancias de cálculo, si ya tienes una instancia de cálculo, iníciala; de lo contrario, crea una nueva instancia de cálculo con la siguiente configuración:
+
+  - **Tipo de máquina virtual:** CPU
+  - **Tamaño de máquina virtual:** Standard_DS11_v2
+  - **Nombre de cálculo:** introduce un nombre único
+
+- Espera a que la instancia de cálculo se inicie (esto puede llevar un minuto aproximadamente).
+
+### Clonar el repositorio ml-basics
+
+Los archivos utilizados en este módulo (y otros módulos relacionados) se publican en el repositorio de GitHub de MicrosoftDocs/ml-basics. Si aún no lo has hecho, sigue estos pasos para clonar el repositorio en tu espacio de trabajo de Azure Machine Learning:
+
+- En [Azure Machine Learning Studio](https://ml.azure.com/home?tid=54f76ea3-fed9-41fc-a628-e91383900a39), en la página de Cálculo, ve a tu instancia de cálculo en ejecución.
+
+- Utiliza el enlace de Jupyter para abrir Jupyter Notebooks en una nueva pestaña del navegador.
+
+- En la página de Jupyter, en el menú Nuevo, selecciona Terminal. Esto abrirá una nueva pestaña con una terminal.
+
+- En la terminal, ejecuta los siguientes comandos para cambiar el directorio actual al directorio Users y clonar el repositorio ml-basics, que contiene el cuaderno y los archivos que utilizarás en este ejercicio:
+
+```bash
+cd Users
+git clone https://github.com/microsoftdocs/ml-basics
+```
+
+- Después de que el comando haya finalizado y se haya completado la descarga de los archivos, cierra la pestaña de la terminal y ve a la página de inicio en tu explorador de archivos de Jupyter. Luego, abre la carpeta Users; debería contener una carpeta ml-basics con los archivos que utilizarás en este módulo.
+
+> Nota: Recomendamos encarecidamente utilizar Jupyter en un espacio de trabajo de Azure Machine Learning para este ejercicio. Esta configuración asegura que se instale la versión correcta de Python y los diversos paquetes que necesitarás; y después de crear el espacio de trabajo una vez, puedes reutilizarlo en otros módulos. Si prefieres completar el ejercicio en un entorno de Python en tu propia computadora, puedes hacerlo. Encontrarás detalles para configurar un entorno de desarrollo local que utiliza Visual Studio Code en Ejecutar los laboratorios en tu propia computadora. Ten en cuenta que si eliges hacer esto, las instrucciones en el ejercicio pueden no coincidir con la interfaz de tu cuaderno.
+
+### Entrenar un modelo de red neuronal profunda
+
+Después de haber creado un entorno Jupyter y clonado el repositorio ml-basics, estás listo para explorar el aprendizaje profundo.
+
+- En Jupyter, en la carpeta ml-basics, abre el cuaderno Deep Neural Networks (PyTorch).ipynb o Deep Neural Networks (Tensorflow).ipynb, según tu preferencia de framework, y sigue las instrucciones que contiene.
+
+- Cuando hayas terminado, cierra y detén todos los cuadernos.
+
+Cuando hayas terminado de trabajar en el cuaderno, vuelve a este módulo y continúa con la siguiente unidad para aprender más.
+
+> ### Nota:
+> El Notebook resulto está en: [1 Train a Deep Neural Network.ipynb](notebooks%2FC6%2F1%20Train%20a%20Deep%20Neural%20Network.ipynb)
+
+
 ## 6 Exercise Quiz 1
+
+![35.png](ims%2FC6%2F35.png)
 
 ## 6 Knowledge Check
 
+![36.png](ims%2FC6%2F36.png)
+
+![37.png](ims%2FC6%2F37.png)
+
 ## 6 Lesson Summary
+
+![38.png](ims%2FC6%2F38.png)
+
+En esta lección, ha aprendido sobre los principios fundamentales del aprendizaje profundo y cómo crear modelos de redes neuronales profundas utilizando PyTorch o TensorFlow. También ha explorado el uso de redes neuronales convolucionales para crear modelos de clasificación de imágenes. Las técnicas de aprendizaje profundo están en la vanguardia del aprendizaje automático y la inteligencia artificial y se utilizan para implementar soluciones empresariales.
 
 # 7 Train a Convolutional Neural Network
 
