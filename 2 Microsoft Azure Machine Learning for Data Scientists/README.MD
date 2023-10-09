@@ -2,12 +2,12 @@
 
 ## INDICE:
 
-- ### [1 Welcome to the Course](#1-welcome-to-the-course)
-- ### [2 Azure Machine Learning to Train and Deploy a Predictive Model](#2-azure-machine-learning-to-train-and-deploy-a-predictive-model)
-- ### [3 Create a Regression Model with Azure Machine Learning Designer](#3-create-a-regression-model-with-azure-machine-learning-designer)
-- ### [4 Create a Classification Model with Azure Machine Learning Designer](#4-create-a-classification-model-with-azure-machine-learning-designer)
-- ### [5 Create a Clustering Model with Azure Machine Learning Designer](#5-create-a-clustering-model-with-azure-machine-learning-designer)
-- ### [6 Course Wrap-Up](#6-course-wrap-up)
+- [1 Welcome to the Course](#1-welcome-to-the-course)
+- [2 Azure Machine Learning to Train and Deploy a Predictive Model](#2-azure-machine-learning-to-train-and-deploy-a-predictive-model)
+- [3 Create a Regression Model with Azure Machine Learning Designer](#3-create-a-regression-model-with-azure-machine-learning-designer)
+- [4 Create a Classification Model with Azure Machine Learning Designer](#4-create-a-classification-model-with-azure-machine-learning-designer)
+- [5 Create a Clustering Model with Azure Machine Learning Designer](#5-create-a-clustering-model-with-azure-machine-learning-designer)
+- [6 Course Wrap-Up](#6-course-wrap-up)
 
 # 1 Welcome to the Course
 
