@@ -1,15 +1,15 @@
 # Microsoft Azure Machine Learning for Data Scientists
 
-## INDICE:
+## 0 INDICE:
 
-- [1 Welcome to the Course](#1-welcome-to-the-course)
-- [2 Azure Machine Learning to Train and Deploy a Predictive Model](#2-azure-machine-learning-to-train-and-deploy-a-predictive-model)
-- [3 Create a Regression Model with Azure Machine Learning Designer](#3-create-a-regression-model-with-azure-machine-learning-designer)
-- [4 Create a Classification Model with Azure Machine Learning Designer](#4-create-a-classification-model-with-azure-machine-learning-designer)
-- [5 Create a Clustering Model with Azure Machine Learning Designer](#5-create-a-clustering-model-with-azure-machine-learning-designer)
-- [6 Course Wrap-Up](#6-course-wrap-up)
+- [1 Welcome to the Course](#1-welcome-to-the-course---home)
+- [2 Azure Machine Learning to Train and Deploy a Predictive Model](#2-azure-machine-learning-to-train-and-deploy-a-predictive-model---home)
+- [3 Create a Regression Model with Azure Machine Learning Designer](#3-create-a-regression-model-with-azure-machine-learning-designer---home)
+- [4 Create a Classification Model with Azure Machine Learning Designer](#4-create-a-classification-model-with-azure-machine-learning-designer---home)
+- [5 Create a Clustering Model with Azure Machine Learning Designer](#5-create-a-clustering-model-with-azure-machine-learning-designer---home)
+- [6 Course Wrap-Up](#6-course-wrap-up---home)
 
-# 1 Welcome to the Course
+# 1 Welcome to the Course [<-HOME](#0-indice)
 
 ## INDICE:
 
@@ -26,7 +26,7 @@
 
 ## How Does Machine Learning Influence Your Day-to-day Life?
 
-# 2 Azure Machine Learning to Train and Deploy a Predictive Model
+# 2 Azure Machine Learning to Train and Deploy a Predictive Model [<-HOME](#0-indice)
 
 ## INDICE:
 
@@ -67,7 +67,7 @@
 
 ## 2 Weekly Summary
 
-# 3 Create a Regression Model with Azure Machine Learning Designer
+# 3 Create a Regression Model with Azure Machine Learning Designer [<-HOME](#0-indice)
 
 ## INDICE:
 
@@ -111,7 +111,7 @@
 
 ## 3 Weekly Summary
 
-# 4 Create a Classification Model with Azure Machine Learning Designer
+# 4 Create a Classification Model with Azure Machine Learning Designer [<-HOME](#0-indice)
 
 ## INDICE:
 
@@ -156,7 +156,7 @@
 
 ## 4 Weekly Summary
 
-# 5 Create a Clustering Model with Azure Machine Learning Designer
+# 5 Create a Clustering Model with Azure Machine Learning Designer [<-HOME](#0-indice)
 
 ## INDICE:
 
@@ -200,7 +200,7 @@
 
 ## 5 Weekly Summary
 
-# 6 Course Wrap-Up
+# 6 Course Wrap-Up [<-HOME](#0-indice)
 
 ## INDICE:
 
