@@ -1327,34 +1327,235 @@ En esta lección, ha aprendido sobre los principios fundamentales del aprendizaj
 
 ## 7 Lesson Introduction
 
+![1.png](ims%2FC7%2F1.png)
+
+En esta lección, aprenderá a entrenar una red neuronal convolucional. Aunque puede utilizar modelos de aprendizaje profundo para cualquier tipo de aprendizaje automático, son particularmente útiles para tratar con datos que consisten en grandes matrices de valores numéricos, como las imágenes. Los modelos de aprendizaje automático que trabajan con imágenes son la base de un área de la inteligencia artificial llamada visión por ordenador.
+
+![2.png](ims%2FC7%2F2.png)
+
+Las técnicas de aprendizaje profundo han sido responsables de impulsar avances asombrosos en esta área en los últimos años. En el corazón del éxito del aprendizaje profundo en esta área se encuentra un tipo de modelo llamado red neuronal convolucional o CNN. Una CNN funciona típicamente extrayendo características de las imágenes, y luego alimentando esas características en una red neuronal completamente conectada para generar una predicción.
+
+![3.png](ims%2FC7%2F3.png)
+
+Las capas de extracción de características en la red tienen el efecto de reducir el número de características del potencialmente enorme conjunto de valores de píxeles individuales a un conjunto de características más pequeño que soporta la predicción etiquetada.
+
 ## Layers in a Convolutional Neural Network
+
+![4.png](ims%2FC7%2F4.png)
+
+Echemos ahora un vistazo más de cerca a las CNN. Las CNN constan de múltiples capas, cada una de las cuales realiza una tarea específica y extrae características o predice etiquetas. Uno de los principales tipos de capa es una capa convolucional que extrae características importantes en las imágenes.
+
+![5.png](ims%2FC7%2F5.png)
+
+Una capa convolucional funciona aplicando un filtro a las imágenes. El filtro se define mediante un núcleo que consiste en una matriz de valores de peso.
+
+![6.png](ims%2FC7%2F6.png)
+
+Por ejemplo, un filtro de tres por tres podría definirse con opciones de valor de menos 1, 0, 1. Una imagen también es sólo una matriz de valores de píxeles. Para aplicar el filtro, se superpone a una imagen y se calcula una suma ponderada de los valores de los píxeles de la imagen correspondientes bajo el núcleo del filtro. A continuación, se asigna el resultado a la celda central de el parche equivalente de tres por tres en una nueva matriz de valores que tenga el mismo tamaño que la imagen. 
+
+![7.png](ims%2FC7%2F7.png)
+
+Por ejemplo, supongamos que una imagen de seis por seis tiene valores de píxel de 100 o 255 para cada celda de la cuadrícula, aplicando el filtro al parche superior izquierdo, de tres por tres de la imagen se obtendría un resultado de 155.
+
+![8.png](ims%2FC7%2F8.png)
+
+El resultado se asigna a el valor del píxel correspondiente en la nueva matriz. 
+
+![9.png](ims%2FC7%2F9.png)
+
+Ahora el filtro se mueve a lo largo o se convoluciona, normalmente utilizando un tamaño de paso de uno, así que moviéndose a lo largo de un píxel a la derecha, entonces se calcula el valor para el siguiente píxel.
+
+![10.png](ims%2FC7%2F10.png)
+
+Ahora podemos rellenar el siguiente valor de la nueva matriz. El proceso se repite hasta que hemos aplicado el filtro a través de todos los parches de tres por tres de la imagen para producir una nueva matriz de valores. Debido al tamaño del núcleo del filtro, no podemos calcular valores para los píxeles del borde, así que normalmente sólo aplicamos un valor de relleno que suele ser cero.
+
+![11.png](ims%2FC7%2F11.png)
+
+a salida de la convolución se suele pasar a una función de activación, que suele ser una función unitaria lineal rectificada que garantiza que los valores negativos se pongan a cero. La matriz resultante es un mapa de características de valores de características que se pueden utilizar para entrenar un modelo de aprendizaje automático. 
+
+![12.png](ims%2FC7%2F12.png)
+
+Es importante tener en cuenta que los valores del mapa de características pueden ser mayores que el valor máximo para un píxel, que es 255. Si quisiera visualizar el mapa de características como una imagen, necesitaría normalizar los valores de las características entre 0 y 255. 
+
+![13.png](ims%2FC7%2F13.png)
+
+Veamos ahora el proceso de convolución. En primer lugar, se pasa una imagen a la capa de convolución. En este caso, la imagen es una forma geométrica simple. A continuación, la imagen se compone de una matriz de píxeles con valores entre 0 y 255. Para las imágenes en color, suele ser una matriz tridimensional con valores para los canales rojo, verde y azul. A continuación, se inicializa generalmente un núcleo de filtro con pesos aleatorios. En este ejemplo, hemos elegido valores para resaltar el efecto que un filtro podría tener sobre los valores de los píxeles. 
+
+![conv.gif](ims%2FC7%2Fconv.gif)
+
+Pero en una CNN real, los pesos iniciales se generarían típicamente a partir de una distribución gaussiana aleatoria. Este filtro se utilizará para extraer un mapa de características de los datos de la imagen. El filtro se convoluciona a través de la imagen, calculando los valores de las características mediante la aplicación de una suma de los pesos multiplicada por sus correspondientes valores de píxel en cada posición.
+
+![14.png](ims%2FC7%2F14.png)
+
+Se aplica una función de activación unitaria lineal rectificada para garantizar que los valores negativos se pongan a cero. Tras la convolución, el mapa de características contiene los valores de características extraídos, que a menudo enfatizan atributos visuales clave de la imagen. En este caso, el mapa de características resalta los bordes y las esquinas del triángulo de la imagen.
+
+![15.png](ims%2FC7%2F15.png)
+
+Normalmente, una capa de convolución aplica múltiples núcleos de filtro. Cada filtro produce un mapa de características diferente, y todos los mapas de características se pasan a la siguiente capa de la red. Tras extraer los valores de las características de las imágenes, se utilizan capas de agrupación o de reducción de la muestra para reducir el número de valores de las características conservando las características diferenciadoras clave que se han extraído.
+
+![16.png](ims%2FC7%2F16.png)
+
+Una de las agrupaciones más comunes es la agrupación máxima, en la que se aplica un filtro a la imagen y sólo se conserva el valor máximo del píxel dentro del área del filtro. 
+
+![17.png](ims%2FC7%2F17.png)
+
+Por ejemplo, la aplicación de un núcleo de agrupación de dos por dos a el siguiente fragmento de una imagen produciría el resultado 155. Observe que el efecto del filtro de agrupación de dos por dos es reducir el número de valores de cuatro a uno.
+
+![18.png](ims%2FC7%2F18.png)
+
+Al igual que las capas convolucionales, las capas de agrupación funcionan aplicando el filtro a todo el mapa de características, el mapa de características extraído por un filtro en una capa convolucional contiene una matriz de valores de características. Se utiliza un kernel de agrupación para reducir el número de valores de características. En este caso, el tamaño del kernel es de dos en dos, por lo que produciremos una matriz con un cuarto del número de valores de características.
+
+![19.png](ims%2FC7%2F19.png)
+
+El kernel de agrupación se convoluciona a través del mapa de características, reteniendo sólo el valor de píxel más alto en cada posición.
+
+![20.png](ims%2FC7%2F20.png)
+
+Uno de los retos más difíciles en una CNN es evitar la sobreadaptación, en la que el modelo resultante funciona bien con los datos de entrenamiento, pero no generaliza bien a nuevos datos en los que no fue entrenado. Una técnica que puede utilizar para mitigar la sobreadaptación es incluir capas en las que el proceso de entrenamiento elimine o elimine aleatoriamente mapas de características.
+
+![21.png](ims%2FC7%2F21.png)
+
+Esto puede parecer contraintuitivo, pero es una forma eficaz de garantizar que el modelo no aprenda a ser excesivamente dependiente de las imágenes de entrenamiento. Otras técnicas que puede utilizar para mitigar la sobreadaptación incluyen voltear aleatoriamente, reflejar o sesgar las imágenes de entrenamiento para generar datos que varíen entre las épocas de entrenamiento.
+
+Después de utilizar capas convolucionales y de agrupamiento para extraer las características más destacadas de las imágenes, los mapas de características resultantes son una matriz multidimensional de valores de píxeles. Se utiliza una capa de aplanamiento para aplanar los mapas de características en un vector de valores que puede utilizarse como entrada a una capa totalmente conectada. Normalmente, una CNN termina con una red totalmente conectada en la que los valores de las características se pasan a una capa de entrada a través de una o más capas ocultas y generan valores predichos en una capa de salida.
+
+
+![22.png](ims%2FC7%2F22.png)
+
+xploremos la arquitectura básica de una CNN. En primer lugar, las imágenes se introducen en una capa convolucional. En este caso, hay dos filtros por lo que cada imagen produce dos mapas de características.
+
+Los mapas de características se pasan a una capa de agrupación en la que un núcleo de agrupación de dos en dos reduce el tamaño de los mapas de características. A continuación, una capa de eliminación elimina aleatoriamente algunos de los mapas de características para ayudar a evitar el sobreajuste. Una capa de aplanamiento toma las matrices de mapas de características restantes y las aplana en un vector. Por último, los elementos del vector se introducen en una red totalmente conectada que genera las predicciones. En este caso, la red es un modelo de clasificación que predice las probabilidades de tres posibles clases de imágenes: triángulos, cuadrados y círculos. 
+
+omo cualquier red neuronal profunda, una CNN se entrena pasando lotes de datos de entrenamiento a través de ella durante múltiples épocas. Se ajustan los pesos y los valores de sesgo en función de la pérdida calculada para cada epoch. En el caso de una CNN, la retropropagación de los pesos ajustados incluye los pesos del núcleo del filtro utilizados en las capas convolucionales, así como los pesos utilizados en las capas totalmente conectadas.
 
 ## Exercise Train a Convolutional Neural Network
 
+PyTorch y TensorFlow ofrecen un amplio soporte para construir redes neuronales convolucionales como modelos de clasificación para imágenes.
+
+En este ejercicio, utilizarás tu framework preferido para crear un clasificador de imágenes basado en CNN (redes neuronales convolucionales) para imágenes de formas geométricas simples. Los mismos principios pueden aplicarse a imágenes de cualquier tipo.
+
+Para completar el ejercicio:
+
+En Jupyter, en la carpeta ml-basics, abre el cuaderno Convolutional Neural Networks (PyTorch).ipynb o Convolutional Neural Networks (TensorFlow).ipynb, dependiendo de tu preferencia de framework, y sigue las instrucciones que contiene.
+
+
+> ### Nota:
+> El notebook de esta clase está en: [05b_Convolutional_Neural_Networks_(Tensorflow).ipynb](..%2F..%2F..%2F..%2F..%2F..%2Fhome%2Fichcanziho%2FDescargas%2F05b_Convolutional_Neural_Networks_%28Tensorflow%29.ipynb)
+
 ## 7 Exercise Quiz 1
+
+![23.png](ims%2FC7%2F23.png)
+
 
 ## Transfer Learning
 
+![24.png](ims%2FC7%2F24.png)
+
+En la vida, a menudo es más fácil aprender una nueva habilidad si ya tienes experiencia en una habilidad transferible similar. Por ejemplo, probablemente sea más fácil enseñarle a alguien cómo conducir un autobús, si ya lo han hecho aprendí a conducir un automóvil. El conductor puede aprovechar las habilidades de conducción que tiene ya ha aprendido en un automóvil y las puede aplicar a la conducción de un autobús. El mismo principio puede se puede aplicar al entrenamiento de modelos de aprendizaje profundo mediante una técnica llamada transferir el aprendizaje.
+
+![27.png](ims%2FC7%2F27.png)
+
+Una red neuronal convolucional, o CNN para la clasificación de imágenes, generalmente se compone de varias capas que extraiga las características y, a continuación, utilice una final capa totalmente conectada para clasificar imágenes en función de en esas características. Conceptualmente, esto la red neuronal consta de dos conjuntos distintos de capas: un conjunto de capas del modelo base que realiza la extracción de características, una conexión completa capa que toma las entidades extraídas y las usa para predicción de clase.
+
+![25.png](ims%2FC7%2F25.png)
+
+La extracción de características las capas aplican filtros convolucionales y agrupar para enfatizar los bordes, las esquinas y otros patrones e imágenes, que se pueden usar para diferenciarlos. En teoría, debería funcionar para cualquier conjunto de imágenes con las mismas dimensiones que el capa de entrada de la red.
+
+![26.png](ims%2FC7%2F26.png)
+
+La capa de predicción mapea las entidades a un conjunto de resultados que representan las probabilidades de cada etiqueta de clase que desee utilizar para clasifica las imágenes.
+
 ## Exercise Use Transfer Learning
+
+Tanto PyTorch como TensorFlow admiten una biblioteca de modelos existentes que puedes utilizar como base para el aprendizaje por transferencia.
+
+En este ejercicio, utilizarás tu framework preferido para entrenar un modelo de red neuronal convolucional mediante el aprendizaje por transferencia.
+
+Para completar el ejercicio:
+
+En Jupyter, en la carpeta ml-basics, abre el cuaderno Transfer Learning (PyTorch).ipynb o Transfer Learning (Tensorflow).ipynb, según tu preferencia de framework, y sigue las instrucciones que contiene.
+
+Cuando hayas terminado, cierra y detén todos los cuadernos.
+
+Limpieza
+Si utilizaste una instancia de cómputo en un espacio de trabajo de Azure Machine Learning para completar los ejercicios, sigue estos pasos para realizar la limpieza.
+
+Cierra todos los cuadernos de Jupyter y la página de inicio de Jupyter.
+
+En Azure Machine Learning Studio, en la página de Compute (Cómputo), selecciona tu instancia de cómputo y detenla.
+
+Si no tienes la intención de completar otros módulos que requieran el espacio de trabajo de Azure Machine Learning, puedes eliminar el grupo de recursos que creaste para ello de tu suscripción de Azure.
+
+> ### Nota:
+> El Notebook de este ejercicio en TensorFlow está en: [2 Transfer Learninig TensorFlow.ipynb](notebooks%2FC7%2F2%20Transfer%20Learninig%20TensorFlow.ipynb)
+>
+> El NoteBook de este ejercicio en PyTorch está en: [2 Transfer Learning PyTorch.ipynb](notebooks%2FC7%2F2%20Transfer%20Learning%20PyTorch.ipynb)
+
+
 
 ## 7 Exercise Quiz 2
 
+![28.png](ims%2FC7%2F28.png)
+
 ## 7 Knowledge Check
+
+![29.png](ims%2FC7%2F29.png)
+
+![30.png](ims%2FC7%2F30.png)
+
+![31.png](ims%2FC7%2F31.png)
 
 ## 7 Test Prep
 
+![32.png](ims%2FC7%2F32.png)
+
+![33.png](ims%2FC7%2F33.png)
+
 ## Lesson summary
+
+![34.png](ims%2FC7%2F34.png)
+
+En esta lección, ha aprendido sobre los principios fundamentales del aprendizaje profundo y cómo crear modelos de redes neuronales profundas utilizando PyTorch o TensorFlow. También ha explorado el uso de redes neuronales convolucionales para crear modelos de clasificación de imágenes. Las técnicas de aprendizaje profundo, están a la vanguardia del aprendizaje automático y la inteligencia artificial y se utilizan para implementar soluciones empresariales.
 
 # 8 Course Wrap-Up
 
 ## INDICE:
 
 - [Course Wrap Up](#course-wrap-up)
-- [New Discussion Prompt](#new-discussion-prompt)
 - [What to expect next](#what-to-expect-next)
 
 ## Course Wrap Up
 
-## New Discussion Prompt
+![35.png](ims%2FC7%2F35.png)
+
+Enhorabuena por completar con éxito este curso, crear modelos de aprendizaje automático y Microsoft Azure. En el próximo curso, explorará Microsoft Azure Machine Learning para científicos de datos. En este curso, explorará las siguientes lecciones como su aprendizaje automático. Entrenar e implementar un modelo predictivo, crear un modelo de regresión, crear un modelo de clasificación, crear un modelo de agrupación. También trabajará a través de varios ejercicios prácticos para crear sus propios modelos predictivos sin código con el aprendizaje automático de Azure.
+
+![36.png](ims%2FC7%2F36.png)
+
+Este curso forma parte de la preparación para el examen. DP-100, diseño e implementación de una solución de ciencia de datos en Azure. Cuando apruebe el examen DP-100, obtendrá la certificación Microsoft Azure Data scientist associate. Por favor, recuerde consultar más información sobre el examen y asegúrese de leer el material que sigue para obtener más información sobre lo que viene a continuación.
+
 
 ## What to expect next
+
+¡Felicidades! Has completado este curso y has dado otro paso hacia la mejora de tus conocimientos, habilidades y calificaciones. En el próximo curso, aprenderás sobre algunos conceptos fundamentales de aprendizaje automático y cómo utilizar el servicio Azure Machine Learning para crear y publicar modelos de aprendizaje automático. Este curso forma parte de la preparación para el Examen AI 900: Microsoft Azure AI Fundamentals. Cuando apruebes el examen, obtendrás la certificación Microsoft Certified Azure AI Fundamentals.
+
+Resumen del curso:
+En este curso, explorarás las siguientes lecciones: Azure Machine Learning para entrenar y desplegar un modelo predictivo, Crear un modelo de regresión, Crear un modelo de clasificación, Crear un modelo de agrupación. También trabajarás en varios ejercicios prácticos para crear tus propios modelos predictivos sin necesidad de programación con Azure Machine Learning.
+
+Descripción general del módulo:
+
+**Módulo 1: Utilizar el aprendizaje automático automatizado en Azure Machine Learning:**
+
+En este módulo, aprenderás a identificar diferentes tipos de modelos de aprendizaje automático y utilizar la capacidad de aprendizaje automático automatizado de Azure Machine Learning para entrenar y desplegar un modelo predictivo.
+
+**Módulo 2: Crear un modelo de regresión con el diseñador de Azure Machine Learning:**
+
+En este módulo, aprenderás a utilizar el diseñador de Azure Machine Learning para entrenar un modelo de regresión, utilizar un modelo de regresión para inferencias y desplegar un modelo de regresión como un servicio.
+
+**Módulo 3: Crear un modelo de clasificación con el diseñador de Azure Machine Learning:**
+
+En este módulo, aprenderás a entrenar y publicar un modelo de clasificación con Azure Machine Learning Designer.
+
+**Módulo 4: Crear un modelo de agrupación con el diseñador de Azure Machine Learning:**
+
+En este módulo, aprenderás a entrenar y publicar un modelo de agrupación con Azure Machine Learning Designer.
