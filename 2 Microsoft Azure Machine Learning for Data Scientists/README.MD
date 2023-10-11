@@ -376,7 +376,7 @@ Si aún no dispone de uno, siga estos pasos para crear un espacio de trabajo:
 1. Inicie sesión en el portal de Microsoft [Portal Azure](https://portal.azure.com/#home)
 utilizando sus credenciales de Microsoft.
 
-![entorno_de_trabajo.gif](ims%2FC2%2Fentorno_de_trabajo.gif)
+    ![entorno_de_trabajo.gif](ims%2FC2%2Fentorno_de_trabajo.gif)
 
 2. Seleccione ＋Crear un recurso, busque Aprendizaje automático y cree un nuevo recurso de Aprendizaje automático con la 
 siguiente configuración:
@@ -399,16 +399,16 @@ siguiente configuración:
 
 3. Espere a que se cree su espacio de trabajo (puede tardar unos minutos). A continuación, vaya a él en el portal.
 
-![9.png](ims%2FC2%2F9.png)
+    ![9.png](ims%2FC2%2F9.png)
 
 4. En la página **Descripción general** de su espacio de trabajo, inicie Microsoft Azure Machine Learning Studio (o abra una nueva 
 pestaña del navegador y vaya a https://ml.azure.com), e inicie sesión en Azure Machine Learning studio utilizando su cuenta Microsoft
 
-![10.png](ims%2FC2%2F10.png)
+    ![10.png](ims%2FC2%2F10.png)
 
 5. En Azure Machine Learning studio, active el icono ☰ situado en la parte superior izquierda para ver las distintas páginas de la interfaz. Puede utilizar estas páginas para gestionar los recursos de su espacio de trabajo.
 
-![11.gif](ims%2FC2%2F11.gif)
+    ![11.gif](ims%2FC2%2F11.gif)
 
 Puede gestionar su espacio de trabajo utilizando el portal de Azure, pero para los científicos de datos y los ingenieros de operaciones de Machine Learning, Azure Machine Learning studio proporciona una interfaz de usuario más centrada para gestionar los recursos del espacio de trabajo.
 
@@ -432,7 +432,7 @@ Los objetivos de computación son recursos basados en la nube en los que puede e
 
 2. En la pestaña **Instancias** de computación, añada una nueva instancia de computación con la siguiente configuración. Utilizará esta instancia como estación de trabajo desde la que probar su modelo:
 
-![instancia.gif](ims%2FC2%2Finstancia.gif)
+    ![instancia.gif](ims%2FC2%2Finstancia.gif)
 
    - **Tipo de máquina virtual:** CPU
 
@@ -442,11 +442,11 @@ Los objetivos de computación son recursos basados en la nube en los que puede e
 
    - **Habilitar acceso SSH:** No seleccionado
 
-![12.png](ims%2FC2%2F12.png)
+    ![12.png](ims%2FC2%2F12.png)
 
 3. Mientras se crea la instancia de cálculo, cambie a la pestaña Clusters de cálculo y añada un nuevo cluster de cálculo con la siguiente configuración. Lo utilizará para entrenar un modelo de aprendizaje automático:
 
-![cluster.gif](ims%2FC2%2Fcluster.gif)
+    ![cluster.gif](ims%2FC2%2Fcluster.gif)
 
    - **Prioridad de la máquina virtual:** Dedicada
 
@@ -454,7 +454,7 @@ Los objetivos de computación son recursos basados en la nube en los que puede e
 
    - **Tamaño de la máquina virtual**: Standard_DS11_v2 (ElijaSeleccionar entre todas las opciones para buscar y seleccionar este tamaño de máquina)
 
-   - **Nombre del ordenador:**introduzca un nombre único
+   - **Nombre del ordenador:** introduzca un nombre único
 
    - **Número mínimo de nodos:** 0
 
@@ -464,7 +464,7 @@ Los objetivos de computación son recursos basados en la nube en los que puede e
 
    - **Habilitar acceso SSH:** No seleccionado
 
-![13.png](ims%2FC2%2F13.png)
+    ![13.png](ims%2FC2%2F13.png)
 
 > ### Nota:
 >Si decide no completar este módulo, asegúrese de detener su instancia de cómputo para evitar incurrir en cargos innecesarios a su suscripción Azure. Los objetivos de cómputo tardarán algún tiempo en crearse. Puede pasar a la siguiente unidad mientras espera.
@@ -528,7 +528,7 @@ en Azure ML.
 
 4. Una vez creado el conjunto de datos, ábralo y consulte la página **Explorar** para ver una muestra de los datos. Estos datos contienen características históricas y etiquetas para el alquiler de bicicletas.
 
-![14.png](ims%2FC2%2F14.png)
+    ![14.png](ims%2FC2%2F14.png)
 
 
 > **Cita**:estos datos proceden de [Capital Bikeshare](https://capitalbikeshare.com/system-data) y se utilizan de acuerdo con el [contrato de licencia](https://ride.capitalbikeshare.com/data-license-agreement) de datos publicado.
