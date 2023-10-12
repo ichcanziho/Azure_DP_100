@@ -383,7 +383,7 @@ Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para comple
 https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-python/3-exercise-explore-data
 
 > ### Nota:
-> Puedes ver todo el notebook en [1 Explore data with Numpy and Pandas.ipynb](notebooks%2FC2%2F1%20Explore%20data%20with%20Numpy%20and%20Pandas.ipynb)
+> Puedes ver todo el notebook en [1 Explore data with Numpy and Pandas.ipynb](notebooks/C2/1%20Explore%20data%20with%20Numpy%20and%20Pandas.ipynb)
 
 ## 2 Exercise Quiz 1
 
@@ -427,8 +427,8 @@ Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para comple
 https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-python/5-exercise-visualize-data
 
 > ### Nota:
-> Puedes ver todo el notebook en [2 Visualize data with Matplotlib.ipynb](notebooks%2FC2%2F2%20Visualize%20data%20with%20Matplotlib.ipynb)
-> 
+> Puedes ver todo el notebook en [2 Visualize data with Matplotlib.ipynb](notebooks/C2/2%20Visualize%20data%20with%20Matplotlib.ipynb)
+
 ## 2 Exercise Quiz 2
 
 ![22.png](ims%2FC1%2F22.png)
@@ -461,7 +461,7 @@ Este ejercicio requiere el uso del entorno de aprendizaje de Microsoft Learn par
 https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-python/7-exercise-real-world-data
 
 > ## Nota:
-> Puedes ver todo el notebook en [3 Examine real world data.ipynb](notebooks%2FC2%2F3%20Examine%20real%20world%20data.ipynb)
+> Puedes ver todo el notebook en [3 Examine real world data.ipynb](notebooks/C2/3%20Examine%20real%20world%20data.ipynb)
 
 ## 2 Exercise Quiz 3
 
