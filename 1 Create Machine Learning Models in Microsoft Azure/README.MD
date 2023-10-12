@@ -427,7 +427,7 @@ Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para comple
 https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-python/5-exercise-visualize-data
 
 > ### Nota:
-> Puedes ver todo el notebook en [2 Visualize data with Matplotlib.ipynb](notebooks/C2/2%20Visualize%20data%20with%20Matplotlib.ipynb)
+> Puedes ver todo el notebook en [2 Visualize data with Matplotlib.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks/C2/2%20Visualize%20data%20with%20Matplotlib.ipynb)
 
 ## 2 Exercise Quiz 2
 
@@ -461,7 +461,7 @@ Este ejercicio requiere el uso del entorno de aprendizaje de Microsoft Learn par
 https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-python/7-exercise-real-world-data
 
 > ## Nota:
-> Puedes ver todo el notebook en [3 Examine real world data.ipynb](notebooks/C2/3%20Examine%20real%20world%20data.ipynb)
+> Puedes ver todo el notebook en [3 Examine real world data.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks/C2/3%20Examine%20real%20world%20data.ipynb)
 
 ## 2 Exercise Quiz 3
 
@@ -606,7 +606,7 @@ Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para comple
 [Exercise - Train and evaluate a regression model](https://learn.microsoft.com/en-us/training/modules/train-evaluate-regression-models/3-exercise-model)
 
 > ### Nota:
-> El notebook de esta sección lo puedes encontrar en: [1 Train and Evaluate a Regression Model.ipynb](notebooks%2FC3%2F1%20Train%20and%20Evaluate%20a%20Regression%20Model.ipynb)
+> El notebook de esta sección lo puedes encontrar en: [1 Train and Evaluate a Regression Model.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks%2FC3%2F1%20Train%20and%20Evaluate%20a%20Regression%20Model.ipynb)
 
 ## 3 Exercise quiz 1
 
@@ -639,7 +639,7 @@ Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para comple
 [Exercise - Experiment with more powerful regression models](https://learn.microsoft.com/en-us/training/modules/train-evaluate-regression-models/5-exercise-powerful-models)
 
 > ### Nota:
-> El notebook de esta clase lo puedes encontrar en: [2 Experiment with more powerfull regression models.ipynb](notebooks%2FC3%2F2%20Experiment%20with%20more%20powerfull%20regression%20models.ipynb)
+> El notebook de esta clase lo puedes encontrar en: [2 Experiment with more powerfull regression models.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks%2FC3%2F2%20Experiment%20with%20more%20powerfull%20regression%20models.ipynb)
 
 ## 3 Exercise quiz 2
 
@@ -675,7 +675,7 @@ En este ejercicio, aprenderás cómo optimizar y guardar modelos.
 [Exercise - Optimize and save models](https://learn.microsoft.com/en-us/training/modules/train-evaluate-regression-models/7-exercise-optimize-save-models)
 
 > ### Nota:
-> Las notas de esta clase están en: [3 Optimize and save models.ipynb](notebooks%2FC3%2F3%20Optimize%20and%20save%20models.ipynb)
+> Las notas de esta clase están en: [3 Optimize and save models.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks%2FC3%2F3%20Optimize%20and%20save%20models.ipynb)
 
 ## 3 Exercise quiz 3
 
@@ -799,7 +799,7 @@ Este ejercicio requiere el uso del entorno de aprendizaje de Microsoft Learn par
 [Exercise - Train and evaluate a classification model](https://learn.microsoft.com/en-us/training/modules/train-evaluate-classification-models/3-exercise-model)
 
 > ### Nota:
-> El notebook de esta clase lo puedes encontrar en: [1 Train and Evaluate a CLassification Model.ipynb](notebooks%2FC4%2F1%20Train%20and%20Evaluate%20a%20CLassification%20Model.ipynb)
+> El notebook de esta clase lo puedes encontrar en: [1 Train and Evaluate a CLassification Model.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks%2FC4%2F1%20Train%20and%20Evaluate%20a%20CLassification%20Model.ipynb)
 
 ## 4 Exercise Quiz 1
 
@@ -850,7 +850,7 @@ En este ejercicio, llevarás a cabo la clasificación utilizando métricas alter
 [Exercise - Perform classification with alternative metrics](https://learn.microsoft.com/en-us/training/modules/train-evaluate-classification-models/5-exercise-alternative-classification-metrics)
 
 > ### Nota:
-> El Notebook de esta sección lo puedes encontrar en: [2 Perform classification with alternative metrics.ipynb](notebooks%2FC4%2F2%20Perform%20classification%20with%20alternative%20metrics.ipynb)
+> El Notebook de esta sección lo puedes encontrar en: [2 Perform classification with alternative metrics.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks%2FC4%2F2%20Perform%20classification%20with%20alternative%20metrics.ipynb)
 
 ## 4 Exercise Quiz 2
 
@@ -903,7 +903,7 @@ Completed
 ](https://learn.microsoft.com/en-us/training/modules/train-evaluate-classification-models/7-exercise-multiclass-classification)
 
 > ### Nota:
-> El NoteBook de esta clase lo encuentras en: [3 Train and Evaluate Multiclass Classification models.ipynb](notebooks%2FC4%2F3%20Train%20and%20Evaluate%20Multiclass%20Classification%20models.ipynb)
+> El NoteBook de esta clase lo encuentras en: [3 Train and Evaluate Multiclass Classification models.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks%2FC4%2F3%20Train%20and%20Evaluate%20Multiclass%20Classification%20models.ipynb)
 
 ## 4 Exercise Quiz 3
 
@@ -988,7 +988,7 @@ Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para comple
 [Exercise - Train and evaluate a clustering model](https://learn.microsoft.com/en-us/training/modules/train-evaluate-cluster-models/3-exercise-model)
 
 > ### Nota:
-> El notebook de esta clase está en: [1 Train and evaluate a clustering model.ipynb](notebooks%2FC5%2F1%20Train%20and%20evaluate%20a%20clustering%20model.ipynb)
+> El notebook de esta clase está en: [1 Train and evaluate a clustering model.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks%2FC5%2F1%20Train%20and%20evaluate%20a%20clustering%20model.ipynb)
 
 ## 5 Exercise Quiz 1
 
@@ -1035,7 +1035,7 @@ En este ejercicio, entrenarás y evaluarás modelos de agrupación avanzados. Es
 [Exercise - Train and evaluate advanced clustering models](https://learn.microsoft.com/en-us/training/modules/train-evaluate-cluster-models/5-exercise-new-models)
 
 > ### Nota:
-> El notebook de esta clase está en: [2 Train and evaluate advanced clustering models.ipynb](notebooks%2FC5%2F2%20Train%20and%20evaluate%20advanced%20clustering%20models.ipynb)
+> El notebook de esta clase está en: [2 Train and evaluate advanced clustering models.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks%2FC5%2F2%20Train%20and%20evaluate%20advanced%20clustering%20models.ipynb)
 
 ## 5 Exercise Quiz 2
 
@@ -1290,7 +1290,7 @@ Después de haber creado un entorno Jupyter y clonado el repositorio ml-basics, 
 Cuando hayas terminado de trabajar en el cuaderno, vuelve a este módulo y continúa con la siguiente unidad para aprender más.
 
 > ### Nota:
-> El Notebook resulto está en: [1 Train a Deep Neural Network.ipynb](notebooks%2FC6%2F1%20Train%20a%20Deep%20Neural%20Network.ipynb)
+> El Notebook resulto está en: [1 Train a Deep Neural Network.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks%2FC6%2F1%20Train%20a%20Deep%20Neural%20Network.ipynb)
 
 ## 6 Exercise Quiz 1
 
@@ -1438,7 +1438,7 @@ En Jupyter, en la carpeta ml-basics, abre el cuaderno Convolutional Neural Netwo
 
 
 > ### Nota:
-> El notebook de esta clase está en: [1 Train a Convolutional Neural Network.ipynb](notebooks%2FC7%2F1%20Train%20a%20Convolutional%20Neural%20Network.ipynb)
+> El notebook de esta clase está en: [1 Train a Convolutional Neural Network.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks%2FC7%2F1%20Train%20a%20Convolutional%20Neural%20Network.ipynb)
 
 ## 7 Exercise Quiz 1
 
@@ -1485,9 +1485,9 @@ En Azure Machine Learning Studio, en la página de Compute (Cómputo), seleccion
 Si no tienes la intención de completar otros módulos que requieran el espacio de trabajo de Azure Machine Learning, puedes eliminar el grupo de recursos que creaste para ello de tu suscripción de Azure.
 
 > ### Nota:
-> El Notebook de este ejercicio en TensorFlow está en: [2 Transfer Learning PyTorch.ipynb](notebooks%2FC7%2F2%20Transfer%20Learning%20PyTorch.ipynb)
+> El Notebook de este ejercicio en TensorFlow está en: [2 Transfer Learning PyTorch.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks%2FC7%2F2%20Transfer%20Learning%20PyTorch.ipynb)
 >
-> El NoteBook de este ejercicio en PyTorch está en: [2 Transfer Learninig TensorFlow.ipynb](notebooks%2FC7%2F2%20Transfer%20Learninig%20TensorFlow.ipynb)
+> El NoteBook de este ejercicio en PyTorch está en: [2 Transfer Learninig TensorFlow.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks%2FC7%2F2%20Transfer%20Learninig%20TensorFlow.ipynb)
 
 
 ## 7 Exercise Quiz 2
