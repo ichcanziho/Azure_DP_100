@@ -383,7 +383,7 @@ Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para comple
 https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-python/3-exercise-explore-data
 
 > ### Nota:
-> Puedes ver todo el notebook en [1 Explore data with Numpy and Pandas.ipynb](notebooks/C2/1%20Explore%20data%20with%20Numpy%20and%20Pandas.ipynb)
+> Puedes ver todo el notebook en [1 Explore data with Numpy and Pandas.ipynb](1%20Create%20Machine%20Learning%20Models%20in%20Microsoft%20Azure/notebooks/C2/1%20Explore%20data%20with%20Numpy%20and%20Pandas.ipynb)
 
 ## 2 Exercise Quiz 1
 
