@@ -384,7 +384,7 @@ https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-pyt
 
 > ### Nota:
 > Puedes ver todo el notebook en [1 Explore data with Numpy and Pandas.ipynb](notebooks%2FC2%2F1%20Explore%20data%20with%20Numpy%20and%20Pandas.ipynb)
-> 
+
 ## 2 Exercise Quiz 1
 
 ![18.png](ims%2FC1%2F18.png)
@@ -428,7 +428,7 @@ https://learn.microsoft.com/en-us/training/modules/explore-analyze-data-with-pyt
 
 > ### Nota:
 > Puedes ver todo el notebook en [2 Visualize data with Matplotlib.ipynb](notebooks%2FC2%2F2%20Visualize%20data%20with%20Matplotlib.ipynb)
-
+> 
 ## 2 Exercise Quiz 2
 
 ![22.png](ims%2FC1%2F22.png)
@@ -639,7 +639,7 @@ Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para comple
 [Exercise - Experiment with more powerful regression models](https://learn.microsoft.com/en-us/training/modules/train-evaluate-regression-models/5-exercise-powerful-models)
 
 > ### Nota:
-> El notebook de esta clase lo puedes encontrar en: [2 Experiment with more powerfil regression models.ipynb](notebooks%2FC3%2F2%20Experiment%20with%20more%20powerfil%20regression%20models.ipynb)
+> El notebook de esta clase lo puedes encontrar en: [2 Experiment with more powerfull regression models.ipynb](notebooks%2FC3%2F2%20Experiment%20with%20more%20powerfull%20regression%20models.ipynb)
 
 ## 3 Exercise quiz 2
 
@@ -990,7 +990,6 @@ Este ejercicio requiere el entorno de aprendizaje de Microsoft Learn para comple
 > ### Nota:
 > El notebook de esta clase está en: [1 Train and evaluate a clustering model.ipynb](notebooks%2FC5%2F1%20Train%20and%20evaluate%20a%20clustering%20model.ipynb)
 
-
 ## 5 Exercise Quiz 1
 
 ![10.png](ims%2FC5%2F10.png)
@@ -1293,7 +1292,6 @@ Cuando hayas terminado de trabajar en el cuaderno, vuelve a este módulo y conti
 > ### Nota:
 > El Notebook resulto está en: [1 Train a Deep Neural Network.ipynb](notebooks%2FC6%2F1%20Train%20a%20Deep%20Neural%20Network.ipynb)
 
-
 ## 6 Exercise Quiz 1
 
 ![35.png](ims%2FC6%2F35.png)
@@ -1440,7 +1438,7 @@ En Jupyter, en la carpeta ml-basics, abre el cuaderno Convolutional Neural Netwo
 
 
 > ### Nota:
-> El notebook de esta clase está en: [05b_Convolutional_Neural_Networks_(Tensorflow).ipynb](..%2F..%2F..%2F..%2F..%2F..%2Fhome%2Fichcanziho%2FDescargas%2F05b_Convolutional_Neural_Networks_%28Tensorflow%29.ipynb)
+> El notebook de esta clase está en: [1 Train a Convolutional Neural Network.ipynb](notebooks%2FC7%2F1%20Train%20a%20Convolutional%20Neural%20Network.ipynb)
 
 ## 7 Exercise Quiz 1
 
@@ -1487,10 +1485,9 @@ En Azure Machine Learning Studio, en la página de Compute (Cómputo), seleccion
 Si no tienes la intención de completar otros módulos que requieran el espacio de trabajo de Azure Machine Learning, puedes eliminar el grupo de recursos que creaste para ello de tu suscripción de Azure.
 
 > ### Nota:
-> El Notebook de este ejercicio en TensorFlow está en: [2 Transfer Learninig TensorFlow.ipynb](notebooks%2FC7%2F2%20Transfer%20Learninig%20TensorFlow.ipynb)
+> El Notebook de este ejercicio en TensorFlow está en: [2 Transfer Learning PyTorch.ipynb](notebooks%2FC7%2F2%20Transfer%20Learning%20PyTorch.ipynb)
 >
-> El NoteBook de este ejercicio en PyTorch está en: [2 Transfer Learning PyTorch.ipynb](notebooks%2FC7%2F2%20Transfer%20Learning%20PyTorch.ipynb)
-
+> El NoteBook de este ejercicio en PyTorch está en: [2 Transfer Learninig TensorFlow.ipynb](notebooks%2FC7%2F2%20Transfer%20Learninig%20TensorFlow.ipynb)
 
 
 ## 7 Exercise Quiz 2
