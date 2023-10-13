@@ -1799,29 +1799,871 @@ utilizará el modelo entrenado para inferir, en otras palabras, predecir valores
 
 ## What is Classification?
 
+![1.png](ims%2FC4%2Fims%2F1.png)
+
+Bienvenido a esta lección donde creará un modelo de clasificación con Microsoft Azure Machine Diseñador de aprendizaje. 
+Después de completar esta lección, podrá; usar Azure Machine Learning Designer para entrenar un modelo de clasificación, 
+utilice una clasificación modele para influir e implementar una clasificación modelo como servicio.
+
+![2.png](ims%2FC4%2Fims%2F2.png)
+
+¿Qué es la clasificación? La clasificación es una forma de aprendizaje automático que se usa para predecir qué categoría 
+o clase a la que pertenece un artículo. Por ejemplo, un estado una clínica podría usar las características de un paciente, 
+como la edad, el peso, la sangre presión, etc. para predecir si el paciente está en riesgo de padecer diabetes. 
+
+![3.png](ims%2FC4%2Fims%2F3.png)
+
+En este caso, las características del paciente son las características y la etiqueta es una clasificación de cero o uno 
+que represente no diabético o diabético. La clasificación es un ejemplo de aprendizaje automático supervisado técnica en 
+la que se entrena un modelo mediante datos que incluyen tanto las características como las conocidas valores para la etiqueta. 
+
+Con clasificación, el modelo aprende a ajustar la función combinaciones para la etiqueta. En nuestro ejemplo de clínica de 
+salud, medidas como el peso, la altura, el nivel de glucosa, la presión arterial, etc., se recopilan para cada paciente. 
+Estas son las características representadas por x en nuestra ecuación. También sabemos si el paciente que estamos midiendo 
+es diabético o no. 
+
+Esa etiqueta Y es la clasificación del paciente. En este caso, las clases determinan si el paciente es diabético o no diabético.
+
+![4.png](ims%2FC4%2Fims%2F4.png)
+
+Cuando se complete el entrenamiento, puede usar el entrenado modelo para predecir las etiquetas de nuevos artículos para 
+cuya etiqueta se desconoce. Cuando las mediciones de un paciente nuevo o tomado, el modelo entrenado utiliza esas 
+características para predecir la probabilidad de que el paciente sea diabético o no diabético.
+
 ## 4 Exercise Part 1: Create a Microsoft Azure Machine Learning Workspace
+
+Para utilizar Azure Machine Learning, debe crear un espacio de trabajo en su suscripción a Microsoft Azure. A continuación, 
+puede utilizar este espacio de trabajo para gestionar datos, recursos informáticos, código, modelos y otros artefactos 
+relacionados con sus cargas de trabajo de aprendizaje automático.
+
+> ### Nota:
+> Este módulo es uno de los muchos que hacen uso de un espacio de trabajo de aprendizaje automático de Azure. Si está 
+> completando este módulo como preparación para la certificación Azure AI Fundamentals o Azure Data Scientist, considere 
+> la posibilidad de crear el espacio de trabajo una vez y reutilizarlo en otros módulos. Después de completar cada módulo, 
+> asegúrese de seguir las instrucciones de Limpieza al final del módulo para detener los recursos informáticos.
+
+Si aún no dispone de uno, siga estos pasos para crear un espacio de trabajo:
+
+1. Inicie sesión en el portal de Microsoft [Portal Azure](https://portal.azure.com/#home)
+utilizando sus credenciales de Microsoft.
+
+    ![entorno_de_trabajo.gif](ims%2FC2%2Fentorno_de_trabajo.gif)
+
+2. Seleccione ＋Crear un recurso, busque Aprendizaje automático y cree un nuevo recurso de Aprendizaje automático con la 
+siguiente configuración:
+
+   - **Suscripción:** su suscripción Azure
+
+   - **Grupo de recursos:** cree o seleccione un grupo de recursos
+
+   - **Nombre del espacio de trabajo:** Introduzca un nombre único para su espacio de trabajo
+
+   - **Región:** seleccione la región geográfica más cercana a usted
+
+   - **Cuenta de almacenamiento:** anote la nueva cuenta de almacenamiento que se creará por defecto para su espacio de trabajo
+
+   - **Depósito de claves:** anote el nuevo almacén de claves que se creará por defecto para su espacio de trabajo
+
+   - **Información sobre la aplicación:** anote el nuevo recurso de información sobre aplicaciones que se creará por defecto para su espacio de trabajo
+
+   - **Registro de contenedores:** Ninguno(se creará uno automáticamente la primera vez que despliegue un modelo en un contenedor)
+
+3. Espere a que se cree su espacio de trabajo (puede tardar unos minutos). A continuación, vaya a él en el portal.
+
+    ![9.png](ims%2FC2%2F9.png)
+
+4. En la página **Descripción general** de su espacio de trabajo, inicie Microsoft Azure Machine Learning Studio (o abra una nueva 
+pestaña del navegador y vaya a https://ml.azure.com), e inicie sesión en Azure Machine Learning studio utilizando su cuenta Microsoft
+
+    ![10.png](ims%2FC2%2F10.png)
+
+5. En Azure Machine Learning studio, active el icono ☰ situado en la parte superior izquierda para ver las distintas páginas de la interfaz. Puede utilizar estas páginas para gestionar los recursos de su espacio de trabajo.
+
+    ![11.gif](ims%2FC2%2F11.gif)
+
+Puede gestionar su espacio de trabajo utilizando el portal de Azure, pero para los científicos de datos y los ingenieros de operaciones de Machine Learning, Azure Machine Learning studio proporciona una interfaz de usuario más centrada para gestionar los recursos del espacio de trabajo.
 
 ## 4 Exercise Part 2: Create Compute Resources
 
+Después de haber creado un espacio de trabajo de Azure Machine Learning, puede utilizarlo para gestionar los distintos activos y recursos que necesita para crear soluciones de aprendizaje automático. En esencia, Azure Machine Learning es una plataforma para entrenar y gestionar modelos de aprendizaje automático, para lo que necesita computación en la que ejecutar el proceso de entrenamiento.
+
+Crear objetivos de computación
+Los objetivos de computación son recursos basados en la nube en los que puede ejecutar procesos de entrenamiento de modelos y exploración de datos.
+
+1. En
+[Azure Machine Learning studio](https://ml.azure.com/) Consulte la página Computación (en Gestionar). Aquí es donde gestiona los objetivos de computación para sus actividades de ciencia de datos. Hay cuatro tipos de recursos informáticos que puede crear:
+
+   - **Instancias de computación:** Estaciones de trabajo de desarrollo que los científicos de datos pueden utilizar para trabajar con datos y modelos.
+
+   - **Clústeres informáticos:** Clusters escalables de máquinas virtuales para el procesamiento bajo demanda de código de experimentos.
+
+   - **Clústeres de inferencia:** Objetivos de despliegue para servicios predictivos que utilizan sus modelos entrenados.
+
+   - **Computación Adjunta:** Enlaces a recursos de computación Azure existentes, como máquinas virtuales o clústeres Azure Databricks.
+
+2. En la pestaña **Instancias** de computación, añada una nueva instancia de computación con la siguiente configuración. Utilizará esta instancia como estación de trabajo desde la que probar su modelo:
+
+    ![instancia.gif](ims%2FC2%2Finstancia.gif)
+
+   - **Tipo de máquina virtual:** CPU
+
+   - **Tamaño de la máquina virtual:** Standard_DS11_v2 (ElijaSeleccionar entre todas las opciones para buscar y seleccionar este tamaño de máquina)
+
+   - **Nombre del ordenador:**introduzca un nombre único
+
+   - **Habilitar acceso SSH:** No seleccionado
+
+    ![12.png](ims%2FC2%2F12.png)
+
+3. Mientras se crea la instancia de cálculo, cambie a la pestaña Clusters de cálculo y añada un nuevo cluster de cálculo con la siguiente configuración. Lo utilizará para entrenar un modelo de aprendizaje automático:
+
+    ![cluster.gif](ims%2FC2%2Fcluster.gif)
+
+   - **Prioridad de la máquina virtual:** Dedicada
+
+   - **Tipo de máquina virtual:** CPU
+
+   - **Tamaño de la máquina virtual**: Standard_DS11_v2 (ElijaSeleccionar entre todas las opciones para buscar y seleccionar este tamaño de máquina)
+
+   - **Nombre del ordenador:** introduzca un nombre único
+
+   - **Número mínimo de nodos:** 0
+
+   - **Número máximo de nodos:** 2
+
+   - **Segundos de inactividad antes de la reducción:** 120
+
+   - **Habilitar acceso SSH:** No seleccionado
+
+    ![13.png](ims%2FC2%2F13.png)
+
+> ### Nota:
+>Si decide no completar este módulo, asegúrese de detener su instancia de cómputo para evitar incurrir en cargos innecesarios a su suscripción Azure. Los objetivos de cómputo tardarán algún tiempo en crearse. Puede pasar a la siguiente unidad mientras espera.
+
 ## 4 Exercise Part 3: Explore Data
+
+Para entrenar un modelo de clasificación, necesita un conjunto de datos que incluya características históricas 
+(características de la entidad para la que desea hacer una predicción) y valores de etiqueta conocidos (el indicador de 
+clase para cuya predicción desea entrenar un modelo).
+
+### Crear un conjunto de datos
+
+En Microsoft Azure Machine Learning, los datos para el entrenamiento del modelo y otras operaciones suelen encapsularse 
+en un objeto denominado conjunto de datos.
+
+1. En [Azure Machine Learning studio](https://ml.azure.com/) consulte la página Conjuntos de datos. Los conjuntos de datos 
+representan archivos o tablas de datos específicos con los que planea trabajar en Azure ML.
+2. Cree un conjunto de datos a partir de archivos web, utilizando la siguiente configuración:
+
+    ![importar_data.gif](ims%2FC4%2Fgifs%2Fimportar_data.gif)
+
+    **Información básica:**
+
+    - **URL web:** https://aka.ms/diabetes-data
+    
+    - **Nombre:** diabetes-data
+    
+    - **Tipo de conjunto de datos:** Tabular
+    
+    - **Descripción:** Datos sobre la diabetes
+
+    **Configuración y vista previa:**
+
+    - **Formato de archivo:** Delimitado
+    
+    - **Delimitador:** Coma
+    
+    - **Codificación:** UTF-8
+    
+    - **Cabeceras de columna:** Sólo el primer archivo tiene cabeceras
+    
+    - **Saltar filas:** Ninguna
+
+    **Esquema:**
+
+    - Incluir todas las columnas excepto Ruta
+
+    - Revisar los tipos detectados automáticamente
+
+    **Confirme los detalles:**
+
+    - No perfilar el conjunto de datos después de la creación
+
+3. Una vez creado el conjunto de datos, ábralo y consulte la página Explorar para ver una muestra de los datos. Estos datos 
+representan detalles de pacientes que se han sometido a pruebas de diabetes.
+
+    ![explorar_data.gif](ims%2FC4%2Fgifs%2Fexplorar_data.gif)
+
+### Crear un Pipeline
+
+Para empezar a utilizar el diseñador de Azure Machine Learning, primero debe crear una canalización y añadir el conjunto 
+de datos con el que desea trabajar.
+
+1. En [Azure Machine Learning studio](https://ml.azure.com/) de su espacio de trabajo, visualice la página Diseñador y 
+seleccione + para crear un nuevo Pipeline.
+
+2. En el panel de Configuración, cambie el nombre predeterminado del pipeline(Pipeline-Created-on-date) por Diabetes Training 
+(si el panel de Configuración no está visible, haga clic en el icono ⚙ situado junto al nombre del pipeline en la parte superior).
+
+    ![renombrar_pipeline.gif](ims%2FC4%2Fgifs%2Frenombrar_pipeline.gif)
+    
+3. Tenga en cuenta que debe especificar un objetivo de cálculo en el que ejecutar la canalización. En el panel Configuración, 
+haga clic en Seleccionar destino de cómputo y seleccione el clúster de cómputo aml-cluster que creó anteriormente.
+
+4. En la parte izquierda del diseñador, expanda la sección Conjuntos de datos y arrastre al lienzo el conjunto de datos 
+diabetes-data que creó en el ejercicio anterior.
+
+5. Haga clic con el botón derecho del ratón (Ctrl+clic en un Mac) sobre el conjunto de datos diabetes-data en el lienzo y, 
+en el menú Visualizar, seleccione Salida del conjunto de datos.
+
+6. Revise el esquema de los datos, observando que puede ver las distribuciones de las distintas columnas como histogramas.
+
+7. Desplácese hacia la derecha y seleccione el encabezado de la columna Diabético, y observe que contiene dos valores 0 y 1. 
+Estos valores representan las dos clases posibles para la etiqueta que predecirá su modelo, con un valor de 0 que significa 
+que el paciente no tiene diabetes, y un valor de 1 que significa que el paciente es diabético.
+
+8. Desplácese de nuevo a la izquierda y revise las otras columnas, que representan las características que se utilizarán 
+para predecir la etiqueta. Observe que la mayoría de estas columnas son numéricas, pero cada característica está en su propia 
+escala. Por ejemplo, los valores de Edad van de 21 a 77, mientras que los de Diabetes Pedigree van de 0,078 a 2,3016. 
+Cuando se entrena un modelo de aprendizaje automático, a veces es posible que los valores más grandes dominen la función 
+predictiva resultante, reduciendo la influencia de las características que están en una escala más pequeña. Normalmente, 
+los científicos de datos mitigan este posible sesgo normalizando las columnas numéricas para que estén en escalas similares.
+
+    ![visualize_data.gif](ims%2FC4%2Fgifs%2Fvisualize_data.gif)
+
+9. Cierre la ventana de visualización del resultado de los datos de la diabetes para que pueda ver el conjunto de datos 
+en el lienzo de esta forma:
+
+    
+
+
+### Añadir transformaciones
+
+Antes de entrenar un modelo, suele ser necesario aplicar algunas transformaciones de preprocesamiento a los datos.
+
+1. En el panel de la izquierda, expanda la sección Transformación de datos, que contiene una amplia gama de módulos que 
+puede utilizar para transformar los datos antes del entrenamiento del modelo.
+
+2. Arrastre un módulo Normalizar datos al lienzo, debajo del conjunto de datos de diabetes. A continuación, conecte la 
+salida de la parte inferior del conjunto de datos de diabetes a la entrada de la parte superior del módulo Normalizar datos, 
+de esta forma:
+
+    ![normalize_data1.gif](ims%2FC4%2Fgifs%2Fnormalize_data1.gif)
+
+3. Seleccione el módulo Normalizar datos y visualice su configuración, observando que requiere que especifique el método 
+de transformación y las columnas a transformar.
+
+4. Establezca la transformación en MinMax y edite las columnas para incluir las siguientes columnas por nombre, como se 
+muestra en la imagen:
+
+    ![normalize_data2.gif](ims%2FC4%2Fgifs%2Fnormalize_data2.gif)
+
+   - Pregnancies
+   - TricepsThickness
+   - SerumInsulin
+   - BMI
+   - DiabetesPedigree
+   - Age
+   - PlasmaGlucose
+   - DiastolicBloodPressure
+
+    ![6.png](ims%2FC4%2Fims%2F6.png)
+
+La transformación de datos está normalizando las columnas numéricas para ponerlas en la misma escala, lo que debería ayudar 
+a evitar que las columnas con valores grandes dominen el entrenamiento del modelo. Normalmente aplicaría un montón de 
+transformaciones de preprocesamiento como esta para preparar sus datos para el entrenamiento, pero mantendremos las cosas 
+simples en este ejercicio.
+
+### Ejecute el Pipeline
+
+Para aplicar sus transformaciones de datos, necesita ejecutar la canalización como un experimento.
+
+1. Asegúrese de que su pipeline tiene un aspecto similar a este:
+
+2. Seleccione Enviar, y ejecute el pipeline como un nuevo experimento llamado **mslearn-diabetes-training** en su cluster 
+de computación.
+
+    ![run_pipeline.gif](ims%2FC4%2Fgifs%2Frun_pipeline.gif)
+
+3. Espere a que finalice la ejecución, puede tardar unos minutos.
+
+### Método alternativo
+
+El método descrito a continuación sirve porque lo enseñado en el curso ya no está actualizado y ya no existe la opción
+`dataset`, entonces para seguir con el tutorial, observe el siguiente GIF actualizado.
+
+![alternativa.gif](ims%2FC4%2Fgifs%2Falternativa.gif)
+
+### Vea los datos transformados
+
+El conjunto de datos está ahora preparado para el entrenamiento del modelo.
+
+1. Seleccione el módulo Normalizar datos completado y, en su panel Configuración de la derecha, en la pestaña 
+Salidas + registros, seleccione el icono Visualizar para el conjunto de datos transformado.
+
+2. Visualice los datos, observando que las columnas numéricas que ha seleccionado se han normalizado a una escala común.
+
+3. Cierre la visualización del resultado de los datos normalizados.
+
+![ver_datos.gif](ims%2FC4%2Fgifs%2Fver_datos.gif)
+
 
 ## 4 Exercise Part 4: Create and Run a Training Pipeline
 
+Después de haber utilizado transformaciones de datos para preparar los datos, puede utilizarlos para entrenar un modelo de aprendizaje automático.
+
+### Añadir módulos de entrenamiento
+Es una práctica común entrenar el modelo utilizando un subconjunto de los datos, mientras se retienen algunos datos con 
+los que probar el modelo entrenado. Esto le permite comparar las etiquetas que predice el modelo con las etiquetas reales 
+conocidas en el conjunto de datos original.
+
+En este ejercicio, va a ampliar el conducto de entrenamiento dela diabetes como se muestra aquí:
+
+![7.png](ims%2FC4%2Fims%2F7.png)
+
+1. Abra la tubería de Entrenamiento en diabetes que creó en la unidad anterior si no está ya abierta.
+
+2. En el panel de la izquierda, en la sección Transformaciones de datos, arrastre un módulo Dividir datos al lienzo bajo 
+el módulo Normalizar datos. A continuación, conecte la salida del Conjunto de datos transformados(izquierda) del módulo 
+Normalizar datos a la entrada del módulo Dividir datos.
+
+3. Seleccione el módulo Dividir datos y configure sus ajustes como se indica a continuación:
+
+    ![split_data.gif](ims%2FC4%2Fgifs%2Fsplit_data.gif)
+
+   - Modo de división Dividir filas
+
+   - Fracción de filas en el primer conjunto de datos de salida: 0.7
+
+   - Semilla aleatoria: 123
+
+   - División estratificada: Falso
+
+4. Expanda la sección Entrenamiento del modelo en el panel de la izquierda y arrastre un módulo Entrenar modelo al lienzo, 
+bajo el módulo Dividir datos. A continuación, conecte la salida Conjunto de datos de resultados1 (izquierda) del módulo
+Dividir datos a la entrada Conjunto de datos(derecha) del módulo Entrenar modelo.
+
+5. El modelo que estamos entrenando predecirá el valor Diabético, así que seleccione el módulo Entrenar modelo y modifique 
+su configuración para establecer la columna Etiqueta en Diabético(¡coincidiendo exactamente con las mayúsculas y minúsculas 
+y la ortografía!)
+
+    ![train_model.gif](ims%2FC4%2Fgifs%2Ftrain_model.gif)
+
+6. La etiqueta Diabético que predecirá el modelo es una clase (0 ó 1), por lo que necesitamos entrenar el modelo utilizando 
+un algoritmo de clasificación. Concretamente, hay dos clases posibles, por lo que necesitamos un algoritmo de clasificación
+binario. Despliegue la sección Algoritmos de aprendizaje automático y, en Clasificación, arrastre un módulo Regresión logística 
+de dos clases al lienzo, a la izquierda del módulo Dividir datos y encima del móduloEntrenar modelo. A continuación, conecte 
+su salida a la entrada Modelo no entrenado(izquierda) del módulo Entrenar modelo.
+
+    ![two_class_LR.gif](ims%2FC4%2Fgifs%2Ftwo_class_LR.gif)
+
+    >    Nota: Existen múltiples algoritmos que puede utilizar para entrenar un modelo de clasificación. Si necesita ayuda para 
+   elegir uno, eche un vistazo a la [hoja de trucos sobre algoritmos de aprendizaje automático](https://learn.microsoft.com/en-us/azure/machine-learning/algorithm-cheat-sheet?view=azureml-api-1) para Diseñador de aprendizaje automático de Microsoft Azure.
+
+7. Para probar el modelo entrenado, necesitamos utilizarlo para puntuar el conjunto de datos de validación que retuvimos 
+cuando dividimos los datos originales; en otras palabras, predecir etiquetas para las características del conjunto de datos 
+de validación. Expanda la sección Puntuación y evaluación del modelo y arrastre un módulo Modelo de puntuación al lienzo, 
+debajo del módulo Modelo de entrenamiento. A continuación, conecte la salida del módulo Train Model a la entrada Trained 
+model (izquierda) del módulo Score Model; y conecte la salida Results dataset2 (derecha) del módulo Split Data a la entrada 
+Dataset (derecha) del módulo Score Model. 
+
+    ![score_model.gif](ims%2FC4%2Fgifs%2Fscore_model.gif)
+
+8. Asegúrese de que su pipeline tiene este aspecto:
+
+    ![7.png](ims%2FC4%2Fims%2F7.png)
+
+### Ejecute la canalización de entrenamiento
+
+Ahora está listo para ejecutar la canalización de entrenamiento y entrenar el modelo. 
+
+1. Seleccione Enviar y ejecute la canalización utilizando el experimento existente denomina domslearn-diabetes-entrenamiento. 
+
+2. Espere a que finalice la ejecución del experimento. Esto puede tardar 5 minutos o más. 
+
+    ![run_pipeline_2.gif](ims%2FC4%2Fgifs%2Frun_pipeline_2.gif)
+
+3. Cuando haya finalizado la ejecución del experimento, seleccione el módulo Modelo de puntuación y en el panel de 
+configuración, en la pestañaSalidas + Registros, enSalidas de datos de la secciónConjunto de datos puntuados , utilice el icono Visualizar para ver los resultados. 
+
+4. Desplácese hacia la derecha y observe que junto a la columna Diabético(que contiene los valores verdaderos conocidos de la etiqueta) hay una nueva columna denominada Etiquetas puntuadas, que contiene los valores predichos de la etiqueta, y una columna Probabilidades puntuadas que contiene un valor de probabilidad entre 0 y 1. Esto indica la probabilidad de una predicción positiva, de modo que las probabilidades superiores a 0,5 dan como resultado una etiqueta predicha de 1 (diabético), mientras que las probabilidades entre 0 y 0,5 dan como resultado una etiqueta predicha de 0 (no diabético). 
+
+    ![view_predictions.gif](ims%2FC4%2Fgifs%2Fview_predictions.gif)
+
+Cierre la ventana de visualización de resultados del modelo de puntuación. 
+
+El modelo está prediciendo valores para la etiqueta Diabético, pero ¿hasta qué punto son fiables sus predicciones? Para saberlo, necesita evaluar el modelo. 
+
 ## 4 Exercise Part 5: Evaluate a Classification Model
+
+Los datos de validación que retuvo y utilizó para puntuar el modelo incluyen los valores conocidos para la etiqueta. Por 
+lo tanto, para validar el modelo, puede comparar los valores reales de la etiqueta con los valores de la etiqueta que se 
+predijeron cuando puntuó el conjunto de datos de validación. Basándose en esta comparación, puede calcular varias métricas 
+que describen el rendimiento del modelo.
+
+### Añadir un módulo Evaluar modelo
+
+1. Abra el conducto de entrenamiento de diabetes que creó en la unidad anterior si no está ya abierto.
+
+2. En el panel de la izquierda, en la sección Puntuación y evaluación del modelo, arrastre un módulo Evaluar modelo al 
+lienzo, debajo del módulo Modelo de puntuación, y conecte la salida del módulo Modelo de puntuación a la entrada Conjunto 
+de datos puntuado (izquierda) del móduloModelo de evaluación.
+
+3. Asegúrese de que su canalización tenga este aspecto:
+
+    ![8.png](ims%2FC4%2Fims%2F8.png)
+
+4. SeleccioneEnviar, y ejecute el pipeline utilizando el experimento existente denominado mslearn-diabetes-training.
+
+    ![evaluate_model.gif](ims%2FC4%2Fgifs%2Fevaluate_model.gif)
+
+5. Espere a que finalice la ejecución del experimento.
+
+6. Cuando haya finalizado la ejecución del experimento, seleccione el móduloEvaluar modelo y en el panel de configuración, 
+en la pestaña Salidas + Registros, en Salidas de datos de la sección Resultados de la evaluación, utilice el icono Visualizar 
+para ver las métricas de rendimiento. Estas métricas pueden ayudar a los científicos de datos a evaluar lo bien que predice 
+el modelo basándose en los datos de validación.
+
+    ![show_metrics.gif](ims%2FC4%2Fgifs%2Fshow_metrics.gif)
+
+7. Visualice la **matriz de confusión** para el modelo, que es una tabulación de los recuentos de valores predichos y reales 
+para cada clase posible. Para un modelo de clasificación binaria como éste, en el que está prediciendo uno de dos valores 
+posibles, la matriz de confusión es una cuadrícula de 2x2 que muestra los recuentos de valores predichos y reales para las 
+clases 0 y 1, similar a esto:
+
+    ![9.png](ims%2FC4%2Fims%2F9.png)
+
+    La matriz de confusión muestra los casos en los que tanto el valor predicho como el real fueron 1 (conocidos como 
+verdaderos positivos) en la parte superior izquierda, y los casos en los que tanto el valor predicho como el real fueron 0
+(verdaderos negativos) en la parte inferior derecha. Las demás celdas muestran los casos en los que los valores predichos 
+y reales difieren (falsos positivos y falsos negativos). 
+
+    Las celdas de la matriz están coloreadas de forma que cuantos más casos estén representados en la celda, más intenso 
+será el color - con el resultado de que puede identificar un modelo que predice con precisión para todas las clases buscando 
+una línea diagonal de celdas coloreadas intensamente desde la parte superior izquierda a la inferior derecha (en otras 
+palabras, las celdas en las que los valores predichos coinciden con los valores reales). 
+
+    Para un modelo de clasificación multi-clase (en el que hay más de dos clases posibles), se utiliza el mismo enfoque 
+para tabular cada combinación posible de recuentos de valores reales y predichos - por lo que un modelo con tres clases 
+posibles daría como resultado una matriz de 3x3 con una línea diagonal de celdas en las que coinciden las etiquetas predichas 
+y reales.
+
+8. Revise las métricas a la izquierda de la matriz de confusión, que incluyen:
+
+   - **Accuracy:** La proporción de predicciones correctas (verdaderos positivos + verdaderos negativos) respecto al número total de predicciones. En otras palabras, ¿qué proporción de predicciones de diabetes acertó el modelo?
+
+   - **Precision:** La fracción de casos positivos identificados correctamente (el número de verdaderos positivos dividido por el número de verdaderos positivos más los falsos positivos). En otras palabras, de todos los pacientes que el modelo predijo que tenían diabetes, ¿cuántos son realmente diabéticos?
+
+   - **Recall:** La fracción de los casos clasificados como positivos que son realmente positivos (el número de verdaderos positivos dividido por el número de verdaderos positivos más los falsos negativos). En otras palabras, de todos los pacientes que realmente tienen diabetes, ¿cuántos identificó el modelo?
+
+   - **F1 Score:** Una métrica global que combina esencialmente la precisión y la recuperación.
+
+   - Volveremos al **AUC** más adelante.
+
+    De estas métricas, el **Accuracy** es la más intuitiva. Sin embargo, debe tener cuidado al utilizar la simple Accuracy 
+como medida de lo bien que funciona un modelo. Supongamos que sólo el 3% de la población es diabética. Podría crear un 
+modelo que predijera siempre 0 y tendría una precisión del 97%, ¡sólo que no sería muy útil! Por esta razón, la mayoría de 
+los científicos de datos utilizan otras métricas como la **Precision** y el **Recall** para evaluar el rendimiento del 
+modelo de clasificación.
+
+9. Encima de la lista de métricas, observe que hay un control deslizante Umbral. Recuerde que lo que predice un modelo de 
+clasificación es **la probabilidad de cada clase posible**. 
+
+    ![umbral.gif](ims%2FC4%2Fgifs%2Fumbral.gif)
+
+    En el caso de este modelo de clasificación binaria, la probabilidad predicha para una predicción positiva(es decir, 
+diabético) es un valor entre 0 y 1. Por defecto, una probabilidad predicha para la diabetes por encima de 0,5 da como 
+resultado una predicción de clase de 1, mientras que una predicción por debajo de este umbral significa que hay una mayor 
+probabilidad de que el paciente no tenga diabetes (recuerde que las probabilidades para todas las clases suman 1), por lo 
+que la clase predicha sería 0. 
+
+    Pruebe a mover el control deslizante del umbral y observe el efecto en la matriz de confusión. Si lo mueve todo hacia 
+la izquierda (0), la métrica Recall se convierte en 1, y si lo mueve todo hacia la derecha (1), la métrica Recall se 
+convierte en 0.
+
+10. Mire por encima del control deslizante Umbral en la curva ROC(ROC significa característica de operador recibido, pero la 
+mayoría de los científicos de datos la llaman simplemente curva ROC). Otro término para recall es Tasa de verdaderos 
+positivos (TPR), y tiene una métrica correspondiente llamada Tasa de falsos positivos, que mide el número de casos negativos 
+identificados incorrectamente como positivos en comparación con el número de casos negativos reales. 
+
+    ![roc.gif](ims%2FC4%2Fgifs%2Froc.gif)
+
+    Si se trazan estas métricas entre sí para cada valor de umbral posible entre 0 y 1, se obtiene una curva. En un modelo 
+ideal, la curva subiría por todo el lado izquierdo y cruzaría la parte superior, de modo que cubriera toda el área del gráfico. 
+Cuanto mayor sea el área bajo la curva (que puede ser cualquier valor entre 0 y 1), mejor es el rendimiento del modelo: 
+es la métrica AUC que aparece junto con las demás métricas a continuación. 
+
+    Para hacerse una idea de cómo representa esta área el rendimiento del modelo, imagine una línea diagonal recta desde 
+la parte inferior izquierda hasta la parte superior derecha del gráfico ROC. Esto representa el rendimiento esperado si se 
+limitara a adivinar o lanzar una moneda al aire para cada paciente: podría esperar acertar alrededor de la mitad y 
+equivocarse en la otra mitad, por lo que el área bajo la línea diagonal representa un AUC de 0,5. Si el AUC de su modelo 
+es superior a esto para un modelo de clasificación binaria, entonces el modelo rinde mejor que una conjetura al azar.
+
+11. Cierre la ventana de visualización de resultados de Evaluar modelo.
+
+El rendimiento de este modelo no es tan bueno, en parte porque sólo realizamos una ingeniería de características y un 
+preprocesamiento mínimos. Podría probar con un algoritmo de clasificación diferente, como el Bosque de decisión de dos 
+clases, y comparar los resultados. Puede conectar las salidas del módulo Dividir datos a varios módulos Entrenar modelo y
+Puntuar modelo, y puede conectar un segundo módulo Puntuar modelo al módulo Evaluar modelo para ver una comparación en 
+paralelo. El objetivo del ejercicio es simplemente introducirle en la clasificación y en la interfaz del diseñador de 
+Azure Machine Learning, ¡no entrenar un modelo perfecto!
 
 ## 4 Exercise Part 6: Create an Inference Pipeline
 
+Después de crear y ejecutar una canalización para entrenar el modelo, necesitará una segunda canalización que realice las 
+mismas transformaciones de datos para los datos nuevos y, a continuación, utilice el modelo entrenado para inferir(en 
+otras palabras, predecir) valores de etiquetas basándose en sus características. Esta canalización constituirá la base de 
+un servicio predictivo que podrá publicar para que lo utilicen las aplicaciones.
+
+### Crear un Pipeline de inferencia
+
+1. En Microsoft Azure Machine Learning Studio, haga clic en la página Diseñador para ver todas los Pipeline que ha creado. 
+A continuación, abra el Pipeline Formación de diabetes que creó anteriormente.
+
+2. En la lista desplegable Crear Pipeline de inferencia, haga clic en Pipeline de inferencia en tiempo real. Tras unos 
+segundos, se abrirá una nueva versión de su canalización denominada Entrenamiento diabético-inferencia en tiempo real.
+
+    ![real_time_pipeline.gif](ims%2FC4%2Fgifs%2Freal_time_pipeline.gif)
+
+    > Nota: Si la canalización no incluye los módulos Web Service Input y Web Service Output, vuelva a la página del Diseñador y 
+abra de nuevo la canalización Entrenamiento diabético-inferencia en tiempo real.
+
+3. Cambie el nombre del nuevo Pipeline a Predecir la diabetes y, a continuación, revise el nuevo Pipeline. Contiene una 
+entrada de servicio web para que se envíen los nuevos datos, y una salida de servicio web para devolver los resultados. 
+Algunas de las transformaciones y pasos de entrenamiento se han encapsulado en esta canalización, de modo que las 
+estadísticas de sus datos de entrenamiento se utilizarán para normalizar los valores de los nuevos datos, y el modelo 
+entrenado se utilizará para puntuar los nuevos datos.
+
+    ![cambiar_nombre.gif](ims%2FC4%2Fgifs%2Fcambiar_nombre.gif)
+
+    Va a realizar los siguientes cambios en la tubería de inferencia:
+
+    ![10.png](ims%2FC4%2Fims%2F10.png)
+
+    - sustituya el conjunto de datos de diabetes por un módulo Introducir datos manualmente que no incluya la columna de etiqueta(Diabético).
+
+    - Elimine el módulo Evaluar modelo.
+
+   - Inserte un módulo Ejecutar script Python antes de la salida del servicio web para devolver sólo el ID del paciente, el valor de etiqueta predicho y la probabilidad. Siga los pasos restantes a continuación, utilizando la imagen y la información anterior como referencia a medida que modifica la canalización.
+
+4. La tubería de inferencia asume que los nuevos datos coincidirán con el esquema de los datos de entrenamiento originales, 
+por lo que se incluye el conjunto de datos de diabetes de la tubería de entrenamiento. Sin embargo, estos datos de entrada 
+incluyen la etiqueta Diabético que predice el modelo, lo que resulta poco intuitivo incluir en los nuevos datos de pacientes 
+para los que aún no se ha realizado una predicción de diabetes. Elimine este módulo y sustitúyalo por un módulo Introducir 
+datos manualmente de la sección Entrada y salida de datos, que contenga los siguientes datos CSV, que incluyen valores de 
+características sin etiquetas para tres nuevas observaciones de pacientes:
+
+    > Nota importante
+    > 
+    > Deberá copiar y pegar todo el bloque de texto presentado en el bloque de código. Asegúrese de haber seleccionado todo el texto o los datos del bloque de código, incluidos los puntos finales, los corchetes, etc., antes de copiarlo y colocarlo en el lugar o sitio especificado en el ejercicio. Esto ayudará a evitar que se produzcan errores o que tenga que volver atrás y comenzar de nuevo el ejercicio.
+
+    ```csv
+    PatientID,Pregnancies,PlasmaGlucose,DiastolicBloodPressure,TricepsThickness,SerumInsulin,BMI,DiabetesPedigree,Age
+    1882185,9,104,51,7,24,27.36983156,1.350472047,43
+    1662484,6,73,61,35,24,18.74367404,1.074147566,75
+    1228510,4,115,50,29,243,34.69215364,0.741159926,59
+    ```
+
+5. Conecte el nuevo módulo Introducir datos manualmente a la misma entrada Conjunto de datos del módulo Aplicar transformación 
+que la entrada Servicio web.
+
+    ![enter_data_manually.gif](ims%2FC4%2Fgifs%2Fenter_data_manually.gif)
+
+6. El conducto de inferencia incluye el módulo Evaluar modelo, que no es útil cuando se realizan predicciones a partir de 
+datos nuevos, así que elimine este módulo.
+
+7. La salida del módulo Modelo de puntuación incluye todas las características de entrada, así como la etiqueta predicha 
+y la puntuación de probabilidad. Para limitar la salida a sólo la predicción y la probabilidad:
+
+    ![python_script.gif](ims%2FC4%2Fgifs%2Fpython_script.gif)
+
+   >(Nota: cometi un error de sintaxis, escribiendo mal: Scored Probabilities, esto termina en que tuve que volver a correr este Job y Volver a construir 
+   > el endpoint por eso más adelante el nombre del endpoint es diferente)
+
+   - Elimine la conexión entre el módulo Modelo de puntuación y la Salida del servicio web.
+
+   - Añada un módulo Ejecutar Script Python de la sección Lenguaje Python, sustituyendo todo el script python por defecto 
+   por el siguiente código (que selecciona sólo las columnas PatientID, Etiquetas puntuadas y Probabilidades puntuadas y 
+   las renombra adecuadamente):
+
+    >Nota importante
+    >
+    >Tendrá que copiar y pegar todo el bloque de texto presentado en el bloque de código. Asegúrese de haber seleccionado todo el texto o los datos del bloque de código, incluidos los puntos finales, los corchetes, etc., antes de copiarlo y colocarlo en el lugar o sitio especificado en el ejercicio. Esto ayudará a evitar que se produzcan errores o que tenga que volver atrás y comenzar de nuevo el ejercicio.
+
+    También puede utilizar los siguientes atajos para copiar y pegar el código:
+
+   - Haga clic dentro del cuadro de código y seleccione CTL + A seguido deCTL + C
+
+   - Alternativamente, si utiliza un Mac seleccioneComando + A y Comando + C para copiar todo el código a su portapapeles
+
+    ```python
+    import pandas as pd
+    def azureml_main(dataframe1 = None, dataframe2 = None):
+        scored_results = dataframe1[["PatientID", "Scored Labels", "Scored Probabilities"]]
+        scored_results.rename(columns={"Scored Labels": "DiabetesPrediction", 
+                                       "Scored Probabilities": "Probability"},
+                                       inplace=True)
+        return scored_results                      
+    ```
+   
+    - Conecte la salida del módulo Score Model a la entrada Dataset1(más a la izquierda) del módulo Execute Python Script, 
+   y conecte la salida del módulo Execute Python Scripta la salida Web Service Output.
+
+8. Compruebe que su pipeline tiene un aspecto similar al siguiente:
+
+    ![11.png](ims%2FC4%2Fims%2F11.png)
+
+9. Ejecute el pipeline como un nuevo experimento llamado mslearn-diabetes-inference en su cluster de computación. Esto 
+puede tardar un poco.
+
+    ![send_pipeline3.gif](ims%2FC4%2Fgifs%2Fsend_pipeline3.gif)
+
+10. Cuando el Pipeline haya finalizado, seleccione el módulo Ejecutar script de Python y, en el panel de configuración, 
+en la pestaña Salida + Registros, visualice el conjunto de datos Resultado para ver las etiquetas y probabilidades predichas 
+para las tres observaciones de pacientes en los datos de entrada.
+
+    ![results_inference.gif](ims%2FC4%2Fgifs%2Fresults_inference.gif)
+
+Su canal de inferencia predice si los pacientes corren o no riesgo de padecer diabetes en función de sus características. 
+Ahora está listo para publicar la canalización para que las aplicaciones cliente puedan utilizarla.
+
 ## 4 Exercise Part 7: Deploy a Predictive Service
+
+Después de haber creado y probado una canalización de inferencias para inferencias en tiempo real, puede publicarla como 
+servicio para que la utilicen las aplicaciones cliente.
+
+> Nota: En este ejercicio, desplegará el servicio web en una Azure Container Instance (ACI). Este tipo de cómputo se crea 
+> dinámicamente, y es útil para el desarrollo y las pruebas. Para la producción, debe crear un clúster de inferencia, que 
+> proporciona un clúster de Azure Kubernetes Service (AKS) que proporciona una mejor escalabilidad y seguridad.
+
+### Despliegue un servicio
+
+1. Visualice la canalización de inferencia Predecir diabetes que creó en la unidad anterior.
+
+2. En la parte superior derecha, seleccione Desplegar, y despliegue un nuevo punto final en tiempo real, utilizando la siguiente configuración:
+
+    ![deploy_diabetes.gif](ims%2FC4%2Fgifs%2Fdeploy_diabetes.gif)
+
+   - Nombre: predict-diabetes
+
+   - Descripción: Clasificar la diabetes.
+
+   - Tipo de computación: Instancia de contenedor Azure
+
+3. Espere a que se despliegue el servicio web - esto puede tardar varios minutos. El estado del despliegue se muestra en la parte superior izquierda de la interfaz del diseñador.
+
+    ![12.png](ims%2FC4%2Fims%2F12.png)
+
+   (Nota: El nombre del Service ID ahora es: predecir-diabetes, porque lo tuve que volver a hacer por un bug)
+
+### Pruebe el servicio
+
+Ahora puede probar su servicio desplegado desde una aplicación cliente - en este caso, utilizará el código de la celda 
+inferior para simular una aplicación cliente.
+
+1. En la página Endpoints, abra el endpoint en tiempo real predict-diabetes.
+
+2. Cuando se abra el endpoint predict-diabetes, vea la pestaña Consume y anote allí la siguiente información. Necesitará 
+esto para conectarse a su servicio desplegado desde una aplicación cliente.
+
+   - El punto final REST para su servicio
+
+   - la clave principal de su servicio
+
+3. Observe que puede utilizar el enlace ⧉ situado junto a estos valores para copiarlos en el portapapeles.
+
+    ![13.png](ims%2FC4%2Fims%2F13.png)
+
+4. Con la página Consume para el servicio de predicción de la diabetes abierta en su navegador, abra una nueva pestaña 
+del navegador y abra una segunda instancia de Microsoft Azure Machine Learning studio. A continuación, en la nueva pestaña, 
+visualice la página Cuadernos(enAutor).
+
+5. En la página Cuadernos, en Mis archivos, utilice el botón + para crear un nuevo archivo con la siguiente configuración:
+
+   - Ubicación del archivo: Usuarios/su nombre de usuario
+
+   - Nombre del archivo: Test-Diabetes
+
+   - Tipo de archivo: Cuaderno
+
+   - Sobrescribir si ya existe: Seleccionado
+
+6. Una vez creado el nuevo cuaderno, asegúrese de que la instancia de cálculo que creó anteriormente está seleccionada en 
+el cuadro Cálculo y de que tiene el estadoEn ejecución.
+
+7. Utilice el botón ≪ para contraer el panel del explorador de archivos y disponer de más espacio para centrarse en la 
+pestaña del cuadernoTest-Diabetes.ipynb.
+
+8. En la celda rectangular que se ha creado en el cuaderno, pegue el siguiente código:
+
+    ![notebook diabetes.gif](ims%2FC4%2Fgifs%2Fnotebook%20diabetes.gif)
+
+    > Nota importante
+    > 
+    > Tendrá que copiar y pegar todo el bloque de texto que se presenta en el bloque de código.
+    > Asegúrese de haber seleccionado todo el texto o los datos del bloque de código, incluidos los puntos finales, los corchetes, etc., antes de copiarlo y colocarlo en el lugar o sitio especificado en el ejercicio. Esto ayudará a evitar que se produzcan errores o que tenga que volver atrás y comenzar de nuevo el ejercicio.
+
+    ```python
+    import urllib.request
+    import json
+    import os
+    import ssl
+    
+    def allowSelfSignedHttps(allowed):
+        # bypass the server certificate verification on client side
+        if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') and getattr(ssl, '_create_unverified_context', None):
+            ssl._create_default_https_context = ssl._create_unverified_context
+    
+    allowSelfSignedHttps(True) # this line is needed if you use self-signed certificate in your scoring service.
+    
+    # Request data goes here
+    # The example below assumes JSON formatting which may be updated
+    # depending on the format your endpoint expects.
+    # More information can be found here:
+    # https://docs.microsoft.com/azure/machine-learning/how-to-deploy-advanced-entry-script
+    data =  {
+      "Inputs": {
+        "WebServiceInput0": [
+          {
+            "PatientID": 1882185,
+            "Pregnancies": 9,
+            "PlasmaGlucose": 104,
+            "DiastolicBloodPressure": 51,
+            "TricepsThickness": 7,
+            "SerumInsulin": 24,
+            "BMI": 27.36983156,
+            "DiabetesPedigree": 1.3504720469999998,
+            "Age": 43
+          },
+          {
+            "PatientID": 1662484,
+            "Pregnancies": 6,
+            "PlasmaGlucose": 73,
+            "DiastolicBloodPressure": 61,
+            "TricepsThickness": 35,
+            "SerumInsulin": 24,
+            "BMI": 18.74367404,
+            "DiabetesPedigree": 1.074147566,
+            "Age": 75
+          },
+          {
+            "PatientID": 1228510,
+            "Pregnancies": 4,
+            "PlasmaGlucose": 115,
+            "DiastolicBloodPressure": 50,
+            "TricepsThickness": 29,
+            "SerumInsulin": 243,
+            "BMI": 34.69215364,
+            "DiabetesPedigree": 0.7411599259999999,
+            "Age": 59
+          }
+        ]
+      },
+      "GlobalParameters": {}
+    }
+    
+    body = str.encode(json.dumps(data))
+    
+    url = 'http://56eb6d33-c7e6-4a5b-a3b6-2217ad9feecd.eastus2.azurecontainer.io/score'
+    # Replace this with the primary/secondary key or AMLToken for the endpoint
+    api_key = 'AQUI IRIA TU API PERRO'
+    if not api_key:
+        raise Exception("A key should be provided to invoke the endpoint")
+    
+    
+    headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
+    
+    req = urllib.request.Request(url, body, headers)
+    
+    try:
+        response = urllib.request.urlopen(req)
+    
+        result = response.read()
+        print(result)
+    except urllib.error.HTTPError as error:
+        print("The request failed with status code: " + str(error.code))
+    
+        # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
+        print(error.info())
+        print(error.read().decode("utf8", 'ignore'))
+
+    ```
+
+    > Nota: 
+    >    
+    > No se preocupe demasiado por los detalles del código. Sólo define las características de un paciente y utiliza el serviciopredecir-diabetesque ha creado para predecir un diagnóstico de diabetes.
+
+9. Cambie a la pestaña del navegador que contiene la página Consume para el servicio predict-diabetes, y copie el punto 
+final REST para su servicio. Vuelva a la pestaña que contiene el cuaderno y pegue la clave en el código, sustituyendo 
+YOUR_ENDPOINT.
+
+10. Cambie a la pestaña del navegador que contiene la página Consume para el servicio predict-diabetes, y copie la clave 
+principal para su servicio. Vuelva a la pestaña que contiene el cuaderno de notas y pegue la clave en el código, 
+sustituyendo YOUR_KEY.
+
+11. Guarde el cuaderno. A continuación, utilice el botón ▷ situado junto a la celda para ejecutar el código.
+
+12. Compruebe que se devuelve el diagnóstico previsto de diabetes.
+
+    ![run_cell.gif](ims%2FC4%2Fgifs%2Frun_cell.gif)
+
 
 ## 4 Exercise Part 8: Clean-up
 
+AzureContainer Instances(ACI) es un servicio que le permite desplegar contenedores en Microsoft Azure. El servicio web que 
+ha creado está alojado en Azure Container Instance. Si no tiene intención de seguir experimentando con él, debería eliminar 
+el endpoint para evitar acumular un uso innecesario de Azure. También debería detener la instancia de cómputo hasta que 
+vuelva a necesitarla.
+
+1. En Microsoft [Azure Machine Learning studio](https://ml.azure.com/) en la pestaña Endpoints, seleccione el endpoint predict-auto-price. A 
+continuación, seleccione Eliminar(🗑) y confirme que desea eliminar el endpoint.
+
+    ![delete_endpoint.gif](ims%2FC4%2Fgifs%2Fdelete_endpoint.gif)
+
+2. En la página Compute, en la pestaña Compute Instances, seleccione su instancia de computación y, a continuación, 
+seleccione Stop.
+
+    ![stop_compute.gif](ims%2FC4%2Fgifs%2Fstop_compute.gif)
+
+Si ha terminado de explorar Azure Machine Learning, puede eliminar el grupo de recursos que contiene su espacio de trabajo Azure Machine Learning de su suscripción Azure:
+
+1. En el [Portal Azure](https://portal.azure.com/#home) en la página Grupos de recursos, abra el grupo de recursos que especificó al crear su espacio de 
+trabajo de Azure Machine Learning.
+
+2. Haga clic en Eliminar grupo de recursos, escriba el nombre del grupo de recursos para confirmar que desea eliminarlo y 
+seleccione Eliminar.
+
 ## 4 Exercise Quiz 1
+
+![q1.png](ims%2FC4%2Fexam%2Fq1.png)
 
 ## 4 Knowledge Check 1
 
+![q2.png](ims%2FC4%2Fexam%2Fq2.png)
+
+![q3.png](ims%2FC4%2Fexam%2Fq3.png)
+
+![q4.png](ims%2FC4%2Fexam%2Fq4.png)
+
 ## 4 Test Prep 1
 
+![q5.png](ims%2FC4%2Fexam%2Fq5.png)
+
+![q6.png](ims%2FC4%2Fexam%2Fq6.png)
+
+![q7.png](ims%2FC4%2Fexam%2Fq7.png)
+
+![q8.png](ims%2FC4%2Fexam%2Fq8.png)
+
 ## 4 Weekly Summary
+
+![14.png](ims%2FC4%2Fims%2F14.png)
+
+Enhorabuena, ha completado esta lección. En esta lección, ha entrenado y publicado el modelo de clasificación con Azure Machine Learning Designer. No olvide realizar la limpieza de final de lección. 
+
+![15.png](ims%2FC4%2Fims%2F15.png)
+
+El servicio web que creó durante las sesiones prácticas está alojado en una instancia de contenedor Azure. Si no tiene intención de seguir experimentando con él, debería eliminar los endpoints para evitar acumular un uso innecesario de Azure. También debería detener el clúster de entrenamiento y los recursos de la instancia de computación hasta que vuelva a necesitarlos.
 
 # 5 Create a Clustering Model with Azure Machine Learning Designer 
 [<-HOME](#0-indice)
