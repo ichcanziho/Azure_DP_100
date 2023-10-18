@@ -2686,41 +2686,842 @@ El servicio web que creó durante las sesiones prácticas está alojado en una i
 
 ## What is Clustering?
 
+![1.png](ims%2FC5%2Fims%2F1.png)
+
+Hola y bienvenido. En esta lección, aprenderá a entrenar y publicar un modelo de clustering con Microsoft Azure Machine 
+Learning Designer sin necesidad de escribir ningún código. Al final de esta lección, será capaz de utilizar Azure Machine 
+Learning Designer para entrenar un modelo de clustering, utilizar un modelo de clustering para inferir y desplegar un modelo 
+de clustering como servicio.
+
+![2.png](ims%2FC5%2Fims%2F2.png)
+
+La agrupación en clústeres es una forma de aprendizaje automático que se utiliza para agrupar elementos similares en 
+clústeres basados en sus características. Por ejemplo, un investigador podría tomar medidas de pingüinos y agruparlos 
+basándose en similitudes en sus proporciones.
+
+![3.png](ims%2FC5%2Fims%2F3.png)
+
+En Microsoft Azure Machine Learning, los datos del entrenamiento del modelo y otras operaciones se suelen encapsular en 
+un objeto llamado conjunto de datos. En esta lección, utilizará un conjunto de datos que incluye observaciones de tres 
+especies de pingüinos. Anteriormente en este curso, exploró la regresión, que es un ejemplo de técnica de aprendizaje 
+automático supervisado. 
+
+Mediante esta técnica, entrenó un modelo utilizando datos que incluyen tanto las características 
+como valores conocidos para la etiqueta. En esta lección, se centrará en el aprendizaje automático no supervisado. 
+
+![4.png](ims%2FC5%2Fims%2F4.png)
+
+El clustering es un ejemplo de aprendizaje automático sin supervisión en el que usted entrena un modelo para separar 
+elementos en clusters basándose puramente en sus características o rasgos. No hay ningún valor de cluster o etiqueta 
+conocidos previamente a partir de los cuales entrenar el modelo.
+
+![5.png](ims%2FC5%2Fims%2F5.png)
+
+Puede utilizar Azure Machine Learning Designer para crear modelos de clustering utilizando una interfaz visual de arrastrar 
+y soltar sin necesidad de escribir ningún código.
+
 ## 5 Exercise Part 1: Create a Microsoft Azure Machine Learning Workspace
+
+Para utilizar Azure Machine Learning, debe crear un espacio de trabajo en su suscripción a Microsoft Azure. A continuación, 
+puede utilizar este espacio de trabajo para gestionar datos, recursos informáticos, código, modelos y otros artefactos 
+relacionados con sus cargas de trabajo de aprendizaje automático.
+
+> ### Nota:
+> Este módulo es uno de los muchos que hacen uso de un espacio de trabajo de aprendizaje automático de Azure. Si está 
+> completando este módulo como preparación para la certificación Azure AI Fundamentals o Azure Data Scientist, considere 
+> la posibilidad de crear el espacio de trabajo una vez y reutilizarlo en otros módulos. Después de completar cada módulo, 
+> asegúrese de seguir las instrucciones de Limpieza al final del módulo para detener los recursos informáticos.
+
+Si aún no dispone de uno, siga estos pasos para crear un espacio de trabajo:
+
+1. Inicie sesión en el portal de Microsoft [Portal Azure](https://portal.azure.com/#home)
+utilizando sus credenciales de Microsoft.
+
+    ![entorno_de_trabajo.gif](ims%2FC2%2Fentorno_de_trabajo.gif)
+
+2. Seleccione ＋Crear un recurso, busque Aprendizaje automático y cree un nuevo recurso de Aprendizaje automático con la 
+siguiente configuración:
+
+   - **Suscripción:** su suscripción Azure
+
+   - **Grupo de recursos:** cree o seleccione un grupo de recursos
+
+   - **Nombre del espacio de trabajo:** Introduzca un nombre único para su espacio de trabajo
+
+   - **Región:** seleccione la región geográfica más cercana a usted
+
+   - **Cuenta de almacenamiento:** anote la nueva cuenta de almacenamiento que se creará por defecto para su espacio de trabajo
+
+   - **Depósito de claves:** anote el nuevo almacén de claves que se creará por defecto para su espacio de trabajo
+
+   - **Información sobre la aplicación:** anote el nuevo recurso de información sobre aplicaciones que se creará por defecto para su espacio de trabajo
+
+   - **Registro de contenedores:** Ninguno(se creará uno automáticamente la primera vez que despliegue un modelo en un contenedor)
+
+3. Espere a que se cree su espacio de trabajo (puede tardar unos minutos). A continuación, vaya a él en el portal.
+
+    ![9.png](ims%2FC2%2F9.png)
+
+4. En la página **Descripción general** de su espacio de trabajo, inicie Microsoft Azure Machine Learning Studio (o abra una nueva 
+pestaña del navegador y vaya a https://ml.azure.com), e inicie sesión en Azure Machine Learning studio utilizando su cuenta Microsoft
+
+    ![10.png](ims%2FC2%2F10.png)
+
+5. En Azure Machine Learning studio, active el icono ☰ situado en la parte superior izquierda para ver las distintas páginas de la interfaz. Puede utilizar estas páginas para gestionar los recursos de su espacio de trabajo.
+
+    ![11.gif](ims%2FC2%2F11.gif)
+
+Puede gestionar su espacio de trabajo utilizando el portal de Azure, pero para los científicos de datos y los ingenieros de operaciones de Machine Learning, Azure Machine Learning studio proporciona una interfaz de usuario más centrada para gestionar los recursos del espacio de trabajo.
 
 ## 5 Exercise Part 2: Create Compute Resources
 
+Después de haber creado un espacio de trabajo de Azure Machine Learning, puede utilizarlo para gestionar los distintos activos y recursos que necesita para crear soluciones de aprendizaje automático. En esencia, Azure Machine Learning es una plataforma para entrenar y gestionar modelos de aprendizaje automático, para lo que necesita computación en la que ejecutar el proceso de entrenamiento.
+
+Crear objetivos de computación
+Los objetivos de computación son recursos basados en la nube en los que puede ejecutar procesos de entrenamiento de modelos y exploración de datos.
+
+1. En
+[Azure Machine Learning studio](https://ml.azure.com/) Consulte la página Computación (en Gestionar). Aquí es donde gestiona los objetivos de computación para sus actividades de ciencia de datos. Hay cuatro tipos de recursos informáticos que puede crear:
+
+   - **Instancias de computación:** Estaciones de trabajo de desarrollo que los científicos de datos pueden utilizar para trabajar con datos y modelos.
+
+   - **Clústeres informáticos:** Clusters escalables de máquinas virtuales para el procesamiento bajo demanda de código de experimentos.
+
+   - **Clústeres de inferencia:** Objetivos de despliegue para servicios predictivos que utilizan sus modelos entrenados.
+
+   - **Computación Adjunta:** Enlaces a recursos de computación Azure existentes, como máquinas virtuales o clústeres Azure Databricks.
+
+2. En la pestaña **Instancias** de computación, añada una nueva instancia de computación con la siguiente configuración. Utilizará esta instancia como estación de trabajo desde la que probar su modelo:
+
+    ![instancia.gif](ims%2FC2%2Finstancia.gif)
+
+   - **Tipo de máquina virtual:** CPU
+
+   - **Tamaño de la máquina virtual:** Standard_DS11_v2 (ElijaSeleccionar entre todas las opciones para buscar y seleccionar este tamaño de máquina)
+
+   - **Nombre del ordenador:**introduzca un nombre único
+
+   - **Habilitar acceso SSH:** No seleccionado
+
+    ![12.png](ims%2FC2%2F12.png)
+
+3. Mientras se crea la instancia de cálculo, cambie a la pestaña Clusters de cálculo y añada un nuevo cluster de cálculo con la siguiente configuración. Lo utilizará para entrenar un modelo de aprendizaje automático:
+
+    ![cluster.gif](ims%2FC2%2Fcluster.gif)
+
+   - **Prioridad de la máquina virtual:** Dedicada
+
+   - **Tipo de máquina virtual:** CPU
+
+   - **Tamaño de la máquina virtual**: Standard_DS11_v2 (ElijaSeleccionar entre todas las opciones para buscar y seleccionar este tamaño de máquina)
+
+   - **Nombre del ordenador:** introduzca un nombre único
+
+   - **Número mínimo de nodos:** 0
+
+   - **Número máximo de nodos:** 2
+
+   - **Segundos de inactividad antes de la reducción:** 120
+
+   - **Habilitar acceso SSH:** No seleccionado
+
+    ![13.png](ims%2FC2%2F13.png)
+
+> ### Nota:
+>Si decide no completar este módulo, asegúrese de detener su instancia de cómputo para evitar incurrir en cargos innecesarios a su suscripción Azure. Los objetivos de cómputo tardarán algún tiempo en crearse. Puede pasar a la siguiente unidad mientras espera.
+
 ## 5 Exercise Part 3: Explore Data
+
+Para entrenar un modelo de agrupación, necesita un conjunto de datos que incluya múltiples observaciones de los elementos 
+que desea agrupar, incluyendo características numéricas que puedan utilizarse para determinar las similitudes entre los 
+casos individuales que ayudarán a separarlos en agrupaciones.
+
+### Crear un conjunto de datos
+
+En Microsoft Azure Machine Learning, los datos para el entrenamiento de modelos y otras operaciones suelen encapsularse en 
+un objeto llamado conjunto de datos. En este módulo, utilizará un conjunto de datos que incluye observaciones de tres especies 
+de pingüinos.
+
+> Nota Importante:
+> 
+> Como ya se mencionó en el segmento anterior, crear un dataset con este método termina creando un Data Asset y los mismos producen
+> MLTables, lo cual no es compatible con los métodos de procesamiento de datos, para crear un DataFrame vamos a seguir el proceso 
+> de importación de datos descrito anteriormente. El siguiente GIF muestra la metodologia empleada para llegar al mismo lugar:
+
+![load_data.gif](ims%2FC5%2Fgifs%2Fload_data.gif)
+
+1. En Microsoft https://ml.azure.com consulte la página Conjuntos de datos. Los conjuntos de datos representan archivos o 
+tablas de datos específicos con los que planea trabajar en Azure ML.
+
+2. Cree un conjunto de datos a partir de archivos web, utilizando la siguiente configuración:
+
+    **Información básica:**
+
+   - URL web: https://aka.ms/penguin-data
+
+   - Nombre : penguin-data
+
+   - Tipo de conjunto de datos: Tabular
+
+   **Configuración y vista previa**
+
+   - Formato de archivo: Delimitado
+
+   - Delimitador: Coma
+
+   - Codificación: UTF-8
+
+   - Cabeceras de columna: Utilizar cabeceras del primer archivo
+
+   - Saltar filas: Ninguna
+
+    **Esquema:**
+    
+    - Incluir todas las columnas excepto: Ruta
+    
+    - Revise los tipos detectados automáticamente
+    
+    **Confirme los detalles:**
+    
+    - No perfilar el conjunto de datos después de la creación
+
+3. Una vez creado el conjunto de datos, ábralo y consulte la página Explorar para ver una muestra de los datos. Estos datos 
+representan mediciones de la longitud y profundidad del culmen (pico), la longitud de las aletas y la masa corporal para 
+múltiples observaciones de pingüinos. Hay tres especies de pingüinos representadas en el conjunto de datos: amelia, Papúa y Barbijo.
+
+> Nota
+>
+> El conjunto de datos de pingüinos utilizado en este ejercicio es un subconjunto de los datos recogidos y puestos a disposición 
+> por la Dra. Kristen Gorman y la Estación Palmer, Antártida LTER , miembro de la Red de Investigación Ecológica a Largo Plazo .
+
+### Crear un Pipeline
+
+> Nota:
+> 
+> En el GIF anterior ya se creo un Pipeline llamado `cluster-pinguino`
+
+Para empezar a utilizar el diseñador de aprendizaje automático de Microsoft Azure, primero debe crear una canalización y añadir el conjunto de datos con el que desea trabajar.
+
+1. En Azure Machine Learning studio de su espacio de trabajo, visualice la página Diseñador y cree una nueva canalización.
+
+2. En el panelConfiguración, cambie el nombre predeterminado de la canalización(Canalización-Creada-en-fecha) por Entrenar 
+agrupación de pingüinos(si el panel Configuración no está visible, haga clic en el icono ⚙ situado junto al nombre de la 
+canalización en la parte superior).
+
+3. Tenga en cuenta que debe especificar un objetivo de cálculo en el que ejecutar la canalización. En el panel Configuración, 
+haga clic en Seleccionar destino de cómputo y seleccione el cluster de cómputo que creó anteriormente.
+
+4. En el panel de la izquierda del diseñador, expanda la sección Conjuntos de datos y arrastre al lienzo el conjunto de 
+datos penguin-data que creó en el ejercicio anterior.
+
+5. Haga clic con el botón derecho del ratón (Ctrl+clic en un Mac) en el conjunto de datos penguin-data del lienzo y, en el 
+menú Visualizar, seleccione Salida del conjunto de datos.
+
+6. Revise el esquema de los datos, observando que puede ver las distribuciones de las distintas columnas como histogramas. 
+A continuación, seleccione la columna CulmenLength. El conjunto de datos debería tener un aspecto similar al siguiente:
+
+    ![preview_data.gif](ims%2FC5%2Fgifs%2Fpreview_data.gif)
+
+7. Observe las siguientes características del conjunto de datos:
+
+    El conjunto de datos incluye las siguientes columnas
+
+    - **CulmenLength:** Longitud del pico del pingüino en milímetros.
+
+    - **CulmenDepth:** Profundidad del pico del pingüino en milímetros.
+
+    - **FlipperLength:** Longitud de la aleta del pingüino en milímetros.
+
+    - **BodyMass:** Peso del pingüino en gramos.
+
+    - **Species:** Indicador de especie (0: "Amelie", 1: "Gentoo", 2: "Chinstrap").
+
+    - Faltan dos valores en la columna CulmenLength(en las columnasCulmenDepth,FlipperLength y BodyMass también faltan dos valores).
+
+    - Los valores de las medidas están en diferentes escalas (desde decenas de milímetros hasta miles de gramos).
+
+### Aplicar transformaciones
+
+Para agrupar las observaciones de pingüinos, vamos a utilizar únicamente las mediciones, por lo que descartaremos la columna 
+de especies. También tenemos que eliminar las filas en las que faltan valores, y normalizar los valores numéricos de las 
+mediciones para que estén en una escala similar.
+
+1. En el panel de la izquierda, amplíe la sección Transformación de datos, que contiene una amplia gama de módulos que puede 
+utilizar para transformar los datos antes del entrenamiento del modelo.
+
+2. Para agrupar las observaciones de pingüinos, vamos a utilizar sólo las mediciones - ignoraremos la columna de especies. 
+Por lo tanto, arrastre un módulo Seleccionar columnas en conjunto de datos al lienzo, debajo del módulo de datos de pingüinos
+y conecte la salida en la parte inferior del módulo de datos de pingüinos a la entrada en la parte superior del módulo
+Seleccionar columnas en conjunto de datos, de esta manera:
+
+    ![13.png](ims%2FC5%2Fims%2F13.png)
+
+3. Seleccione el módulo Seleccionar columnas en conjunto de datos y, en su panel Configuración de la derecha, seleccione 
+Editar columna. A continuación, en la ventana Seleccionar columnas, seleccione Por nombre y utilice los enlaces + para 
+seleccionar los nombres de las columnas CulmenLength, CulmenDepth, FlipperLength y BodyMass; así:
+
+    ![12.png](ims%2FC5%2Fims%2F12.png)
+
+4. Guarde la configuración del módulo Seleccionar columnas en un conjunto de datos para volver al lienzo del diseñador.
+
+    ![select_columns.gif](ims%2FC5%2Fgifs%2Fselect_columns.gif)
+
+5. Arrastre un módulo Limpiar datos que faltan al lienzo, debajo del módulo Seleccionar columnas en un conjunto dedatos
+y conéctelos así:
+
+    ![11.png](ims%2FC5%2Fims%2F11.png)
+
+6. Seleccione el módulo Limpiar datos que faltan y, en el panel de ajustes de la derecha, haga clic en Editar columna. A 
+continuación, en la ventana Seleccionar columnas, seleccione Con reglase incluya Todas las columnas; así:
+
+    ![6.png](ims%2FC5%2Fims%2F6.png)
+
+7. Con el módulo Limpiar datos ausentes aún seleccionado, en el panel de ajustes, establezca los siguientes parámetros de 
+configuración:
+
+    ![missing_values.gif](ims%2FC5%2Fgifs%2Fmissing_values.gif)
+
+   - **Proporción mínima de valores perdidos:** 0,0
+
+   - **Proporción máxima de valores perdidos:** 1,0
+
+   - **Modo de limpieza:** Eliminar toda la fila
+
+8. Arrastre un módulo Normalizar datos al lienzo, debajo del módulo Limpiar datos perdidos. A continuación, conecte la salida 
+situada más a la izquierda del módulo Limpiar datos ausentes a la entrada del módulo Normalizar datos.
+
+    ![10.png](ims%2FC5%2Fims%2F10.png)
+
+9. Seleccione el módulo Normalizar datos y, en su panel Configuración de la derecha, establezca el método de transformación
+en MínMáxy seleccione Editar columna. A continuación, en la ventana Seleccionar columnas, seleccione Con reglase incluya
+Todas las columnas; así:
+
+    ![Normalize_data.gif](ims%2FC5%2Fgifs%2FNormalize_data.gif)
+
+    ![7.png](ims%2FC5%2Fims%2F7.png)
+
+10. Guarde la configuración del módulo Normalizar datos para volver al lienzo del diseñador.
+
+### Ejecute el Pipeline
+
+Para aplicar sus transformaciones de datos, necesita ejecutar la canalización como un experimento.
+
+1. Asegúrese de que su canalización tiene un aspecto similar al siguiente:
+    
+    ![8.png](ims%2FC5%2Fims%2F8.png)
+
+2. Seleccione Enviar, y ejecute el pipeline como un nuevo experimento llamadoms learn-penguin-training en su cluster de 
+computación.
+
+    ![run_pipeline_1.gif](ims%2FC5%2Fgifs%2Frun_pipeline_1.gif)
+
+3. Espere a que finalice la ejecución. Esto puede tardar 5 minutos o más. Cuando la ejecución haya finalizado, los módulos 
+deberían tener este aspecto:
+
+    ![9.png](ims%2FC5%2Fims%2F9.png)
+
+### Ver los datos transformados
+
+El conjunto de datos está ahora preparado para el entrenamiento del modelo.
+
+1. Seleccione el módulo Normalizar datos completado y, en su panel Configuración de la derecha, en la pestaña Salidas + 
+registros, seleccione el icono Visualizar para el conjunto de datos transformado.
+
+2. Visualice los datos, observando que se ha eliminado la columnaEspecie, que no hay valores perdidos y que los valores de 
+las cuatro características se han normalizado a una escala común.
+
+3. Cierre la visualización del resultado de los datos normalizados.
+
+    ![view_data_normalized.gif](ims%2FC5%2Fgifs%2Fview_data_normalized.gif)
+
+Ahora que ha seleccionado y preparado las características que desea utilizar del conjunto de datos, está listo para 
+utilizarlas para entrenar un modelo de agrupación.
+
 
 ## 5 Exercise Part 4: Create and Run a Training Pipeline
 
+Después de haber utilizado transformaciones de datos para preparar los datos, puede utilizarlos para entrenar un modelo 
+de aprendizaje automático.
+
+### Añadir módulos de entrenamiento
+
+Para entrenar un modelo de agrupación, necesita aplicar un algoritmo de agrupación a los datos, utilizando sólo las características 
+que ha seleccionado para la agrupación. Entrenará el modelo con un subconjunto de los datos, y utilizará el resto para 
+probar el modelo entrenado.
+
+En este ejercicio, va a ampliar el conducto Entrenar agrupación de pingüinos como se muestra aquí:
+
+![14.png](ims%2FC5%2Fims%2F14.png)
+
+Siga los pasos que se indican a continuación, utilizando la imagen de arriba como referencia a medida que añade y configura 
+los módulos necesarios.
+
+1. Abra la canalización Train Penguin Clustering, si no está ya abierta.
+
+2. En el panel de la izquierda, en la sección Transformaciones de datos, arrastre un módulo Dividir datos al lienzo bajo 
+el módulo Normalizar datos. A continuación, conecte la salida izquierda del módulo Normalizar datos a la entrada del 
+módulo Dividir datos.
+
+3. Seleccione el módulo Dividir datos y configure sus ajustes de la siguiente manera:
+
+    ![split_data.gif](ims%2FC5%2Fgifs%2Fsplit_data.gif)
+
+   - **Modo de división:** Dividir filas
+
+   - **Fracción de filas en el primer conjunto de datos de salida:** 0.7
+
+   - **Semilla aleatoria:** 123
+
+   - **División estratificada:** Falso
+
+4. Expanda la sección Entrenamiento del modelo en el panel de la izquierda y arrastre un módulo Entrenar modelo de 
+agrupación al lienzo, bajo el módulo Dividir datos. A continuación, conecte la salida Result dataset1(izquierda) del 
+módulo SplitData a la entradaDataset(derecha) del módulo Train ClusteringModel. 
+
+5. El modelo de clustering debería asignar clusters a los elementos de datos utilizando todas las características que 
+usted seleccionó del conjunto de datos original. Seleccione el módulo Entrenar modelo de agrupación en clústeres y 
+en su panel de configuración, en la pestaña Parámetros, seleccione Editar columnas y utilice la opción Con reglas para 
+incluir todas las columnas; así:
+
+    ![train_block.gif](ims%2FC5%2Fgifs%2Ftrain_block.gif)
+
+    ![15.png](ims%2FC5%2Fims%2F15.png)
+
+6. El modelo que estamos entrenando utilizará las características para agrupar los datos en clusters, por lo que necesitamos 
+entrenar el modelo utilizando un algoritmo de agrupación. Expanda la sección Algoritmos de aprendizaje automático y, en
+Clustering, arrastre un módulo **K-Means Clustering** al lienzo, a la izquierda del conjunto de datos penguin-data y 
+encima del módulo Train Clustering Model. A continuación, conecte su salida a la entrada Modelo no entrenado(izquierda) 
+del módulo Entrenar modelode agrupación.
+
+7. El algoritmoK-Means agrupa los elementos en el número de conglomerados que usted especifique, un valor denominado K. 
+Seleccione el módulo Clustering K-Means y en su panel de configuración, en la pestaña Parámetros, ajuste el parámetro
+Número de centroides a **3.**
+
+    ![k_means.gif](ims%2FC5%2Fgifs%2Fk_means.gif)
+
+    > Nota
+    >
+    > Puede pensar en las observaciones de datos, como las mediciones de los pingüinos, como si fueran vectores multidimensionales. 
+    >  El algoritmo K-Means funciona de la siguiente manera
+    >
+    > a) Inicializando K coordenadas como puntos seleccionados al azar llamados centroides en un espacio n-dimensional (donde n es 
+    > el número de dimensiones de los vectores de características).
+    >
+    > b) Trazando los vectores de características como puntos en el mismo espacio, y asignando cada punto a su centroide más cercano.
+    >
+    > c) Desplazando los centroides al centro de los puntos asignados a él (en función de la distancia media).
+    >
+    > d) Reasignar los puntos a su centroide más cercano tras el desplazamiento.
+    >
+    > e) Repitiendo los pasos 3 y 4 hasta que las asignaciones de los conglomerados se estabilicen o se haya completado el número especificado de iteraciones.
+
+8. Después de utilizar el 70% de los datos para entrenar el modelo de agrupación en clusters, puede utilizar el 30% restante 
+para probarlo utilizando el modelo para asignar los datos a los clusters. Expanda la sección Puntuación y evaluación del 
+modelo y arrastre un módulo Asignar datos a conglomerados al lienzo, debajo del módulo Entrenar modelo de conglomerados. 
+A continuación, conecte la salidaTrained model(izquierda) del módulo Train Clustering Model a la entrada Trained model
+(izquierda) del módulo Assign Data to Clusters; y conecte la salidaResults dataset2(derecha) del módulo Split Data a 
+la entrada Dataset(derecha) del módulo Assign Data to Clusters.
+
+    ![assign_to_clusters.gif](ims%2FC5%2Fgifs%2Fassign_to_clusters.gif)
+
+### Ejecute el proceso de entrenamiento
+
+Ahora ya está listo para ejecutar el pipeline de entrenamiento y entrenar el modelo.
+
+1. Asegúrese de que su pipeline tiene este aspecto:
+
+    ![16.png](ims%2FC5%2Fims%2F16.png)
+
+2. Seleccione Enviar, y ejecute el pipeline utilizando el experimento existente llamado mslearn-penguin-trainingen su 
+cluster de computación.
+
+3. Espere a que finalice la ejecución del experimento. Esto puede tardar 5 minutos o más.
+
+    ![run_pipeline2.gif](ims%2FC5%2Fgifs%2Frun_pipeline2.gif)
+
+4. Cuando haya finalizado la ejecución del experimento, seleccione el módulo Asignar datos a clústeres y en su panel de 
+configuración, en la pestaña Salidas + Registros, en Salidas de datos dela sección Conjunto de datos de resultados, utilice 
+el icono Visualizar para ver los resultados.
+
+5. Desplácese hacia la derecha y observe la columna Asignaciones, que contiene el conglomerado (0, 1 ó 2) al que está 
+asignada cada fila. También hay nuevas columnas que indican la distancia desde el punto que representa esta fila a los 
+centros de cada uno de los conglomerados - el conglomerado al que el punto está más cerca es aquel al que está asignado.
+
+    ![view_assings.gif](ims%2FC5%2Fgifs%2Fview_assings.gif)
+
+6. Cierre la visualización Asignar datos a conglomerados.
+
+El modelo está prediciendo conglomerados para las observaciones de los pingüinos, pero ¿hasta qué punto son fiables sus 
+predicciones? Para ello, debe evaluar el modelo.
+
 ## 5 Exercise Part 5: Evaluate a Clustering Model
+
+La evaluación de un modelo de agrupación se ve dificultada por el hecho de que no existen valores verdaderos previamente 
+conocidos para las asignaciones de los conglomerados. Un modelo de agrupación exitoso es aquel que consigue un buen nivel 
+de separación entre los elementos de cada cluster, por lo que necesitamos métricas que nos ayuden a medir esa separación.
+
+### Añadir un módulo Evaluar modelo
+
+1. Abra la canalizaciónEntrenar agrupación por pingüinos que creó en la unidad anterior si no está ya abierta.
+
+2. En el panel de la izquierda, en la secciónModel Scoring & Evaluation, arrastre un módulo Evaluate Model al lienzo, bajo 
+el móduloAssign Data to Clusters, y conecte la salida del móduloAssign Data to Clusters a la entrada Scored dataset
+(izquierda) del móduloEvaluate Model.
+
+3. Asegúrese de que su canalización tenga este aspecto:
+
+    ![17.png](ims%2FC5%2Fims%2F17.png)
+
+4. Seleccione Enviar, y ejecute el pipeline utilizando el experimento mslearn-penguin-training existente.
+
+5. Espere a que finalice la ejecución del experimento.
+
+6. Cuando haya finalizado la ejecución del experimento, seleccione el móduloEvaluar modelo y en el panel de configuración, 
+en la pestaña Salidas + Registros, en Salidas de datos de la sección Resultados de la evaluación, utilice el icono
+Visualizar para ver las métricas de rendimiento. Estas métricas pueden ayudar a los científicos de datos a evaluar lo bien 
+que el modelo separa los conglomerados. Incluyen una fila de métricas para cada conglomerado y una fila de resumen para 
+una evaluación combinada. Las métricas de cada fila son:
+
+    ![metrics.gif](ims%2FC5%2Fgifs%2Fmetrics.gif)
+
+   - **Distancia media a otro centro:** Indica lo cerca que está, por término medio, cada punto del conglomerado de los 
+   centroides de todos los demás conglomerados.
+
+   - **Distancia media al centro del conglomerado:** Indica lo cerca que está, por término medio, cada punto del 
+   conglomerado del centroide del conglomerado.
+
+   - **Número de puntos:** El número de puntos asignados al conglomerado.
+
+   - **Distancia máxima al centro del cluster:** La máxima de las distancias entre cada punto y el centroide del cluster 
+   de ese punto. Si este número es alto, el conglomerado puede estar muy disperso. Esta estadística, en combinación con 
+   la Distancia media al centro del conglomerado, le ayuda a determinar la dispersión del conglomerado.
+
+7. Cierre la ventana de visualización de resultados de Evaluar modelo.
+
+Ahora que tiene un modelo de agrupación que funciona, puede utilizarlo para asignar nuevos datos a los clústeres en un
+proceso de inferencia.
 
 ## 5 Exercise Part 6: Create an Inference Pipeline
 
+Tras crear y ejecutar una canalización para entrenar el modelo de agrupación, puede crear una canalización de inferencia que 
+utilice el modelo para asignar nuevas observaciones de datos a agrupaciones. Esto formará la base de un servicio predictivo 
+que podrá publicar para que lo utilicen las aplicaciones.
+
+### Crear una canalización de inferencia
+
+1. En Microsoft Azure Machine Learning Studio, abra la canalización de formación de agrupaciones de pingüinosque creó 
+anteriormente.
+
+2. En la lista desplegable Crear canalización de inferencia, haga clic en Canalización de inferencia en tiempo real. 
+Después de unos segundos, se abrirá una nueva versión de su canalización llamada Train Penguin Clustering-inferencia en 
+tiempo real.
+
+    ![create_inference_pipeline.gif](ims%2FC5%2Fgifs%2Fcreate_inference_pipeline.gif)
+
+    > Si la canalización no incluye los módulos Web Service Input y Web Service Output, vuelva a la página del Diseñador y 
+    > abra de nuevo la canalización TrainPenguin Clustering-inferencia en tiempo real. 
+
+3. Cambie el nombre de la nueva canalización a Predecir agrupaciones de pingüinos y, a continuación, revise la nueva 
+canalización. Contiene una entrada de servicio web para que se envíen los nuevos datos, y una salida de servicio web para 
+devolver los resultados. Las transformaciones y el modelo de agrupamiento de su canal de formación se encapsulan en este 
+canal basándose en las estadísticas de sus datos de formación, y se utilizarán para transformar y puntuar los nuevos datos.
+
+    ![cambiar_nombre_inferencia.gif](ims%2FC5%2Fgifs%2Fcambiar_nombre_inferencia.gif)
+
+    Va a realizar los siguientes cambios en la canalización de inferencia:
+
+    ![18.png](ims%2FC5%2Fims%2F18.png)
+
+    - Sustituya el conjunto de datos pingüino-data por un módulo Introducir datos manualmente que no incluya la columna Especie.
+
+    - Elimine el módulo Seleccionar columnas en el conjunto de datos, que ahora es redundante.
+
+    - Conecte los módulos Entrada del servicio web e Introducir datos manualmente (que representan las entradas de los datos 
+   que se van a agrupar) al primer módulo Aplicar transformación.
+
+    - Elimine el módulo Evaluar modelo.
+
+    - Siga los pasos restantes a continuación, utilizando la imagen y la información anteriores como referencia a medida 
+   que modifica la canalización.
+
+4. La canalización de inferencia asume que los nuevos datos coincidirán con el esquema de los datos de entrenamiento originales, 
+por lo que se incluye el conjunto de datos penguin-data de la canalización de entrenamiento. Sin embargo, estos datos de 
+entrada incluyen una columna para la especie de pingüino, que el modelo no utiliza. Elimine tanto el conjunto de datos 
+penguin-data como los módulos Select Columns in Dataset, y sustitúyalos por un módulo Enter Data Manually de la sección 
+Data Input and Output. A continuación, modifique la configuración del módulo Introducir datos manualmente para utilizar 
+la siguiente entrada CSV, que contiene valores de características para tres nuevas observaciones de pingüinos (incluidas 
+las cabeceras):
+
+    ![enter_data1.gif](ims%2FC5%2Fgifs%2Fenter_data1.gif)
+
+    > Nota importante
+    >      
+    > Tendrá que copiar y pegar todo el bloque de texto presentado en el bloque de código.
+    >
+    > Asegúrese de haber seleccionado todo el texto o los datos del bloque de código, incluidos los puntos finales, 
+    > los corchetes, etc., antes de copiarlo y colocarlo en el lugar o sitio especificado en el ejercicio. Esto ayudará 
+    > a evitar que se produzcan errores o que tenga que volver atrás y comenzar de nuevo el ejercicio.
+
+    ![enter_data2.gif](ims%2FC5%2Fgifs%2Fenter_data2.gif)
+
+    ```csv
+    CulmenLength,CulmenDepth,FlipperLength,BodyMass
+    39.1,18.7,181,3750
+    49.1,14.8,220,5150
+    46.6,17.8,193,3800
+    ```
+
+5. Conecte las salidas de los módulos Entrada del servicio web e Introducir datos manualmente a la entrada Conjunto de 
+datos (derecha) del primer módulo Aplicar transformación.
+
+6. Elimine el módulo Evaluar modelo.
+
+    ![remove_evaluate_model.gif](ims%2FC5%2Fgifs%2Fremove_evaluate_model.gif)
+
+7. Verifique que su pipeline tiene un aspecto similar al siguiente:
+
+    ![19.png](ims%2FC5%2Fims%2F19.png)
+
+8. Envíe el pipeline como un nuevo experimento llamado mslearn-penguin-inference en su cluster de computación. Esto puede tardar un poco 
+
+    ![run_pipeline4.gif](ims%2FC5%2Fgifs%2Frun_pipeline4.gif)
+
+9. Cuando el proceso haya finalizado, visualice la salida del conjunto de datos Resultados del móduloAsignar datos a clusters 
+para ver las asignaciones de clusters y métricas previstas para las tres observaciones de pingüinos en los datos de entrada.
+
+    ![predict_inference.gif](ims%2FC5%2Fgifs%2Fpredict_inference.gif)
+
+Su canal de inferencia asigna las observaciones de los pingüinos a los clusters en función de sus características. Ahora 
+está listo para publicar la canalización para que las aplicaciones cliente puedan utilizarla.
+
 ## 5 Exercise Part 7: Deploy a Predictive Service
+
+Después de haber creado y probado una canalización de inferencias para inferencias en tiempo real, puede publicarla 
+como servicio para que la utilicen las aplicaciones cliente.
+
+> Nota: En este ejercicio, desplegará el servicio web en una Microsoft Azure Container Instance (ACI). Este tipo de 
+> cómputo se crea dinámicamente, y es útil para el desarrollo y las pruebas. Para la producción, debe crear un 
+> clúster de inferencia, que proporciona un clúster de Microsoft Azure Kubernetes Service (AKS) que proporciona una 
+> mejor escalabilidad y seguridad.
+
+### Despliegue un servicio
+
+1. Visualice la canalización de inferencia de clústeres de pingüinos predictores que creó en la unidad anterior.
+
+2. En la parte superior derecha, seleccioneDesplegar, y despliegue un nuevo punto final en tiempo real, utilizando la siguiente configuración:
+
+    ![deploy_service.gif](ims%2FC5%2Fgifs%2Fdeploy_service.gif)
+
+   - **Nombre:** predict-penguin-clusters
+
+   - **Descripción:** Cluster pingüinos.
+
+   - **Tipo de cómputo:** Azure Container Instance.
+
+3. Espere a que se despliegue el servicio web - esto puede tardar varios minutos. El estado del despliegue se muestra 
+en la parte superior izquierda de la interfaz del diseñador.
+
+### Pruebe el servicio
+
+Ahora puede probar su servicio desplegado desde una aplicación cliente - en este caso, utilizará el código de la 
+celda inferior para simular una aplicación cliente.
+
+1. En la página Endpoints, abra el endpoint en tiempo real predict-penguin-clusters.
+
+2. Cuando se abra el endpoint predict-penguin-clusters, vea la pestaña Consume y anote allí la siguiente información. 
+Necesitará esto para conectarse a su servicio desplegado desde una aplicación cliente.
+
+    ![show_endpoint.gif](ims%2FC5%2Fgifs%2Fshow_endpoint.gif)
+
+   - El punto final REST para su servicio
+
+   - la clave principal de su servicio 
+
+3. Observe que puede utilizar el enlace ⧉ situado junto a estos valores para copiarlos en el portapapeles.
+
+4. Con la página Consume para el servicio predict-penguin-clusters abierta en su navegador, abra una nueva pestaña del 
+navegador y abra una segunda instancia de Microsoft Azure Machine Learning studio. A continuación, en la nueva pestaña, visualice la páginaCuadernos(enAutor).
+
+5. En la página Cuadernos, en Mis archivos, utilice el botón + para crear un nuevo archivo con la siguiente configuración:
+
+    ![create_notebook.gif](ims%2FC5%2Fgifs%2Fcreate_notebook.gif)
+
+   - **Ubicación del archivo:** Usuarios/su nombre de usuario
+
+   - **Nombre del archivo:** Test-Penguins
+
+   - **Tipo de archivo:** Cuaderno
+
+   - **Sobrescribir si ya existe:** Seleccionado
+
+6. Una vez creado el nuevo cuaderno, asegúrese de que la instancia de cálculo que creó anteriormente está seleccionada 
+en el cuadro Cálculo y que tiene el estadoEn ejecución.
+
+7. Utilice el botón ≪ para contraer el panel del explorador de archivos y disponer de más espacio para centrarse en 
+la pestaña del cuadernoTest-Penguins.ipynb.
+
+8. En la celda rectangular que se ha creado en el cuaderno, pegue el siguiente código:
+
+    > Nota importante
+    > 
+    > Tendrá que copiar y pegar todo el bloque de texto que se presenta en el bloque de código.
+    >
+    > Asegúrese de haber seleccionado todo el texto o los datos del bloque de código, incluidos los puntos finales, los corchetes, etc., antes de copiarlo y colocarlo en el lugar o sitio especificado en el ejercicio. Esto ayudará a evitar que se produzcan errores o que tenga que volver atrás y comenzar de nuevo el ejercicio.
+
+    ```python
+    import urllib.request
+    import json
+    import os
+    import ssl
+    
+    def allowSelfSignedHttps(allowed):
+        # bypass the server certificate verification on client side
+        if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') and getattr(ssl, '_create_unverified_context', None):
+            ssl._create_default_https_context = ssl._create_unverified_context
+    
+    allowSelfSignedHttps(True) # this line is needed if you use self-signed certificate in your scoring service.
+    
+    # Request data goes here
+    # The example below assumes JSON formatting which may be updated
+    # depending on the format your endpoint expects.
+    # More information can be found here:
+    # https://docs.microsoft.com/azure/machine-learning/how-to-deploy-advanced-entry-script
+    data =  {
+      "Inputs": {
+        "WebServiceInput0": [
+          {
+            "CulmenLength": 39.1,
+            "CulmenDepth": 18.7,
+            "FlipperLength": 181,
+            "BodyMass": 3750
+          },
+          {
+            "CulmenLength": 49.1,
+            "CulmenDepth": 14.8,
+            "FlipperLength": 220,
+            "BodyMass": 5150
+          },
+          {
+            "CulmenLength": 46.6,
+            "CulmenDepth": 17.8,
+            "FlipperLength": 193,
+            "BodyMass": 3800
+          }
+        ]
+      },
+      "GlobalParameters": {}
+    }
+    
+    body = str.encode(json.dumps(data))
+    
+    url = 'http://97d17d76-3276-4efd-9c32-766de663986a.eastus2.azurecontainer.io/score'
+    # Replace this with the primary/secondary key or AMLToken for the endpoint
+    api_key = '3eNKX0u1Km6RdBgVyf7hCJnxe8jw7ER6'
+    if not api_key:
+        raise Exception("A key should be provided to invoke the endpoint")
+    
+    
+    headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
+    
+    req = urllib.request.Request(url, body, headers)
+    
+    try:
+        response = urllib.request.urlopen(req)
+    
+        result = response.read()
+        print(result)
+    except urllib.error.HTTPError as error:
+        print("The request failed with status code: " + str(error.code))
+    
+        # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
+        print(error.info())
+        print(error.read().decode("utf8", 'ignore'))
+    ```
+   
+    > Nota
+    >
+    > No se preocupe demasiado por los detalles del código. Sólo define las características de un pingüino y utiliza el servicio predict-penguin-clusters que usted creó para predecir la asignación de un cluster.   
+
+9. Cambie a la pestaña del navegador que contiene la página Consume para el servicio predict-penguin-clusters, y copie 
+el punto final REST para su servicio. Vuelva a la pestaña que contiene el cuaderno y pegue la clave en el código, 
+sustituyendo YOUR_ENDPOINT.
+
+10. Cambie a la pestaña del navegador que contiene la página Consume para el servicio predict-penguin-clusters, y 
+copie la clave principal para su servicio. Vuelva a la pestaña que contiene el cuaderno y pegue la clave en el código, 
+sustituyendo YOUR_KEY.
+
+    ![set_api.gif](ims%2FC5%2Fgifs%2Fset_api.gif)
+
+11. Guarde el cuaderno y, a continuación, utilice el botón ▷ situado junto a la celda para ejecutar el código.
+
+12. Verifique que se devuelve el cluster predicho.
+
+    ![predict.gif](ims%2FC5%2Fgifs%2Fpredict.gif)
+
 
 ## 5 Exercise Part 8: Clean-up
 
+Azure Container Instances(ACI) es un servicio que le permite desplegar contenedores en Microsoft Azure. El servicio web 
+que ha creado está alojado enAzure Container Instance. Si no tiene intención de seguir experimentando con él, debería 
+eliminar el endpoint para evitar acumular un uso innecesario de Azure. También debería detener la instancia de cómputo 
+hasta que vuelva a necesitarla.
+
+1. En Microsoft https://ml.azure.com, en la pestaña Endpoints, seleccione el endpoint predict-penguin-cluster. A continuación, 
+seleccioneEliminar(🗑) y confirme que desea eliminar el endpoint.
+
+    ![remove_endpoint.gif](ims%2FC5%2Fgifs%2Fremove_endpoint.gif)
+
+2. En la página Compute, en la pestaña Compute Instances, seleccione su instancia de computación y, a continuación, seleccioneStop.
+
+    ![stop_compute.gif](ims%2FC5%2Fgifs%2Fstop_compute.gif)
+
+Si ha terminado de explorar Azure Machine Learning, puede eliminar el grupo de recursos que contiene su espacio de trabajo Azure Machine Learning de su suscripción Azure:
+
+1. En https://portal.azure.com, en la página Grupos de recursos, abra el grupo de recursos que especificó al crear su espacio 
+de trabajo de Azure Machine Learning.
+
+2. Haga clic en Eliminar grupo de recursos, escriba el nombre del grupo de recursos para confirmar que desea eliminarlo y 
+seleccione Eliminar.
+
 ## 5 Exercise Quiz 1
+
+![q0.png](ims%2FC5%2Fexam%2Fq0.png)
 
 ## 5 Knowledge Check 1
 
+![q1.png](ims%2FC5%2Fexam%2Fq1.png)
+
+![q2.png](ims%2FC5%2Fexam%2Fq2.png)
+
 ## 5 Test Prep 1
+
+![q3.png](ims%2FC5%2Fexam%2Fq3.png)
+
+![q4.png](ims%2FC5%2Fexam%2Fq4.png)
+
+![q5.png](ims%2FC5%2Fexam%2Fq5.png)
+
+![q6.png](ims%2FC5%2Fexam%2Fq6.png)
 
 ## 5 Weekly Summary
 
-# 6 Course Wrap-Up 
-[<-HOME](#0-indice)
+![20.png](ims%2FC5%2Fims%2F20.png)
 
-## INDICE:
+Enhorabuena. Ha completado la última lección de este curso, por favor recuerde hacer limpieza. Si no tiene intención de 
+seguir experimentando, debería eliminar el endpoint para evitar acumular un uso innecesario de Azure. Y también debería 
+detener la instancia de computación hasta que vuelva a necesitarla. Puede acceder al proceso y a la lectura sobre limpieza.
 
-- [Course Wrap-up](#course-wrap-up)
-- [Course Review](#course-review)
-- [What to expect next](#what-to-expect-next)
+![21.png](ims%2FC5%2Fims%2F21.png)
 
-## Course Wrap-up
+En este curso ha explorado algunos conceptos fundamentales de aprendizaje automático. Y utilizar las capacidades de 
+aprendizaje automático automatizado, de aprendizaje automático de Microsoft Azure. Para entrenar e implementar un modelo 
+predictivo. También adquirió experiencia práctica sobre cómo utilizar el diseñador de aprendizaje automático de Azure. Y 
+el estudio de aprendizaje automático de Azure para entrenar, utilizar e implementar un modelo de regresión, clasificación 
+y agrupación.
 
-## Course Review
+![22.png](ims%2FC5%2Fims%2F22.png)
 
-## What to expect next
+Usted está un paso más adelante en el camino hacia la certificación. Las certificaciones de Microsoft Azure validan las 
+habilidades y conocimientos que usted demuestra. Completar con éxito este programa puede ayudarle a desarrollar sus 
+objetivos profesionales, así como abrir otras oportunidades profesionales.
+
