@@ -965,22 +965,373 @@ aprovisionar una máquina de Azure Espacio de trabajo de aprendizaje, uso de her
 
 ## 3 Lesson introduction
 [< Back to Local Index](#3-index)
+
+![1.png](ims%2FC3%2Fims%2F1%2F1.png)
+
+El entrenamiento en el modelo de aprendizaje automático puede ser tan fácil como cargar datos y ejecutar una línea de código 
+utilizando paquetes como scikit learn. Sin embargo, en un escenario de aprendizaje automático de producción, debe considerar 
+la creación de scripts de entrenamiento reutilizables para múltiples entornos informáticos. Registrar las métricas de 
+rendimiento del modelo durante los procesos de entrenamiento y evaluación, y realizar un seguimiento de las versiones del 
+modelo. 
+
+![2.png](ims%2FC3%2Fims%2F1%2F2.png)
+
+En esta lección, aprenderá a utilizar una configuración de ejecución de script para ejecutar un script de entrenamiento 
+de modelo como un experimento de Azure Machine Learning. Crear scripts de entrenamiento reutilizables y parametrizados y 
+registrar los modelos entrenados.
+
 ## 3 Run a training script
 [< Back to Local Index](#3-index)
+
+Puede utilizar un ScriptRunConfig para ejecutar un experimento basado en un script que entrene un modelo de aprendizaje automático.
+
+### Escribir un script para entrenar un modelo
+
+Cuando utilice un experimento para entrenar un modelo, su script debe guardar el modelo entrenado en la carpeta de salidas. 
+Por ejemplo, el siguiente script entrena un modelo utilizando Scikit-Learn, y lo guarda en la carpeta de salidas utilizando 
+el paquete **joblib**:
+
+Podemos ver el archivo [diabetes.csv](ims%2FC3%2Fdata%2Fdiabetes.csv)
+```csv
+PatientID,Pregnancies,PlasmaGlucose,DiastolicBloodPressure,TricepsThickness,SerumInsulin,BMI,DiabetesPedigree,Age,Diabetic
+1354778,0,171,80,34,23,43.50972593,1.213191354,21,0
+1147438,8,92,93,47,36,21.24057571,0.158364981,23,0
+1640031,7,115,47,52,35,41.51152348,0.079018568,23,0
+```
+
+```python
+from azureml.core import Run
+import pandas as pd
+import numpy as np
+import joblib
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
+# Get the experiment run context
+run = Run.get_context()
+
+# Prepare the dataset
+diabetes = pd.read_csv('data/diabetes.csv')
+X, y = diabetes[['Feature1','Feature2','Feature3']].values, diabetes['Label'].values
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
+
+# Train a logistic regression model
+reg = 0.1
+model = LogisticRegression(C=1/reg, solver="liblinear").fit(X_train, y_train)
+
+# calculate accuracy
+y_hat = model.predict(X_test)
+acc = np.average(y_hat == y_test)
+run.log('Accuracy', np.float(acc))
+
+# Save the trained model
+os.makedirs('outputs', exist_ok=True)
+joblib.dump(value=model, filename='outputs/model.pkl')
+
+run.complete()
+```
+
+Para preparar un experimento que entrene un modelo, se crea un script como éste y se guarda en una carpeta. Por ejemplo, 
+podría guardar este script como **training_script.py** en una carpeta llamada **training_folder**. Dado que el script 
+incluye código para cargar los datos de entrenamiento **diabetes.csv**, este archivo también debe guardarse en la carpeta.
+
+### Ejecutar el script como experimento
+
+Para ejecutar el script, cree una **ScriptRunConfig** que haga referencia a la carpeta y al archivo de script. Por lo general, 
+también deberá definir un entorno Python (Conda) que incluya cualquier paquete requerido por el script. En este ejemplo, 
+el script utiliza Scikit-Learn por lo que debe crear un entorno que lo incluya. 
+
+El script también utiliza Azure Machine Learning para registrar métricas, por lo que debe acordarse de incluir el paquete
+azureml-defaults en el entorno.
+
+```python
+from azureml.core import Experiment, ScriptRunConfig, Environment
+from azureml.core.conda_dependencies import CondaDependencies
+
+# Create a Python environment for the experiment
+sklearn_env = Environment("sklearn-env")
+
+# Ensure the required packages are installed
+packages = CondaDependencies.create(conda_packages=['scikit-learn','pip'],
+                                    pip_packages=['azureml-defaults'])
+sklearn_env.python.conda_dependencies = packages
+
+# Create a script config
+script_config = ScriptRunConfig(source_directory='training_folder',
+                                script='training.py',
+                                environment=sklearn_env) 
+
+# Submit the experiment
+experiment = Experiment(workspace=ws, name='training-experiment')
+run = experiment.submit(config=script_config)
+run.wait_for_completion()
+```
+
+> Nota, tambien podemos crear un archivo .yml y crear el ambiente desde el archivo .yml
+
+Con el siguiente código podemos crear el archivo: `environment_test.yml` a partir de la variable `packages` creada anteriormente:
+
+```python
+with open('environment_test.yml', 'w') as f:
+    f.write(packages.serialize_to_string())
+```
+La respuesta generada sería:
+```yml
+# Conda environment specification. The dependencies defined in this file will
+# be automatically provisioned for runs with userManagedDependencies=False.
+
+# Details about the Conda environment file format:
+# https://conda.io/docs/user-guide/tasks/manage-environments.html#create-env-file-manually
+
+name: project_environment
+dependencies:
+  # The python interpreter version.
+  # Currently Azure ML only supports 3.8 and later.
+- python=3.8.13
+
+- pip:
+  - azureml-defaults~=1.53.0
+- scikit-learn
+- pip
+channels:
+- anaconda
+- conda-forge
+```
+Entonces para crear el `sklearn_env` desde el archivo `.yml`:
+```python
+# Create a Python environment for the experiment (from a .yml file)
+sklearn_env = Environment.from_conda_specification("experiment_env", "environment_test.yml")
+```
+
 ## 3 Using script parameters
 [< Back to Local Index](#3-index)
+
+Puede aumentar la flexibilidad de los experimentos basados en scripts utilizando argumentos para establecer variables en 
+el script.
+
+### Trabajar con argumentos de script
+
+Para utilizar parámetros en un script, debe utilizar una biblioteca como **argparse** para leer los argumentos pasados al 
+script y asignarlos a variables. Por ejemplo, el siguiente script lee un argumento llamado **--reg-rate**, que se utiliza 
+para establecer el hiperparámetro de tasa de regularización para el algoritmo de regresión logística utilizado para entrenar 
+un modelo.
+
+```python
+from azureml.core import Run
+import argparse
+import pandas as pd
+import numpy as np
+import joblib
+import os
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
+# Get the experiment run context
+run = Run.get_context()
+
+# Set regularization hyperparameter
+parser = argparse.ArgumentParser()
+parser.add_argument('--reg-rate', type=float, dest='reg_rate', default=0.01)
+args = parser.parse_args()
+reg = args.reg_rate
+
+# Prepare the dataset
+diabetes = pd.read_csv('data/diabetes.csv')
+X, y = data[['Feature1','Feature2','Feature3']].values, data['Label'].values
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
+
+# Train a logistic regression model
+model = LogisticRegression(C=1/reg, solver="liblinear").fit(X_train, y_train)
+
+# calculate accuracy
+y_hat = model.predict(X_test)
+acc = np.average(y_hat == y_test)
+run.log('Accuracy', np.float(acc))
+
+# Save the trained model
+os.makedirs('outputs', exist_ok=True)
+joblib.dump(value=model, filename='outputs/model.pkl')
+
+run.complete()
+```
+
+### Pasar argumentos a un script de experimento
+
+Para pasar valores de parámetros a un script que se está ejecutando en un experimento, necesita proporcionar un valor de 
+argumentos que contenga una lista de argumentos separados por comas y sus valores al **ScriptRunConfig**, de la siguiente manera:
+
+```python
+# Create a script config
+script_config = ScriptRunConfig(source_directory='training_folder',
+                                script='training.py',
+                                arguments = ['--reg-rate', 0.1],
+                                environment=sklearn_env)
+```
+
 ## 3 Registering models
 [< Back to Local Index](#3-index)
+
+Después de ejecutar un experimento que entrena un modelo, puede utilizar una referencia al objeto Ejecutar para recuperar 
+sus resultados, incluido el modelo entrenado.
+
+### Recuperación de archivos de modelo
+
+Una vez finalizada la ejecución de un experimento, puede utilizar el método **get_file_names** de los objetos run para 
+listar los archivos generados. La práctica estándar es que los scripts que entrenan modelos los guarden en la carpeta de
+salidas de la ejecución.
+
+También puede utilizar los métodos **download_file** y **download_files** del objeto run para descargar los archivos de 
+salida al sistema de archivos local.
+
+```python
+# "run" is a reference to a completed experiment run
+
+# List the files generated by the experiment
+for file in run.get_file_names():
+    print(file)
+
+# Download a named file
+run.download_file(name='outputs/model.pkl', output_file_path='model.pkl')
+```
+
+### Registro de un modelo
+
+El registro de modelos le permite realizar un seguimiento de varias versiones de un modelo y recuperar modelos para
+inferencias(predicción de valores de etiquetas a partir de nuevos datos). Cuando registra un modelo, puede especificar un 
+nombre, una descripción, etiquetas, un marco (como Scikit-Learn o PyTorch), una versión del marco, propiedades personalizadas 
+y otros metadatos útiles. Al registrar un modelo con el mismo nombre que un modelo existente, se crea automáticamente una 
+nueva versión del modelo, empezando por 1 y aumentando en unidades de 1.
+
+Para registrar un modelo desde un archivo local, puede utilizar el método **register** del objeto **Model** como se muestra aquí:
+
+```python
+from azureml.core import Model
+
+model = Model.register(workspace=ws,
+                       model_name='classification_model',
+                       model_path='model.pkl', # local path
+                       description='A classification model',
+                       tags={'data-format': 'CSV'},
+                       model_framework=Model.Framework.SCIKITLEARN,
+                       model_framework_version='0.20.3')
+```
+
+Alternativamente, si tiene una referencia a la **Ejecución** utilizada para entrenar el modelo, puede utilizar su método
+**register_model** como se muestra aquí:
+
+```python
+run.register_model( model_name='classification_model',
+                    model_path='outputs/model.pkl', # run outputs path
+                    description='A classification model',
+                    tags={'data-format': 'CSV'},
+                    model_framework=Model.Framework.SCIKITLEARN,
+                    model_framework_version='0.20.3')
+```
+
+### Visualización de modelos registrados
+
+Puede ver los modelos registrados en Azure Machine Learning studio. También puede utilizar el objeto **Model** para recuperar 
+los detalles de los modelos registrados como se muestra aquí:
+
+```python
+from azureml.core import Model
+
+for model in Model.list(ws):
+    # Get model name and auto-generated version
+    print(model.name, 'version:', model.version)
+```
+
+
 ## 3 Exercise Training and registering a model
 [< Back to Local Index](#3-index)
+
+Ahora es su oportunidad de utilizar Azure Machine Learning para entrenar un modelo de aprendizaje automático
+
+En este ejercicio, usted:
+
+
+- Utilizar un script para entrenar un modelo
+- Utilizar un script parametrizado para entrenar un modelo
+- Registrar un modelo.
+
+
+### Instrucciones
+
+Siga estas instrucciones para completar el ejercicio.
+
+1. Si aún no dispone de una suscripción a Azure, regístrese para obtener una prueba gratuita en 
+https://azure.microsoft.com
+
+2. Vea el repositorio del ejercicio en 
+https://aka.ms/mslearn-dp100
+
+3. Si aún no lo ha hecho, complete el ejercicio Crear un espacio de trabajo de Azure Machine Learning para aprovisionar un espacio de trabajo de Azure Machine Learning, crear una instancia de cálculo y clonar los archivos necesarios
+
+4. Complete el ejercicio Entrenar modelos.
+
+### Train models using the Azure Machine Learning SDK
+
+![m1.gif](ims%2FC3%2Fgifs%2Fm1.gif)
+
+![m2.gif](ims%2FC3%2Fgifs%2Fm2.gif)
+
+![m3.gif](ims%2FC3%2Fgifs%2Fm3.gif)
+
+![m4.gif](ims%2FC3%2Fgifs%2Fm4.gif)
+
+![m5.gif](ims%2FC3%2Fgifs%2Fm5.gif)
+
+![m6.gif](ims%2FC3%2Fgifs%2Fm6.gif)
+
+![m7.gif](ims%2FC3%2Fgifs%2Fm7.gif)
+
+![m8.gif](ims%2FC3%2Fgifs%2Fm8.gif)
+
+![m9.gif](ims%2FC3%2Fgifs%2Fm9.gif)
+
+![m10.gif](ims%2FC3%2Fgifs%2Fm10.gif)
+
+![m11.gif](ims%2FC3%2Fgifs%2Fm11.gif)
+
+> ### Nota:
+> El notebook de esta clase está en: [05 - Train Models.ipynb](ims%2FC3%2Fnotebooks%2F05%20-%20Train%20Models.ipynb)
+
 ## 3 Exercise quiz
 [< Back to Local Index](#3-index)
+
+![3.png](ims%2FC3%2Fims%2F1%2F3.png)
+
 ## 3 Knowledge Check
 [< Back to Local Index](#3-index)
+
+![q1.png](ims%2FC3%2Ftest%2Fq1.png)
+
+![q2.png](ims%2FC3%2Ftest%2Fq2.png)
+
+![q3.png](ims%2FC3%2Ftest%2Fq3.png)
+
 ## 3 Test prep
 [< Back to Local Index](#3-index)
+
+![q4.png](ims%2FC3%2Ftest%2Fq4.png)
+
+![q5.png](ims%2FC3%2Ftest%2Fq5.png)
+
+![q6.png](ims%2FC3%2Ftest%2Fq6.png)
+
+![q7.png](ims%2FC3%2Ftest%2Fq7.png)
+
+
+
 ## 3 Lesson Summary
 [< Back to Local Index](#3-index)
+
+![4.png](ims%2FC3%2Fims%2F1%2F4.png)
+
+En este módulo, ha aprendido a entrenar un modelo de aprendizaje automático con Azure machine learning. O, más concretamente, 
+ha aprendido a utilizar un script, run Config para ejecutar un script de entrenamiento de modelos como un experimento de 
+aprendizaje automático de Azure. Cree scripts de restricción de parámetros reutilizables y modelos entrenados registrados.
+
 
 # 4 Work with Data in Azure Machine Learning
 
