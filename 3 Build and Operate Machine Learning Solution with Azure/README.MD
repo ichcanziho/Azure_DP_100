@@ -507,18 +507,445 @@ pip install azureml-sdk
 
 ## 2 Azure Machine Learning tools and interfaces
 [< Back to Local Index](#2-index)
+
+![15.png](ims%2FC2%2F15.png)
+
+Azure Machine Learning proporciona un servicio basado en la nube que ofrece flexibilidad en la forma de utilizarlo. 
+Existen interfaces de usuario diseñadas específicamente para Azure Machine Learning, o puede utilizar una interfaz 
+programática para gestionar recursos del espacio de trabajo y ejecutar operaciones de aprendizaje automático. 
+
+![16.png](ims%2FC2%2F16.png)
+
+Puede gestionar los recursos de su espacio de trabajo de Azure Machine Learning en el portal de Azure. Sin embargo, 
+como se trata de una interfaz general para gestionar todos los recursos en Azure, los científicos de datos y otros usuarios 
+implicados en operaciones de aprendizaje automático pueden preferir utilizar una interfaz dedicada más centrada. 
+
+![17.png](ims%2FC2%2F17.png)
+
+Azure Machine Learning Studio es una herramienta basada en web para gestionar un espacio de trabajo de Azure Machine Learning. 
+Le permite crear, gestionar, y ver todos los activos de su espacio de trabajo y proporciona las siguientes herramientas gráficas: 
+
+![18.png](ims%2FC2%2F18.png)
+
+Diseñador. Se trata de una interfaz de arrastrar y soltar para el desarrollo de modelos de aprendizaje automático sin código.
+
+![19.png](ims%2FC2%2F19.png)
+
+Aprendizaje automático automatizado. Se trata de una interfaz de asistente que le permite entrenar un modelo, utilizando 
+una combinación de algoritmos y técnicas de preprocesamiento de datos para encontrar el mejor modelo para sus datos. 
+
+![20.png](ims%2FC2%2F20.png)
+
+Es importante señalar que una herramienta lanzada anteriormente llamada Azure Machine Learning Studio proporcionaba un 
+servicio gratuito para el desarrollo de modelos de aprendizaje automático de arrastrar y soltar. La interfaz del estudio 
+para el servicio Azure Machine Learning incluye esta capacidad en la herramienta de diseño, así como otras capacidades de 
+gestión de activos del espacio de trabajo.
+
+![21.png](ims%2FC2%2F21.png)
+
+Para utilizar Azure Machine Learning Studio, utilice un navegador web para navegar a ml.azure.com e inicie sesión utilizando 
+las credenciales asociadas a su suscripción Azure. A continuación, puede seleccionar la suscripción y el espacio de trabajo 
+que desea gestionar. 
+
+![22.png](ims%2FC2%2F22.png)
+
+Aunque las interfaces gráficas como Azure Machine Learning Studio facilitan la creación y la gestión de activos de aprendizaje 
+automático, a menudo resulta ventajoso utilizar un enfoque basado en código para gestionar los recursos.
+
+Escribiendo scripts para crear y gestionar recursos, puede ejecutar operaciones de aprendizaje automático desde su entorno 
+de desarrollo preferido. Automatice la creación y configuración de activos para que sea repetible, asegure la coherencia 
+de los recursos que deben replicarse en múltiples entornos. Por ejemplo, desarrollo, pruebas y producción. Incorpore la 
+configuración de activos de aprendizaje automático en operaciones de desarrollo o flujos de trabajo DevOps, como integración 
+continua, despliegue continuo o conductos CICD.
+
+![23.png](ims%2FC2%2F23.png)
+
+Azure Machine Learning proporciona kits de desarrollo de software o SDK para Python y R, que puede utilizar para crear, 
+gestionar, y utilizar activos en un espacio de trabajo de Azure Machine Learning. Tenga en cuenta que este curso se centra 
+en el SDK de Python porque tiene capacidades más amplias que el SDK de R. 
+
+![24.png](ims%2FC2%2F24.png)
+
+Aprendamos ahora a instalar el SDK de Azure Machine Learning para Python. Puede instalar el SDK de Azure Machine Learning 
+para Python utilizando la utilidad de gestión de paquetes pip y utilizando el comando pip install. El SDK se instala 
+utilizando la utilidad pip para Python y consta de el paquete principal azureml-sdk, así como de otros numerosos paquetes 
+auxiliares que contienen funcionalidad especializada.
+
+![25.png](ims%2FC2%2F25.png)
+
+Por ejemplo, el paquete Azure-ml widgets proporciona soporte para widgets interactivos en un entorno Jupyter Notebook.
+
+![26.png](ims%2FC2%2F26.png)
+
+Para instalar paquetes adicionales, inclúyalos en el comando pip install. 
+
+![27.png](ims%2FC2%2F27.png)
+
+Para obtener más información sobre la instalación del 
+SDK Azure Machine Learning para Python, consulte la documentación del SDK en el sitio web de Microsoft. Puede encontrar un 
+enlace a este documento desde las lecturas adicionales al final de esta lección. 
+
+![28.png](ims%2FC2%2F28.png)
+
+Además, debe tener en cuenta que el SDK se actualiza en forma regular y revisar las notas de la versión para conocer la 
+última versión. Puede encontrar un enlace a este documento desde las lecturas adicionales al final de esta lección.
+
+![29.png](ims%2FC2%2F29.png)
+
+Después de instalar el paquete SDK en su entorno Python, puede escribir código para conectarse a su espacio de trabajo y 
+realizar operaciones de aprendizaje automático. La forma más sencilla de conectarse a un espacio de trabajo es utilizar 
+un archivo de configuración del espacio de trabajo, que incluye la suscripción a Azure, el grupo de recursos y los detalles 
+del espacio de trabajo.
+
+![30.png](ims%2FC2%2F30.png)
+
+Puede descargar un archivo de configuración para un espacio de trabajo desde la página de resumen de su hoja en el portal 
+de Azure o desde Azure Machine Learning Studio. Para conectarse al espacio de trabajo utilizando el archivo de configuración, 
+puede utilizar el método from_config de la clase del espacio de trabajo en el SDK. Por defecto, el método from_config 
+busca un archivo llamado config.json en la carpeta que contiene el archivo de código Python, pero puede especificar otra 
+ruta si es necesario.
+
+![31.png](ims%2FC2%2F31.png)
+
+Como alternativa al uso de un archivo de configuración, puede utilizar el método Get de la clase del espacio de trabajo, 
+que especifica explícitamente la suscripción, el grupo de recursos y los detalles del espacio de trabajo. 
+
+![32.png](ims%2FC2%2F32.png)
+
+Sin embargo, la técnica del archivo de configuración suele preferirse debido a su mayor flexibilidad cuando se utilizan varios scripts. 
+
+![33.png](ims%2FC2%2F33.png)
+
+Sea cual sea la técnica que utilice, si no hay una sesión activa con su suscripción Azure, se le pedirá que se autentique. 
+La clase del espacio de trabajo es el punto de partida para la mayoría de las operaciones de código. Por ejemplo, puede 
+utilizar sus atributos de objetivos de cálculo para recuperar un objeto de diccionario, que contiene los objetivos de cálculo 
+definidos en el espacio de trabajo. 
+
+El SDK contiene una rica biblioteca de clases que puede utilizar para crear, gestionar y utilizar muchos activos en el espacio de trabajo de Azure Machine Learning. 
+
+![34.png](ims%2FC2%2F34.png)
+
+Para obtener más información sobre los objetivos de cómputo, Azure Machine Learning SDK, consulte la documentación del SDK 
+en el sitio web de Microsoft. Puede encontrar un enlace a este documento en las lecturas adicionales al final de esta lección.
+
+![35.png](ims%2FC2%2F35.png)
+
+La interfaz de línea de comandos de Azure, o CLI, es una herramienta de línea de comandos multiplataforma para gestionar 
+los recursos de Azure. La extensión Azure Machine Learning CLI es un paquete adicional que proporciona comandos para trabajar 
+con Azure Machine Learning.
+
+![36.png](ims%2FC2%2F36.png)
+
+Para instalar la extensión Azure Machine Learning CLI, primero debe instalar Azure CLI. Consulte las instrucciones de instalación 
+completas para todas las plataformas compatibles para obtener más detalles. Puede encontrar un enlace a este documento desde 
+las lecturas adicionales al final de esta lección. 
+
+![37.png](ims%2FC2%2F37.png)
+
+Después de instalar la CLI de Azure, puede añadir la extensión CLI de Azure Machine Learning ejecutando un comando de extensión az. 
+Para utilizar la extensión Azure Machine Learning CLI, ejecute el comando az ml con los parámetros adecuados para la acción 
+que desee realizar. 
+
+![38.png](ims%2FC2%2F38.png)
+
+Es importante tener en cuenta lo siguiente, en el ejemplo de código anterior, el parámetro -g especifica el nombre del 
+grupo de recursos en el que se define el espacio de trabajo Azure Machine Learning especificado en el parámetro -w. Estos 
+parámetros son alias abreviados para --resource group y --workspace name. 
+
+![39.png](ims%2FC2%2F39.png)
+
+Para más información sobre la extensión CLI de Azure Machine Learning, consulte la documentación. Puede encontrar un enlace a este documento desde las lecturas adicionales al final de esta lección. 
+
+![40.png](ims%2FC2%2F40.png)
+
+Azure Machine Learning incluye la capacidad de crear instancias de cómputo en un espacio de trabajo, para proporcionar un 
+entorno de desarrollo que se gestiona con todos los demás activos del espacio de trabajo. Las instancias de computación 
+incluyen, Jupyter Notebook y Jupyter instalaciones de laboratorio que puede utilizar para escribir y ejecutar código que 
+utiliza el SDK de Azure Machine Learning para trabajar con activos en su espacio de trabajo. 
+
+![41.png](ims%2FC2%2F41.png)
+
+Puede elegir una imagen de instancia de computación que proporcione la especificación de computación que necesite, desde 
+pequeñas máquinas virtuales de sólo CPU hasta grandes estaciones de trabajo con GPU.
+
+![42.png](ims%2FC2%2F42.png)
+
+Dado que las instancias de computación se alojan en Azure, sólo paga por los recursos de computación cuando están en 
+funcionamiento, por lo que puede crear una instancia de computación que se adapte a sus necesidades. Deténgala cuando su 
+carga de trabajo haya finalizado para minimizar los costes. Puede almacenar blocs de notas de forma independiente en el 
+almacenamiento del espacio de trabajo y abrirlos en cualquier instancia de computación.
+
+![43.png](ims%2FC2%2F43.png)
+
+Visual Studio Code es un entorno ligero de edición de código para Microsoft Windows, Apple MAC OS y Linux. Proporciona una 
+interfaz visual para muchos tipos de código, incluidos Microsoft C#, JavaScript, Python y otros. También proporciona 
+Intellisense y formato de sintaxis para formatos de datos comunes como JSON y XML. 
+
+![44.png](ims%2FC2%2F44.png)
+
+La flexibilidad de Visual Studio Code se basa en la capacidad de instalar extensiones modulares que añaden interfaces de 
+comprobación de sintaxis, depuración y gestión visual para cargas de trabajo específicas. 
+
+![45.png](ims%2FC2%2F45.png)
+
+Por ejemplo, la extensión Microsoft Python para Visual Studio Code, añade soporte para escribir y ejecutar código Python y 
+scripts o cuadernos dentro de la interfaz de Visual Studio Code. 
+
+![46.png](ims%2FC2%2F46.png)
+
+La extensión Azure Machine Learning para Visual Studio Code proporciona una interfaz gráfica para trabajar con activos en 
+un espacio de trabajo Azure Machine Learning. Puede combinar las capacidades de las extensiones Azure Machine Learning y 
+Python para gestionar una carga de trabajo completa de aprendizaje automático de extremo a extremo en Azure Machine Learning 
+desde el entorno de Visual Studio Code.
+
+Para obtener más información sobre el uso de la extensión Azure Machine Learning para Visual Studio Code, consulte la 
+documentación. Puede encontrar un enlace a este documento en las lecturas adicionales al final de esta lección.
+
 ## 2 Azure Machine Learning experiments
 [< Back to Local Index](#2-index)
+
+![47.png](ims%2FC2%2F47.png)
+
+Como cualquier disciplina científica, la ciencia de datos implica la ejecución de experimentos normalmente para explorar 
+datos o para construir y evaluar modelos predictivos. En Azure Machine Learning un experimento es un proceso con nombre. 
+Normalmente, la ejecución de un script o un pipeline que puede generar métricas y resultados y ser rastreado en el espacio 
+de trabajo de Azure Machine Learning. 
+
+![48.png](ims%2FC2%2F48.png)
+
+Este experimento puede ejecutarse varias veces con diferentes datos, código o configuraciones. Azure Machine Learning realiza 
+un seguimiento de cada ejecución, lo que le permite ver el historial de ejecución y comparar los resultados de cada ejecución. 
+
+![49.png](ims%2FC2%2F49.png)
+
+Ahora, echemos un vistazo a cómo se controlan los experimentos en Azure Machine Learning. Cuando envía un experimento, 
+utiliza su contexto de ejecución para inicializar y finalizar la ejecución del experimento que se rastrea en Azure Machine Learning. 
+
+![50.png](ims%2FC2%2F50.png)
+
+Una vez finalizada la ejecución del experimento, puede ver los detalles de la ejecución la pestaña de experimentos en Azure 
+Machine Learning studio. 
+
+![51.png](ims%2FC2%2F51.png)
+
+Los experimentos son más útiles cuando producen métricas y resultados que pueden rastrearse a través de las ejecuciones. 
+Cada experimento genera archivos de registro que incluyen los mensajes que se escribirán en el terminal durante la ejecución 
+interactiva. Esto le permite utilizar simples sentencias de impresión para escribir mensajes en el registro. Sin embargo, 
+si desea registrar métricas con nombre para compararlas entre ejecuciones, puede hacerlo utilizando el objeto run, que 
+proporciona una serie de funciones de registro específicas para este fin. 
+
+![52.png](ims%2FC2%2F52.png)
+
+Entre ellas se incluyen: 
+- **Log:** registrar un único valor con nombre.
+- **Log_list:** registrar una lista de valores con nombre. 
+- **Log_row:** registra una fila con múltiples columnas. 
+- **Log_table:** registra el diccionario como una tabla. 
+- **Log_image:** registra un archivo de imagen o un gráfico. 
+
+![53.png](ims%2FC2%2F53.png)
+
+Para obtener más información sobre el registro de métricas durante las ejecuciones de experimentos, consulte Monitorizar 
+ejecuciones y métricas de experimentos Azure ML en el sitio web de Microsoft. Puede encontrar un enlace a este recurso en 
+las lecturas adicionales al final de esta lección.
+
+![54.png](ims%2FC2%2F54.png)
+
+Por ejemplo, puede utilizar un código que registre el número de observaciones registradas en un archivo CSV. 
+
+![55.png](ims%2FC2%2F55.png)
+
+Puede ver las métricas registradas por una ejecución de experimento en Azure Machine Learning studio o utilizando el widget 
+RunDetails en un cuaderno. 
+
+![56.png](ims%2FC2%2F56.png)
+
+También puede recuperar las métricas utilizando el método run objects get metrics. Este método devuelve una representación 
+json de las métricas. A continuación, puede generar observaciones de salida. Además de registrar métricas, un experimento 
+puede generar archivos de salida.
+
+![57.png](ims%2FC2%2F57.png)
+
+A menudo, se trata de modelos de aprendizaje automático entrenados, pero puede guardar cualquier tipo de archivo y ponerlo 
+a disposición como salida de la ejecución de su experimento. Los archivos de salida de un experimento se guardan en su 
+carpeta de salidas. La técnica que utilice para añadir archivos a las salidas de un experimento, depende de cómo esté 
+ejecutando el experimento. 
+
+![58.png](ims%2FC2%2F58.png)
+
+Los ejemplos mencionados aquí hasta ahora controlan el ciclo de vida del experimento alineando su código. Si adopta este 
+enfoque, puede subir archivos locales a la carpeta de salidas de la ejecución utilizando el método upload file de los 
+objetos de ejecución en el código de su experimento. Si ejecuta un experimento en un contexto de cálculo remoto, del que 
+hablaremos más adelante en este curso. Cualquier archivo escrito en la carpeta de salidas en el contexto de cálculo se 
+sube automáticamente a la carpeta de salidas de la ejecución cuando ésta finaliza. 
+
+![m9.gif](ims%2FC2%2Fgifs%2Fm9.gif)
+
+Sea cual sea el enfoque que utilice para ejecutar sus experimentos, puede recuperar una lista de archivos de salida del 
+objeto de ejecución, que produciría una salida, mostrando output/sample.csv. 
+
+![59.png](ims%2FC2%2F59.png)
+
+Puede ejecutar un experimento en línea utilizando el método start_logging del objeto de experimento , pero es más común 
+encapsular la lógica del experimento en un script y ejecutar el script como un experimento. El script puede ejecutarse en 
+cualquier contexto de computación válido, lo que lo convierte en una solución más flexible para ejecutar experimentos a 
+escala. Un script de experimento no es más que un archivo de código python que contiene el código que desea ejecutar en 
+el experimento.
+
+![60.png](ims%2FC2%2F60.png)
+
+Para acceder al contexto de ejecución del experimento, necesario para registrar métricas, el script debe importar la clase 
+azureml.core.run class y codificar su método get context. 
+
+![61.png](ims%2FC2%2F61.png)
+
+El script puede entonces utilizar el contexto de ejecución para registrar métricas, cargar archivos y completar el experimento.
+
+![62.png](ims%2FC2%2F62.png)
+
+Para ejecutar un script como un experimento, debe definir una configuración de script que defina el script a ejecutar y 
+el entorno python en el que ejecutarlo. Esto se implementa utilizando un objeto ScriptRunConfig. Por ejemplo, el código 
+podría utilizarse para ejecutar un experimento basado en un script en la carpeta de archivos del experimento, que también 
+debe contener cualquier archivo utilizado por el script, como el archivo data.csv del ejemplo de código de script anterior. 
+
+![63.png](ims%2FC2%2F63.png)
+
+Es importante tener en cuenta y objeto de configuración de ejecución creado implícitamente, define el entorno python para 
+el experimento, incluyendo los paquetes disponibles para el script. Además, si su script depende de paquetes que no están 
+incluidos en el entorno por defecto. Debe asociar el ScriptRunConfig con un objeto de entorno que haga uso de un objeto 
+CondaDependencies para especificar los paquetes python necesarios. Los entornos de ejecución se tratan con más detalle 
+más adelante en este curso.
+
 ## 2 Exercise - Run experiments
 [< Back to Local Index](#2-index)
+
+Ahora es su oportunidad de probar Azure Machine Learning por sí mismo.
+
+En este ejercicio, usted:
+
+- Ejecutar un experimento de Azure Machine Learning.
+- Ejecutar un script como experimento.
+- Utilizar MLflow para realizar un seguimiento de las métricas del experimento.
+
+### Instrucciones
+Siga estas instrucciones para completar el ejercicio.
+
+1. Si aún no tiene una suscripción a Azure, regístrese para una prueba gratuita en https://azure.microsoft.com.
+
+2. Consulte el repositorio del ejercicio en https://aka.ms/mslearn-dp100.
+
+3. Si aún no lo ha hecho, complete el ejercicio Crear un espacio de trabajo de Azure Machine Learning para aprovisionar 
+un espacio de trabajo de Azure Machine Learning, crear una instancia de cálculo y clonar los archivos necesarios.
+
+4. Complete el ejercicio Ejecutar experimentos
+
+Liga para el tutorial en inglés: https://microsoftlearning.github.io/mslearn-dp100/instructions/04-run-experiments.html
+
+Vamos a omitir los pasos:
+
+
+- Before you start
+- Provision an Azure Machine Learning workspace
+- Clone the lab materials
+
+Puesto que estos ya se hicieron en el tutorial anterior.
+
+### Verificar que el SDK de Azure Machine Learning esté instalado
+
+El SDK de Azure Machine Learning se instala de forma predeterminada en su instancia de cálculo. Siga estos pasos para verificar la instalación.
+
+![m10.gif](ims%2FC2%2Fgifs%2Fm10.gif)
+
+1. En la página de **Cuadernos**, cree un nuevo **Terminal** si ya no está abierto. Esto abrirá una nueva pestaña con una shell de comandos.
+2. Ingrese el siguiente comando para instalar el SDK de Azure ML:
+
+   ![m11.gif](ims%2FC2%2Fgifs%2Fm11.gif)
+
+   ```bash
+   pip install azureml-sdk
+   ```
+   Tenga en cuenta la versión del paquete SDK instalado.
+
+3. El paquete SDK **azureml-sdk** proporciona las bibliotecas más importantes necesarias para trabajar con Azure Machine Learning. Sin embargo, existen algunos paquetes adicionales que contienen otras bibliotecas útiles que no se incluyen en el paquete principal del SDK. Use el siguiente comando para instalar el paquete **azureml-widgets**, que contiene bibliotecas para mostrar información de Azure Machine Learning en cuadernos:
+   ```bash
+   pip install azureml-widgets
+   ```
+4. Cierre la pestaña del **Terminal**.
+   > **Más información:** Para obtener más detalles sobre la instalación del SDK de Azure ML y sus componentes opcionales, consulte la [Documentación del SDK de Azure ML](https://learn.microsoft.com/es-mx/python/api/overview/azure/ml/install?view=azure-ml-py).
+
+### Ejecutar experimentos en un cuaderno
+
+Los experimentos en Azure Machine Learning necesitan ser iniciados desde algún tipo de capa de control; a menudo un script o programa. 
+En este ejercicio, utilizará un cuaderno para controlar los experimentos.
+
+1. En la **página de Cuadernos**, navegue hasta la carpeta **/users/your-user-name/mslearn-dp100** donde clonó el repositorio de cuadernos y abra el cuaderno **Run Experiments**.
+   
+   ![m12.gif](ims%2FC2%2Fgifs%2Fm12.gif)   
+
+2. Luego lea las notas en el cuaderno, ejecutando cada celda de código de manera consecutiva.
+
+> ### Nota:
+> El notebook completo de esta sección está en: [04 - Run Experiments.ipynb](ims%2FC2%2Fnotebooks%2F04%20-%20Run%20Experiments.ipynb)
+
+
+### Eliminar los recursos de Azure
+
+Cuando termine de explorar Azure Machine Learning, debe eliminar los recursos que ha creado para evitar costos innecesarios de Azure.
+
+1. Cierre la pestaña de Azure Machine Learning Studio y regrese al portal de Azure.
+2. En el portal de Azure, en la **página de Inicio**, seleccione **Grupos de recursos**.
+3. Seleccione el grupo de recursos **rg-dp100-labs**.
+4. En la parte superior de la **página Descripción general** de su grupo de recursos, seleccione **Eliminar grupo de recursos**.
+5. Ingrese el nombre del grupo de recursos para confirmar que desea eliminarlo y seleccione **Eliminar**.
+
+
 ## 2 Exercise Quiz 2
 [< Back to Local Index](#2-index)
+
+![64.png](ims%2FC2%2F64.png)
+
 ## 2 Knowledge Check
 [< Back to Local Index](#2-index)
+
+![t1.png](ims%2FC2%2Ftest%2Ft1.png)
+
+![t2.png](ims%2FC2%2Ftest%2Ft2.png)
+
+![t3.png](ims%2FC2%2Ftest%2Ft3.png)
+
+![t4.png](ims%2FC2%2Ftest%2Ft4.png)
+
 ## 2 Lesson summary
 [< Back to Local Index](#2-index)
+
+![65.png](ims%2FC2%2F65.png)
+
+En esta lección, aprendiste cómo usar Python para explorar , visualizar y manipular datos o, más específicamente, 
+aprovisionar una máquina de Azure Espacio de trabajo de aprendizaje, uso de herramientas e interfaces para trabajar con Azure Aprendizaje automático y ejecución de experimentos basados en código en una máquina de Azure Espacio de trabajo de aprendizaje.
+
+
 ## 2 Additional Reading
 [< Back to Local Index](#2-index)
+
+**Azure Machine Learning workspaces**
+
+[Use an Azure Resource Manager template to create a workspace for Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-create-workspace-template?tabs=azcli)
+
+**Azure Machine Learning tools and interfaces**
+
+[Azure Machine Learning release notes](https://docs.microsoft.com/en-us/azure/machine-learning/azure-machine-learning-release-notes)
+
+[What is the Azure Machine Learning SDK for Python?](https://docs.microsoft.com/en-us/python/api/overview/azure/ml/?view=azure-ml-py)
+
+[How to install the Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+
+[Install & use the CLI extension for Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/reference-azure-machine-learning-cli)
+
+[Manage Azure Machine Learning resources with the VS Code Extension (preview)](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-manage-resources-vscode)
+
+**Azure Machine Learning experiments**
+
+[Log & view metrics and log files](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-log-view-metrics)
 
 # 3 Train a machine learning model with Azure Machine Learning
 
