@@ -1352,24 +1352,610 @@ aprendizaje automático de Azure. Cree scripts de restricción de parámetros re
 
 ## 4 Lesson Introduction
 [< Back to Local Index](#4-index)
+
+![1.png](ims%2FC4%2Fims%2F1%2F1.png)
+
+Hola, en esta lección, aprenderá a trabajar con datos en el aprendizaje automático de Azure. Los datos son un elemento 
+fundamental en cualquier carga de trabajo de aprendizaje automático. 
+
+En esta lección, aprenderá a crear y gestionar almacenes de datos y conjuntos de datos en un espacio de trabajo de 
+aprendizaje automático de Azure. Y a utilizarlos en experimentos de entrenamiento de modelos. 
+
+![2.png](ims%2FC4%2Fims%2F1%2F2.png)
+
+En esta lección, aprenderá a crear y utilizar almacenes de datos, y a crear y utilizar conjuntos de datos.
+
 ## 4 Introduction to datastores
 [< Back to Local Index](#4-index)
+
+![1.png](ims%2FC4%2Fims%2F2%2F1.png)
+
+En Azure machine Learning los almacenes de datos o abstracciones para fuentes de datos en la nube, encapsulan la información 
+necesaria para conectarse a las fuentes de datos. Puede acceder a los almacenes de datos directamente codificar utilizando 
+el SDK de Azure Machine Learning y utilizarlo para cargar o descargar datos.
+
+![2.png](ims%2FC4%2Fims%2F2%2F2.png)
+
+A medida que su machine learning soporta la creación de almacenes de datos de múltiples tipos de fuente de datos Azure, 
+incluyendo Azure storage blob y contenedores de archivos. Almacenes Azure data Lake como su base de datos SQL y Azure data 
+bricks, sistema de archivos o D B F S
+
+![3.png](ims%2FC4%2Fims%2F2%2F3.png)
+
+para una lista completa de los almacenes de datos soportados, consulte la documentación de Azure machine Learning de la 
+página web de Microsoft, puede encontrar un enlace a esta página web desde las lecturas adicionales al final de esta lección.
+
+![4.png](ims%2FC4%2Fims%2F2%2F4.png)
+
+Cada espacio de trabajo tiene dos almacenes de datos incorporados y como su contenedor de almacenamiento blob y un contenedor 
+de archivos de almacenamiento Azure que son utilizados como sistema de almacenamiento por Azure Machine Learning también 
+hay un tercer almacén de datos que se añade a su espacio de trabajo. Si hace uso de los conjuntos de datos abiertos 
+proporcionados como muestras, por ejemplo, creando un pipeline de diseño basado en un conjunto de datos de muestra. 
+
+![5.png](ims%2FC4%2Fims%2F2%2F5.png)
+
+![6.png](ims%2FC4%2Fims%2F2%2F6.png)
+
+En la mayoría de los proyectos de aprendizaje automático, es probable que necesite trabajar con fuentes de datos propias. 
+Esto se debe a que necesitará almacenar volúmenes de datos mayores que los que admite el almacén de datos incorporado o 
+porque necesita integrar su solución de aprendizaje automático con datos de aplicaciones existentes
+
 ## 4 Use datastores
 [< Back to Local Index](#4-index)
+
+![1.png](ims%2FC4%2Fims%2F3%2F1.png)
+
+Para añadir un banco de datos a su espacio de trabajo, puede registrarlo mediante la interfaz gráfica de Azure Machine 
+Learning Studio, o puede usar Azure SDK de aprendizaje automático. Por ejemplo, registrar un almacenamiento de Azure 
+Contenedores de blobs, nombres de un almacén de datos datos de subrayado de blob.
+
+![2.png](ims%2FC4%2Fims%2F3%2F2.png)
+
+Puede ver y administrar almacenes de datos en Azure Machine Learning Studio o puede usar Azure Machine SDK de aprendizaje. 
+Por ejemplo, usar un bucle para enumerar los nombres de cada almacén de datos en el espacio de trabajo
+
+![3.png](ims%2FC4%2Fims%2F3%2F3.png)
+
+puede obtener una referencia a cualquier almacén de datos utilizando el método datastore get.
+
+![4.png](ims%2FC4%2Fims%2F3%2F4.png)
+
+El espacio de trabajo siempre incluye un almacén de datos predeterminado, que puede recuperar mediante el método get default 
+datastore de un objeto de espacio de trabajo. El almacén de datos predeterminado está integrado inicialmente en el espacio 
+de trabajo almacén de datos de blob store.
+
+![5.png](ims%2FC4%2Fims%2F3%2F5.png)
+
+Cuando planifique un almacén de datos, tenga en cuenta la siguientes pautas : Al usar Azure Blob Storage, nivel premium el 
+almacenamiento puede proporcionar un rendimiento de E/S mejorado para conjuntos de datos de gran tamaño. Sin embargo, esta 
+opción lo hará incrementará los costos y puede limitar las opciones de replicación para redundancia de datos.
+
+![6.png](ims%2FC4%2Fims%2F3%2F6.png)
+
+Cuando se trabaja con archivos de datos: aunque el formato CSV es muy común, el formato Parquet generalmente da como resultado 
+un mejor rendimiento. 
+
+![7.png](ims%2FC4%2Fims%2F3%2F7.png)
+
+![8.png](ims%2FC4%2Fims%2F3%2F8.png)
+
+Puedes acceder a cualquier el almacén de datos por nombre, pero quizá le interese cambiar el almacén 
+de datos predeterminado, que inicialmente era el almacén de datos integrado en el espacio de trabajo.
+
+![9.png](ims%2FC4%2Fims%2F3%2F9.png)
+
+Para cambiar el almacén de datos predeterminado, usa el valor predeterminado establecido método de almacén de datos.
+
 ## 4 Introduction to datasets
 [< Back to Local Index](#4-index)
+
+Los conjuntos de datos son objetos de datos empaquetados y versionados que pueden consumirse fácilmente en experimentos y 
+pipelines. Los conjuntos de datos son la forma recomendada de trabajar con los datos, y son el mecanismo principal para 
+las capacidades avanzadas de Azure Machine Learning, como el etiquetado de datos y la supervisión de la deriva de los datos.
+
+### Tipos de conjuntos de datos
+
+Los conjuntos de datos suelen basarse en archivos de un almacén de datos, aunque también pueden basarse en URL y otras fuentes. 
+Puede crear los siguientes tipos de conjuntos de datos:
+
+- **Tabular:** Los datos se leen del conjunto de datos como una tabla. Debe utilizar este tipo de conjunto de datos cuando 
+sus datos estén estructurados de forma consistente y desee trabajar con ellos en estructuras de datos tabulares comunes, 
+como los dataframes de Pandas.
+
+- **Archivo:** El conjunto de datos presenta una lista de rutas de archivos que pueden leerse como si procedieran del sistema 
+de archivos. Utilice este tipo de conjunto de datos cuando sus datos no estén estructurados, o cuando necesite procesar 
+los datos a nivel de archivo (por ejemplo, para entrenar una red neuronal convolucional a partir de un conjunto de archivos 
+de imágenes).
+
+### Creación y registro de conjuntos de datos
+
+Puede utilizar la interfaz visual de Azure Machine Learning studio o el SDK de Azure Machine Learning para crear conjuntos 
+de datos a partir de archivos individuales o de varias rutas de archivos. Las rutas pueden incluir comodines (por ejemplo
+,/archivos/*.csv), lo que permite encapsular datos de un gran número de archivos en un único conjunto de datos.
+
+Una vez creado un conjunto de datos, puede registrarlo en el espacio de trabajo para que esté disponible para su uso posterior 
+en experimentos y canalizaciones de procesamiento de datos.
+
+### Creación y registro de conjuntos de datos tabulares
+
+Para crear un conjunto de datos tabular utilizando el SDK, utilice el método **from_delimited_files** de la clase 
+**Dataset.Tabular**, como se muestra a continuación:
+
+```python
+from azureml.core import Dataset
+
+blob_ds = ws.get_default_datastore()
+csv_paths = [(blob_ds, 'data/files/current_data.csv'),
+             (blob_ds, 'data/files/archive/*.csv')]
+tab_ds = Dataset.Tabular.from_delimited_files(path=csv_paths)
+tab_ds = tab_ds.register(workspace=ws, name='csv_table')
+```
+
+El conjunto de datos de este ejemplo incluye datos de dos rutas de archivos dentro del almacén de datos predeterminado:
+
+- El archivo **current_data.csv** de la carpeta **data/files**.
+
+- Todos los archivos **.csv** de la carpeta **data/files/archive/.**
+
+Tras crear el conjunto de datos, el código lo registra en el espacio de trabajo con el nombre **csv_table**.
+
+### Creación y registro de conjuntos de datos de archivos
+
+Para crear un conjunto de datos de archivo utilizando el SDK, utilice el método **from_files** de la clase 
+**Dataset.File**, como se muestra a continuación:
+
+```python
+from azureml.core import Dataset
+
+blob_ds = ws.get_default_datastore()
+file_ds = Dataset.File.from_files(path=(blob_ds, 'data/files/images/*.jpg'))
+file_ds = file_ds.register(workspace=ws, name='img_files')
+```
+
+El conjunto de datos de este ejemplo incluye todos los archivos **.jpg** de la ruta **data/files/images** dentro del almacén 
+de datos predeterminado:
+
+Después de crear el conjunto de datos, el código lo registra en el área de trabajo con el nombre **img_files**.
+
+### Recuperación de un conjunto de datos registrado
+
+Después de registrar un conjunto de datos, puede recuperarlo utilizando cualquiera de las siguientes técnicas:
+
+- El atributo de **diccionario datasets** de un objeto **Espacio de trabajo**.
+
+- El método **get_by_name** o **get_by_id** de la claseDataset.
+
+Ambas técnicas se muestran en el siguiente código:
+
+```python
+import azureml.core
+from azureml.core import Workspace, Dataset
+
+# Load the workspace from the saved config file
+ws = Workspace.from_config()
+
+# Get a dataset from the workspace datasets collection
+ds1 = ws.datasets['csv_table']
+
+# Get a dataset by name from the datasets class
+ds2 = Dataset.get_by_name(ws, 'img_files')
+```
+
+### Versionado de conjuntos de datos
+
+Los conjuntos de datos pueden versionarse, lo que le permite realizar un seguimiento de las versiones históricas de los 
+conjuntos de datos que se utilizaron en experimentos y reproducir dichos experimentos con datos en el mismo estado.
+
+Puede crear una nueva versión de un conjunto de datos registrándolo con el mismo nombre que un conjunto de datos previamente 
+registrado y especificando la propiedad **create_new_version**:
+
+```python
+img_paths = [(blob_ds, 'data/files/images/*.jpg'),
+             (blob_ds, 'data/files/images/*.png')]
+file_ds = Dataset.File.from_files(path=img_paths)
+file_ds = file_ds.register(workspace=ws, name='img_files', create_new_version=True)
+```
+
+En este ejemplo, los archivos .png de la carpeta **images** se han añadido a la definición del ejemplo de conjunto de datos
+**img_paths** utilizado en el tema anterior.
+
+### Recuperación de una versión específica del conjunto de datos
+
+Puede recuperar una versión específica de un conjunto de datos especificando el parámetro **version** en el método 
+**get_by_name** de la clase **Dataset**.
+
+```python
+img_ds = Dataset.get_by_name(workspace=ws, name='img_files', version=2)
+```
+
 ## 4 Use datasets
 [< Back to Local Index](#4-index)
+
+Los conjuntos de datos son la forma principal de pasar datos a los experimentos que entrenan modelos.
+
+### Trabajar con conjuntos de datos tabulares
+
+Puede leer los datos directamente desde un conjunto de datos tabular convirtiéndolo en un marco de datos Pandas o Spark:
+
+```python
+df = tab_ds.to_pandas_dataframe()
+# code to work with dataframe goes here, for example:
+print(df.head())
+```
+
+### Pasar un conjunto de datos tabular a un script de experimento
+
+Cuando necesite acceder a un conjunto de datos en un script de experimento, debe pasar el conjunto de datos al script. 
+Hay dos formas de hacerlo.
+
+### Utilizar un argumento de script para un conjunto de datos tabular
+
+Puede pasar un conjunto de datos tabular como argumento de script. Cuando adopta este enfoque, el argumento que recibe el 
+script es el ID único para el conjunto de datos en su espacio de trabajo. En el script, puede entonces obtener el espacio 
+de trabajo del contexto de ejecución y utilizarlo para recuperar el conjunto de datos por su ID.
+
+_ScriptRunConfig_:
+
+```python
+env = Environment('my_env')
+packages = CondaDependencies.create(conda_packages=['pip'],
+                                    pip_packages=['azureml-defaults',
+                                                  'azureml-dataprep[pandas]'])
+env.python.conda_dependencies = packages
+
+script_config = ScriptRunConfig(source_directory='my_dir',
+                                script='script.py',
+                                arguments=['--ds', tab_ds],
+                                environment=env)
+```
+_Script:_
+
+```python
+from azureml.core import Run, Dataset
+
+parser.add_argument('--ds', type=str, dest='dataset_id')
+args = parser.parse_args()
+
+run = Run.get_context()
+ws = run.experiment.workspace
+dataset = Dataset.get_by_id(ws, id=args.dataset_id)
+data = dataset.to_pandas_dataframe()
+```
+
+### Utilizar una entrada con nombre para un conjunto de datos tabular
+
+Como alternativa, puede pasar un conjunto de datos tabular como una entrada con **nombre**. En este enfoque, usted utiliza el 
+método **as_named_input** del conjunto de datos para especificar un nombre para el conjunto de datos. 
+
+A continuación, en el script, puede recuperar el conjunto de datos por su nombre de la colección **input_datasets** del contexto 
+de ejecución sin necesidad de recuperarlo del espacio de trabajo. Tenga en cuenta que si utiliza este enfoque, seguirá 
+necesitando incluir un argumento de script para el conjunto de datos, aunque en realidad no lo utilice para recuperar el 
+conjunto de datos.
+
+_ScriptRunConfig:_
+
+```python
+env = Environment('my_env')
+packages = CondaDependencies.create(conda_packages=['pip'],
+                                    pip_packages=['azureml-defaults',
+                                                  'azureml-dataprep[pandas]'])
+env.python.conda_dependencies = packages
+
+script_config = ScriptRunConfig(source_directory='my_dir',
+                                script='script.py',
+                                arguments=['--ds', tab_ds.as_named_input('my_dataset')],
+                                environment=env)
+```
+
+_Script:_
+
+```python
+from azureml.core import Run
+
+parser.add_argument('--ds', type=str, dest='ds_id')
+args = parser.parse_args()
+
+run = Run.get_context()
+dataset = run.input_datasets['my_dataset']
+data = dataset.to_pandas_dataframe()
+```
+
+### Trabajar con conjuntos de datos de archivos
+
+Cuando trabaje con un conjunto de datos de archivo, puede utilizar el método **to_path()** para devolver una lista de las 
+rutas de archivo encapsuladas por el conjunto de datos:
+
+```python
+for file_path in file_ds.to_path():
+    print(file_path)
+```
+
+### Pasar un conjunto de datos de archivo a un script de experimento
+
+Al igual que con un conjunto de datos Tabular, existen dos formas de pasar un conjunto de datos de archivo a un script. 
+Sin embargo, existen algunas diferencias clave en la forma de pasar el conjunto de datos.
+
+### Utilizar un argumento de script para un conjunto de datos de archivo
+
+Puede pasar un conjunto de datos de archivo como argumento de script. A diferencia de lo que ocurre con un conjunto de datos 
+tabular, debe especificar un modo para el argumento del conjunto de datos de archivo, que puede ser **as_download** o 
+**as_mount**. Esto proporciona un punto de acceso que el script puede utilizar para leer los archivos del conjunto de datos. 
+
+En la mayoría de los casos, debería utilizar **as_download**, que copia los archivos a una ubicación temporal en el 
+ordenador donde se está ejecutando el script. Sin embargo, si está trabajando con una gran cantidad de datos para los que 
+puede no haber suficiente espacio de almacenamiento en el ordenador del experimento, utilice **as_mount** para transmitir 
+los archivos directamente desde su fuente.
+
+_ScriptRunConfig:_
+
+```python
+env = Environment('my_env')
+packages = CondaDependencies.create(conda_packages=['pip'],
+                                    pip_packages=['azureml-defaults',
+                                                  'azureml-dataprep[pandas]'])
+env.python.conda_dependencies = packages
+
+script_config = ScriptRunConfig(source_directory='my_dir',
+                                script='script.py',
+                                arguments=['--ds', file_ds.as_download()],
+                                environment=env)
+```
+
+_Script:_
+
+```python
+from azureml.core import Run
+import glob
+
+parser.add_argument('--ds', type=str, dest='ds_ref')
+args = parser.parse_args()
+run = Run.get_context()
+
+imgs = glob.glob(args.ds_ref + "/*.jpg")
+```
+
+### Utilizar una entrada con nombre para un conjunto de datos de archivo
+
+También puede pasar un conjunto de datos de archivos como una entrada con **nombre**. En este enfoque, utilice el método
+**as_named_input** del conjunto de datos para especificar un nombre antes de especificar el modo de acceso. A continuación, 
+en el script, puede recuperar el conjunto de datos por su nombre de la colección **input_datasets** del contexto de ejecución 
+y leer los archivos desde allí. 
+
+Al igual que con los conjuntos de datos tabulares, si utiliza una entrada con nombre, deberá incluir un argumento de script 
+para el conjunto de datos, aunque en realidad no lo utilice para recuperar el conjunto de datos.
+
+_ScriptRunConfig:_
+
+```python
+env = Environment('my_env')
+packages = CondaDependencies.create(conda_packages=['pip'],
+                                    pip_packages=['azureml-defaults',
+                                                  'azureml-dataprep[pandas]'])
+env.python.conda_dependencies = packages
+
+script_config = ScriptRunConfig(source_directory='my_dir',
+                                script='script.py',
+                                arguments=['--ds', file_ds.as_named_input('my_ds').as_download()],
+                                environment=env)
+```
+
+_Script:_
+
+```python
+from azureml.core import Run
+import glob
+
+parser.add_argument('--ds', type=str, dest='ds_ref')
+args = parser.parse_args()
+run = Run.get_context()
+
+dataset = run.input_datasets['my_ds']
+imgs= glob.glob(dataset + "/*.jpg")
+```
+
 ## 4 Exercise Work with data
 [< Back to Local Index](#4-index)
+
+Ahora es su oportunidad de trabajar con datos en Azure Machine Learning.
+
+En este ejercicio, usted
+
+- Cargar datos en un almacén de datos
+- Crear conjuntos de datos
+- Utilizar conjuntos de datos para entrenar un modelo
+
+### Instrucciones
+
+1. Si aún no dispone de una suscripción a Azure, suscríbase a una prueba gratuita en
+https://azure.microsoft.com.
+
+2. Consulte el repositorio del ejercicio en
+https://aka.ms/mslearn-dp100.
+
+3. Si aún no lo ha hecho, complete el ejercicio Crear un espacio de trabajo de Azure Machine Learning para aprovisionar un espacio de trabajo de Azure Machine Learning, crear una instancia de cálculo y clonar los archivos necesarios.
+
+4. Complete el ejercicio Trabajar con datos.
+
+Como ya es costumbre, vamos a iniciar Corriendo nuestro: `Compute-instance` -> `Coursera-cpu`
+
+![1.png](ims%2FC4%2Fims%2F4%2F1.png)
+
+Y ahora vayamos al `Notebook` de: `06 - Work with Data.ipynb`
+
+> ### Nota:
+> El Notebook completo de esta clase está en: [06 - Work with Data.ipynb](ims%2FC4%2FNotebooks%2F06%20-%20Work%20with%20Data.ipynb)
+
+![2.png](ims%2FC4%2Fims%2F4%2F2.png)
+
+1. Como ya sabemos el primer paso sería abrir el Notebook de esta clase y verificar la versión de AML que estamos utilizando,
+   asi como crear nuestro `ws` a partir de nuestro `config.json`:
+
+   ![m1.gif](ims%2FC4%2Fgifs%2Fm1.gif)
+
+2. Ahora en lugar de crear un nuevo `cluster` vamos a aprovechar que en la sesión anterior, ya habiamos creado uno llamado: `coursera-clsuter`
+   el cuál sin problemas podemos volver a usar para esta clase:   
+   ![m2.gif](ims%2FC4%2Fgifs%2Fm2.gif)
+
+3. En el momento que creamos un `ws` se nos asigna por defecto un `datastore`al inicio cuando creamos el workspace: `mlw-dp100-labs`
+   se nos asignaron un par de datastores.
+   ![m3.gif](ims%2FC4%2Fgifs%2Fm3.gif)
+
+4. Esto tambien lo podemos ver en: `Data/datastores` y notar los mismos nombres de datastores
+
+   ![m4.gif](ims%2FC4%2Fgifs%2Fm4.gif)
+
+5. Ahora veamos como nuestro repositorio clonado de `GitHub` ya contiene una carpeta llamada `Data` la cuál contiene dos archivos
+   `.csv` sobre diabetes. Nuestro objetivo será sencillo: subir esos documentos a una carpeta llamada `diabetes-data` a nustro 
+   `datastore` por defecto, podemos validar que el proceso es éxitoso entrando al mismo:
+
+   ![m5.gif](ims%2FC4%2Fgifs%2Fm5.gif)
+
+6. Ahora, una cosa es que el archivo ya este en la "nube" ya éxiste dentro del datastore default, pero debemos convertirlo en un `tabular dataset`,
+   para eso de forma sencilla, apuntamos a nuestro `datastore` a la carpeta `diabetes-data` y podemos emplear todos los archivos que sean `.csv`
+
+   ![m6.gif](ims%2FC4%2Fgifs%2Fm6.gif)
+
+   De forma simple podemos ver las primeras 20 filas de nuestro ahora, tabular dataset 
+
+7. Sin embargo, no siempre nuestros datos tendrán forma tabular, a veces serán archivos, y lo que debemos construir entonces es un `file Dataset` 
+   que a diferencia del anterior lo que almacena es una lista que contiene la dirección a cada archivo:
+
+   ![m7.gif](ims%2FC4%2Fgifs%2Fm7.gif)
+
+8. Como ya hemos creado los datasets que vamos a utilizar uno `tabular` y otro del tipo `file` el siguiente paso es `registrarlos` para que esten
+   `disponibles` para nuestros futuros experimentos
+
+   ![m8.gif](ims%2FC4%2Fgifs%2Fm8.gif)
+
+9. Podemos observar que ahora que han sido registrados podemos enlistarlos y no solo eso, ahora también éxisten dentro de `Data`, podemos ver
+   cada uno de ellos de forma individual y ver como `Tabular` directamente nos regresa una vista del csv mientras que `File` nos regresa una vista previa de cada archivo.
+
+   ![m9.gif](ims%2FC4%2Fgifs%2Fm9.gif)
+
+10. **Entrenar un modelo con un dataset:**
+   
+   > Atención:
+   > 
+   > Este proceso puede parecer un poco rebuscado, pero en realidad NO es tan díficil como parece.  
+
+   En las clases anteriores, habíamos visto que para entrenar un modelo, teníamos que tener un archivo de `training.py` que es el que 
+   eventualmente crea un archivo .pkl, elige el modelo de scikit lear para entrenar, procesa los datos del dataframe etc.
+
+   Sabíamos que teníamos que crear una carpeta y en dicha carpeta tenía que éxistir tanto el archivo .csv del dataset que iba a entrenar
+   al modelo, como el código que generase el modelo. 
+   
+   Sin embargo, todo lo que hemos echo hasta ahora, ha sido para tener el dataset en la nube ya disponible en AZURE, entonces sería interesante
+   que para entrenar el modelo utilicemos información que ya está en la nube.
+
+   Lo que vamos a hacer entonces es que nuestro archivo de entrenamiento, contenga como parámetro un `alias` al dataset que vamos a utilizar que existe en AZURE. 
+
+   ![m10.gif](ims%2FC4%2Fgifs%2Fm10.gif)
+
+   _esto es como decirle que vas a utilizar un dataset a partir de su id_
+   ```python
+   parser.add_argument("--input-data", type=str, dest='training_dataset_id', help='training dataset')
+   ```
+   Sin embargo, en el proceso de `ScriptRunConfig`, NO es que pasemos literalmente un `id` al parámetro `--input-data` lo que hacemos es un poco más rebuscado. 
+
+   _primero creamos un apuntador al dataset que nos interesa_
+
+   ```python
+   # Get the training dataset
+   diabetes_ds = ws.datasets.get("diabetes dataset")
+   ```
+   
+   _después, ahora vamos a enviar el id del dataset, pero con un nombre `alias` que en este caso es `training_data`_
+
+   ```python
+   # Create a script config
+   script_config = ScriptRunConfig(source_directory=experiment_folder,
+                                 script='diabetes_training.py',
+                                 arguments = ['--regularization', 0.1, # Regularizaton rate parameter
+                                              '--input-data', diabetes_ds.as_named_input('training_data')],
+   ```
+
+   Ahora efectivamente podemos crear nuestro experimento: `experiment_name = 'mslearn-train-diabetes'` y entrenar al modelo :D
+
+11. Ahora, ya hemos corrido el experimento, pero le hemos puesto un nombre que ya habíamos utilizado en anteriores clases. Por eso cuando vayamos al apartado de `Jobs` veremos como
+   ya teníamos experimentos anteriores asociados al mismo nombre, Pero eso no es mayor problema, solamente tenemos que ir al experimento más reciente, y podemos notar sus métricas
+   y adicionalmente en `Code` observamos como es el código más reciente que hemos creado.
+   ![m11.gif](ims%2FC4%2Fgifs%2Fm11.gif)
+
+12. Ahora solo nos queda registrar el modelo, sabemos que podemos ponerle cualquier nombre, pero como a fin de cuentas todo lo que hemos hecho corresponde
+   a un mismo dataset y a un mismo experimento, le vamos a poner el mismo nombre del modelo, con lo cuál creará una versión 3 del modelo `diabetes_model`
+   podemos ir a la pestaña `Models` antes de correr el código para percatarnos de que antes no éxiste y después sí.
+   ![m12.gif](ims%2FC4%2Fgifs%2Fm12.gif)
+
+13. Ahora vamos a repetir básicamente el mismo proceso, pero en lugar de utilizar un `Tabular` dataset  estamos empleando un `File` dataset.
+
+   ![m13.gif](ims%2FC4%2Fgifs%2Fm13.gif)
+
+   Lo que más vale la pena destacar aqui. que es diferente al ejemplo pasado, es que ahora NO tuvimos directamente un `dataframe`, si no una lista que contiene los 
+   directorios a diferentes archivos .csv, por eso usamos `blob` para ver la ruta a cada archivo, y cada uno de forma independiente lo abrimos y usamos pd.concat para 
+   juntar todos en un solo dataframe:
+
+   ```python
+   # load the diabetes dataset
+   print("Loading Data...")
+   data_path = run.input_datasets['training_files'] # Get the training data path from the input
+   # (You could also just use args.dataset_folder if you don't want to rely on a hard-coded friendly name)
+   
+   # Read the files
+   all_files = glob.glob(data_path + "/*.csv")
+   diabetes = pd.concat((pd.read_csv(f) for f in all_files), sort=False)
+   ```
+   Básicamente, esa es la principal diferencia, para cada `f` dentro de `all_files` leímos el archivo csv y lo concatenamos para finalmente rear `diabetes
+
+14. Podemos correr el experimento con el mismo nombre, y observar los cambios.
+
+   ![m14.gif](ims%2FC4%2Fgifs%2Fm14.gif)
+
+15. Ahora, veamos los resultados del nuevo experimento, vemos como los resultados de AUC son ligeramente inferiores al experimento anterior.
+
+   ![m15.gif](ims%2FC4%2Fgifs%2Fm15.gif)
+
+16. Lo registramos para tener una versión 4 del modelo:
+
+   ![m16.gif](ims%2FC4%2Fgifs%2Fm16.gif)
+
+17. No olvidemos detener la instancia `compute` para que no nos cobren extra:
+
+   ![m17.gif](ims%2FC4%2Fgifs%2Fm17.gif)
+
 ## 4 Exercise quiz
 [< Back to Local Index](#4-index)
+
+![1.png](ims%2FC4%2Ftest%2F1.png)
+
 ## 4 Knowledge check
 [< Back to Local Index](#4-index)
+
+![q1.png](ims%2FC4%2Ftest%2Fq1.png)
+
+![q2.png](ims%2FC4%2Ftest%2Fq2.png)
+
+![q3.png](ims%2FC4%2Ftest%2Fq3.png)
+
 ## 4 Lesson summary
 [< Back to Local Index](#4-index)
+
+![1.png](ims%2FC4%2Fims%2F5%2F1.png)
+
+En esta lección, ha aprendido cómo trabajar con datos en Azure Machine Learning. Más concretamente, ha aprendido cómo crear y utilizar almacenes de datos, y crear y utilizar conjuntos de datos. 
+
+![2.png](ims%2FC4%2Fims%2F5%2F2.png)
+
+Para más detalles sobre cómo trabajar con datos en Azure Machine Learning, consulte la página web sobre acceso a datos en Azure Machine Learning, que está disponible en el sitio web de Microsoft. Puede encontrar un enlace a esta página web desde las lecturas adicionales al final de esta lección.
+
 ## 4 Additional Reading
 [< Back to Local Index](#4-index)
+
+**Introduction to datastores**
+
+[Secure data access in Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/concept-data#access-data-in-storage)
+**Working with data**
+
+[Secure data access in Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/concept-data#access-data-in-storage)
 
 # 5 Work with Compute in Azure Machine Learning
 
