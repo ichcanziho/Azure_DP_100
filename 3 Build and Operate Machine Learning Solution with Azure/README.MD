@@ -1979,28 +1979,594 @@ Para más detalles sobre cómo trabajar con datos en Azure Machine Learning, con
 
 ## 5 Lesson introduction
 [< Back to Local Index](#5-index)
+
+![1.png](ims%2FC5%2Fims%2F1%2F1.png)
+
+Hola. En esta lección, aprenderá a trabajar con computación en Azure Machine Learning. En Azure Machine Learning, los 
+científicos de datos pueden ejecutar experimentos basados en scripts que procesan datos, entrenan modelos de aprendizaje 
+automático y realizan otras tareas de ciencia de datos. 
+
+![2.png](ims%2FC5%2Fims%2F1%2F2.png)
+
+El contexto de ejecución de cada experimento consta de dos elementos. El **entorno para el script**, que incluye todos los 
+paquetes de los que depende el script y **el objetivo de computación** en el que se desplegará el entorno y ejecutará el script. 
+
+![3.png](ims%2FC5%2Fims%2F1%2F3.png)
+
+En esta lección, aprenderá a crear y utilizar entornos y a crear y utilizar objetivos de computación.
+
 ## 5 Environments in Azure Machine Learning
 [< Back to Local Index](#5-index)
+
+![1.png](ims%2FC5%2Fims%2F2%2F1.png)
+
+El código Python se ejecuta en el contexto de un entorno virtual que define la versión de el tiempo de ejecución de Python 
+que se utilizará, así como los paquetes instalados disponibles para el código. En la mayoría de las instalaciones de Python, 
+los paquetes se instalan y gestionan en entornos utilizando Conda o Pip.
+
+![2.png](ims%2FC5%2Fims%2F2%2F2.png)
+
+Para mejorar la portabilidad, solemos crear entornos en contenedores docker que a su vez se alojan en objetivos informáticos 
+como su ordenador de desarrollo, máquinas virtuales o clústeres en la Nube. 
+
+![3.png](ims%2FC5%2Fims%2F2%2F3.png)
+
+n general, Azure Machine Learning gestiona la creación de entornos y la instalación de paquetes por usted, normalmente a 
+través de la creación de contenedores docker. 
+
+![4.png](ims%2FC5%2Fims%2F2%2F4.png)
+
+Puede especificar los paquetes Conda o Pip que necesite, y hacer que Azure Machine Learning cree un entorno para el experimento. 
+
+![5.png](ims%2FC5%2Fims%2F2%2F5.png)
+
+En una solución de aprendizaje automático empresarial, donde los experimentos pueden ejecutarse en una variedad de contextos 
+informáticos, puede ser importante ser consciente de los entornos en los que se ejecuta el código de su experimento. Los 
+entornos están encapsulados por la clase environment, que puede utilizar para crear entornos y especificar la configuración 
+de tiempo de ejecución para un experimento. Puede hacer que Azure Machine Learning gestione la creación de entornos, y la 
+instalación de paquetes para definir un entorno, y luego registrarlo para su reutilización. 
+
+![6.png](ims%2FC5%2Fims%2F2%2F6.png)
+
+![7.png](ims%2FC5%2Fims%2F2%2F7.png)
+
+Alternativamente, puede gestionar sus propios entornos y registrarlos. Esto hace posible definir contextos de tiempo de 
+ejecución reutilizables y consistentes para sus experimentos, independientemente de dónde se ejecute el script del experimento.
+
 ## 5 Creating environments
 [< Back to Local Index](#5-index)
+
+Hay varias formas de crear entornos en Azure Machine Learning.
+
+### Creación de un entorno a partir de un archivo de especificación
+
+Puede utilizar un archivo de especificación Conda o pip para definir los paquetes necesarios en un entorno Python, y 
+utilizarlo para crear un objeto **Entorno**.
+
+Por ejemplo, podría guardar los siguientes ajustes de configuración de Conda en un archivo llamado **conda.yml**:
+
+```yaml
+name: py_env
+dependencies:
+  - numpy
+  - pandas
+  - scikit-learn
+  - pip:
+    - azureml-defaults
+```
+
+A continuación, podría utilizar el siguiente código para crear un entorno Azure Machine Learning a partir del archivo de 
+especificaciones guardado:
+
+```python
+from azureml.core import Environment
+
+env = Environment.from_conda_specification(name='training_environment',
+                                           file_path='./conda.yml')
+```
+
+### Creación de un entorno a partir de un entorno Conda existente
+
+Si tiene un entorno **Conda** existente definido en su estación de trabajo, puede utilizarlo para definir un entorno 
+Azure Machine Learning:
+
+```python
+from azureml.core import Environment
+
+env = Environment.from_existing_conda_environment(name='training_environment',
+                                                  conda_environment_name='py_env')
+```
+
+### Creación de un entorno especificando paquetes
+
+Puede definir un entorno especificando los paquetes Conda y pip que necesita en un objeto **CondaDependencies**, de esta forma:
+
+```python
+from azureml.core import Environment
+from azureml.core.conda_dependencies import CondaDependencies
+
+env = Environment('training_environment')
+deps = CondaDependencies.create(conda_packages=['scikit-learn','pandas','numpy'],
+                                pip_packages=['azureml-defaults'])
+env.python.conda_dependencies = deps
+```
+
+### Configuración de contenedores de entorno
+
+Normalmente, los entornos para experimentos script se crean en **contenedores**. El siguiente código configura un experimento 
+basado en script para alojar el entorno env creado previamente en un contenedor (esto es lo predeterminado a menos que 
+utilice un **DockerConfiguration** con un atributo **use_docker** de **False**, en cuyo caso el entorno se crea directamente 
+en el objetivo de computación)
+
+```python
+from azureml.core import Experiment, ScriptRunConfig
+from azureml.core.runconfig import DockerConfiguration
+
+docker_config = DockerConfiguration(use_docker=True)
+
+script_config = ScriptRunConfig(source_directory='my_folder',
+                                script='my_script.py',
+                                environment=env,
+                                docker_runtime_config=docker_config)
+```
+
+Azure Machine Learning utiliza una biblioteca de imágenes base para contenedores, eligiendo la base apropiada para el 
+objetivo de computación que especifique (por ejemplo, incluyendo soporte Cuda para computación basada en GPU). Si ha creado 
+imágenes de contenedor personalizadas y las ha registrado en un registro de contenedores, puede anular las imágenes base 
+predeterminadas y utilizar las suyas propias modificando los atributos de la propiedad **docker** del entorno.
+
+```python
+env.docker.base_image='my-base-image'
+env.docker.base_image_registry='myregistry.azurecr.io/myimage'
+```
+
+Alternativamente, puede hacer que se cree una imagen bajo demanda basada en la imagen base y en ajustes adicionales en un archivo dockerfile.
+
+```python
+env.docker.base_image = None
+env.docker.base_dockerfile = './Dockerfile'
+```
+
+Por defecto, Azure machine Learning gestiona las rutas de Python y las dependencias de los paquetes. Si su imagen ya incluye 
+una instalación de Python con las dependencias que necesita, puede anular este comportamiento estableciendo **python.user_managed_dependencies** 
+en **True** y estableciendo una ruta Python explícita para su instalación.
+
+```python
+env.python.user_managed_dependencies=True
+env.python.interpreter_path = '/opt/miniconda/bin/python'
+```
+
+### Registro y reutilización de entornos
+
+Después de haber creado un entorno, puede registrarlo en su espacio de trabajo y reutilizarlo para futuros experimentos 
+que tengan las mismas dependencias de Python.
+
+### Registrar un entorno
+
+Utilice el método **register** de un objeto **Environment** para registrar un entorno:
+
+```python
+env.register(workspace=ws)
+```
+
+Así puede ver los entornos registrados en su espacio de trabajo:
+
+```python
+from azureml.core import Environment
+
+env_names = Environment.list(workspace=ws)
+for env_name in env_names:
+    print('Name:',env_name)
+```
+
+### Recuperar y utilizar un entorno
+
+Puede recuperar un entorno registrado utilizando el método **get** de la clase **Environment** y, a continuación, asignarlo 
+a un **ScriptRunConfig**.
+
+Por ejemplo, el siguiente ejemplo de código recupera el entorno registrado **training_environment**, y lo asigna a una 
+configuración de ejecución de script:
+
+```python
+from azureml.core import Environment, ScriptRunConfig
+
+training_env = Environment.get(workspace=ws, name='training_environment')
+
+script_config = ScriptRunConfig(source_directory='my_folder',
+                                script='my_script.py',
+                                environment=training_env)
+```
+
+Cuando se ejecute un experimento basado en el estimador, Azure Machine Learning buscará un entorno existente que coincida 
+con la definición y, si no se encuentra ninguno, se creará un nuevo entorno basado en la especificación del entorno registrado.
+
 ## 5 Introduction to compute targets
 [< Back to Local Index](#5-index)
+
+![1.png](ims%2FC5%2Fims%2F3%2F1.png)
+
+Bienvenido a esta sección en la que aprenderá sobre los objetivos de computación. En Azure Machine Learning, los objetivos 
+de computación son ordenadores físicos o virtuales en los que se ejecutan los experimentos.
+
+![2.png](ims%2FC5%2Fims%2F3%2F2.png)
+
+Azure Machine Learning admite múltiples tipos de computación para la experimentación y el entrenamiento. Esto le permite 
+seleccionar el tipo de objetivo de computación más apropiado para sus necesidades particulares. Estos tipos incluyen: 
+computación local, clusters de computación y computación adjunta. Veamos ahora cada uno de ellos con un poco más de detalle.
+
+![3.png](ims%2FC5%2Fims%2F3%2F3.png)
+
+Puede especificar un objetivo de computación local para la mayoría de las tareas de procesamiento en Azure Machine Learning. 
+Esto ejecuta el experimento en el mismo objetivo de computación que el código utilizado para iniciar el experimento. 
+Esta puede ser su estación de trabajo física o una máquina virtual como una instancia de computación de Azure Machine 
+Learning en la que esté ejecutando un cuaderno. La computación local es generalmente una gran elección durante el desarrollo 
+y las pruebas, con volúmenes de datos de bajos a moderados.
+
+![4.png](ims%2FC5%2Fims%2F3%2F4.png)
+
+Para cargas de trabajo de experimentos con altos requisitos de escalabilidad, puede utilizar los clústeres de computación 
+de Azure Machine Learning, que son clústeres de múltiples nodos de máquinas virtuales que se escalan automáticamente hacia 
+arriba o hacia abajo para satisfacer la demanda. Esta es una forma rentable de ejecutar experimentos que necesitan manejar 
+grandes volúmenes de datos, o utilizar el procesamiento paralelo para distribuir la carga de trabajo y reducir el tiempo 
+que tarda en ejecutarse. 
+
+![5.png](ims%2FC5%2Fims%2F3%2F5.png)
+
+Si ya utiliza un entorno de computación basado en Azure para la ciencia de datos, como una máquina virtual o un clúster 
+Azure Databricks, puede adjuntarlo a su espacio de trabajo Azure Machine Learning y utilizarlo como objetivo de computación 
+para determinados tipos de carga de trabajo.
+
+![6.png](ims%2FC5%2Fims%2F3%2F6.png)
+
+Es importante señalar que en Azure Machine Learning Studio, puede crear otro tipo de computación denominada clústeres de 
+inferencia. Este tipo de computación representa un clúster de Azure Kubernetes Service, y sólo puede utilizarse para 
+desplegar modelos entrenados como servicios de inferencia. Exploraremos el despliegue más adelante, pero por ahora nos 
+centramos en la computación para experimentos y entrenamiento de modelos. 
+
+![7.png](ims%2FC5%2Fims%2F3%2F7.png)
+
+La capacidad de asignar ejecuciones de experimentos a objetivos de computación específicos le ayuda a implementar un ecosistema 
+de ciencia de datos flexible de las siguientes maneras. El código puede desarrollarse y probarse en computación local o 
+de bajo coste y luego trasladarse a computación más escalable para cargas de trabajo de producción.
+
+![8.png](ims%2FC5%2Fims%2F3%2F8.png)
+
+Puede ejecutar procesos individuales en el objetivo de computación que mejor se adapte a sus necesidades. Por ejemplo, 
+utilizando computación basada en CPU para entrenar modelos de aprendizaje profundo, y cambiando a computación basada 
+únicamente en CPU de menor coste para probar y registrar el modelo entrenado. 
+
+![9.png](ims%2FC5%2Fims%2F3%2F9.png)
+
+Una de las principales ventajas de la computación en nube es la capacidad de gestionar los costes pagando sólo por lo que se utiliza.
+
+![10.png](ims%2FC5%2Fims%2F3%2F10.png)
+
+En Azure Machine Learning, puede aprovechar este principio definiendo objetivos de computación que se inician bajo demanda 
+y se detienen automáticamente cuando ya no son necesarios, y se escalan automáticamente basándose en las necesidades de 
+procesamiento de la carga de trabajo.
+
 ## 5 Create compute targets
 [< Back to Local Index](#5-index)
+
+Las formas más comunes de crear o adjuntar un objetivo de cómputo son utilizar la página de **cómputo** en Azure Machine 
+Learning studio, o utilizar el SDK de Azure Machine Learning para aprovisionar objetivos de cómputo en código.
+
+### Creación de un objetivo de cálculo gestionado con el SDK
+
+Un objetivo de computación _gestionado_ es aquel que está gestionado por Azure Machine Learning, como un clúster de 
+computación de Azure Machine Learning.
+
+Para crear un clúster de computación de Azure Machine Learning, utilice la clase **azureml.core.compute.ComputeTarget** y 
+la clase **AmlCompute**, como en este ejemplo.
+
+```python
+from azureml.core import Workspace
+from azureml.core.compute import ComputeTarget, AmlCompute
+
+# Load the workspace from the saved config file
+ws = Workspace.from_config()
+
+# Specify a name for the compute (unique within the workspace)
+compute_name = 'aml-cluster'
+
+# Define compute configuration
+compute_config = AmlCompute.provisioning_configuration(vm_size='STANDARD_DS11_V2',
+                                                       min_nodes=0, max_nodes=4,
+                                                       vm_priority='dedicated')
+
+# Create the compute
+aml_cluster = ComputeTarget.create(ws, compute_name, compute_config)
+aml_cluster.wait_for_completion(show_output=True)
+```
+
+En este ejemplo, se creará un clúster con hasta cuatro nodos basado en la imagen de máquina virtual **STANDARD_DS12_v2.** 
+La prioridad para las máquinas virtuales (VM) se establece en **dedicada**, lo que significa que están reservadas para su 
+uso en este clúster (la alternativa es especificar prioridad baja, que tiene un coste **menor** pero significa que las VM 
+pueden ser adelantadas si una carga de trabajo de mayor prioridad requiere el cómputo).
+
+> Nota:
+> 
+> Para obtener una lista completa de las opciones de configuración de [AmlCompute](https://aka.ms/AA70zfq),
+> consulte la documentación del SDK de la clase [AmlCompute](https://aka.ms/AA70zfq).
+
+### Adjuntar un objetivo de computación no gestionado con el SDK
+
+Un objetivo de cálculo _no gestionado_ es aquel que se define y gestiona fuera del espacio de trabajo de Azure Machine Learning; 
+por ejemplo, una máquina virtual Azure o un clúster Azure Databricks.
+
+El código para adjuntar un objetivo de cómputo no gestionado existente es similar al código utilizado para crear un objetivo 
+de cómputo gestionado, excepto que debe utilizar el método **ComputeTarget.attach()** para adjuntar el cómputo existente 
+basándose en sus ajustes de configuración específicos del objetivo.
+
+Por ejemplo, el siguiente código puede utilizarse para adjuntar un clúster Azure Databricks existente:
+
+```python
+from azureml.core import Workspace
+from azureml.core.compute import ComputeTarget, DatabricksCompute
+
+# Load the workspace from the saved config file
+ws = Workspace.from_config()
+
+# Specify a name for the compute (unique within the workspace)
+compute_name = 'db_cluster'
+
+# Define configuration for existing Azure Databricks cluster
+db_workspace_name = 'db_workspace'
+db_resource_group = 'db_resource_group'
+db_access_token = '1234-abc-5678-defg-90...'
+db_config = DatabricksCompute.attach_configuration(resource_group=db_resource_group,
+                                                   workspace_name=db_workspace_name,
+                                                   access_token=db_access_token)
+
+# Create the compute
+databricks_compute = ComputeTarget.attach(ws, compute_name, db_config)
+databricks_compute.wait_for_completion(True)
+```
+
+### Comprobación de un objetivo de computación existente
+
+En muchos casos, querrá comprobar la existencia de un objetivo de cómputo, y sólo crear uno nuevo si no hay ya uno con 
+el nombre especificado. Para lograrlo, puede capturar la excepción **ComputeTargetException**, de la siguiente manera:
+
+```python
+from azureml.core.compute import ComputeTarget, AmlCompute
+from azureml.core.compute_target import ComputeTargetException
+
+compute_name = "aml-cluster"
+
+# Check if the compute target exists
+try:
+    aml_cluster = ComputeTarget(workspace=ws, name=compute_name)
+    print('Found existing cluster.')
+except ComputeTargetException:
+    # If not, create it
+    compute_config = AmlCompute.provisioning_configuration(vm_size='STANDARD_DS11_V2',
+                                                           max_nodes=4)
+    aml_cluster = ComputeTarget.create(ws, compute_name, compute_config)
+
+aml_cluster.wait_for_completion(show_output=True)
+```
+
+> **Más información:** Para obtener más información sobre la creación de objetivos de cálculo, consulte
+[Configurar y utilizar objetivos de cálculo para el entrenamiento de modelos](https://aka.ms/AA70rrg)
+ en la documentación de Azure Machine Learning.
+
 ## 5 Use compute targets
 [< Back to Local Index](#5-index)
+
+Después de haber creado o adjuntado objetivos de cálculo en su espacio de trabajo, puede utilizarlos para ejecutar cargas 
+de trabajo específicas; como experimentos.
+
+Para utilizar un objetivo de cálculo concreto, puede especificarlo en el parámetro adecuado para una configuración de 
+ejecución de experimentos o un estimador. Por ejemplo, el siguiente código configura un estimador para que utilice el 
+objetivo de cálculo denominado _aml-cluster_:
+
+```python
+from azureml.core import Environment, ScriptRunConfig
+
+compute_name = 'aml-cluster'
+
+training_env = Environment.get(workspace=ws, name='training_environment')
+
+script_config = ScriptRunConfig(source_directory='my_dir',
+                                script='script.py',
+                                environment=training_env,
+                                compute_target=compute_name)
+```
+
+Cuando se envíe un experimento, la ejecución se pondrá en cola mientras se inicia el objetivo de cálculo _aml-cluster_ y 
+se crea en él el entorno especificado, y luego la ejecución se procesará en el entorno de cálculo.
+
+En lugar de especificar el nombre del objetivo de cómputo, puede especificar un objeto _ComputeTarget_, así:
+
+```python
+from azureml.core import Environment, ScriptRunConfig
+from azureml.core.compute import ComputeTarget
+
+compute_name = "aml-cluster"
+
+training_cluster = ComputeTarget(workspace=ws, name=compute_name)
+
+training_env = Environment.get(workspace=ws, name='training_environment')
+
+script_config = ScriptRunConfig(source_directory='my_dir',
+                                script='script.py',
+                                environment=training_env,
+                                compute_target=training_cluster)
+```
+
 ## 5 Exercise Work with Compute Contexts
 [< Back to Local Index](#5-index)
+
+Ahora es su oportunidad de trabajar con entornos y objetivos de computación en Azure Machine Learning.
+
+En este ejercicio, usted podrá:
+
+- Crear y utilizar un entorno.
+
+- Crear y utilizar un objetivo de cómputo.
+
+### Instrucciones
+
+Siga estas instrucciones para completar el ejercicio.
+
+1. Si aún no tiene una suscripción a Azure, regístrese para una prueba gratuita en
+https://azure.microsoft.com.
+
+2. Consulte el repositorio del ejercicio en
+https://aka.ms/mslearn-dp100.
+
+3. Si aún no lo ha hecho, complete el ejercicioCrear un espacio de trabajo de Azure Machine Learning para aprovisionar un espacio de trabajo de Azure Machine Learning, crear una instancia de computación y clonar los archivos necesarios.
+
+4. Complete el ejercicio **Trabajar con computación**.
+
+### Notebook
+
+Como ya es costumbre, vamos a iniciar Corriendo nuestro: `Compute-instance` -> `Coursera-cpu`
+
+> ### Nota
+> El notebook de esta clase está en: [07 - Work with Compute.ipynb](ims%2FC5%2FNotebooks%2F07%20-%20Work%20with%20Compute.ipynb)
+
+![1.png](ims%2FC4%2Fims%2F4%2F1.png)
+
+1. Empezamos con lo básico: creamos nuestro `ws` a partir de nuestra configuración y checamos la versión de AML que usamos
+
+   ![m1.gif](ims%2FC5%2Fgifs%2Fm1.gif)
+
+2. En el notebook anterior ya habiamos registrado un `tabular dataset` de `diabetes dataset`, el cuál podemos verificar en la pestaña de `Data`
+   como ya éxiste, entonces sol estamos comprobando que esté registrado, sino entonces lo hubieramos creado con ese código.
+   ![m2.gif](ims%2FC5%2Fgifs%2Fm2.gif)
+
+3. Como ya es común, vamos a crear una nueva carpeta `diabetes_training_logistic` para entrenar a nuestro modelo de confianza `logistic_regerssion`
+   para este punto ya somos conscientes de como se usa un script con parámetros y que uno de esos parámetros sea el `dataset` y que tenga un:
+   `alias` en este caso llamado `training_data
+   ![m3.gif](ims%2FC5%2Fgifs%2Fm3.gif)
+
+4. Ahora, vamos a crear un archivo `.yml` (env.yml) que contiene la versión de python a utilizar así como los paquetes `conda` a instalar y los paquetes `pip`
+   > Nota: no queda claro porque algunos paquetes son con Conda y otros con Pip
+   ![m4.gif](ims%2FC5%2Fgifs%2Fm4.gif)
+
+5. Creamos un `experiment_env` a partir de nuestro `env.yml` que esta en la carpeta `diabetes_training_logistic` y vamos a hacer que la gestion de paquetes NO sea por el contenedor Docker, sino por AZURE.
+
+   ![m5.gif](ims%2FC5%2Fgifs%2Fm5.gif)
+
+6. Con el environment creado ya podemos correr el `RunScriptConfig`, apuntamos al folder, al archivo `.py` obtenemos con un `get` el `diabetes dataset` que esta cargado en Azure, 
+   le ponemos como `alias`: `training dataset`, especificamos el `.env` que ya creamos, y finalmente, usamos un `contenedor Docker`
+
+   ![m6.gif](ims%2FC5%2Fgifs%2Fm6.gif)
+
+7. **Veamos los resultados:**
+   Podemos ver los resultados de ACU y ACC y en `Jobs` podemos ver nuestro último experimento, con sus métricas e imágenes creadas y también en outputs el modelo `.pkl` generado y en `code` también vemos
+   NO solo el archivo .py sino también el archivo `.yml` que usamos para crear el `.env`
+   ![m7.gif](ims%2FC5%2Fgifs%2Fm7.gif)
+
+8. Vamos a registrar nuestro nuevo `custom environment` para después usarlo en posteriores proyectos:
+
+   ![m8.gif](ims%2FC5%2Fgifs%2Fm8.gif)  
+   
+   Podemos observar como realmente nuestro `environment` se ha registrado con éxito :D
+
+9. Nuestro objetivo ahora es crear un nuevo experimento, usar el mismo dataset PERO utilizar un nuevo modelo: `DecisionTreeClassifier`
+   Ya conocemos el path: crear un folder y crear el `training.py` y poner como argumento el dataset. Al utilizar un `DTC` NO pasamos el parámetro `--regularization` porque NO tiene ese parámetro.
+   ![m9.gif](ims%2FC5%2Fgifs%2Fm9.gif)
+
+10. El objetivo es utilizar `Environment.get(ws, nombre)` para obtener el `environment` que ya creamos anteriormente. De ahí en fuera todo igual
+
+   ![m10.gif](ims%2FC5%2Fgifs%2Fm10.gif)
+
+11. Veamos los resultados del modelo. Ahora nuestro ACC ha aumentado ligeramente a 0.89 y AUC a 0.88 
+
+   ![m11.gif](ims%2FC5%2Fgifs%2Fm11.gif)
+
+12. Vamos a asegurarnos de enlistar los ambientes registrados y ver como sí éxiste `experiment env`
+
+   ![m12.gif](ims%2FC5%2Fgifs%2Fm12.gif)
+
+13. Vamos a crear un nuevo `Cluster`, esto ya lo hemos hecho antes, de echo lo hicimos para crear nuestro `coursera-cluster` ahora hacemos lo mismo para crear un `test-cluster` 
+
+   ![m13.gif](ims%2FC5%2Fgifs%2Fm13.gif)
+
+14. Lo interesante NO es solo checar que hicimos un nuevo `cluster` sino ahora utilizarlo explícitamente para correr un nuevo experimento.
+
+   ![m14.gif](ims%2FC5%2Fgifs%2Fm14.gif)
+
+15. vemos como ahora hemos declarado explícitamente nuestro `compute target`
+
+   ![m15.gif](ims%2FC5%2Fgifs%2Fm15.gif)
+
+16. Efectivamente el `cluster` está corriendo:
+
+   ![m16.gif](ims%2FC5%2Fgifs%2Fm16.gif)
+
+17. Finalmente, veamos los resultados del experimento y registremos nuestro más reciente modelo:
+
+   ![m17.gif](ims%2FC5%2Fgifs%2Fm17.gif)
+
+18. Adicionalmente, podemos ver algo muy interesante:
+   Podemos comprobar como hemos utilizado específicamente el `custom environment` que hemos creado anteriormente.
+   ![m18.gif](ims%2FC5%2Fgifs%2Fm18.gif)
+
+19. Como paso final, debemos detener nuestro `compute instance`:
+
+   ![1.png](ims%2FC5%2Fgifs%2F1.png)
+
+
 ## 5 Exercise quiz
 [< Back to Local Index](#5-index)
+
+![0.png](ims%2FC5%2Ftest%2F0.png)
+
 ## 5 Knowledge check
 [< Back to Local Index](#5-index)
+
+![q1.png](ims%2FC5%2Ftest%2Fq1.png)
+
+![q2.png](ims%2FC5%2Ftest%2Fq2.png)
+
+![q3.png](ims%2FC5%2Ftest%2Fq3.png)
+
+![q4.png](ims%2FC5%2Ftest%2Fq4.png)
+
 ## 5 Test prep
 [< Back to Local Index](#5-index)
+
+![w1.png](ims%2FC5%2Ftest%2Fw1.png)
+
+![w2.png](ims%2FC5%2Ftest%2Fw2.png)
+
+![w3.png](ims%2FC5%2Ftest%2Fw3.png)
+
+![w4.png](ims%2FC5%2Ftest%2Fw4.png)
+
+![w5.png](ims%2FC5%2Ftest%2Fw5.png)
+
+![w6.png](ims%2FC5%2Ftest%2Fw6.png)
+
 ## 5 Lesson summary
 [< Back to Local Index](#5-index)
+
+![1.png](ims%2FC5%2Fims%2F4%2F1.png)
+
+En este módulo, ha aprendido cómo trabajar con computación en Azure Machine Learning. Más concretamente, ha aprendido cómo crear y utilizar entornos, y crear y utilizar objetivos de computación.
+
+![2.png](ims%2FC5%2Fims%2F4%2F2.png)
+
+Para obtener más información sobre entornos en Azure Machine Learning, consulte reutilizar entornos para la formación y el despliegue mediante Azure Machine Learning.
+
+![3.png](ims%2FC5%2Fims%2F4%2F3.png)
+
+Para más información sobre los objetivos de computación en Azure Machine Learning, consulte qué son los objetivos de computación en Azure Machine Learning. Puede encontrar un enlace a estos recursos desde las lecturas adicionales al final de esta lección.
+
 ## 5 Additional reading
 [< Back to Local Index](#5-index)
+
+**Environments in Azure Machine Learning** 
+
+[Reuse environments for training and deployment by using Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-use-environments)
+
+**Compute targets in Azure Machine Learning**
+
+[What are compute targets in Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/concept-compute-target)
 
 # 6 Orchestrate Machine Learning with Pipelines
 
