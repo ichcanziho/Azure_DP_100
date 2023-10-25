@@ -231,7 +231,6 @@ Mientras se prepara para el examen o trabaja en la consecución de sus objetivos
 
 Aproveche el entorno de aprendizaje práctico que le proporcionan los ejercicios. Podrá obtener un refuerzo sustancial de su aprendizaje mediante la aplicación paso a paso de sus conocimientos.
 
-
 # 2 Introduction to the Azure Machine Learning SDK
 
 ## 2 INDEX:
@@ -1332,7 +1331,6 @@ En este módulo, ha aprendido a entrenar un modelo de aprendizaje automático co
 ha aprendido a utilizar un script, run Config para ejecutar un script de entrenamiento de modelos como un experimento de 
 aprendizaje automático de Azure. Cree scripts de restricción de parámetros reutilizables y modelos entrenados registrados.
 
-
 # 4 Work with Data in Azure Machine Learning
 
 ## 4 INDEX
@@ -1958,7 +1956,6 @@ Para más detalles sobre cómo trabajar con datos en Azure Machine Learning, con
 [Secure data access in Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/concept-data#access-data-in-storage)
 
 # 5 Work with Compute in Azure Machine Learning
-
 
 ## 5 INDEX
 
@@ -2591,30 +2588,635 @@ Para más información sobre los objetivos de computación en Azure Machine Lear
 
 ## 6 Lesson introduction
 [< Back to Local Index](#6-index)
+
+![1.png](ims%2FC6%2Fims%2F1%2F1.png)
+
+Hola. En Azure Machine Learning, usted ejecuta cargas de trabajo como experimentos, pero aprovechando los activos de 
+datos y los recursos de computación. En un proceso de ciencia de datos empresarial, generalmente querrá separar el proceso 
+general en tareas individuales y orquestar estas tareas como Pipelines de pasos conectados.
+
+![2.png](ims%2FC6%2Fims%2F1%2F2.png)
+
+Los pipelines son clave para implementar una solución eficaz de aprendizaje automático operacionalización o MLOps en Azure. 
+Explorará cómo definirlos y ejecutarlos en este módulo. 
+
+![3.png](ims%2FC6%2Fims%2F1%2F3.png)
+
+Es importante tener en cuenta que el término pipeline se utiliza ampliamente en el aprendizaje automático, a menudo con 
+diferentes significados. Por ejemplo, en Scikit-learn, puede definir pipelines que combinen transformaciones de 
+preprocesamiento de datos con un algoritmo de entrenamiento, y en Azure DevOps, puede definir un pipeline de construcción 
+o lanzamiento para realizar las tareas de construcción y configuración necesarias para entregar software. Este módulo se 
+centra en pipelines de aprendizaje automático de Azure, que encapsula pasos que pueden ejecutarse como un experimento.
+
+![4.png](ims%2FC6%2Fims%2F1%2F4.png)
+
+Sin embargo, es importante tener en mente que es perfectamente factible tener un canal Azure DevOps con una tarea que inicie 
+un canal Azure Machine Learning, que a su vez incluya un paso que entrene un modelo que esté basado en un canal Scikit-learn. 
+
+![5.png](ims%2FC6%2Fims%2F1%2F5.png)
+
+En esta lección, aprenderá a crear un canal de Azure Machine Learning, publicar en canal de Azure Machine Learning, y 
+programar un canal de Azure Machine Learning.
+
 ## 6 Introduction to pipelines
 [< Back to Local Index](#6-index)
+
+![1.png](ims%2FC6%2Fims%2F2%2F1.png)
+
+En el aprendizaje automático de Azure, una canalización es un tipo de flujo de trabajo, es un flujo de trabajo de tareas 
+de aprendizaje automático en el que cada tarea se implementa como un paso. 
+
+![2.png](ims%2FC6%2Fims%2F2%2F2.png)
+
+Estos pasos pueden organizarse secuencialmente o en paralelo, lo que le permite construir una sofisticada lógica de flujo 
+para orquestar las operaciones de aprendizaje automático.
+
+![3.png](ims%2FC6%2Fims%2F2%2F3.png)
+
+Cada paso puede ejecutarse en un objetivo de cómputo específico, lo que hace posible combinar diferentes tipos de 
+procesamiento según sea necesario para lograr un objetivo general. 
+
+![4.png](ims%2FC6%2Fims%2F2%2F4.png)
+
+Una canalización puede ejecutarse como un proceso ejecutando la canalización como un experimento. Entonces, cada paso de 
+la canalización se ejecuta en su objetivo de computación asignado como parte de la ejecución general del experimento.
+
+![5.png](ims%2FC6%2Fims%2F2%2F5.png)
+
+Una canalización de aprendizaje automático de Azure consta de uno o más pasos que realizan tareas. Existen muchos tipos 
+de pasos admitidos por las canalizaciones de aprendizaje automático de Azure, cada uno con su propio propósito especializado 
+y opciones de configuración. 
+
+![6.png](ims%2FC6%2Fims%2F2%2F6.png)
+
+Los tipos comunes de pasos en una canalización de aprendizaje automático de Azure incluyen:
+
+- **PythonScriptStep**, ejecuta un script Python especificado. 
+- **DataTransferStep**, utiliza la fábrica de datos de Azure para copiar datos entre almacenes de datos. 
+- **DataBrickStep**, ejecuta un script de cuaderno o un jar compilado en un clúster de ladrillos de datos. 
+- **AdlaStep**, ejecuta un trabajo de secuela de uso en Azure Data lake analytics. 
+- **ParallelRunStep**, ejecuta un script Python como una tarea distribuida en múltiples nodos de computación. 
+
+![7.png](ims%2FC6%2Fims%2F2%2F7.png)
+
+Es importante tener en cuenta que para obtener una lista completa de los tipos de pasos soportados, consulte 
+[Azure.pipeline.steps](https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps?view=azure-ml-py) package documentation. Puede encontrar un enlace a este documento en las lecturas adicionales al final de esta lección. 
+
+![8.png](ims%2FC6%2Fims%2F2%2F8.png)
+
+
+![9.png](ims%2FC6%2Fims%2F2%2F9.png)
+
+Para crear una canalización, primero debe definir cada paso y después crear una canalización que incluya los pasos. 
+
+![10.png](ims%2FC6%2Fims%2F2%2F10.png)
+
+La configuración específica de cada paso depende del tipo de paso, por ejemplo, puede utilizar un código que defina dos 
+pasos de script Python para preparar los datos y luego entrenar un modelo. 
+
+![11.png](ims%2FC6%2Fims%2F2%2F11.png)
+
+Una vez definidos estos pasos, puede asignarlos a una canalización y ejecutarla como un experimento.
+
 ## 6 Pass data between pipeline steps
 [< Back to Local Index](#6-index)
+
+![1.png](ims%2FC6%2Fims%2F3%2F1.png)
+
+A menudo, una canalización incluye al menos un paso que depende de la salida de un paso anterior. 
+![2.png](ims%2FC6%2Fims%2F3%2F2.png)
+
+Por ejemplo, puede utilice un paso que desee que un script de Python preprocesar algunos datos, que luego deben usarse en 
+un paso posterior para entrenar un modelo.
+
+
+![3.png](ims%2FC6%2Fims%2F3%2F3.png)
+
+El **OutputFileDatasetConfig** es un conjunto de datos especial. Es el conjunto de datos que hace referencia a una ubicación 
+en un almacén de datos para el almacenamiento provisional de datos y crea una dependencia de datos entre los pasos de la canalización.
+
+![4.png](ims%2FC6%2Fims%2F3%2F4.png)
+
+Puede ver un archivo de salida objeto de configuración del conjunto de datos como almacén intermediario para los datos que 
+deben pasarse de un paso a un paso posterior.
+
+
+![5.png](ims%2FC6%2Fims%2F3%2F5.png)
+
+Como se recomienda, puede usar **OutputFileDatasetConfig** para pasar datos entre los pasos. Para ello, debe 
+
+- Definir un archivo de salida con nombre objeto de configuración de conjunto de datos que hace referencia a ubicación en un almacén de datos.
+  (Si no es explícito Se especifica el almacén de datos, se utiliza el almacén de datos predeterminado.)
+- Pase el archivo de salida el objeto de configuración del conjunto de datos como argumento de script en pasos que ejecutan 
+scripts.
+- Incluya código en ellos scripts para escribir en el conjunto de datos del archivo de salida argumento de configuración 
+como salida o lectura como entrada.
+
+  
+![6.png](ims%2FC6%2Fims%2F3%2F6.png)
+
+Por ejemplo, puedes usar código que defina un **OutputFileDatasetConfig**  para los datos preprocesados. 
+
+![7.png](ims%2FC6%2Fims%2F3%2F7.png)
+
+En los propios scripts, puede obtener una referencia **OutputFileDatasetConfig**  el objeto a partir del argumento del 
+script y utilice es como una carpeta local. Puede acceder al versión completa de este código desde la lectura al final 
+de esta lección.
+
 ## 6 OutputFileDatasetConfig Step Inputs and Outputs
 [< Back to Local Index](#6-index)
+
+Para utilizar un objeto **OutputFileDatasetConfig** para pasar datos entre pasos, debes:
+
+1. Definir un objeto **OutputFileDatasetConfig** con nombre que haga referencia a una ubicación en un almacén de datos. 
+Si no se especifica un almacén de datos explícito, se usará el almacén de datos predeterminado.
+
+2. Pasar el objeto **OutputFileDatasetConfig** como argumento de script en los pasos que ejecuten scripts.
+
+3. Incluir código en esos scripts para escribir en el objeto **OutputFileDatasetConfig** como salida o leerlo como entrada.
+
+Por ejemplo, el siguiente código define un objeto **OutputFileDatasetConfig** para los datos preprocesados que deben 
+pasarse entre los pasos.
+
+```python
+from azureml.data import OutputFileDatasetConfig
+from azureml.pipeline.steps import PythonScriptStep, EstimatorStep
+
+# Get a dataset for the initial data
+raw_ds = Dataset.get_by_name(ws, 'raw_dataset')
+
+# Define a PipelineData object to pass data between steps
+data_store = ws.get_default_datastore()
+prepped_data = OutputFileDatasetConfig('prepped')
+
+# Step to run a Python script
+step1 = PythonScriptStep(name = 'prepare data',
+                         source_directory = 'scripts',
+                         script_name = 'data_prep.py',
+                         compute_target = 'aml-cluster',
+                         # Script arguments include PipelineData
+                         arguments = ['--raw-ds', raw_ds.as_named_input('raw_data'),
+                                      '--out_folder', prepped_data])
+
+# Step to run an estimator
+step2 = PythonScriptStep(name = 'train model',
+                         source_directory = 'scripts',
+                         script_name = 'train_model.py',
+                         compute_target = 'aml-cluster',
+                         # Pass as script argument
+                         arguments=['--training-data', prepped_data.as_input()])
+```
+
+Dentro de los propios scripts, puedes obtener una referencia al objeto **OutputFileDatasetConfig** a partir del argumento 
+de script y usarlo como si fuera una carpeta local.
+
+```python
+# code in data_prep.py
+from azureml.core import Run
+import argparse
+import os
+
+# Get the experiment run context
+run = Run.get_context()
+
+# Get arguments
+parser = argparse.ArgumentParser()
+parser.add_argument('--raw-ds', type=str, dest='raw_dataset_id')
+parser.add_argument('--out_folder', type=str, dest='folder')
+args = parser.parse_args()
+output_folder = args.folder
+
+# Get input dataset as dataframe
+raw_df = run.input_datasets['raw_data'].to_pandas_dataframe()
+
+# code to prep data (in this case, just select specific columns)
+prepped_df = raw_df[['col1', 'col2', 'col3']]
+
+# Save prepped data to the PipelineData location
+os.makedirs(output_folder, exist_ok=True)
+output_path = os.path.join(output_folder, 'prepped_data.csv')
+prepped_df.to_csv(output_path)
+```
+
 ## 6 Reuse pipeline steps
 [< Back to Local Index](#6-index)
+
+Los **pipelines** con múltiples pasos de larga ejecución pueden tardar un tiempo considerable en completarse. 
+Azure Machine Learning incluye algunas funciones de almacenamiento en caché y reutilización para reducir este tiempo.
+
+### Gestión de la reutilización de la salida de pasos
+
+Por defecto, la salida del paso de una ejecución anterior del pipeline se reutiliza sin necesidad de volver a ejecutar el 
+paso siempre que el script, el directorio de origen y otros parámetros del paso no hayan cambiado. La reutilización de 
+pasos puede reducir el tiempo que se tarda en ejecutar una canalización, pero puede dar lugar a resultados obsoletos cuando 
+no se han tenido en cuenta los cambios en las fuentes de datos posteriores.
+
+Para controlar la reutilización de un paso individual, puede establecer el parámetro **allow_reuse** en la configuración 
+del paso, de la siguiente manera:
+
+```python
+step1 = PythonScriptStep(name = 'prepare data',
+                         source_directory = 'scripts',
+                         script_name = 'data_prep.py',
+                         compute_target = 'aml-cluster',
+                         runconfig = run_config,
+                         inputs=[raw_ds.as_named_input('raw_data')],
+                         outputs=[prepped_data],
+                         arguments = ['--folder', prepped_data]),
+                         # Disable step reuse
+                         allow_reuse = False)
+```
+
+### Forzar la ejecución de todos los pasos
+
+Cuando tenga varios pasos, puede forzar la ejecución de todos ellos independientemente de la configuración de reutilización 
+individual estableciendo el parámetro **regenerate_outputs** al enviar el experimento de canalización:
+
+```python
+pipeline_run = experiment.submit(train_pipeline, regenerate_outputs=True)
+```
+
 ## 6 Publish pipelines
 [< Back to Local Index](#6-index)
+
+Después de haber creado una canalización, puede publicarla para crear un punto final REST a través del cual se pueda ejecutar 
+la canalización bajo demanda.
+
+### Publicación de una canalización
+
+Para publicar una canalización, puede llamar a su método **publish**, como se muestra aquí:
+
+```python
+published_pipeline = pipeline.publish(name='training_pipeline',
+                                          description='Model training pipeline',
+                                          version='1.0')
+```
+
+Alternativamente, puede llamar al método de publicación en una ejecución exitosa de la canalización:
+
+```python
+# Get the most recent run of the pipeline
+pipeline_experiment = ws.experiments.get('training-pipeline')
+run = list(pipeline_experiment.get_runs())[0]
+
+# Publish the pipeline from the run
+published_pipeline = run.publish_pipeline(name='training_pipeline',
+                                          description='Model training pipeline',
+                                          version='1.0')
+```
+
+Una vez publicada la canalización, puede verla en Azure Machine Learning studio. También puede determinar el URI 
+de su endpoint de esta forma:
+
+```python
+rest_endpoint = published_pipeline.endpoint
+print(rest_endpoint)
+```
+
+### Uso de una canalización publicada
+
+Para iniciar un endpoint publicado, realice una solicitud HTTP a su endpoint REST, pasando una cabecera de autorización 
+con un token para un service principal con permiso para ejecutar el pipeline, y una carga útil JSON especificando el 
+nombre del experimento. La canalización se ejecuta de forma asíncrona, por lo que la respuesta de una llamada 
+REST exitosa incluye el ID de ejecución. Puede utilizarlo para realizar un seguimiento de la ejecución en Azure Machine 
+Learning studio.
+
+Por ejemplo, el siguiente código Python realiza una solicitud REST para ejecutar una canalización y muestra el ID de 
+ejecución devuelto.
+
+```python
+import requests
+
+response = requests.post(rest_endpoint,
+                         headers=auth_header,
+                         json={"ExperimentName": "run_training_pipeline"})
+run_id = response.json()["Id"]
+print(run_id)
+```
+
 ## 6 Use pipelines parameters
 [< Back to Local Index](#6-index)
+
+Puede aumentar la flexibilidad de una canalización definiendo parámetros.
+
+### Definición de parámetros para una canalización
+
+Para definir parámetros para una canalización, cree un objeto **PipelineParameter** para cada parámetro y especifique cada 
+parámetro en al menos un paso.
+
+Por ejemplo, puede utilizar el siguiente código para incluir un parámetro para una tasa de regularización en el script 
+utilizado por un estimador:
+
+```python
+from azureml.pipeline.core.graph import PipelineParameter
+
+reg_param = PipelineParameter(name='reg_rate', default_value=0.01)
+
+...
+
+step2 = PythonScriptStep(name = 'train model',
+                         source_directory = 'scripts',
+                         script_name = 'data_prep.py',
+                         compute_target = 'aml-cluster',
+                         # Pass parameter as script argument
+                         arguments=['--in_folder', prepped_data,
+                                    '--reg', reg_param],
+                         inputs=[prepped_data])
+```
+
+> Nota
+>
+> Debe definir los parámetros para una canalización antes de publicarla.
+
+### Ejecutar una canalización con un parámetro
+
+Después de publicar una canalización parametrizada, puede pasar valores de parámetros en la carga útil JSON para la 
+interfaz REST:
+
+```python
+response = requests.post(rest_endpoint,
+                         headers=auth_header,
+                         json={"ExperimentName": "run_training_pipeline",
+                               "ParameterAssignments": {"reg_rate": 0.1}})
+```
+
 ## 6 Schedule pipelines
 [< Back to Local Index](#6-index)
+
+Una vez publicada una canalización, puede iniciarla a petición a través de su punto final REST, o puede hacer que se 
+ejecute automáticamente en función de una programación periódica o en respuesta a actualizaciones de datos.
+
+### Programación de una canalización para intervalos periódicos
+
+Para programar una canalización para que se ejecute a intervalos periódicos, debe definir una **ScheduleRecurrence** que 
+determine la frecuencia de ejecución, y utilizarla para crear una **Schedule**.
+
+Por ejemplo, el siguiente código programa una ejecución diaria de una canalización publicada.
+
+```python
+from azureml.pipeline.core import ScheduleRecurrence, Schedule
+
+daily = ScheduleRecurrence(frequency='Day', interval=1)
+pipeline_schedule = Schedule.create(ws, name='Daily Training',
+                                        description='trains model every day',
+                                        pipeline_id=published_pipeline.id,
+                                        experiment_name='Training_Pipeline',
+                                        recurrence=daily)
+```
+
+### Activar la ejecución de una canalización cuando cambian los datos
+
+Para programar una canalización para que se ejecute cada vez que cambien los datos, debe crear un **Schedule** que supervise 
+una ruta especificada en un almacén de datos, de la siguiente manera:
+
+```python
+from azureml.core import Datastore
+from azureml.pipeline.core import Schedule
+
+training_datastore = Datastore(workspace=ws, name='blob_data')
+pipeline_schedule = Schedule.create(ws, name='Reactive Training',
+                                    description='trains model on data change',
+                                    pipeline_id=published_pipeline_id,
+                                    experiment_name='Training_Pipeline',
+                                    datastore=training_datastore,
+                                    path_on_datastore='data/training')
+```
+
 ## 6 Exercise Create a pipeline
 [< Back to Local Index](#6-index)
+
+En este ejercicio, usted
+
+
+- Crear un pipeline de Azure Machine Learning
+
+- Publicar un pipeline como un servicio REST
+
+- Programar un pipeline.
+
+### Instrucciones
+
+Siga estas instrucciones para completar el ejercicio.
+
+
+1. Si aún no tiene una suscripción a Azure, regístrese para una prueba gratuita en 
+https://azure.microsoft.com
+
+2. Consulte el repositorio del ejercicio en 
+https://aka.ms/mslearn-dp100
+
+3. Si aún no lo ha hecho, complete el ejercicio Crear un espacio de trabajo de Azure Machine Learning para aprovisionar un espacio de trabajo de Azure Machine Learning, crear una instancia de cálculo y clonar los archivos necesarios
+
+4. Complete el ejercicio Crear una canalización.
+
+### Notebook
+
+Como ya es costumbre, vamos a iniciar Corriendo nuestro: `Compute-instance` -> `Coursera-cpu`
+
+> ### Nota
+> El notebook de esta clase está en: [08 - Create a Pipeline.ipynb](ims%2FC6%2Fnotebook%2F08%20-%20Create%20a%20Pipeline.ipynb)
+
+![1.png](ims%2FC4%2Fims%2F4%2F1.png)
+
+
+1. Como ya es costumbre, vamos a empezar definiendo nuestro `ws` y verificando nuestra versión de `AML`:
+
+   ![m1.gif](ims%2FC6%2Fgifs%2Fm1.gif)
+
+2. Ahora vamos a seguir utilizando el `diabetes dataset` que ya hemos registrado anteriormente.
+
+   ![m2.gif](ims%2FC6%2Fgifs%2Fm2.gif)
+
+3. El primer paso para crear nuestro `pipeline` es pensarlo como un `experimento` eso significa que debemos empezar creando
+   un folder en donde vamos a tener nuestros scripts de python que vamos a ir ejecutando.
+
+   ![m3.gif](ims%2FC6%2Fgifs%2Fm3.gif)
+
+   El script `prep_diabetes.py` contiene una metodología ya bien conocida en este curso, pero agrega un paso interesante y es
+   el de crear un `folder` temporal que necesitan los `pipeline` para poder intercambiar información entre los diferentes pasos del proceso.
+
+   El objetivo del script es simple, preprocesar un `tabular dataset` utilizando un `MinMaxScaler`, una vez que este ha sido pre-procesado correctamente, 
+   la salida (el dataset procesado) se guardara en una ruta `save_folder` notar específicamente esta sección:
+
+   ```python
+   # se leen los argumentos
+   parser = argparse.ArgumentParser()
+   # se prepara el argumento de folder temporal:
+   parser.add_argument('--prepped-data', type=str, dest='prepped_data', default='prepped_data', help='Folder for results')
+   # los argumentos quedan como un diccionario
+   args = parser.parse_args()
+   # y ahora podemos crear una variable con la dirección del folder temporal
+   save_folder = args.prepped_data
+   # eventualmente vamos a usar esta variable para crear una carpeta y ahí guardar el dataset procesado
+   ```
+   Después de procesar el dataset, para utilizar correctamente la metodología del `pipeline` de pasar información entre `steps` tenemos que
+   guardar el dato en una ruta específica:
+
+   ```python
+   # Save the prepped data
+   print("Saving Data...")
+   os.makedirs(save_folder, exist_ok=True)
+   save_path = os.path.join(save_folder,'data.csv')
+   diabetes.to_csv(save_path, index=False, header=True)
+   ```
+
+4. El siguiente `step` es crear un script que entrene un modelo de `ML`para la clasificación de diabetes, en este caso usaremos un `DecisionTreeClassifier`
+
+   ![m4.gif](ims%2FC6%2Fgifs%2Fm4.gif)
+
+   > Nota: aqui hay un pequeño `truquito` hardcodeado
+
+   ```python
+    # Get parameters
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--training-data", type=str, dest='training_data', help='training data')
+    args = parser.parse_args()
+    training_data = args.training_data
+    
+    # load the prepared data file in the training folder
+    print("Loading Data...")
+    file_path = os.path.join(training_data,'data.csv')
+    diabetes = pd.read_csv(file_path)
+   ```
+   Técnicamente el argumento recibe la dirección del folder temporal NO el dataset tal cual, es por eso que el `file_path` tiene `hardcodeado` la palabra `data.csv`
+   porque eso fue lo que escribimos en el script de python anterior. Esto me parece algo cuestionable pero digno de mencionar.
+
+5. Este paso ya lo conocemos, simplemente es elegir un `ComputeTarget` que en este caso vamos a utilizar el que ya hemos creado anteriormente `coursera-cluster`
+
+   ![m5.gif](ims%2FC6%2Fgifs%2Fm5.gif)
+
+6. Este paso también ya lo conocemos que es crear nuestro archivo `experiment_env.yml` que vamos a utilizar para crear nuestro entorno virtual conda.
+
+   ![m6.gif](ims%2FC6%2Fgifs%2Fm6.gif)
+
+   Aquí asignamos y registramos nuestro `experiment_env`
+
+   ```python
+   # Create a Python environment for the experiment (from a .yml file)
+   experiment_env = Environment.from_conda_specification("experiment_env", experiment_folder + "/experiment_env.yml")
+   
+   # Register the environment 
+   experiment_env.register(workspace=ws)
+   registered_env = Environment.get(ws, 'experiment_env')
+   ```
+
+7. Ahora, el punto es que antes de definir propiamente los pasos que van a componer al `pipeline` vamos a configurar sus parámetros, que en este caso
+   serán, su `compute cluster` y su `environment`:
+
+   ![m7.gif](ims%2FC6%2Fgifs%2Fm7.gif)
+
+   ```python
+    # Create a new runconfig object for the pipeline
+    pipeline_run_config = RunConfiguration()
+   
+    # Use the compute you created above. 
+    pipeline_run_config.target = pipeline_cluster
+   
+    # Assign the environment to the run configuration
+    pipeline_run_config.environment = registered_env
+   
+    print("Run configuration created.")
+   ```   
+
+8. Propiamente, no podemos directamente utilizar los scripts de python como `steps` estos deben ser configurados como: `PythonScriptStep` 
+   para efectivamente convertirlo a un formato que pueda ser utilizado en un `pipeline`.
+
+   Entre las notas importantes que debemos aclarar es que este es el punto ideal para crear nuestra variable para compartir información:
+
+   ```python
+    # Create an OutputFileDatasetConfig (temporary Data Reference) for data passed from step 1 to step 2
+    prepped_data = OutputFileDatasetConfig("prepped_data")
+   ```
+
+   ![m8.gif](ims%2FC6%2Fgifs%2Fm8.gif)
+
+   > Notas interesantes en este paso:
+   > 
+   > -  En el Step 1: el argumento  '--prepped-data', es directamente la variable `prepped_data` que es un folder temporal
+   > - No me queda super claro si en `compute_target` podría poner un `target` diferente para cada paso
+   > - `Allow_reuse` como esta en `True` es para intentar ahorrar recursos si se vuelven a correr estos mismos pasos en futuros experimentos
+   > - En el segundo paso del pipeline algo muy interesante es que el argumento que recibe como entra: arguments = ['--training-data', prepped_data.as_input() esta como `as_input()`
+   
+9. Nuestro pipeline no es más que una lsita de `steps` que ya han sido definidos, vamos a crear el `pipeline` y correr el experimento:
+
+   ```python
+    from azureml.core import Experiment
+    from azureml.pipeline.core import Pipeline
+    from azureml.widgets import RunDetails
+   
+    # Construct the pipeline
+    pipeline_steps = [prep_step, train_step]
+    pipeline = Pipeline(workspace=ws, steps=pipeline_steps)
+    print("Pipeline is built.")
+    
+    # Create an experiment and run the pipeline
+    experiment = Experiment(workspace=ws, name = 'mslearn-diabetes-pipeline')
+    pipeline_run = experiment.submit(pipeline, regenerate_outputs=True)
+    print("Pipeline submitted for execution.")
+    RunDetails(pipeline_run).show()
+    pipeline_run.wait_for_completion(show_output=True)
+   ```
+
+   ![m9.gif](ims%2FC6%2Fgifs%2Fm9.gif)
+
+10. Un pipeline contiene varios scripts y cada uno de ellos con logs y metrics diferentes, por eso una vez que el `pipeline` se ha ejecutado por completo
+   para revisar los resultados debemos hacerlo script a script:
+
+   ```python
+    for run in pipeline_run.get_children():
+        print(run.name, ':')
+        metrics = run.get_metrics()
+        for metric_name in metrics:
+            print('\t',metric_name, ":", metrics[metric_name])
+   ```
+
+   ![m10.gif](ims%2FC6%2Fgifs%2Fm10.gif)
+
+11. El punto de publicar el `Pipeline` como un `rest endpoint` es poder hacer eventualmente un `request` y correr automáticamente todo el flujo del pipeline
+   esto presenta varias ventajas, como por ejemplo poder hacer un `schedule` de cada cuanto ejecutar el pipeline
+
+   ![m11.gif](ims%2FC6%2Fgifs%2Fm11.gif)
+
+12. Básicamente para consumir el `pipeline` debemos obtener un `run_id` y ya con eso es como si fuera nuestro `Api key` que nos identifica a nosotros y al `pipeline` que queremos correr
+
+   ![m12.gif](ims%2FC6%2Fgifs%2Fm12.gif)
+
+13. Perfecto logramos ejecutar el `pipeline` desde un api rest, y ahora podemos proceder haciendo un `schedule` que lo ejecute una vez a la semana
+
+   ![m13.gif](ims%2FC6%2Fgifs%2Fm13.gif)
+
+14. Como paso final, debemos detener nuestro `compute instance`:
+
+   ![1.png](ims%2FC5%2Fgifs%2F1.png)
+
+
 ## 6 Exercise quiz
 [< Back to Local Index](#6-index)
+
+![1.png](ims%2FC6%2Ftest%2F1.png)
+
 ## 6 Knowledge Check
 [< Back to Local Index](#6-index)
+
+![q1.png](ims%2FC6%2Ftest%2Fq1.png)
+
+![q2.png](ims%2FC6%2Ftest%2Fq2.png)
+
+
+
 ## 6 Lesson summary
 [< Back to Local Index](#6-index)
+
+![2.png](ims%2FC6%2Ftest%2F2.png)
+
+En esta lección, aprendió a crear una canalización de Azure Machine Learning, publicar una canalización de Azure Machine Learning, y programar una canalización de Azure Machine Learning.
+
 ## 6 Additional Reading
 [< Back to Local Index](#6-index)
+
+**Introduction to pipelines:**
+
+[steps Package](https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps?view=azure-ml-py)
 
 # 7 Deploy real-time machine learning services with Azure Machine Learning
 
