@@ -3202,8 +3202,6 @@ Como ya es costumbre, vamos a iniciar Corriendo nuestro: `Compute-instance` -> `
 
 ![q2.png](ims%2FC6%2Ftest%2Fq2.png)
 
-
-
 ## 6 Lesson summary
 [< Back to Local Index](#6-index)
 
@@ -3224,6 +3222,7 @@ En esta lección, aprendió a crear una canalización de Azure Machine Learning,
 
 - [7 Lesson introduction](#7-lesson-introduction)
 - [7 Deploy a model as a real-time service](#7-deploy-a-model-as-a-real-time-service)
+- [7 Consume a real-time inferencing service](#7-consume-a-real-time-inferencing-service)
 - [7 Troubleshoot service deployment](#7-troubleshoot-service-deployment)
 - [7 Exercise Deploy a model as a real-time service](#7-exercise-deploy-a-model-as-a-real-time-service)
 - [7 Exercise quiz](#7-exercise-quiz)
@@ -3235,20 +3234,511 @@ En esta lección, aprendió a crear una canalización de Azure Machine Learning,
 
 ## 7 Lesson introduction
 [< Back to Local Index](#7-index)
+
+![1.png](ims%2FC7%2Fims%2F1.png)
+
+En el aprendizaje automático, la inferencia se refiere al uso de un modelo entrenado para predecir etiquetas para nuevos datos en los que el modelo no ha sido entrenado. 
+
+![2.png](ims%2FC7%2Fims%2F2.png)
+
+A menudo, el modelo se despliega como parte de un servicio que permite a las aplicaciones solicitar predicciones inmediatas o en tiempo real para observaciones de datos individuales o en pequeño número.
+
+![3.png](ims%2FC7%2Fims%2F3.png)
+
+ En Azure Machine Learning, puede crear soluciones de inferencia en tiempo real desplegando un modelo como servicio alojado en una plataforma en contenedores como Azure Kubernetes Services o AKS. 
+
+![4.png](ims%2FC7%2Fims%2F4.png)
+
+En esta lección, aprenderá a desplegar un modelo como servicio de inferencia en tiempo real, servicio de inferencia en tiempo real del consumidor, y a solucionar problemas de despliegue del servicio.
+
 ## 7 Deploy a model as a real-time service
 [< Back to Local Index](#7-index)
+
+Puede desplegar un modelo como servicio web en tiempo real en varios tipos de destino de cómputo, incluido el cómputo local, 
+una instancia de cómputo de Azure Machine Learning, una instancia de contenedor de Azure (ACI), un clúster de Azure Kubernetes 
+Service (AKS), una función de Azure o un módulo de Internet de las cosas (IoT). Azure Machine Learning utiliza contenedores 
+como mecanismo de despliegue, empaquetando el modelo y el código para utilizarlo como una imagen que puede desplegarse 
+en un contenedor en su destino de computación elegido.
+
+> ### Nota
+>
+> El despliegue en un servicio local, una instancia de computación o un ACI es una buena opción para pruebas y desarrollo. 
+> Para producción, debe desplegar en un destino que satisfaga las necesidades específicas de rendimiento, escalabilidad y 
+> seguridad de la arquitectura de su aplicación.
+
+Para desplegar un modelo como servicio de inferencia en tiempo real, debe realizar las siguientes tareas:
+
+### Registrar un modelo entrenado
+
+Después de entrenar con éxito un modelo, debe registrarlo en su espacio de trabajo de Azure Machine Learning. Su servicio 
+en tiempo real podrá entonces cargar el modelo cuando sea necesario.
+
+Para registrar un modelo desde un archivo local, puede utilizar el método register del objetoModel como se muestra aquí:
+
+```python
+from azureml.core import Model
+
+classification_model = Model.register(workspace=ws,
+                       model_name='classification_model',
+                       model_path='model.pkl', # local path
+                       description='A classification model')
+```
+
+Alternativamente, si tiene una referencia a laEjecución utilizada para entrenar el modelo, puede utilizar su método
+register_model como se muestra aquí:
+
+```python
+run.register_model( model_name='classification_model',
+                    model_path='outputs/model.pkl', # run outputs path
+                    description='A classification model')
+```
+
+### Definir una configuración de inferencia
+
+El modelo se desplegará como un servicio que constará de:
+
+- Un script para cargar el modelo y devolver predicciones para los datos enviados.
+
+- Un entorno en el que se ejecutará el script.
+
+Por lo tanto, debe definir el script y el entorno para el servicio.
+
+### Crear un script de entrada
+
+Cree el _script_ de entrada (a veces denominado _script de puntuación_) para el servicio como un archivo Python (.py). 
+Debe incluir dos funciones:
+
+- `init():` Llamada cuando se inicializa el servicio.
+
+- `run(raw_data):` Llamada cuando se envían nuevos datos al servicio.
+
+Normalmente, se utiliza la función **init** para cargar el modelo desde el registro de modelos, y se utiliza la función
+**run** para generar predicciones a partir de los datos de entrada. El siguiente script de ejemplo muestra este patrón:
+
+```python
+import json
+import joblib
+import numpy as np
+from azureml.core.model import Model
+
+# Called when the service is loaded
+def init():
+    global model
+    # Get the path to the registered model file and load it
+    model_path = Model.get_model_path('classification_model')
+    model = joblib.load(model_path)
+
+# Called when a request is received
+def run(raw_data):
+    # Get the input data as a numpy array
+    data = np.array(json.loads(raw_data)['data'])
+    # Get a prediction from the model
+    predictions = model.predict(data)
+    # Return the predictions as any JSON serializable format
+    return predictions.tolist()
+```
+
+### Crear un entorno
+
+Su servicio requiere un entorno Python en el que ejecutar el script de entrada, que puede configurar utilizando el archivo de 
+configuración **Conda**. Una forma sencilla de crear este archivo es utilizar una clase **CondaDependencies** para crear un entorno 
+predeterminado (que incluye el paquete **azureml-defaults** y paquetes de uso común como **numpy** y **pandas**), añadir 
+cualquier otro paquete necesario y, a continuación, serializar el entorno a una cadena y guardarlo:
+
+```python
+from azureml.core.conda_dependencies import CondaDependencies
+
+# Add the dependencies for your model
+myenv = CondaDependencies()
+myenv.add_conda_package("scikit-learn")
+
+# Save the environment config as a .yml file
+env_file = 'service_files/env.yml'
+with open(env_file,"w") as f:
+    f.write(myenv.serialize_to_string())
+print("Saved dependency info in", env_file)
+```
+
+### Combinar el script y el entorno en un InferenceConfig
+
+Después de crear el script de entrada y el archivo de configuración del entorno, puede combinarlos en una **InferenceConfig** 
+para el servicio de la siguiente manera:
+
+```python
+from azureml.core.model import InferenceConfig
+
+classifier_inference_config = InferenceConfig(runtime= "python",
+                                              source_directory = 'service_files',
+                                              entry_script="score.py",
+                                              conda_file="env.yml")
+```
+
+### Definir una configuración de despliegue
+
+Ahora que tiene el script de entrada y el entorno, necesita configurar el ordenador en el que se desplegará el servicio. 
+Si va a realizar el despliegue en un clúster AKS, deberá crear el clúster y un objetivo de cómputo para él antes de realizar 
+el despliegue:
+
+```python
+from azureml.core.compute import ComputeTarget, AksCompute
+
+cluster_name = 'aks-cluster'
+compute_config = AksCompute.provisioning_configuration(location='eastus')
+production_cluster = ComputeTarget.create(ws, cluster_name, compute_config)
+production_cluster.wait_for_completion(show_output=True)
+```
+
+Con el objetivo de cómputo creado, ahora puede definir la configuración de despliegue, que establece la especificación de 
+cómputo específica del objetivo para el despliegue en contenedor:
+
+```python
+from azureml.core.webservice import AksWebservice
+
+classifier_deploy_config = AksWebservice.deploy_configuration(cpu_cores = 1,
+                                                              memory_gb = 1)
+```
+
+El código para configurar un despliegue ACI es similar, salvo que no necesita crear explícitamente un objetivo de cómputo ACI 
+y debe utilizar la clase **deploy_configuration** del espacio de nombres **azureml.core.webservice.AciWebservice**. Del mismo modo, 
+puede utilizar el espacio de nombres **azureml.core.webservice.LocalWebservice** para configurar un servicio local basado en Docker.
+
+> Nota
+> 
+> Para desplegar un modelo en una Azure Function, no necesita crear una configuración de despliegue. En su lugar, necesita 
+> empaquetar el modelo en función del tipo de activador de función que desee utilizar. Esta funcionalidad se encuentra en 
+> fase de previsualización en el momento de redactar este documento. Para más detalles, consulte
+[Desplegar un modelo de aprendizaje automático en Azure Functions](https://aka.ms/AA70rrn)
+ en la documentación de Azure Machine Learning.
+
+### Desplegar el modelo
+
+Una vez preparada toda la configuración, puede desplegar el modelo. La forma más sencilla de hacerlo es llamar al método
+**deploy** de la clase **Model**, de esta manera:
+
+```python
+from azureml.core.model import Model
+
+model = ws.models['classification_model']
+service = Model.deploy(workspace=ws,
+                       name = 'classifier-service',
+                       models = [model],
+                       inference_config = classifier_inference_config,
+                       deployment_config = classifier_deploy_config,
+                       deployment_target = production_cluster)
+service.wait_for_deployment(show_output = True)
+```
+
+Para ACI o servicios locales, puede omitir el parámetro **deployment_target**(o establecerlo enNone).
+
+Para obtener más información sobre el despliegue de modelos con Azure Machine Learning, consulte
+[Despliegue de modelos de aprendizaje automático en Azure](https://aka.ms/AA70zfv)
+ en la documentación.
+
+## 7 Consume a real-time inferencing service
+[< Back to Local Index](#7-index)
+
+Tras desplegar un servicio en tiempo real, puede consumirlo desde aplicaciones cliente para predecir etiquetas para nuevos casos de datos.
+
+### Utilizar el SDK de aprendizaje automático de Azure
+
+Para realizar pruebas, puede utilizar el SDK de aprendizaje automático de Azure para llamar a un servicio web a través del 
+método de ejecución de un objeto WebService que haga referencia al servicio desplegado. Normalmente, usted envía datos al 
+método de ejecución en formato JSON con la siguiente estructura:
+
+```json
+{
+  "data":[
+      [0.1,2.3,4.1,2.0], // 1st case
+      [0.2,1.8,3.9,2.1],  // 2nd case,
+      ...
+  ]
+}
+```
+
+La respuesta del método de ejecución es una colección JSON con una predicción para cada caso que se envió en los datos. 
+El siguiente ejemplo de código llama a un servicio y muestra la respuesta:
+
+```python
+import json
+
+# An array of new data cases
+x_new = [[0.1,2.3,4.1,2.0],
+         [0.2,1.8,3.9,2.1]]
+
+# Convert the array to a serializable list in a JSON document
+json_data = json.dumps({"data": x_new})
+
+# Call the web service, passing the input data
+response = service.run(input_data = json_data)
+
+# Get the predictions
+predictions = json.loads(response)
+
+# Print the predicted class for each case.
+for i in range(len(x_new)):
+    print (x_new[i], predictions[i])
+```
+
+### Utilizar un punto final REST 
+
+En producción, la mayoría de las aplicaciones cliente no incluirán el SDK de Azure Machine Learning, y consumirán el servicio 
+a través de su interfaz REST. Puede determinar el punto final de un servicio desplegado en Azure Machine Learning studio, 
+o recuperando la propiedad **scoring_uri** del objetoWebservice en el SDK, como se muestra a continuación:
+
+```python
+endpoint = service.scoring_uri
+print(endpoint)
+```
+
+Con el endpoint conocido, puede utilizar una solicitud HTTP POST con datos JSON para llamar al servicio. El siguiente 
+ejemplo muestra cómo hacerlo utilizando Python:
+
+```python
+import requests
+import json
+
+# An array of new data cases
+x_new = [[0.1,2.3,4.1,2.0],
+         [0.2,1.8,3.9,2.1]]
+
+# Convert the array to a serializable list in a JSON document
+json_data = json.dumps({"data": x_new})
+
+# Set the content type in the request headers
+request_headers = { 'Content-Type':'application/json' }
+
+# Call the service
+response = requests.post(url = endpoint,
+                         data = json_data,
+                         headers = request_headers)
+
+# Get the predictions from the JSON response
+predictions = json.loads(response.json())
+
+# Print the predicted class for each case.
+for i in range(len(x_new)):
+    print (x_new[i]), predictions[i] )
+```
+
+### Autenticación
+
+En producción, es probable que desee restringir el acceso a sus servicios aplicando la autenticación. Hay dos tipos de 
+autenticación que puede utilizar:
+
+- **Clave**: Las solicitudes se autentican especificando la clave asociada al servicio.
+
+- **Token**: Las solicitudes se autentican proporcionando un Token Web JSON (JWT).
+
+Por defecto, la autenticación está desactivada para los servicios ACI, y configurada como autenticación basada en clave 
+para los servicios AKS (para los que se generan automáticamente claves primarias y secundarias). Opcionalmente, puede 
+configurar un servicio AKS para que utilice la autenticación basada en token (que no es compatible con los servicios ACI).
+
+Suponiendo que haya establecido una sesión autenticada con el área de trabajo, puede recuperar las claves de un servicio 
+utilizando el método **get_keys** del objeto **WebService** asociado al servicio:
+
+```python
+primary_key, secondary_key = service.get_keys()
+```
+
+Para la autenticación basada en token, su aplicación cliente necesita utilizar la autenticación de principal de servicio 
+para verificar su identidad a través de Azure Active Directory (Azure AD) y llamar al método **get_token** del servicio 
+para recuperar un token de tiempo limitado.
+
+Para realizar una llamada autenticada al punto final REST del servicio, debe incluir la clave o el token en la cabecera 
+de la solicitud de la siguiente manera:
+
+```python
+import requests
+import json
+
+# An array of new data cases
+x_new = [[0.1,2.3,4.1,2.0],
+         [0.2,1.8,3.9,2.1]]
+
+# Convert the array to a serializable list in a JSON document
+json_data = json.dumps({"data": x_new})
+
+# Set the content type in the request headers
+request_headers = { "Content-Type":"application/json",
+                    "Authorization":"Bearer " + key_or_token }
+
+# Call the service
+response = requests.post(url = endpoint,
+                         data = json_data,
+                         headers = request_headers)
+
+# Get the predictions from the JSON response
+predictions = json.loads(response.json())
+
+# Print the predicted class for each case.
+for i in range(len(x_new)):
+    print (x_new[i]), predictions[i] )
+```
+
 ## 7 Troubleshoot service deployment
 [< Back to Local Index](#7-index)
+
+![5.png](ims%2FC7%2Fims%2F5.png)
+
+Hay muchos elementos para un despliegue de servicios en tiempo real. Estos pueden incluir el modelo entrenado, la configuración 
+del entorno de ejecución, el script de puntuación, la imagen del contenedor, y el host del contenedor. 
+
+![6.png](ims%2FC7%2Fims%2F6.png)
+
+Solucionar problemas de una implementación fallida o de un error al consumir una implementación el servicio puede ser complejo.
+
+![7.png](ims%2FC7%2Fims%2F7.png)
+
+Como paso inicial de solución de problemas, puede comprobar el estado de un servicio examinando su estado a través de la 
+herramienta get el método de servicio implementado.
+
+![8.png](ims%2FC7%2Fims%2F8.png)
+
+Es importante tener en cuenta que para para ver el estado de un servicio, debe usar el cómputo específico tipo de servicio, 
+por ejemplo, un servicio web de KS y no es un objeto de servicio web genérico. Para un servicio operativo, el estado debe estar sano.
+
+![9.png](ims%2FC7%2Fims%2F9.png)
+
+Si un servicio no es saludable o si tiene errores al usarlo, puede revisar sus registros. Puede revisar estos registros 
+mediante un código, los registros incluyen información detallada sobre el aprovisionamiento del servicio y las solicitudes 
+que ha procesado.
+
+![10.png](ims%2FC7%2Fims%2F10.png)
+
+A menudo, pueden proporcionar una idea sobre la causa de los errores inesperados. Despliegue y Los errores de ejecución 
+pueden ser más fáciles de diagnosticar, puede hacerlo implementando el servicio como contenedor en una instancia de Docker local.
+
+![11.png](ims%2FC7%2Fims%2F11.png)
+
+A continuación, puede probar el localmente servicio implementado mediante el SDK. 
+
+![12.png](ims%2FC7%2Fims%2F12.png)
+
+A continuación, puede solucionar problemas de tiempo de ejecución realizando cambios en el archivo de puntuación al que 
+se hace referencia en la configuración de inferencia.
+
+![13.png](ims%2FC7%2Fims%2F13.png)
+
+Luego, recargando el servicio sin volver a implementarlo, algo que solo puedes hacer hazlo con un servicio local.
+
 ## 7 Exercise Deploy a model as a real-time service
 [< Back to Local Index](#7-index)
+
+Ahora es su oportunidad de utilizar Azure Machine Learning para desplegar un modelo de aprendizaje automático como un servicio en tiempo real.
+
+### Notebook
+
+Como ya es costumbre, vamos a iniciar Corriendo nuestro: `Compute-instance` -> `Coursera-cpu`
+
+> ### Nota
+> El notebook de esta clase está en: [09 - Create a Real-time Inferencing Service.ipynb](ims%2FC7%2Fnotebooks%2F09%20-%20Create%20a%20Real-time%20Inferencing%20Service.ipynb)
+
+![1.png](ims%2FC4%2Fims%2F4%2F1.png)
+
+
+1. Como ya es costumbre, vamos a empezar definiendo nuestro `ws` y verificando nuestra versión de `AML`:
+
+   ![m1.gif](ims%2FC7%2Fgifs%2Fm1.gif)
+
+2. El notebook tiene una celda adicional para crear un modelo y registrarlo, sin embargo, como ya tenemos varios modelos de diabetes, vamos a omitir la celda y vamos a ver cuáles modelos ya tenemos disponibles:
+
+   ![m2.gif](ims%2FC7%2Fgifs%2Fm2.gif)
+
+3. Vamos a seleccionar nuestro modelo más reciente que en este caso es la versión `8`. Para crear el endpoint, primero debemos preparar un folder para crear el `servicio`
+
+   ![m3.gif](ims%2FC7%2Fgifs%2Fm3.gif)
+
+   > Nota: tenemos una variable llamada `script_file` que solo es el nombre del archivo .py, mientras que `script_file` es la concatenación entre el nombre del folder y el nombre del archivo
+
+4. En el `script_file.py` como ya leímos en las notas de este capítulo, dos funciones: `init()` (para cargar al modelo) y `run(raw_data)` que básicamente, lee los archivos en un formato `crudo`
+   y los prepara para ser clasificados por el modelo, finalmente utiliza la predicción 0 o 1 para darle una etiqueta de `non diabetic` vs `diabetic`
+
+   ![m4.gif](ims%2FC7%2Fgifs%2Fm4.gif)
+
+5. Ahora debemos seleccionar el ambiente que utilizará para crear el contenedor, en este caso, simplemente estamos utilizando uno de los que ya vienen por defecto en Azure. Ahora, para crear
+   el objeto `inference_config` debemos tener 3 ingredientes, el folder donde esta el script, el nombre del script, y el ambiente creado.
+
+   ![m5.gif](ims%2FC7%2Fgifs%2Fm5.gif)
+
+   También debemos crear el `cluster` donde se va a ejecutar la información, pero este será especial puesto que es para hacer `inferencia`, le asignamos solo un core de cpu y un giga de ram.
+   Ahora ya podemos hacer Model.deploy() con todos los incredientes:
+
+   ````python
+    service = Model.deploy(ws, service_name, [model], inference_config, deployment_config, overwrite=True)
+   ````
+
+6. Una vez que se ha publicado nuestro endpoint podemos consultar sus logs, y ver el nombre del servicio que hemos creado `diabetes-service`, adicionalmente, en la pestaña de
+   `endpoints` podemos ver que ya esta públicado nuestro `endpoint` y ahí mismo podemos observar la dirección de nuestra `API`
+   ![m6.gif](ims%2FC7%2Fgifs%2Fm6.gif)
+
+7. Podemos probar que el modelo funciona correctamente, tanto para una predicción como para múltiples soluciones, el servicio se esta ejecutando y todo funciona bien.
+
+   ![m7.gif](ims%2FC7%2Fgifs%2Fm7.gif)
+
+   sin embargo, no siempre vamos a disponer del SDK para correr al modelo, es por ello que es buena idea contar con la dirección del endpoint:
+
+   ```python
+    endpoint = service.scoring_uri
+    print(endpoint)
+   ```
+   Podemos observar que esta en linea en la dirección:
+
+   ```commandline
+    http://d2575064-0c24-4cd8-97b1-9932795ec186.eastus2.azurecontainer.io/score
+   ```
+
+8. Una alternativa más interesante, es hacer un `post` para hacer inferencia:
+
+   ![m8.gif](ims%2FC7%2Fgifs%2Fm8.gif)
+
+   este método NO necesita tener el SDK de azure instalando, puesto que solo usa `requests` para hacer una solicitud `post` al `API rest` que hemos creado. 
+
+   Finalmente, podemos eliminar el `servicio` para que no consuma más cargos.
+
+9. No olvidemos de detener nuestro `coursera-cpu`:
+
+      ![1.png](ims%2FC5%2Fgifs%2F1.png)
+
+
 ## 7 Exercise quiz
 [< Back to Local Index](#7-index)
+
+![1.png](ims%2FC7%2Ftest%2F1.png)
+
 ## 7 Knowledge Check
 [< Back to Local Index](#7-index)
+
+![q1.png](ims%2FC7%2Ftest%2Fq1.png)
+
+![q2.png](ims%2FC7%2Ftest%2Fq2.png)
+
+![q3.png](ims%2FC7%2Ftest%2Fq3.png)
+
+![q4.png](ims%2FC7%2Ftest%2Fq4.png)
+
 ## 7 Test prep
 [< Back to Local Index](#7-index)
+
+![t1.png](ims%2FC7%2Ftest%2Ft1.png)
+
+![t2.png](ims%2FC7%2Ftest%2Ft2.png)
+
+![t3.png](ims%2FC7%2Ftest%2Ft3.png)
+
+![t4.png](ims%2FC7%2Ftest%2Ft4.png)
+
+![t5.png](ims%2FC7%2Ftest%2Ft5.png)
+
+![t6.png](ims%2FC7%2Ftest%2Ft6.png)
+
 ## 7 Lesson summary
 [< Back to Local Index](#7-index)
+
+![14.png](ims%2FC7%2Fims%2F14.png)
+
+En esta lección, ha aprendido a desplegar servicios de aprendizaje automático en tiempo real con Azure Machine Learning. 
+O, más concretamente, desplegar un modelo como servicio de influencia en tiempo real, consumir un servicio de influencia 
+en tiempo real y solucionar problemas de despliegue del servicio.
 
 # 8 Deploy batch inference pipelines with Azure Machine Learning
 
