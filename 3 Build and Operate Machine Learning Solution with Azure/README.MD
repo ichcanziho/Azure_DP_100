@@ -3757,18 +3757,287 @@ en tiempo real y solucionar problemas de despliegue del servicio.
 
 ## 8 Lesson introduction
 [< Back to Local Index](#8-index)
+
+![1.png](ims%2FC8%2Fims%2F1%2F1.png)
+
+Hola. En esta lección, aprenderás cómo implementar canalizaciones de inferencia por lotes con Azure Machine Learning. 
+En muchos escenarios de producción, tareas de larga duración que se realizan sobre grandes volúmenes de datos como 
+operaciones por lotes.
+
+![2.png](ims%2FC8%2Fims%2F1%2F2.png)
+
+En el aprendizaje automático, inferencia por lotes se usa para aplicar un modelo predictivo a múltiples casos de forma 
+asincrónica, normalmente escribiendo los resultados a un archivo o base de datos. 
+
+![3.png](ims%2FC8%2Fims%2F1%2F3.png)
+
+En Azure Machine Learning, puede implementar Batch Inferenciar soluciones mediante la creación de una canalización que 
+incluya un paso para leer los datos de entrada, cargar un modelo registrado, predecir etiquetas y escribir los resultados como su salida.
+
+![4.png](ims%2FC8%2Fims%2F1%2F4.png)
+
+En esta lección, publicarás una canalización de inferencias por lotes para un modelo entrenado, y utilizará un lote canal 
+de inferencia para generar predicciones.
+
 ## 8 Creating a batch inference pipeline
 [< Back to Local Index](#8-index)
+
+Para crear una canalización de inferencia por lotes, realice las siguientes tareas:
+
+### 1. Registrar un modelo
+
+Para utilizar un modelo entrenado en una canalización de inferencia por lotes, debe registrarlo en su espacio de trabajo 
+de Azure Machine Learning.
+
+Para registrar un modelo desde un archivo local, puede utilizar el método **register** del objeto **Model** como se 
+muestra en el siguiente código de ejemplo:
+
+```python
+from azureml.core import Model
+
+classification_model = Model.register(workspace=your_workspace,
+                                      model_name='classification_model',
+                                      model_path='model.pkl', # local path
+                                      description='A classification model')
+```
+
+Alternativamente, si tiene una referencia a la **Ejecución** utilizada para entrenar el modelo, puede utilizar su método
+**register_model** como se muestra en el siguiente código de ejemplo:
+
+```python
+run.register_model( model_name='classification_model',
+                    model_path='outputs/model.pkl', # run outputs path
+                    description='A classification model')
+```
+
+### 2. Crear un script de calificación
+
+El servicio de inferencia por lotes requiere un script de puntuación para cargar el modelo y utilizarlo para predecir 
+nuevos valores. Debe incluir dos funciones
+
+- **init():** Llamada cuando se inicializa la canalización.
+
+- **run(mini_batch):** Llamada para cada lote de datos a procesar.
+
+Normalmente, se utiliza la función **init** para cargar el modelo desde el registro de modelos, y se utiliza la función 
+**run** para generar predicciones a partir de cada lote de datos y devolver los resultados. El siguiente script de 
+ejemplo muestra este patrón:
+
+```python
+import os
+import numpy as np
+from azureml.core import Model
+import joblib
+
+def init():
+    # Runs when the pipeline step is initialized
+    global model
+
+    # load the model
+    model_path = Model.get_model_path('classification_model')
+    model = joblib.load(model_path)
+
+def run(mini_batch):
+    # This runs for each batch
+    resultList = []
+
+    # process each file in the batch
+    for f in mini_batch:
+        # Read comma-delimited data into an array
+        data = np.genfromtxt(f, delimiter=',')
+        # Reshape into a 2-dimensional array for model input
+        prediction = model.predict(data.reshape(1, -1))
+        # Append prediction to results
+        resultList.append("{}: {}".format(os.path.basename(f), prediction[0]))
+    return resultList
+```
+
+### 3. Crear una canalización con un ParallelRunStep
+
+Azure Machine Learning proporciona un tipo de paso de canalización específico para realizar inferencias paralelas por lotes. 
+Utilizando la clase **ParallelRunStep**, puede leer lotes de archivos de un conjunto de datos **File** y escribir la salida 
+del procesamiento en un **OutputFileDatasetConfig**.
+
+Además, puede establecer el ajuste **output_action** para el paso en "**append_row**", lo que garantizará que todas las 
+instancias del paso que se ejecuten en paralelo cotejarán sus resultados en un único archivo de salida denominado 
+**parallel_run_step.txt**:
+
+```python
+from azureml.pipeline.steps import ParallelRunConfig, ParallelRunStep
+from azureml.data import OutputFileDatasetConfig
+from azureml.pipeline.core import Pipeline
+
+# Get the batch dataset for input
+batch_data_set = ws.datasets['batch-data']
+
+# Set the output location
+default_ds = ws.get_default_datastore()
+output_dir = OutputFileDatasetConfig(name='inferences')
+
+# Define the parallel run step step configuration
+parallel_run_config = ParallelRunConfig(
+    source_directory='batch_scripts',
+    entry_script="batch_scoring_script.py",
+    mini_batch_size="5",
+    error_threshold=10,
+    output_action="append_row",
+    environment=batch_env,
+    compute_target=aml_cluster,
+    node_count=4)
+
+# Create the parallel run step
+parallelrun_step = ParallelRunStep(
+    name='batch-score',
+    parallel_run_config=parallel_run_config,
+    inputs=[batch_data_set.as_named_input('batch_data')],
+    output=output_dir,
+    arguments=[],
+    allow_reuse=True
+)
+# Create the pipeline
+pipeline = Pipeline(workspace=ws, steps=[parallelrun_step])
+```
+
+### 4. Ejecutar la canalización y recuperar la salida del paso
+
+Una vez definida su canalización, puede ejecutarla y esperar a que se complete. A continuación, puede recuperar el archivo
+**parallel_run_step.txt** de la salida del paso para ver los resultados, como se muestra en el siguiente ejemplo de código:
+
+```python
+from azureml.core import Experiment
+
+# Run the pipeline as an experiment
+pipeline_run = Experiment(ws, 'batch_prediction_pipeline').submit(pipeline)
+pipeline_run.wait_for_completion(show_output=True)
+
+# Get the outputs from the first (and only) step
+prediction_run = next(pipeline_run.get_children())
+prediction_output = prediction_run.get_output_data('inferences')
+prediction_output.download(local_path='results')
+
+# Find the parallel_run_step.txt file
+for root, dirs, files in os.walk('results'):
+    for file in files:
+        if file.endswith('parallel_run_step.txt'):
+            result_file = os.path.join(root,file)
+
+# Load and display the results
+df = pd.read_csv(result_file, delimiter=":", header=None)
+df.columns = ["File", "Prediction"]
+print(df)
+```
+
+
 ## 8 Publishing a batch inference pipeline
 [< Back to Local Index](#8-index)
+
+Puede publicar una canalización de inferencia por lotes como un servicio REST, como se muestra en el siguiente código de ejemplo:
+
+```python
+published_pipeline = pipeline_run.publish_pipeline(name='Batch_Prediction_Pipeline',
+                                                   description='Batch pipeline',
+                                                   version='1.0')
+rest_endpoint = published_pipeline.endpoint
+```
+
+Una vez publicado, puede utilizar el punto final del servicio para iniciar un trabajo de inferencia por lotes, como se muestra en el siguiente código de ejemplo:
+
+```python
+import requests
+
+response = requests.post(rest_endpoint,
+                         headers=auth_header,
+                         json={"ExperimentName": "Batch_Prediction"})
+run_id = response.json()["Id"]
+```
+
+También puede programar la canalización publicada para que se ejecute automáticamente, como se muestra en el siguiente 
+código de ejemplo:
+
+```python
+from azureml.pipeline.core import ScheduleRecurrence, Schedule
+
+weekly = ScheduleRecurrence(frequency='Week', interval=1)
+pipeline_schedule = Schedule.create(ws, name='Weekly Predictions',
+                                        description='batch inferencing',
+                                        pipeline_id=published_pipeline.id,
+                                        experiment_name='Batch_Prediction',
+                                        recurrence=weekly)
+```
+
+
 ## 8 Exercise Create a batch inference pipeline
 [< Back to Local Index](#8-index)
+
+Ahora es su oportunidad de crear y ejecutar una canalización de inferencia por lotes
+
+En este ejercicio, deberá:
+
+
+- Crear una canalización de inferencia por lotes
+
+- Publicar la canalización como un servicio REST
+
+- Ejecutar la canalización a través de su punto final REST.
+
+### Instrucciones
+
+Siga estas instrucciones para completar el ejercicio.
+
+
+1. Si aún no tiene una suscripción a Azure, regístrese para una prueba gratuita en 
+https://azure.microsoft.com
+
+2. Consulte el repositorio del ejercicio en 
+https://aka.ms/mslearn-dp100
+
+3. Si aún no lo ha hecho, complete el ejercicio Crear un espacio de trabajo de Azure Machine Learning para aprovisionar un espacio de trabajo de Azure Machine Learning, crear una instancia de cálculo y clonar los archivos necesarios
+
+4. Complete el ejercicio Crear un servicio de inferencia por lotes.
+
+> ### Nota:
+> El notebook de esta sección está en: [10 - Create a Batch Inferencing Service.ipynb](ims%2FC8%2Fnotebooks%2F10%20-%20Create%20a%20Batch%20Inferencing%20Service.ipynb)
+
+![s1.gif](ims%2FC8%2Fgifs%2Fs1.gif)
+
+![s2.gif](ims%2FC8%2Fgifs%2Fs2.gif)
+
+![s3.gif](ims%2FC8%2Fgifs%2Fs3.gif)
+
+![s4.gif](ims%2FC8%2Fgifs%2Fs4.gif)
+
+![s5.gif](ims%2FC8%2Fgifs%2Fs5.gif)
+
+![s6.gif](ims%2FC8%2Fgifs%2Fs6.gif)
+
+![s7.gif](ims%2FC8%2Fgifs%2Fs7.gif)
+
 ## 8 Exercise quiz
 [< Back to Local Index](#8-index)
+
+![0.png](ims%2FC8%2Ftest%2F0.png)
+
 ## 8 Knowledge Check
 [< Back to Local Index](#8-index)
+
+![q1.png](ims%2FC8%2Ftest%2Fq1.png)
+
+![q2.png](ims%2FC8%2Ftest%2Fq2.png)
+
+![q3.png](ims%2FC8%2Ftest%2Fq3.png)
+
+![q4.png](ims%2FC8%2Ftest%2Fq4.png)
+
+![q5.png](ims%2FC8%2Ftest%2Fq5.png)
+
 ## 8 Lesson Summary
 [< Back to Local Index](#8-index)
+
+![5.png](ims%2FC8%2Fims%2F1%2F5.png)
+
+En esta lección, ha aprendido a desplegar canalizaciones de inferencia por lotes con el aprendizaje automático de 
+Azure. O, más concretamente, a publicar una canalización de inferencia por lotes para un modelo entrenado. Y a utilizar 
+una canalización de inferencia por lotes para generar predicciones.
 
 # 9 Tune hyperparameters with Azure Machine Learning
 
@@ -3789,24 +4058,421 @@ en tiempo real y solucionar problemas de despliegue del servicio.
 
 ## 9 Lesson introduction
 [< Back to Local Index](#9-index)
+
+![1.png](ims%2FC9%2Fims%2F1%2F1.png)
+
+Hola, en el aprendizaje automático los modelos se entrenan para predecir etiquetas desconocidas para nuevos datos 
+basándose en correlaciones entre etiquetas conocidas y características encontradas en los datos de entrenamiento. 
+
+![2.png](ims%2FC9%2Fims%2F1%2F2.png)
+
+Dependiendo del algoritmo utilizado, puede que necesite especificar hiperparámetros para configurar cómo se entrena el modelo. 
+
+![3.png](ims%2FC9%2Fims%2F1%2F3.png)
+
+Por ejemplo, el algoritmo de regresión logística utiliza una tasa de regularización, hiperparámetro para contrarrestar el 
+sobreajuste. Y las técnicas de aprendizaje profundo para redes neuronales convolucionales o CNN utilizan 
+hiperparámetros como la tasa de aprendizaje para controlar cómo se ajustan los pesos durante el entrenamiento. Y el 
+tamaño del lote para determinar cuántos elementos de datos se incluyen en cada lote de entrenamiento.
+
+![4.png](ims%2FC9%2Fims%2F1%2F4.png)
+
+Es importante señalar que el aprendizaje automático es un campo académico con su propia terminología particular. 
+Los científicos de datos se refieren a los valores determinados a partir de las características de entrenamiento 
+como parámetros. Así que se requiere un término diferente para los valores que se utilizan para configurar el 
+comportamiento de entrenamiento pero que no se derivan de los datos de entrenamiento. De ahí el término 
+hiperparámetro. La elección de los valores de los hiperparámetros puede afectar significativamente al modelo resultante. 
+
+![5.png](ims%2FC9%2Fims%2F1%2F5.png)
+
+Por eso es importante seleccionar los mejores valores posibles para sus datos particulares y sus objetivos de rendimiento predictivo.
+
+![6.png](ims%2FC9%2Fims%2F1%2F6.png)
+
+El ajuste de hiperparámetros se consigue entrenando los múltiples modelos utilizando el mismo algoritmo y los mismos datos 
+de entrenamiento pero con diferentes valores de hiperparámetros. El modelo resultante de cada ejecución de entrenamiento 
+se evalúa a continuación para determinar la métrica de rendimiento para la que desea optimizar, por ejemplo, la precisión. 
+Y se selecciona el modelo de mejor rendimiento.
+
+![7.png](ims%2FC9%2Fims%2F1%2F7.png)
+
+En el aprendizaje automático de Azure esto se consigue a través de un experimento que consiste en una ejecución hiper
+dirigida que inicia una ejecución hija para cada combinación de hiperparámetros que se va a probar. 
+
+![8.png](ims%2FC9%2Fims%2F1%2F8.png)
+
+Cada una de estas ejecuciones hijas utiliza un script de entrenamiento con valores de hiperparámetros para entrenar un 
+modelo y registra la métrica de rendimiento objetivo alcanzada por el modelo entrenado. 
+
+![9.png](ims%2FC9%2Fims%2F1%2F9.png)
+
+En esta lección, aprenderá a sintonizar hiperparámetros con el aprendizaje automático de Azure o, más concretamente, a 
+
+- Definir un espacio de búsqueda de hiperparámetros. 
+- Configurar el muestreo de hiperparámetros. 
+- Seleccionar una política de terminación anticipada.
+- Ejecutar un experimento de sintonización de hiperparámetros.
+
 ## 9 Defining a search space
 [< Back to Local Index](#9-index)
+
+![1.png](ims%2FC9%2Fims%2F2%2F1.png)
+
+El conjunto de valores de hiperparámetro probados durante el ajuste de hiperparámetros se conoce como espacio de búsqueda. 
+La definición del rango de posibles valores que se pueden elegir, depende del tipo de hiperparámetro.
+
+![2.png](ims%2FC9%2Fims%2F2%2F2.png)
+
+Algunos hiperparámetros requieren valores discretos. En otras palabras, debe seleccionar el valor de un conjunto 
+concreto de posibilidades.
+
+
+![4.png](ims%2FC9%2Fims%2F2%2F4.png)
+
+Puede definir un espacio de búsqueda para un parámetro discreto utilizando una elección de una lista de valores explícitos, que puede definir como una lista Python, un rango o un conjunto arbitrario de valores separados por comas.
+
+![5.png](ims%2FC9%2Fims%2F2%2F5.png)
+
+También puede seleccionar valores discretos de cualquiera de las siguientes distribuciones discretas; qnorma, quniforme, 
+qlognormal y qloguniforme.
+
+![6.png](ims%2FC9%2Fims%2F2%2F6.png)
+
+Algunos hiperparámetros son continuos. En otras palabras, puede utilizar cualquier valor a lo largo de una escala. Para 
+definir un espacio de búsqueda para estos valores, puede utilizar cualquiera de los siguientes tipos de distribución; 
+normal, uniforme, lognormal y loguniforme. 
+
+![7.png](ims%2FC9%2Fims%2F2%2F7.png)
+
+Para definir un espacio de búsqueda para el ajuste de hiperparámetros, cree un diccionario con la expresión de parámetros 
+apropiada para cada hiperparámetro nombrado. 
+
+Por ejemplo, en el espacio de búsqueda, puede indicar que el hiperparámetro de tamaño de lote puede tener el valor 
+`16, 32, o 64`, y el hiperparámetro de tasa de aprendizaje puede tener cualquier valor de una distribución normal con 
+una media de `10` y una desviación estándar de `3`.
+
+
 ## 9 Configuring sampling
 [< Back to Local Index](#9-index)
+
+Los valores específicos utilizados en una ejecución de ajuste de hiperparámetros dependen del tipo demuestreo utilizado.
+
+### Grid Sampling
+
+El muestreo de cuadrícula sólo puede emplearse cuando todos los hiperparámetros son discretos, y se utiliza para probar 
+todas las combinaciones posibles de parámetros en el espacio de búsqueda.
+
+Por ejemplo, en el siguiente ejemplo de código, el muestreo de cuadrícula se utiliza para probar cada combinación 
+posible de valor discreto de batch_size y learning_rate:
+
+````python
+from azureml.train.hyperdrive import GridParameterSampling, choice
+
+param_space = {
+                 '--batch_size': choice(16, 32, 64),
+                 '--learning_rate': choice(0.01, 0.1, 1.0)
+              }
+
+param_sampling = GridParameterSampling(param_space)
+````
+
+
+### Random sampling
+
+El muestreo aleatorio se utiliza para seleccionar al azar un valor para cada hiperparámetro, que puede ser una mezcla 
+de valores discretos y continuos, como se muestra en el siguiente ejemplo de código:
+
+```python
+from azureml.train.hyperdrive import RandomParameterSampling, choice, normal
+
+param_space = {
+                 '--batch_size': choice(16, 32, 64),
+                 '--learning_rate': normal(10, 3)
+              }
+
+param_sampling = RandomParameterSampling(param_space)
+```
+
+### Bayesian sampling
+
+El muestreo bayesiano elige los valores de los hiperparámetros basándose en el algoritmo de optimización bayesiano, que 
+intenta seleccionar las combinaciones de parámetros que darán como resultado un mejor rendimiento respecto a la selección 
+anterior. El siguiente ejemplo de código muestra cómo configurar el muestreo bayesiano:
+
+```python
+from azureml.train.hyperdrive import BayesianParameterSampling, choice, uniform
+
+param_space = {
+                 '--batch_size': choice(16, 32, 64),
+                 '--learning_rate': uniform(0.05, 0.1)
+              }
+
+param_sampling = BayesianParameterSampling(param_space)
+```
+
+Sólo puede utilizar el muestreo bayesiano con expresiones de parámetros de **elección**, **uniformes** y **quniformes**, y 
+no puede combinarlo con una política de terminación anticipada.
+
 ## 9 Configuring early termination
 [< Back to Local Index](#9-index)
+
+![1.png](ims%2FC9%2Fims%2F3%2F1.png)
+
+Con un espacio de búsqueda de hiperparámetros suficientemente grande, podrían necesitarse muchas iteraciones o ejecuciones 
+hijo para probar todas las combinaciones posibles.
+
+
+![2.png](ims%2FC9%2Fims%2F3%2F2.png)
+
+Normalmente, se establece un número máximo de iteraciones, pero esto aún podría dar lugar a un gran número de ejecuciones 
+que no produzcan un modelo mejor que una combinación ya probada. 
+
+![3.png](ims%2FC9%2Fims%2F3%2F3.png)
+
+Para evitar la pérdida de tiempo, puede establecer una política de finalización anticipada que abandone las ejecuciones. 
+Es poco probable que las ejecuciones que se abandonen produzcan un resultado mejor que las ejecuciones completadas 
+anteriormente. 
+
+![4.png](ims%2FC9%2Fims%2F3%2F4.png)
+
+Esta política se evalúa en un intervalo de evaluación que usted especifique en función de cada vez que se registre la métrica de rendimiento objetivo.
+
+![5.png](ims%2FC9%2Fims%2F3%2F5.png)
+
+También puede establecer un parámetro de evaluación de retardo para evitar evaluar la política hasta que se haya completado el número mínimo de iteraciones.
+
+![6.png](ims%2FC9%2Fims%2F3%2F6.png)
+
+Es importante señalar que la terminación anticipada es especialmente útil para escenarios de aprendizaje profundo en 
+los que una red neuronal profunda o DNN se entrena iterativamente lee lo largo de varias épocas. El script de 
+entrenamiento puede informar de la métrica objetivo después de cada epoch.
+
+![7.png](ims%2FC9%2Fims%2F3%2F7.png)
+
+Y si la ejecución es significativamente inferior a las ejecuciones anteriores después del mismo número de intervalos, puede abandonarse.
+
+![8.png](ims%2FC9%2Fims%2F3%2F8.png)
+
+Puede utilizar una política bandit para detener una ejecución si la métrica de rendimiento objetivo es inferior a la mejor 
+ejecución hasta el momento por un margen especificado. 
+
+Este ejemplo aplica la política para cada iteración Después de la 1ª 5. y abandona las ejecuciones en las que la métrica 
+objetivo informada es 0.2 o peor que la ejecución con mejor rendimiento después del mismo número de intervalos.
+
+
+![9.png](ims%2FC9%2Fims%2F3%2F9.png)
+
+También puede aplicar una política bandit utilizando un factor de holgura, que compara la métrica de rendimiento como un 
+ratio en lugar de un valor absoluto.
+
+![10.png](ims%2FC9%2Fims%2F3%2F10.png)
+
+![11.png](ims%2FC9%2Fims%2F3%2F11.png)
+
+Una política de detención de la mediana abandona las ejecuciones cuya métrica de rendimiento objetivo es peor que la 
+mediana de las medias de todas las ejecuciones.
+
+![12.png](ims%2FC9%2Fims%2F3%2F12.png)
+
+Una política de selección de truncamiento cancela el X por ciento de ejecuciones de menor rendimiento en cada 
+intervalo de evaluación, basándose en el valor del porcentaje de truncamiento que especifique para X.
+
 ## 9 Running a hyperparameter tuning experiment
 [< Back to Local Index](#9-index)
+
+En Azure Machine Learning, puede afinar hiperparámetros ejecutando un experimento de _hiperparámetro_.
+
+### Creación de un script de entrenamiento para el ajuste de hiperparámetros
+
+Para ejecutar un experimento de hiperparámetro, necesita crear un script de entrenamiento de la misma manera que lo 
+haría para cualquier otro experimento de entrenamiento, excepto que su script **debe:**
+
+- Incluir un argumento para cada hiperparámetro que desee variar.
+
+- Registrar la métrica de rendimiento objetivo. Esto permite a la ejecución del hiperdireccionamiento evaluar el 
+rendimiento de las ejecuciones hijas que inicia, e identificar la que produce el modelo de mejor rendimiento.
+
+Por ejemplo, el siguiente script de ejemplo entrena un modelo de regresión logística utilizando un argumento
+
+--regularization 
+
+para establecer el hiperparámetro de **tasa de regularización**, y registra la métrica de **precisión** con el nombre
+**Precisión**:
+
+```python
+import argparse
+import joblib
+from azureml.core import Run
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+
+# Get regularization hyperparameter
+parser = argparse.ArgumentParser()
+parser.add_argument('--regularization', type=float, dest='reg_rate', default=0.01)
+args = parser.parse_args()
+reg = args.reg_rate
+
+# Get the experiment run context
+run = Run.get_context()
+
+# load the training dataset
+data = run.input_datasets['training_data'].to_pandas_dataframe()
+
+# Separate features and labels, and split for training/validatiom
+X = data[['feature1','feature2','feature3','feature4']].values
+y = data['label'].values
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30)
+
+# Train a logistic regression model with the reg hyperparameter
+model = LogisticRegression(C=1/reg, solver="liblinear").fit(X_train, y_train)
+
+# calculate and log accuracy
+y_hat = model.predict(X_test)
+acc = np.average(y_hat == y_test)
+run.log('Accuracy', np.float(acc))
+
+# Save the trained model
+os.makedirs('outputs', exist_ok=True)
+joblib.dump(value=model, filename='outputs/model.pkl')
+
+run.complete()
+```
+
+> Nota:
+> 
+> Tenga en cuenta que en la claseLogisticRegression de Scikit-Learn,C es la inversa de la tasa de regularización; por lo tanto, C=1/reg.
+
+### Configuración y ejecución de un experimento hiperdireccional
+
+Para preparar el experimento hyperdrive, debe utilizar un objeto **HyperDriveConfig** para configurar la ejecución del 
+experimento, como se muestra en el siguiente código de ejemplo:
+
+```python
+from azureml.core import Experiment
+from azureml.train.hyperdrive import HyperDriveConfig, PrimaryMetricGoal
+
+# Assumes ws, script_config and param_sampling are already defined
+
+hyperdrive = HyperDriveConfig(run_config=script_config,
+                              hyperparameter_sampling=param_sampling,
+                              policy=None,
+                              primary_metric_name='Accuracy',
+                              primary_metric_goal=PrimaryMetricGoal.MAXIMIZE,
+                              max_total_runs=6,
+                              max_concurrent_runs=4)
+
+experiment = Experiment(workspace = ws, name = 'hyperdrive_training')
+hyperdrive_run = experiment.submit(config=hyperdrive)
+```
+
+### Supervisión y revisión de las ejecuciones de hyperdrive
+
+Puede supervisar los experimentos hyperdrive en Azure Machine Learning studio, o utilizando el **widgetRunDetails** de 
+Jupyter Notebooks.
+
+El experimento iniciará una ejecución hija para cada combinación de hiperparámetros que se pruebe, y puede recuperar 
+las métricas registradas estas ejecuciones utilizando el siguiente código:
+
+```python
+for child_run in run.get_children():
+    print(child_run.id, child_run.get_metrics())
+```
+
+También puede listar todas las ejecuciones en orden descendente de rendimiento de esta forma:
+
+```python
+for child_run in hyperdrive_run.get_children_sorted_by_primary_metric():
+    print(child_run)
+```
+
+Para recuperar la ejecución con mejor rendimiento, puede utilizar el código siguiente:
+
+```python
+best_run = hyperdrive_run.get_best_run_by_primary_metric()
+```
+
+
 ## 9 Exercise Tune hyperparameters
 [< Back to Local Index](#9-index)
+
+Ahora es su oportunidad de realizar un experimento de ajuste de hiperparámetros
+
+En este ejercicio, lo hará
+
+
+- Ejecutar un experimento de ajuste de hiperparámetros.
+
+- Revisar los resultados del experimento.
+
+
+### Instrucciones
+Siga estas instrucciones para completar el ejercicio
+
+- Si aún no dispone de una suscripción a Azure, suscríbase a una prueba gratuita en https://azure.microsoft.com.
+
+- Consulte el repositorio del ejercicio en https://aka.ms/mslearn-dp100.
+
+- Si aún no lo ha hecho, complete el ejercicio Crear un espacio de trabajo de Azure Machine Learning para aprovisionar un espacio de trabajo de Azure Machine Learning, crear una instancia de cálculo y clonar los archivos necesarios
+Complete el ejercicio Afinar hiperparámetros.
+
+> ## Nota:
+> El notebook de esta sección está en: [11 - Tune Hyperparameters.ipynb](ims%2FC9%2Fnotebooks%2F11%20-%20Tune%20Hyperparameters.ipynb)
+
+![s1.gif](ims%2FC9%2Fgifs%2Fs1.gif)
+
+![s2.gif](ims%2FC9%2Fgifs%2Fs2.gif)
+
+![s3.gif](ims%2FC9%2Fgifs%2Fs3.gif)
+
+![s4.gif](ims%2FC9%2Fgifs%2Fs4.gif)
+
+![s5.gif](ims%2FC9%2Fgifs%2Fs5.gif)
+
+![s6.gif](ims%2FC9%2Fgifs%2Fs6.gif)
+
+![s7.gif](ims%2FC9%2Fgifs%2Fs7.gif)
+
+![s8.gif](ims%2FC9%2Fgifs%2Fs8.gif)
+
 ## 9 Exercise quiz
 [< Back to Local Index](#9-index)
+
+![0.png](ims%2FC9%2Ftest%2F0.png)
+
 ## 9 Knowledge check
 [< Back to Local Index](#9-index)
+
+![q1.png](ims%2FC9%2Ftest%2Fq1.png)
+
+![q2.png](ims%2FC9%2Ftest%2Fq2.png)
+
+![q3.png](ims%2FC9%2Ftest%2Fq3.png)
+
+![q4.png](ims%2FC9%2Ftest%2Fq4.png)
+
 ## 9 Test prep
 [< Back to Local Index](#9-index)
+
+![p1.png](ims%2FC9%2Ftest%2Fp1.png)
+
+![p2.png](ims%2FC9%2Ftest%2Fp2.png)
+
+![p3.png](ims%2FC9%2Ftest%2Fp3.png)
+
+![p4.png](ims%2FC9%2Ftest%2Fp4.png)
+
+![p5.png](ims%2FC9%2Ftest%2Fp5.png)
+
 ## 9 Lesson summary
 [< Back to Local Index](#9-index)
+
+![1.png](ims%2FC9%2Ftest%2F1.png)
+
+En esta lección, ha aprendido a sintonizar hiperparámetros con Azure Machine Learning , o más concretamente, definir un 
+espacio de búsqueda de hiperparámetros, configurar un muestreo de hiperparámetros, seleccionar una política de terminación 
+anticipada, y ejecutar un experimento de sintonización de hiperparámetros.
 
 # 10 Automate machine learning model selection with Azure Machine Learning
 
@@ -3826,22 +4492,295 @@ en tiempo real y solucionar problemas de despliegue del servicio.
 
 ## 10 Lesson introduction
 [< Back to Local Index](#10-index)
+
+![1.png](ims%2FC10%2Fims%2F1%2F1.png)
+
+Hola. En esta lección, aprenderá a automatizar la selección de modelos de aprendizaje automático con Azure Machine 
+Learning. El aprendizaje automático le permite probar múltiples algoritmos en transformaciones de preprocesamiento 
+con sus datos.
+
+![2.png](ims%2FC10%2Fims%2F1%2F2.png)
+
+Esto, combinado con la computación escalable basada en la nube, hace posible encontrar el modelo de mejor rendimiento 
+para sus datos sin la enorme cantidad de ensayo y error manual que consumiría mucho tiempo y que de otro modo sería 
+necesario.
+
+![3.png](ims%2FC10%2Fims%2F1%2F3.png)
+
+Azure Machine Learning incluye soporte para el aprendizaje automático de máquinas a través de una interfaz visual en Azure 
+Machine Learning Studio.
+
+![4.png](ims%2FC10%2Fims%2F1%2F4.png)
+
+Puede utilizar el SDK de Azure Machine Learning para ejecutar experimentos automatizados de aprendizaje automático.
+
+![5.png](ims%2FC10%2Fims%2F1%2F5.png)
+
+En este módulo, aprenderá a utilizar las capacidades de aprendizaje automático automatizado de Azure Machine Learning para 
+determinar el algoritmo de mejor rendimiento para sus datos, utilizar el aprendizaje automático automatizado para 
+preprocesar los datos para el entrenamiento, y ejecutar un experimento de aprendizaje automático automatizado.
+
 ## 10 Automated machine learning tasks and algorithms
 [< Back to Local Index](#10-index)
+
+
+![7.png](ims%2FC10%2Fims%2F1%2F7.png)
+
+Puede utilizar el aprendizaje automático en Azure Machine Learning para entrenar modelos para los siguientes tipos de 
+tareas de aprendizaje automático, regresión de clasificación y previsión de series temporales. 
+
+![8.png](ims%2FC10%2Fims%2F1%2F8.png)
+
+Azure Machine Learning incluye soporte para numerosos algoritmos de uso común para estas tareas. Entre ellos se incluyen 
+algoritmos de clasificación como la regresión logística y el árbol de decisión.
+
+![9.png](ims%2FC10%2Fims%2F1%2F9.png)
+
+Algoritmos de regresión como la regresión lineal, el bosque aleatorio y la red elástica. 
+
+![10.png](ims%2FC10%2Fims%2F1%2F10.png)
+
+Y, por último, algoritmos de previsión como la regresión lineal y el árbol de decisión. 
+
+![11.png](ims%2FC10%2Fims%2F1%2F11.png)
+
+ara obtener una lista completa de los algoritmos admitidos, consulte cómo definir una tarea de aprendizaje automático en 
+el sitio web de Microsoft. Puede encontrar un enlace a este recurso en las lecturas adicionales al final de esta lección. 
+
+[What is automated machine learning (AutoML)](https://docs.microsoft.com/en-us/azure/machine-learning/concept-automated-ml)
+
+
+![12.png](ims%2FC10%2Fims%2F1%2F12.png)
+
+Por defecto, el aprendizaje automático seleccionará aleatoriamente entre toda la gama de algoritmos para la tarea 
+especificada. Puede elegir bloquear algoritmos individuales para que no sean seleccionados, lo que puede ser útil si 
+sabe que sus datos no se adaptan a un tipo de algoritmo concreto. O tiene que cumplir una política que restrinja el 
+tipo de algoritmos de aprendizaje automático que puede utilizar en su organización.
+
 ## 10 Preprocessing and featurization
 [< Back to Local Index](#10-index)
+
+![13.png](ims%2FC10%2Fims%2F1%2F13.png)
+
+Hola. En esta sección, explorará el preprocesamiento y la featurización, además de probar una selección de algoritmos. 
+El aprendizaje automático automatizado puede aplicar transformaciones de preprocesamiento a sus datos, mejorando el 
+rendimiento del modelo. 
+
+
+![15.png](ims%2FC10%2Fims%2F1%2F15.png)
+
+El aprendizaje automático aplica escalado y normalización a los datos numéricos automáticamente, ayudando a evitar 
+que cualquier característica a gran escala domine el entrenamiento. Durante un experimento de aprendizaje automático 
+automatizado, se aplicarán múltiples técnicas de escalado o normalización
+
+![16.png](ims%2FC10%2Fims%2F1%2F16.png)
+
+Puede elegir que el aprendizaje automático aplique transformaciones de preprocesamiento como: 
+- la imputación de valores perdidos para eliminar nulos en el conjunto de datos de entrenamiento 
+- codificación categórica para convertir características categóricas en indicadores numéricos
+- eliminar características de alta cardinalidad como ID de registros
+- ingeniería de características, por ejemplo, derivando partes de fechas individuales de características DateTime
+- otras. 
+
+![17.png](ims%2FC10%2Fims%2F1%2F17.png)
+Para obtener más información sobre el soporte de preprocesamiento en el aprendizaje automático automatizado, consulte 
+qué es el aprendizaje automático automatizado en el sitio web de Microsoft. Puede encontrar un enlace a este recurso en 
+las lecturas adicionales al final de esta lección.
+
+**Preprocessing and featurization**
+[What is automated machine learning (AutoML)  - How automated ML works](https://docs.microsoft.com/en-us/azure/machine-learning/concept-automated-ml#how-automated-ml-works)
+
+
 ## 10 Running an automated machine learning experiment
 [< Back to Local Index](#10-index)
+
+Para ejecutar un experimento automatizado de aprendizaje automático, puede utilizar la interfaz de usuario en Azure 
+Machine Learning studio o enviar un experimento utilizando el SDK.
+
+### Configurar un experimento de aprendizaje automático automatizado
+
+La interfaz de usuario proporciona una forma intuitiva de seleccionar opciones para su experimento de aprendizaje 
+automático automatizado. Cuando utilice el SDK, dispondrá de mayor flexibilidad, y podrá configurar las opciones del 
+experimento utilizando la clase **AutoMLConfig**, como se muestra en el siguiente ejemplo.
+
+```python
+from azureml.train.automl import AutoMLConfig
+
+automl_run_config = RunConfiguration(framework='python')
+automl_config = AutoMLConfig(name='Automated ML Experiment',
+                             task='classification',
+                             primary_metric = 'AUC_weighted',
+                             compute_target=aml_compute,
+                             training_data = train_dataset,
+                             validation_data = test_dataset,
+                             label_column_name='Label',
+                             featurization='auto',
+                             iterations=12,
+                             max_concurrent_iterations=4)
+```
+
+### Especificar los datos para el entrenamiento
+
+El aprendizaje automático automatizado está diseñado para permitirle simplemente aportar sus datos y que Azure Machine 
+Learning averigüe cuál es la mejor manera de entrenar un modelo a partir de ellos.
+
+Cuando utilice la interfaz de usuario de aprendizaje automático automatizado en Azure Machine Learning studio, podrá 
+crear o seleccionar un [conjunto de datos](https://learn.microsoft.com/es-mx/azure/machine-learning/how-to-create-data-assets?view=azureml-api-2&tabs=cli) de Azure Machine Learning para utilizarlo como entrada para su experimento de aprendizaje automático automatizado.
+
+Cuando utilice el SDK para ejecutar un experimento de aprendizaje automático automatizado, puede enviar los datos de las 
+siguientes maneras:
+
+- Especifique un conjunto de datos o marco de datos de datos de entrenamiento que incluya características y la etiqueta 
+a predecir.
+
+- Opcionalmente, especifique un segundo conjunto de datos o marco de datos de validación que se utilizará para validar 
+el modelo entrenado. si no se proporciona, Azure Machine Learning aplicará la validación cruzada utilizando los datos de 
+entrenamiento.
+
+Alternativa:
+
+- Especifique un conjunto de datos, marco de datos o matriz numpy de valores X que contenga las características de 
+entrenamiento, con una matriz y correspondiente de valores de etiqueta.
+
+- Opcionalmente, especifique los conjuntos de datos, marcos de datos o matrices numpy X_valid e y_valid de valores X 
+que se utilizarán para la validación.
+
+### Especifique la métrica principal
+
+Uno de los ajustes más importantes que debe especificar es la **métrica_principal**. Se trata de la métrica de rendimiento 
+objetivo para la que se determinará el modelo óptimo. Azure Machine Learning admite un conjunto de métricas con nombre 
+para cada tipo de tarea. Para recuperar la lista de métricas disponibles para un tipo de tarea concreto, puede utilizar 
+la función **get_primary_metrics** como se muestra aquí:
+
+```python
+from azureml.train.automl.utilities import get_primary_metrics
+
+get_primary_metrics('classification')
+```
+
+**Más información:** Puede encontrar una lista completa de las métricas primarias y sus definiciones en
+[Comprender los resultados](https://learn.microsoft.com/es-mx/azure/machine-learning/how-to-understand-automated-ml?view=azureml-api-2)
+ del aprendizaje automático automatizado.
+
+### Enviar un experimento de aprendizaje automático automatizado
+
+Puede enviar un experimento de aprendizaje automático automatizado como cualquier otro experimento basado en el SDK.
+
+```python
+from azureml.core.experiment import Experiment
+
+automl_experiment = Experiment(ws, 'automl_experiment')
+automl_run = automl_experiment.submit(automl_config)
+```
+
+Puede supervisar las ejecuciones de experimentos de aprendizaje automático automatizado en Azure Machine Learning studio, 
+o en el widget **RunDetails** de Jupyter Notebooks.
+
+### Recuperar la mejor ejecución y su modelo
+
+Puede identificar fácilmente la mejor ejecución en Azure Machine Learning studio, y descargar o desplegar el modelo que 
+generó. Para lograr esto mediante programación con el SDK, puede utilizar código como el del siguiente ejemplo:
+
+```python
+best_run, fitted_model = automl_run.get_output()
+best_run_metrics = best_run.get_metrics()
+for metric_name in best_run_metrics:
+    metric = best_run_metrics[metric_name]
+    print(metric_name, metric)
+```
+
+### Explorar los pasos del preprocesamiento
+
+El aprendizaje automático utiliza conductos scikit-learn para encapsular los pasos de preprocesamiento con el modelo. 
+Puede ver los pasos en el modelo ajustado que obtuvo de la mejor ejecución utilizando el código anterior de esta manera:
+
+```python
+for step_ in fitted_model.named_steps:
+    print(step_)
+```
+
 ## 10 Exercise Using automated machine learning
 [< Back to Local Index](#10-index)
+
+Ahora es su oportunidad de utilizar las capacidades de aprendizaje automático automatizado de Azure Machine Learning 
+para entrenar un modelo de aprendizaje automático.
+
+En este ejercicio, usted:
+
+- Ejecutará un experimento de aprendizaje automático automatizado.
+
+- Revisará el modelo de mejor rendimiento.
+
+### Instrucciones
+
+1. Si aún no tiene una suscripción a Azure, regístrese para una prueba gratuita en
+https://azure.microsoft.com.
+
+2. Consulte el repositorio del ejercicio en
+https://aka.ms/mslearn-dp100.
+
+3. Si aún no lo ha hecho, complete el ejercicioCrear un espacio de trabajo de Azure Machine Learning para aprovisionar un espacio de trabajo de Azure Machine Learning, crear una instancia de cálculo y clonar los archivos necesarios.
+
+4. Complete el ejercicioUtilizar aprendizaje automático automatizado del SDK.
+
+> Nota
+>
+> También hay un ejercicio llamado Utilizar aprendizaje automático automatizado, en el que puede utilizar la interfaz visual para el aprendizaje automático automatizado. También puede completarlo si desea explorar el enfoque "sin código".
+
+> ### Nota:
+> El notebook de esta sección está en: [12 - Use Automated Machine Learning.ipynb](ims%2FC10%2Fnotebooks%2F12%20-%20Use%20Automated%20Machine%20Learning.ipynb)
+
+![s1.gif](ims%2FC10%2Fgifs%2Fs1.gif)
+
+![s2.gif](ims%2FC10%2Fgifs%2Fs2.gif)
+
+![s3.gif](ims%2FC10%2Fgifs%2Fs3.gif)
+
+![s4.gif](ims%2FC10%2Fgifs%2Fs4.gif)
+
+![s5.gif](ims%2FC10%2Fgifs%2Fs5.gif)
+
+![s6.gif](ims%2FC10%2Fgifs%2Fs6.gif)
+
+![s7.gif](ims%2FC10%2Fgifs%2Fs7.gif)
+
 ## 10 Exercise quiz
 [< Back to Local Index](#10-index)
+
+![0.png](ims%2FC10%2Ftests%2F0.png)
+
 ## 10 Knowledge check
 [< Back to Local Index](#10-index)
+
+![q1.png](ims%2FC10%2Ftests%2Fq1.png)
+
+![q2.png](ims%2FC10%2Ftests%2Fq2.png)
+
+![q3.png](ims%2FC10%2Ftests%2Fq3.png)
+
+![q4.png](ims%2FC10%2Ftests%2Fq4.png)
+
 ## 10 Lesson summary
 [< Back to Local Index](#10-index)
+
+![18.png](ims%2FC10%2Fims%2F1%2F18.png)
+
+En esta lección, ha aprendido a automatizar la selección de modelos de aprendizaje automático con Azure Machine Learning. 
+Más concretamente, ha aprendido a utilizar las capacidades de aprendizaje automático automatizado de Azure Machine Learning 
+para: 
+- determinar el algoritmo de mejor rendimiento para sus datos 
+- utilizar el aprendizaje automático automatizado para preprocesar los datos para el entrenamiento
+- ejecutar un experimento de aprendizaje automático automatizado.
+
+
 ## 10 Additional Reading
 [< Back to Local Index](#10-index)
+
+**Automated machine learning tasks and algorithms**
+[What is automated machine learning (AutoML)](https://docs.microsoft.com/en-us/azure/machine-learning/concept-automated-ml)
+
+**Preprocessing and featurization**
+[What is automated machine learning (AutoML)  - How automated ML works](https://docs.microsoft.com/en-us/azure/machine-learning/concept-automated-ml#how-automated-ml-works)
 
 # 11 Explore differential privacy
 
@@ -3860,20 +4799,182 @@ en tiempo real y solucionar problemas de despliegue del servicio.
 
 ## 11 Lesson introduction
 [< Back to Local Index](#11-index)
+
+![1.png](ims%2FC11%2Fims%2F1%2F1.png)
+
+Hola, en esta lección aprenderá a explorar la privacidad diferencial. Los proyectos de ciencia de datos, incluidos los 
+de aprendizaje automático, implican el análisis de datos y, a menudo, esos datos incluyen detalles personales sensibles 
+que deberían mantenerse en privado.
+
+![2.png](ims%2FC11%2Fims%2F1%2F2.png)
+
+En la práctica, la mayoría de los informes que se publican a partir de los datos incluyen agregaciones de los datos, 
+lo que podría pensar que proporcionaría cierta privacidad. Al fin y al cabo, los resultados agregados no revelan los 
+valores de los datos individuales.
+
+![3.png](ims%2FC11%2Fims%2F1%2F3.png)
+
+Sin embargo, consideremos un caso en el que múltiples análisis de los datos dan lugar a informes agregados que, al 
+combinarse, podrían utilizarse para averiguar información sobre los individuos del conjunto de datos de origen. 
+Supongamos que diez participantes comparten datos sobre su ubicación y salario a partir de los cuales se elaboran 
+los informes.
+
+![4.png](ims%2FC11%2Fims%2F1%2F4.png)
+
+Un informe de salarios agregados que nos dice los salarios medios en Nueva York, San Francisco y Seattle. Un informe de 
+ubicación de los trabajadores que nos dice que el 10% de los participantes en el estudio. En otras palabras, una 
+sola persona tiene su sede en Seattle. 
+
+![5.png](ims%2FC11%2Fims%2F1%2F5.png)
+
+A partir de estos dos informes, podemos determinar fácilmente el salario 
+específico del participante con sede en Seattle. Cualquiera que revise ambos estudios y que por casualidad conozca a una 
+persona de Seattle que haya participado, ahora conoce el salario de esa persona.
+
+![6.png](ims%2FC11%2Fims%2F1%2F6.png)
+
+En esta lección explorará la privacidad diferencial, una técnica que puede ayudar a proteger los datos de un individuo frente a este tipo de exposición. 
+Más concretamente, aprenderá a: 
+
+- articular el problema de la privacidad de los datos 
+- describir cómo funciona la privacidad diferencial
+- configurar parámetros para la privacidad diferencial
+- realizar análisis de datos deferencialmente privados
+
+
 ## 11 Understand differential privacy
 [< Back to Local Index](#11-index)
+
+![7.png](ims%2FC11%2Fims%2F1%2F7.png)
+
+La privacidad diferencial busca para proteger los valores de los datos individuales mediante la adición de estadísticas 
+ruido en el proceso de análisis. La matemática necesaria para sumar el ruido es complejo, pero el principio es bastante 
+intuitivo. El ruido asegura la agregación de datos mantener la coherencia estadística con los valores reales de los datos, 
+teniendo en cuenta algunos variación aleatoria, pero NO permiten calcular los valores individuales a partir de los datos agregados. 
+
+![8.png](ims%2FC11%2Fims%2F1%2F8.png)
+
+Además, el ruido es diferente para cada análisis, por lo que los resultados no son deterministas. En otras palabras, a 
+los análisis que realizan la misma agregación puede producir resultados ligeramente diferentes.
+
 ## 11 Configure data privacy parameters
 [< Back to Local Index](#11-index)
+
+![9.png](ims%2FC11%2Fims%2F1%2F9.png)
+
+Una forma en la que un individuo puede proteger sus datos personales es simplemente no participar en un estudio. Esto se 
+conoce como la opción de exclusión voluntaria. 
+
+Sin embargo, existen algunas consideraciones para esto como solución. Incluso si decide excluirse de un estudio, éste 
+todavía puede producir resultados que le afecten. Por ejemplo, puede optar por excluirse de un estudio que compara 
+los diagnósticos de enfermedades cardíacas entre un par de personas basándose en que al hacerlo puede revelar un 
+diagnóstico de enfermedad cardíaca que haga que suban las primas de su seguro médico. 
+
+El estudio encuentra una correlación entre las personas que beben café y un mayor riesgo de enfermedad cardiaca, y su 
+compañía de seguros sabe que usted es bebedor de café, su tarifa puede subir aunque usted no haya participado personalmente 
+en el estudio. 
+
+![10.png](ims%2FC11%2Fims%2F1%2F10.png)
+
+Los beneficios de la participación en el estudio pueden compensar cualquier impacto negativo. Por ejemplo, si le pagan 
+100 dólares por participar en un estudio que hace que la tarifa de su seguro médico suba 10 dólares al año, pasarán más 
+de 10 años antes de que tenga una pérdida neta.
+
+Puede que para usted sea una compensación que merezca la pena, sobre todo si su tarifa puede subir como resultado del 
+estudio, incluso si no participa. 
+
+![11.png](ims%2FC11%2Fims%2F1%2F11.png)
+
+La única forma de que la opción de exclusión funcione para cada individuo es que cada individuo no participe, lo que 
+hace que todo el estudio carezca de sentido.
+
+![12.png](ims%2FC11%2Fims%2F1%2F12.png)
+
+La cantidad de llamadas a la variación añadiendo ruido es configurable a través de un parámetro llamado Epsilon. 
+
+![13.png](ims%2FC11%2Fims%2F1%2F13.png)
+
+Este valor rige la cantidad de riesgos adicionales de que sus datos personales puedan ser identificados al rechazar la 
+opción de exclusión voluntaria y participar en un estudio. **Lo fundamental es que se aplica este principio de privacidad para todos los que participan en el estudio.**
+
+![14.gif](ims%2FC11%2Fims%2F1%2F14.gif)
+
+Un valor de **Epsilon bajo proporciona la mayor privacidad** a expensas de una **menor precisión** al agregar los datos. 
+Un valor de **Epsilon más alto da lugar a agregaciones que son más fieles a la distribución real** de los datos, 
+pero en las que la contribución individual de un solo individuo a el valor agregado queda menos oscurecida por el ruido.
+
 ## 11 Exercise Use differential privacy
 [< Back to Local Index](#11-index)
+
+Ahora tiene la oportunidad de explorar por sí mismo la privacidad diferencial utilizando el paqueteSmartNoise.
+
+En este ejercicio, usted podrá:
+
+- Utilizar **SmartNoise** para generar análisis diferencialmente privados.
+
+- Utilizar **SmartNoise** para enviar consultas diferencialmente privadas.
+
+### Instrucciones
+Siga estas instrucciones para completar el ejercicio.
+
+1. Si aún no dispone de una suscripción a Azure, regístrese para una prueba gratuita en
+https://azure.microsoft.com.
+
+2. Consulte el repositorio del ejercicio en
+https://aka.ms/mslearn-dp100.
+
+3. Si aún no lo ha hecho, complete el ejercicioCrear un espacio de trabajo de Azure Machine Learning para aprovisionar un espacio de trabajo de Azure Machine Learning, crear una instancia de cálculo y clonar los archivos necesarios.
+
+4. Complete el ejercicio **Explorar la privacidad diferencial.**
+
+> Nota:
+> 
+> El Notebook de esta clase está en: [13 - Explore Differential Privacy.ipynb](ims%2FC11%2Fnotebooks%2F13%20-%20Explore%20Differential%20Privacy.ipynb) 
+
+Es fácil de leer el notebook pero TIENE problemas de compatibilidad entre versiones y no logre ejecutarlo adecuadamente,
+sin embargo, la forma en la que esta hecho es muy fácil de leer.
+
 ## 11 Exercise quiz
 [< Back to Local Index](#11-index)
+
+![0.png](ims%2FC11%2Ftests%2F0.png)
+
 ## 11 Knowledge Check
 [< Back to Local Index](#11-index)
+
+![q1.png](ims%2FC11%2Ftests%2Fq1.png)
+
+![q2.png](ims%2FC11%2Ftests%2Fq2.png)
+
+![q3.png](ims%2FC11%2Ftests%2Fq3.png)
+
+![q4.png](ims%2FC11%2Ftests%2Fq4.png)
+
+![q5.png](ims%2FC11%2Ftests%2Fq5.png)
+
 ## 11 Lesson Summary
 [< Back to Local Index](#11-index)
+
+![15.png](ims%2FC11%2Fims%2F1%2F15.png)
+
+En esta lección, ha aprendido a explorar la privacidad diferencial. Ha aprendido a articular el problema de la privacidad 
+de los datos, describir cómo funciona la privacidad diferencial, configurar parámetros para la privacidad diferencial, y 
+realizar análisis de datos con privacidad diferencial. 
+
+![16.png](ims%2FC11%2Fims%2F1%2F16.png)
+
+Para obtener más información sobre la interpretación de modelos, consulte la privacidad diferencial en la documentación 
+de Azure Machine Learning del sitio web de Microsoft. Puede encontrar un enlace a estos recursos en las lecturas 
+adicionales al final de esta lección.
+[What is differential privacy in machine learning](https://docs.microsoft.com/en-us/azure/machine-learning/concept-differential-privacy)
+
+
 ## 11 Additional Reading
 [< Back to Local Index](#11-index)
+
+**Differential privacy**
+
+[What is differential privacy in machine learning](https://docs.microsoft.com/en-us/azure/machine-learning/concept-differential-privacy)
 
 # 12 Explain machine learning models with Azure Machine Learning
 
@@ -3895,26 +4996,407 @@ en tiempo real y solucionar problemas de despliegue del servicio.
 
 ## 12 Lesson introduction
 [< Back to Local Index](#12-index)
+
+![1.png](ims%2FC12%2Fims%2F1%2F1.png)
+
+Hola. En esta lección, aprenderá a explicar los modelos de aprendizaje automático con Azure Machine Learning. A medida 
+que el aprendizaje automático se vuelve cada vez más integral para las decisiones que afectan a la salud, la seguridad, 
+el bienestar económico, y otros aspectos de la vida de las personas, es importante poder entender cómo los modelos hacen 
+predicciones y poder explicar los fundamentos de las decisiones basadas en el aprendizaje automático.
+
+![2.png](ims%2FC12%2Fims%2F1%2F2.png)
+
+Explicar los modelos es difícil debido a la variedad de tipos de algoritmos de aprendizaje automático y a la naturaleza 
+de cómo funciona el aprendizaje automático. Pero la interpretabilidad de los modelos se ha convertido en un elemento clave 
+para ayudar a hacer que las predicciones de los modelos sean explicables.
+
+![3.png](ims%2FC12%2Fims%2F1%2F3.png)
+
+En esta lección, aprenderá a: 
+
+- interpretar la importancia global y local de las características. 
+- utilizar un explicador para interpretar un modelo
+- cree explicaciones de modelos en un experimento de entrenamiento
+- visualizar explicaciones de modelos.
+
 ## 12 Feature importance
 [< Back to Local Index](#12-index)
+
+![4.png](ims%2FC12%2Fims%2F1%2F4.png)
+
+Los explicadores de modelos utilizan técnicas estadísticas para calcular la importancia de las características
+
+Esto permite cuantificar la influencia relativa que tiene cada característica del conjunto de datos de entrenamiento en 
+la predicción de etiquetas. Los explicadores funcionan evaluando un conjunto de datos de prueba de casos de 
+características y las etiquetas que el modelo predice para ellos. 
+
+![5.png](ims%2FC12%2Fims%2F1%2F5.png)
+
+> La importancia global de las características cuantifica la importancia relativa de cada característica en el conjunto de datos de prueba en su totalidad. Proporciona una comparación general del grado en que cada característica del conjunto de datos influye en la predicción.
+
+Por ejemplo, un modelo de clasificación binaria para predecir el riesgo de impago de un préstamo podría entrenarse a partir 
+de características como: **el importe del préstamo, los ingresos, el estado civil y la edad** para predecir una etiqueta 
+de `1` para los préstamos que probablemente se devolverán y de `0` para los préstamos que tienen un riesgo significativo 
+de impago y, por lo tanto, no deberían aprobarse. 
+
+Un explicador podría entonces utilizar un conjunto de datos de prueba suficientemente representativo para producir los 
+siguientes valores de importancia global de las características: 
+
+- ingresos 0.98
+- importe del préstamo 0.67
+- edad 0.54 
+- estado civil 0.32. 
+
+![6.png](ims%2FC12%2Fims%2F1%2F6.png)
+
+De estos valores se deduce claramente que, con respecto a las predicciones globales generadas por el modelo para el 
+conjunto de datos de prueba, los ingresos son la característica más importante para predecir si un prestatario 
+incumplirá o no un préstamo, seguida de el importe del préstamo, luego la edad y, por último, el estado civil.
+
+![7.png](ims%2FC12%2Fims%2F1%2F7.png)
+
+**La importancia local de las características mide la influencia de cada valor de característica para una predicción individual
+específica**. 
+
+Por ejemplo, supongamos que **Sam** solicita un préstamo que el modelo de aprendizaje automático aprueba prediciendo que 
+**Sam no incumplirá la devolución del préstamo**. Podría utilizar un **explicador** para calcular **la importancia local** 
+de la característica para la solicitud de Sam para determinar qué factores influyen en la predicción. Dado que se trata 
+de un modelo de clasificación, **cada característica obtiene un valor de importancia local para cada clase posible**, 
+indicando la cantidad de apoyo para esa clase basada en el valor de la característica. Dado que se trata de un modelo de 
+clasificación binario, sólo hay dos clases posibles, cero y uno. 
+
+![8.png](ims%2FC12%2Fims%2F1%2F8.png)
+
+El apoyo de cada característica a una clase se traduce en un nivel correlativamente negativo de apoyo a la otra. En el 
+caso de Sam, el apoyo global a la clase cero es -1.4 y el apoyo para la clase uno es correspondientemente 1,4. Así pues, 
+el apoyo para la clase uno es mayor que para la clase cero y el préstamo se aprueba. 
+
+![9.png](ims%2FC12%2Fims%2F1%2F9.png)
+
+La característica más importante para una predicción de la clase uno es el importe del préstamo, seguido de los ingresos. 
+Se trata del orden inverso al de sus valores de importancia global de las características, que indican que los ingresos 
+son el factor más importante para la muestra de datos en su conjunto. 
+
+![10.png](ims%2FC12%2Fims%2F1%2F10.png)
+
+Podría haber múltiples razones por las que la importancia local para una predicción individual varía de la importancia 
+global para el conjunto de datos en su conjunto.
+
+![11.png](ims%2FC12%2Fims%2F1%2F11.png)
+
+Por ejemplo, Sam podría tener unos ingresos inferiores a la media, pero el importe del préstamo en este caso podría ser 
+inusualmente pequeño. 
+
+![12.png](ims%2FC12%2Fims%2F1%2F12.png)
+
+Para un modelo de clasificación multiclase, se calcula un valor de importancia local para cada una de las clases posibles 
+para cada característica, siendo siempre cero el total para todas las clases. 
+
+Por ejemplo, un modelo podría predecir la especie de un pingüino basándose en características como: 
+
+- la longitud de su pico
+- la anchura de su pico
+- la longitud de sus aletas 
+- su peso.
+
+![13.png](ims%2FC12%2Fims%2F1%2F13.png) 
+
+Supongamos que hay tres especies de pingüinos. Entonces el modelo predice una de las tres etiquetas de clase 
+**cero, uno o dos**. Para una predicción individual, la característica longitud de la aleta podría tener valores de 
+importancia local de **0.5 para la clase cero, 0,3 para la clase uno y -0,8 para la clase dos**. 
+
+
+![14.png](ims%2FC12%2Fims%2F1%2F14.png)
+
+Esto indica que la longitud de la aleta apoya moderadamente una predicción para la clase cero apoya ligeramente una 
+predicción de la clase uno, y apoya fuertemente la predicción de este pingüino en particular, no formando parte de la 
+clase dos. 
+
+![15.png](ims%2FC12%2Fims%2F1%2F15.png)
+
+Para un modelo de regresión, no hay clases, por lo que el valor de importancia local simplemente indica el nivel de 
+influencia que cada característica tiene en la escala o etiqueta predicha.
+
 ## 12 Using explainers
 [< Back to Local Index](#12-index)
+
+![1.png](ims%2FC12%2Fims%2F2%2F1.png)
+
+Hola y bienvenidos. En esta parte explorará el uso de explicadores. Puede utilizar el SDK de Azure Machine Learning para 
+crear explicadores para modelos. Incluso si no fueron entrenados utilizando un experimento de Azure Machine Learning. 
+
+![2.png](ims%2FC12%2Fims%2F2%2F2.png)
+
+Para interpretar un modelo local, debe instalar el paquete azureml-interpret y utilizarlo para crear un explicador. 
+Existen varios tipos de explicadores, como MimicExplainer, TabularExplainer y PFIExplainer. Veámoslos ahora con un poco más de detalle. 
+
+![3.png](ims%2FC12%2Fims%2F2%2F3.png)
+
+MimicExplainer es un explicador que crea un modelo sustituto global que se aproxima a su modelo entrenado, y que puede 
+utilizarse para generar explicaciones. Este modelo explicable debe tener el mismo tipo de arquitectura que su modelo entrenado, 
+por ejemplo, lineal o basado en árboles.
+
+![4.png](ims%2FC12%2Fims%2F2%2F4.png)
+
+TabularExplainer es un explicador que actúa como envoltorio alrededor de varios algoritmos explicadores afilados. Elige 
+automáticamente el más adecuado para la arquitectura de su modelo. 
+
+![5.png](ims%2FC12%2Fims%2F2%2F5.png)
+
+PFIExplainer es un explicador de permutación de importancia de características, que analiza la importancia de las características. 
+Barajando los valores de las características y midiendo el impacto en el rendimiento de la predicción.
+
+![6.png](ims%2FC12%2Fims%2F2%2F6.png)
+
+Bien, pasemos ahora a la importancia global de las características. Para recuperar los valores de importancia global de las 
+características de su modelo, puede llamar al método global explicado de su explicador para obtener una explicación global. 
+Y luego utilice el método get_feature_importance_dict() para obtener un diccionario de los valores de importancia de las características. 
+
+![7.png](ims%2FC12%2Fims%2F2%2F7.png)
+
+Es importante tener en cuenta que el código es el mismo para MimicExplainer y TabularExplainer. El PFIExplainer requiere 
+las etiquetas reales que corresponden a las características de prueba
+
+![8.png](ims%2FC12%2Fims%2F2%2F8.png)
+
+Por último, veamos cómo explicar la importancia local de las características. Para recuperar la importancia local de las 
+características de un MimicExplainer o un TabularExplainer. Debe llamar al método local explicado de su explicador especificando 
+el subconjunto de casos que desea explicar. 
+
+![9.png](ims%2FC12%2Fims%2F2%2F9.png)
+
+A continuación, puede utilizar los métodos get_ranked_local_names y get_ranked_local_values. Para recuperar diccionarios de 
+los nombres de las características y valores de importancia clasificados por importancia. Es importante tener en cuenta que 
+el código es el mismo para MimicExplainer y TabularExplainer. El PFIExplainer no admite explicaciones de importancia de 
+características locales.
+
 ## 12 Creating explanations
 [< Back to Local Index](#12-index)
+
+Cuando utilice un estimador o un script para entrenar un modelo en un experimento de Azure Machine Learning, puede crear 
+una explicación y cargar la explicación que genera en la ejecución para su posterior análisis.
+
+### Creación de una explicación en el script del experimento
+
+Para crear una explicación en el script del experimento, deberá asegurarse de que los paquetes **azureml-interpret** y 
+**azureml-contrib-interpret** están instalados en el entorno de ejecución. Entonces podrá utilizarlos para crear una explicación 
+a partir de su modelo entrenado y cargarla en las salidas de ejecución. 
+
+El siguiente ejemplo de código muestra cómo puede incorporarse a un script de experimento el código para generar y cargar una 
+explicación del modelo.
+
+```python
+# Import Azure ML run library
+from azureml.core.run import Run
+from azureml.contrib.interpret.explanation.explanation_client import ExplanationClient
+from interpret.ext.blackbox import TabularExplainer
+# other imports as required
+
+# Get the experiment run context
+run = Run.get_context()
+
+# code to train model goes here
+
+# Get explanation
+explainer = TabularExplainer(model, X_train, features=features, classes=labels)
+explanation = explainer.explain_global(X_test)
+
+# Get an Explanation Client and upload the explanation
+explain_client = ExplanationClient.from_run(run)
+explain_client.upload_model_explanation(explanation, comment='Tabular Explanation')
+
+# Complete the run
+run.complete()
+```
+
+### Visualización de la explicación
+
+Puede ver la explicación que ha creado para su modelo en la pestaña **Explicaciones** de la ejecución en Azure Machine learning studio.
+
+También puede utilizar el objeto **ExplanationClient** para descargar la explicación en Python.
+
+```python
+from azureml.contrib.interpret.explanation.explanation_client import ExplanationClient
+
+client = ExplanationClient.from_run_id(workspace=ws,
+                                       experiment_name=experiment.experiment_name, 
+                                       run_id=run.id)
+explanation = client.download_model_explanation()
+feature_importances = explanation.get_feature_importance_dict()
+```
+
 ## 12 Visualizing explanations
 [< Back to Local Index](#12-index)
+
+![10.png](ims%2FC12%2Fims%2F2%2F10.png)
+
+Explicaciones de modelos en Azure Machine Learning Studio incluye varias visualizaciones que puedes usar para explorar 
+importancia de la función. La primera visualización de la pestaña de explicaciones de una ejecución muestra la importancia 
+global de las funciones. Puede usar el control deslizante para mostrar solo las k funciones principales. 
+
+![11.png](ims%2FC12%2Fims%2F2%2F11.png)
+
+Pasar al resumen la visualización de la importancia muestra la distribución de importancia individual, valores para cada 
+característica en todo el conjunto de datos de prueba. Puede ver las funciones como un diagrama de enjambres, como se 
+muestra arriba, un diagrama de caja o un diagrama de violín. 
+
+![12.png](ims%2FC12%2Fims%2F2%2F12.png)
+
+Selección de un individuo el punto de datos muestra la importancia de la característica local para el caso en el que el 
+punto de datos pertenece.
+
 ## 12 Exercise Interpret models
 [< Back to Local Index](#12-index)
+
+Ahora es su oportunidad de interpretar modelos.
+
+En este ejercicio, usted podrá:
+
+- Generar la importancia de las características de un modelo.
+
+- Generar explicaciones como parte de un experimento de entrenamiento de modelos.
+
+### Instrucciones
+
+Siga estas instrucciones para completar el ejercicio.
+
+1. Si aún no dispone de una suscripción a Azure, suscríbase a una prueba gratuita en
+https://azure.microsoft.com.
+
+2. Consulte el repositorio del ejercicio en
+https://aka.ms/mslearn-dp100.
+
+3. Si aún no lo ha hecho, complete el ejercicioCrear un espacio de trabajo de Azure Machine Learning para aprovisionar un espacio de trabajo de Azure Machine Learning, crear una instancia de cálculo y clonar los archivos necesarios.
+
+4. Complete el ejercicioInterpretar modelos.
+
+### Notebook
+
+> NOTA:
+> 
+> El notebook de esta clase está en: [14 - Interpret Models.ipynb](ims%2FC12%2Fnotebooks%2F14%20-%20Interpret%20Models.ipynb)
+
+1. Vamos a empezar instalando la biblioteca que permitirá darle `intrepretabilidad` a nuestros modelos, incluso si estos ya han sido entrenados.
+
+   ![s1.gif](ims%2FC12%2Fgifs%2Fs1.gif)
+
+2. Ahora de forma simple, vamos a crear un clasificador de diabetes basado un `DecisionTreeClassifier`:
+
+   ![s2.gif](ims%2FC12%2Fgifs%2Fs2.gif)
+
+   Podemos observar sus resultados de `Accuracy` y `AUC`, el modelo ha este punto ya ha sido entrenado y validado.
+
+3. Vamos entonces a darle interpretabilidad a l mismo. Para ello y por el tipo de `dataset` que estamos utilizando, vamos a emplear
+   un `TabularExplainer`. Vemos como el proceso es sumamente simple, solo podemos el modelo que ya hemos entrenado, los `X_train` y a su vez 
+   una lista de `features` que corresponde al nombre de las variables Y. Finalmente, ponemos los `labels`.
+   ![s3.gif](ims%2FC12%2Fgifs%2Fs3.gif)
+
+4. Ahora vamos a ver una `Global Feature importance`:
+
+   ![s4.gif](ims%2FC12%2Fgifs%2Fs4.gif)
+
+    Esto corresponde con la importancia de cada Variable a nivel Global para determinar la clase en este problema de clasificación.
+
+5. Algo igual de interesante es ver la importancia a nivel `Local`, quiero decir a nivel de instancia:
+
+   ![s5.gif](ims%2FC12%2Fgifs%2Fs5.gif)
+   
+   Algo interesante es que la `interpretabilidad` recae directamente en el objeto: `tab_explainer` aunque curiosamente quien pone
+   la etiqueta final sigue siendo la predicción del modelo `bbox`
+
+6. Podemos hacer lo mismo pero con un experimento, un modelo creado en Azure:
+
+   Ya conocemos estos pasos básicos para correr un nuevo experimento:
+
+   1. Crear el folder que contenga el dataset:
+
+      ![s6.gif](ims%2FC12%2Fgifs%2Fs6.gif)
+
+   2. Crear el código de python que se va a correr en el experimento:
+
+      ![s7.gif](ims%2FC12%2Fgifs%2Fs7.gif)
+
+      > Nota importante:
+      >
+      > Es aquí donde ponemos el código para agregar `interpretabilidad`:
+      
+      ```python
+       # Get explanation
+       explainer = TabularExplainer(model, X_train, features=features, classes=labels)
+       explanation = explainer.explain_global(X_test)
+   
+       # Get an Explanation Client and upload the explanation
+       explain_client = ExplanationClient.from_run(run)
+       explain_client.upload_model_explanation(explanation, comment='Tabular Explanation')
+      ```
+   3. Crear el entorno virtual `.yaml` de conda:
+
+      ![s8.gif](ims%2FC12%2Fgifs%2Fs8.gif)
+
+   4. Correr el experimento:
+
+      ![s9.gif](ims%2FC12%2Fgifs%2Fs9.gif)
+
+7. Observar los resultados en Azure:
+
+   ![s10.gif](ims%2FC12%2Fgifs%2Fs10.gif)
+
 ## 12 Exercise quiz
 [< Back to Local Index](#12-index)
+
+![0.png](ims%2FC12%2Ftests%2F0.png)
+
 ## 12 Knowledge check
 [< Back to Local Index](#12-index)
+
+![q1.png](ims%2FC12%2Ftests%2Fq1.png)
+
+![q2.png](ims%2FC12%2Ftests%2Fq2.png)
+
+![q3.png](ims%2FC12%2Ftests%2Fq3.png)
+
 ## 12 Test prep
 [< Back to Local Index](#12-index)
+
+![t1.png](ims%2FC12%2Ftests%2Ft1.png)
+
+![t2.png](ims%2FC12%2Ftests%2Ft2.png)
+
+![t3.png](ims%2FC12%2Ftests%2Ft3.png)
+
+![t4.png](ims%2FC12%2Ftests%2Ft4.png)
+
+![t5.png](ims%2FC12%2Ftests%2Ft5.png)
+
+![t6.png](ims%2FC12%2Ftests%2Ft6.png)
+
+![t7.png](ims%2FC12%2Ftests%2Ft7.png)
+
 ## 12 Lesson Summary
 [< Back to Local Index](#12-index)
+
+![1.png](ims%2FC12%2Ftests%2F1.png)
+
+
+En esta lección, ha aprendido a explicar modelos de aprendizaje automático, con Azure Machine Learning. 
+Más concretamente, ha aprendido a: 
+
+- interpretar la importancia global y local de las características
+- utilizar un explicador para interpretar un modelo
+- crear explicaciones de modelos en un experimento de entrenamiento
+- visualizar explicaciones de modelos. 
+
+![2.png](ims%2FC12%2Ftests%2F2.png)
+
+Para obtener más información sobre la interpretación de modelos, consulte la interpretación de modelos en 
+Azure Machine Learning, en la documentación de Azure Machine Learning del sitio web de Microsoft. Puede 
+encontrar un enlace a este recurso, en las lecturas adicionales al final de esta lección.
+
 ## 12 Additional Reading
 [< Back to Local Index](#12-index)
+
+**Model interpretability**
+[Model interpretability in Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-machine-learning-interpretability)
 
 # 13 Detect and mitigate unfairness in models with Azure Machine Learning
 
