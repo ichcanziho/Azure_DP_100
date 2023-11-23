@@ -5416,22 +5416,431 @@ encontrar un enlace a este recurso, en las lecturas adicionales al final de esta
 
 ## 13 Lesson introduction
 [< Back to Local Index](#13-index)
+
+![1.png](ims%2FC13%2Fims%2F1%2F1.png)
+
+Hola. En esta lección, aprenderá a detectar y mitigar la injusticia En los modelos, con el aprendizaje automático 
+de Azure. Los modelos de aprendizaje automático, se utilizan cada vez más para fundamentar decisiones que afectan a la 
+vida de las personas. 
+
+![2.png](ims%2FC13%2Fims%2F1%2F2.png)
+
+Por ejemplo, una predicción hecha por un modelo de machine learning puede influenciar la aceptación de un crédito para una
+deuda o un seguro médico u otros servicios financieros. Si eres aceptado en una escuela o no. Eligibilidad para un tratamiento
+médico o tratamiento experimental. Inclusión en una promoción de marketing. Selección para un aumento de puesto. 
+
+![3.png](ims%2FC13%2Fims%2F1%2F3.png)
+
+Con decisiones tan críticas en la balanza, tenemos que certeza en que los modelos de aprendizaje automático en los 
+que confiamos predicen y no discriminen a favor o en contra de subconjuntos de la población en función de su 
+origen étnico, sexo, edad u otros factores. 
+
+![4.png](ims%2FC13%2Fims%2F1%2F4.png)
+
+En esta lección, aprenderá a: 
+
+- evaluar los modelos de aprendizaje automático para imparcialidad
+- mitigar la disparidad predictiva en un modelo de aprendizaje automático.
+
 ## 13 Consider model fairness
 [< Back to Local Index](#13-index)
+
+![5.png](ims%2FC13%2Fims%2F1%2F5.png)
+
+Cuando consideramos el concepto de imparcialidad en relación con las predicciones realizadas por los modelos de aprendizaje 
+automático, ayuda tener claro lo que entendemos por imparcialidad. 
+
+![6.png](ims%2FC13%2Fims%2F1%2F6.png)
+
+Por ejemplo, supongamos que el modelo de clasificación se utiliza para predecir la probabilidad de que se reembolse con 
+éxito el préstamo y, por lo tanto, influye en que se apruebe o no el préstamo.
+
+![7.png](ims%2FC13%2Fims%2F1%2F7.png)
+
+Es probable que el modelo se entrene utilizando características que reflejen las características del solicitante, como la edad, 
+la situación laboral, los ingresos, los ahorros y la deuda actual. Estas características se utilizan para entrenar un modelo 
+de clasificación binario que predice si un solicitante reembolsará el préstamo.
+
+![8.png](ims%2FC13%2Fims%2F1%2F8.png)
+
+Supongamos que el modelo predice que alrededor del 45% de los solicitantes reembolsarán con éxito sus préstamos. 
+Sin embargo, al revisar los registros de aprobación de préstamos, usted empieza a sospechar que se aprueban menos préstamos 
+a solicitantes de 25 años o más jóvenes que a solicitantes mayores de 25 años. 
+
+¿Cómo puede estar seguro de que el modelo es justo con los solicitantes de ambos grupos de edad? 
+
+![9.png](ims%2FC13%2Fims%2F1%2F9.png)
+
+Una forma de empezar a evaluar la justicia de un modelo es comparar las predicciones para cada grupo con una característica 
+sensible. Para el modelo de aprobación de préstamos, la edad es una característica sensible que nos importa
+
+![10.png](ims%2FC13%2Fims%2F1%2F10.png)
+
+Así que podríamos dividir los datos en subconjuntos para cada grupo de edad y comparar la tasa de selección, la proporción 
+de predicciones positivas para cada grupo. 
+
+![11.png](ims%2FC13%2Fims%2F1%2F11.png)
+
+Digamos que encontramos que el modelo predice que el 36% de los solicitantes de 25 años o menos, reembolsarán un préstamo, 
+pero predice reembolsos con éxito para el 54% de los solicitantes de más de 25 años. Hay una disparidad en las predicciones 
+del 18%. 
+
+![12.png](ims%2FC13%2Fims%2F1%2F12.png)
+
+A primera vista, esta comparación parece **confirmar que hay un sesgo** en el modelo que discrimina a los solicitantes más jóvenes. 
+Sin embargo, si se tiene en cuenta a la población en su conjunto, es posible que las personas más jóvenes 
+
+- ganen generalmente menos que las personas más establecidas en sus carreras
+- tengan niveles más bajos de ahorros y activos 
+- presenten una mayor tasa de impago de los préstamos.
+
+![13.png](ims%2FC13%2Fims%2F1%2F13.png)
+
+El punto importante que hay que considerar aquí es que sólo porque queramos garantizar la equidad con respecto a la edad, 
+no se deduce necesariamente que la edad no sea un factor en la probabilidad de reembolso de los préstamos. 
+
+Es posible que, en general, las personas más jóvenes tengan menos probabilidades de reembolsar un préstamo que las de más edad. 
+Para hacernos una idea completa, tenemos que profundizar un poco más en el rendimiento predictivo del modelo para cada 
+subconjunto de la población. 
+
+![14.png](ims%2FC13%2Fims%2F1%2F14.png)
+
+Cuando se entrena un modelo de aprendizaje automático utilizando una técnica supervisada como regresión o clasificación, 
+se utilizan métricas logradas frente a datos de validación retenidos para evaluar el rendimiento predictivo general del 
+modelo. Por ejemplo, puede evaluar un modelo de clasificación basándose en la exactitud, la precisión o la recuperación 
+para evaluar la equidad de un modelo.
+
+![15.png](ims%2FC13%2Fims%2F1%2F15.png)
+
+Es importante dividir los datos en subconjuntos basados en las características sensibles en las que se agrupa la población. 
+Entonces, tras aplicar las mismas métricas de rendimiento predictivo, puede medir la disparidad de esas métricas entre los 
+subgrupos.
+
+![16.png](ims%2FC13%2Fims%2F1%2F16.png)
+
+Por ejemplo, supongamos que el modelo de aprobación de préstamos presenta una métrica de recuerdo global de de 0,67. En 
+otras palabras, a identifica correctamente el 67% de los casos en los que el solicitante devolvió el préstamo. La cuestión 
+es si el modelo proporciona o no una tasa similar de predicciones correctas para los distintos grupos de edad.
+
+![17.png](ims%2FC13%2Fims%2F1%2F17.png)
+
+Para averiguarlo, agrupamos los datos en función de la característica sensible edad y medimos la métrica de rendimiento 
+predictivo recuerdo para esos grupos.
+
+![18.png](ims%2FC13%2Fims%2F1%2F18.png)
+
+A continuación, podemos comparar las puntuaciones de las métricas para determinar la disparidad entre ellas. Digamos que 
+descubrimos que el recuerdo para los casos de validación en los que el solicitante tiene 25 años o menos es **0.50** y el 
+recuerdo para los casos en los que el solicitante tiene más de 25 años **es 0.83**. 
+
+En otras palabras, el modelo identificó correctamente al **50% de las personas del grupo de edad de 25 o más jóvenes** que 
+reembolsaron con éxito solos y por lo tanto **clasificó erróneamente al 50%** de ellos como morosos de préstamos, pero encontró 
+al **83% de los reparadores de préstamos del grupo de más edad**, clasificando **erróneamente sólo al 17% de ellos**. La 
+**disparidad** y el rendimiento de la predicción entre los **grupos es del 33%**.
+
+![19.png](ims%2FC13%2Fims%2F1%2F19.png)
+
+Con el modelo prediciendo significativamente más falsos negativos para el grupo de edad más joven. Cuando encuentre una 
+disparidad entre las tasas de predicción o el rendimiento de la predicción métricas a través de grupos de características 
+sensibles, vale la pena considerar las causas potenciales.
+
+Entre ellas pueden estar el: 
+
+- desequilibrio de los datos
+- correlación directa
+- sesgos sociales. 
+
+Echemos ahora un vistazo más de cerca a cada una de ellas:
+
+![20.png](ims%2FC13%2Fims%2F1%2F20.png)
+
+Algunos grupos pueden estar sobrerrepresentados en los datos de entrenamiento o los datos pueden estar sesgados de tal 
+manera que los casos dentro de un grupo específico no sean representativos de la población en general. 
+
+![21.png](ims%2FC13%2Fims%2F1%2F21.png)
+
+La característica sensible en sí misma **puede no ser predictiva de la etiqueta**, pero puede haber una **correlación oculta** 
+entre la característica sensible y alguna otra característica que influya en la predicción. 
+
+Por ejemplo, es probable que exista una **correlación entre la edad y el historial crediticio** y es probable que exista 
+una correlación entre el historial crediticio y los impagos de préstamos. Si la característica del historial crediticio no 
+se incluye en los datos de entrenamiento, el algoritmo de entrenamiento puede asignar una espera predictiva a la edad 
+sin tener en cuenta el historial crediticio, lo que podría marcar la diferencia en la probabilidad de devolución del préstamo. 
+
+![22.png](ims%2FC13%2Fims%2F1%2F22.png)
+
+Los sesgos subconscientes en la preparación de la recopilación de datos o en el proceso de modelado pueden haber influido 
+en la selección de características o en otros aspectos del diseño del modelo. Optimizar la imparcialidad en un modelo de 
+aprendizaje automático es un reto socio-técnico.
+
+![23.png](ims%2FC13%2Fims%2F1%2F23.png)
+
+No siempre es algo que se pueda conseguir simplemente aplicando correcciones técnicas a un algoritmo de entrenamiento. 
+Sin embargo, hay algunas estrategias que puede adoptar para mitigar el sesgo, entre ellas equilibrar los datos de entrenamiento 
+y validación. 
+
+Puede aplicar técnicas de sobremuestreo o submuestreo para equilibrar los datos y utilizar algoritmos de splitting estratificado 
+para mantener proporciones representativas para el entrenamiento y la validación.
+
+![24.png](ims%2FC13%2Fims%2F1%2F24.png)
+
+Realizar una amplia selección de características y análisis de ingeniería. Asegúrese de explorar a fondo las correlaciones 
+interconectadas en sus datos para intentar diferenciar las características que son directamente predictivas de las 
+características que encapsulan relaciones matizadas más complejas.
+
+![25.png](ims%2FC13%2Fims%2F1%2F25.png)
+
+Evalúe la disparidad de los modelos en función de las características significativas. No puede abordar fácilmente el sesgo 
+de un modelo si no puede cuantificarlo.
+
+![26.png](ims%2FC13%2Fims%2F1%2F26.png)
+
+Compense el rendimiento predictivo global por la menor disparidad en el rendimiento predictivo entre grupos de características 
+sensibles. Un modelo que tiene una precisión del 99,5% con un rendimiento comparable en todos los grupos suele ser más 
+deseable que un modelo que tiene una precisión del 99,9%, pero discrimina un subconjunto particular de casos. 
+
+![27.png](ims%2FC13%2Fims%2F1%2F27.png)
+
+El resto de este módulo explora el paquete fair learned, un paquete python que usted puede utilizar para evaluar y mitigar 
+la injusticia en los modelos de aprendizaje automático.
+
 ## 13 Analyze model fairness with Fairlearn
 [< Back to Local Index](#13-index)
+
+![1.png](ims%2FC13%2Fims%2F2%2F1.png)
+
+Fairlearn es un paquete de Python que puede utilizar para analizar modelos y evaluar la disparidad entre las predicciones 
+y el rendimiento de la predicción para una o más características sensibles. 
+
+![2.png](ims%2FC13%2Fims%2F2%2F2.png)
+
+Funciona calculando métricas de grupo para las características sensibles que especifique. Las métricas en sí se basan en 
+métricas estándar de evaluación de modelos de aprendizaje psíquico como la exactitud, la precisión o el recuerdo para 
+modelos de clasificación. 
+
+![3.png](ims%2FC13%2Fims%2F2%2F3.png)
+
+La API de Fairlearn proporciona múltiples formas de detectar disparidades en las métricas a través de agrupaciones de 
+características sensibles. 
+
+![4.png](ims%2FC13%2Fims%2F2%2F4.png)
+
+Para un modelo de clasificación binaria, puede empezar comparando la tasa de selección, el número de predicciones positivas 
+para cada grupo utilizando la función de tasa de selección. 
+
+![5.png](ims%2FC13%2Fims%2F2%2F5.png)
+
+Esta función devuelve la tasa de selección global para el conjunto de datos de prueba. También puede utilizar las funciones 
+estándar de métricas aprendidas de SK como la exactitud, la puntuación, la puntuación de precisión o la puntuación de 
+recuperación para obtener una visión general del rendimiento del modelo. 
+
+![6.png](ims%2FC13%2Fims%2F2%2F6.png)
+
+A continuación, puede definir una o varias características sensibles en su conjunto de datos con las que desee agrupar 
+subconjuntos de la población y comparar la tasa de selección y el rendimiento predictivo. Fairlearn incluye una función de 
+marco métrico que le permite crear un marco de datos de múltiples métricas por el grupo.
+
+![7.png](ims%2FC13%2Fims%2F2%2F7.png)
+
+Por ejemplo, en un modelo de clasificación binaria para la predicción del reembolso de préstamos, donde la característica 
+sensible edad consta de dos posibles valores categóricos 25 y menos y más de 25. A continuación, puede crear un marco 
+métrico para estos grupos. 
+
+![8.png](ims%2FC13%2Fims%2F2%2F8.png)
+
+A menudo es más fácil comparar métricas visualmente. Por ello, Fairlearn proporciona un widget de cuadro de mando interactivo 
+que puede utilizar en un cuaderno para mostrar las métricas de grupo de un modelo. El widget le permite elegir una 
+característica sensible y una métrica de rendimiento para comparar y, a continuación, calcula y visualiza las métricas y 
+la disparidad. 
+
+![9.png](ims%2FC13%2Fims%2F2%2F9.png)
+
+Fairlearn se integra con el aprendizaje automático de Azure permitiéndole ejecutar un experimento en el que las métricas 
+del panel se cargan en su espacio de trabajo de aprendizaje automático de Azure.
+
 ## 13 Mitigate unfairness with Fairlearn
 [< Back to Local Index](#13-index)
+
+![10.png](ims%2FC13%2Fims%2F2%2F10.png)
+
+Hola. En esta parte, aprenderá a mitigar la injusticia con Fairlearn. Además de permitirle analizar la disparidad en las 
+tasas de selección y el rendimiento predictivo a través de características sensibles. 
+
+![11.png](ims%2FC13%2Fims%2F2%2F11.png)
+
+Fairlearn proporciona soporte para mitigar la injusticia en los modelos.
+
+![12.png](ims%2FC13%2Fims%2F2%2F12.png)
+
+El soporte de mitigación en Fairlearn se basa en el uso de algoritmos para crear modelos alternativos que aplican 
+restricciones de paridad para producir métricas comparables a través de grupos de características sensibles. 
+
+![13.png](ims%2FC13%2Fims%2F2%2F13.png)
+
+Fairlearn soporta las siguientes técnicas de mitigación. 
+
+- **Gradiente exponenciado**, que es una técnica de reducción que aplica un enfoque de minimización de costes para aprender 
+el equilibrio óptimo entre el rendimiento predictivo global y la disparidad de equidad. 
+- **Búsqueda de cuadrícula**, que es una versión simplificada del algoritmo de gradiente exponenciado que funciona 
+eficazmente con un número reducido de restricciones. 
+- **El optimizador de umbral**, que es una técnica de posprocesamiento que aplica una restricción a un clasificador existente, 
+transformando la predicción según convenga. 
+
+Es importante señalar que las tres técnicas admiten **la clasificación y la regresión binarias.** Mientras que 
+el optimizador de umbral sólo admite el modelo de clasificación binaria.
+
+![14.png](ims%2FC13%2Fims%2F2%2F14.png)
+
+La elección de la restricción de paridad depende de la técnica que se utilice y de los criterios de equidad específicos que 
+desee aplicar. Las restricciones en Fairlearn incluyen: 
+
+- la paridad demográfica
+- la paridad de la tasa de verdaderos positivos
+- la paridad de la tasa de falsos positivos
+- las probabilidades igualadas
+- la paridad de la tasa de error
+- la pérdida de grupo limitada. 
+
+Veamos ahora cada una de ellas un poco más de cerca. 
+
+![15.png](ims%2FC13%2Fims%2F2%2F15.png)
+
+Utilice la restricción de **paridad demográfica** con cualquiera de los algoritmos de mitigación para minimizar la 
+disparidad en la tasa de selección entre los grupos de características sensibles. 
+
+Por ejemplo, en un escenario de clasificación binaria esta restricción intenta garantizar que se realice un número igual de predicciones positivas en cada grupo. 
+
+![16.png](ims%2FC13%2Fims%2F2%2F16.png)
+
+Utilice la restricción de **paridad de la tasa de verdaderos positivos** con cualquiera de los algoritmos de mitigación 
+para minimizar la disparidad en la tasa de verdaderos positivos entre los grupos de características sensibles. 
+
+Por ejemplo, en un escenario de clasificación binaria esta restricción intenta garantizar que cada grupo contenga una proporción 
+comparable de predicciones de verdaderos positivos.
+
+![17.png](ims%2FC13%2Fims%2F2%2F17.png)
+
+Utilice la restricción de paridad de la tasa de falsos positivos con cualquiera de los algoritmos de mitigación para 
+minimizar la disparidad en la tasa de falsos positivos entre los grupos de características sensibles. 
+
+Por ejemplo, en un escenario de clasificación binaria, esta restricción intenta garantizar que cada grupo contenga una 
+proporción comparable de predicciones de falsos positivos. 
+
+![18.png](ims%2FC13%2Fims%2F2%2F18.png)
+
+Utilice las restricciones de pariedades igualadas con cualquiera de los algoritmos de mitigación para minimizar la disparidad 
+en la tasa combinada de verdaderos positivos y falsos positivos entre los grupos de características sensibles. 
+
+Por ejemplo, en un escenario de clasificación binaria, esta restricción intenta garantizar que cada grupo contenga una 
+proporción comparable de predicciones positivas verdaderas y positivas falsas. 
+
+![19.png](ims%2FC13%2Fims%2F2%2F19.png)
+
+Utilice la restricción de paridad de la tasa de error con cualquiera de los algoritmos de mitigación basados en la reducción 
+gradiente exponenciado y búsqueda en cuadrícula para garantizar que el error de cada grupo de características sensibles no 
+se desvíe de la tasa de error global en más de una cantidad especificada. 
+
+![20.png](ims%2FC13%2Fims%2F2%2F20.png)
+
+Por último, utilice la restricción de pérdida de grupo limitada con cualquiera de los algoritmos de mitigación basados en 
+la reducción para restringir la pérdida para cada grupo de características sensibles en un modelo de regresión. 
+
+![21.png](ims%2FC13%2Fims%2F2%2F21.png)
+
+Un enfoque común para la mitigación es utilizar uno de los algoritmos y restricciones para entrenar múltiples modelos y 
+luego comparar su tasa de selección de rendimiento y métricas de disparidad para encontrar el modelo óptimo para sus necesidades. 
+
+A menudo, la elección del modelo implica un compromiso entre el rendimiento predictivo bruto y la equidad basado en su 
+definición de equidad para un escenario dado. 
+
+![22.png](ims%2FC13%2Fims%2F2%2F22.png)
+
+Generalmente, la equidad se mide por una reducción en la disparidad de la selección de características Por ejemplo, 
+garantizar que una proporción igual de miembros de cada grupo de género sea aprobada para un préstamo bancario
+
+![23.png](ims%2FC13%2Fims%2F2%2F23.png)
+
+o por una reducción en la disparidad de la métrica de rendimiento. Por ejemplo, garantizando que un modelo sea igual de 
+preciso, identificando reparaciones y morosos en cada grupo de edad. 
+
+![24.png](ims%2FC13%2Fims%2F2%2F24.png)
+
+Fairlearn le permite entrenar modelos mitigados y visualizarlos utilizando el panel de control. Puede seleccionar un modelo 
+individual en el gráfico de dispersión para ver sus detalles, lo que le permite explorar las opciones y seleccionar el mejor 
+modelo para sus requisitos de equidad. 
+
+![25.png](ims%2FC13%2Fims%2F2%2F25.png)
+
+Al igual que cuando analiza un modelo individual, puede registrar todos los modelos encontrados durante sus pruebas de 
+mitigación y cargar las métricas del cuadro de mando en Azure machine learning.
+
 ## 13 Exercise Use Fairlearn with Azure Machine Learning
 [< Back to Local Index](#13-index)
+
+Puede acceder al ejercicio desde el siguiente enlace
+
+
+**Enlace del ejercicio**
+
+[Ejercicio - Utilizar Fairlearn con Azure Machine Learning](https://docs.microsoft.com/en-us/learn/modules/detect-mitigate-unfairness-models-with-azure-machine-learning/5-exercise-use-fairlearn)
+
+> Nota:
+> El notebook de esta sección está en: [15 - Detect Unfairness.ipynb](ims%2FC13%2Fnotebooks%2F15%20-%20Detect%20Unfairness.ipynb)
+
+![s1.gif](ims%2FC13%2Fgifs%2Fs1.gif)
+
+![s2.gif](ims%2FC13%2Fgifs%2Fs2.gif)
+
+![s3.gif](ims%2FC13%2Fgifs%2Fs3.gif)
+
+![s4.gif](ims%2FC13%2Fgifs%2Fs4.gif)
+
+![s5.gif](ims%2FC13%2Fgifs%2Fs5.gif)
+
+![s6.gif](ims%2FC13%2Fgifs%2Fs6.gif)
+
+![s7.gif](ims%2FC13%2Fgifs%2Fs7.gif)
+
+![s8.gif](ims%2FC13%2Fgifs%2Fs8.gif)
+
+![s9.gif](ims%2FC13%2Fgifs%2Fs9.gif)
+
+![s10.png](ims%2FC13%2Fgifs%2Fs10.png)
+
 ## 13 Exercise quiz
 [< Back to Local Index](#13-index)
+
+![0.png](ims%2FC13%2Ftests%2F0.png)
+
 ## 13 Knowledge Check
 [< Back to Local Index](#13-index)
+
+![1.png](ims%2FC13%2Ftests%2F1.png)
+
+![2.png](ims%2FC13%2Ftests%2F2.png)
+
+![3.png](ims%2FC13%2Ftests%2F3.png)
+
 ## 13 Lesson summary
 [< Back to Local Index](#13-index)
+
+![4.png](ims%2FC13%2Ftests%2F4.png)
+
+En esta lección, aprendió a construir y operar soluciones de Aprendizaje Automático con Azure Machine Learning. Aprendió 
+a evaluar modelos de Aprendizaje Automático para imparcialidad y mitigar la disparidad predictiva en un modelo de 
+Aprendizaje Automático.
+
+![5.png](ims%2FC13%2Ftests%2F5.png)
+
+Para aprender más sobre fairlearn, consulte la documentación de fairlearn en GitHub. Puede encontrar un enlace a estos 
+recursos desde las lecturas adicionales al final de esta lección.
+
 ## 13 Additional Reading
 [< Back to Local Index](#13-index)
+
+Learn more about Fairlearn:
+
+[Fairlearn documentation on GitHub](https://github.com/fairlearn/fairlearn)
 
 # 14 Monitor Models with Azure Machine Learning
 
@@ -5450,20 +5859,176 @@ encontrar un enlace a este recurso, en las lecturas adicionales al final de esta
 
 ## 14 Lesson introduction
 [< Back to Local Index](#14-index)
+
+![1.png](ims%2FC14%2Fims%2F1%2F1.png)
+
+Hola. En esta lección, aprenderá a supervisar modelos con Azure Machine Learning. Application Insights es un servicio de 
+gestión del rendimiento de aplicaciones en Microsoft Azure. 
+
+![2.png](ims%2FC14%2Fims%2F1%2F2.png)
+
+Permite la captura, el almacenamiento, y el análisis de datos de telemetría de aplicaciones. Puede utilizar Application 
+Insights para supervisar la telemetría de muchos tipos de aplicaciones, incluidas las aplicaciones que no se ejecutan en 
+Azure. 
+
+![3.png](ims%2FC14%2Fims%2F1%2F3.png)
+
+Todo lo que se necesita es un paquete de instrumentación de baja sobrecarga para capturar y enviar los datos de telemetría a 
+Application Insights. El paquete necesario ya está incluido en los servicios web de Azure Machine Learning, por lo que puede 
+utilizarlo para capturar y revisar la telemetría de los modelos publicados con Azure Machine Learning.
+
+![4.png](ims%2FC14%2Fims%2F1%2F4.png)
+
+En esta lección, aprenderá cómo habilitar la monitorización de Application Insights para un servicio web de Azure Machine 
+Learning y capturar y ver la telemetría de los modelos.
+
 ## 14 Enable Application Insights
 [< Back to Local Index](#14-index)
+
+![5.png](ims%2FC14%2Fims%2F1%2F5.png)
+
+En esta sección, aprenderá cómo habilitar Application Insights. Para registrar telemetría y Application Insights desde un 
+servicio Azure Machine Learning, debe tener un recurso Application Insights asociado a su Azure Machine Learning Workspace, 
+y debe configurar su servicio para utilizarlo para el registro de telemetría.
+
+![6.png](ims%2FC14%2Fims%2F1%2F6.png)
+
+Cuando crea un Azure Machine Learning Workspace, puede seleccionar un recurso Azure Application Insights para asociarlo a 
+él. Si no selecciona un recurso Application Insights existente, se crea uno nuevo en el mismo grupo de recursos que su 
+espacio de trabajo. 
+
+![7.png](ims%2FC14%2Fims%2F1%2F7.png)
+
+Puede determinar el recurso de Application Insights asociado a su espacio de trabajo consultando la página Descripción 
+general de la hoja del espacio de trabajo en el portal Azure
+
+![8.png](ims%2FC14%2Fims%2F1%2F8.png)
+
+O puede utilizar el método de `get_details()` de un objeto de espacio de trabajo. 
+
+![9.png](ims%2FC14%2Fims%2F1%2F9.png)
+
+Veamos ahora cómo habilitar Application Insights para un servicio. Al desplegar un nuevo servicio en tiempo real, 
+puede habilitar Application Insights en la configuración de despliegue para el servicio.
+
+![10.png](ims%2FC14%2Fims%2F1%2F10.png)
+
+Si desea habilitar Application Insights para un servicio que ya está desplegado, puede modificar la configuración de 
+despliegue para Azure Kubernetes Service o AKS, servicios basados en el portal Azure.
+
+![11.png](ims%2FC14%2Fims%2F1%2F11.png)
+
+Alternativamente, puede actualizar cualquier servicio web utilizando el Azure Machine Learning, SDK.
+
 ## 14 Capture and view telemetry
 [< Back to Local Index](#14-index)
+
+Application Insights captura automáticamente cualquier información escrita en la salida estándar y en los registros de errores, 
+y proporciona una capacidad de consulta para ver los datos de estos registros.
+
+### Escribir datos de registro
+
+Para capturar datos de telemetría para Application insights, puede escribir cualquier valor en el registro de salida estándar 
+en el script de puntuación para su servicio utilizando una sentencia print, como se muestra en el siguiente ejemplo:
+
+```python
+def init():
+    global model
+    model = joblib.load(Model.get_model_path('my_model'))
+def run(raw_data):
+    data = json.loads(raw_data)['data']
+    predictions = model.predict(data)
+    log_txt = 'Data:' + str(data) + ' - Predictions:' + str(predictions)
+    print(log_txt)
+    return predictions.tolist()
+```
+
+_Azure Machine Learning crea unadimensión personalizada en el modelo de datos de Application Insights para la salida que usted escriba._
+
+### Consultar registros en Application Insights
+
+Para analizar los datos de registro capturados, puede utilizar la interfaz de consulta **Log Analytics** para Application 
+Insights en el portal Azure. Esta interfaz admite una sintaxis de consulta similar a SQL que puede utilizar para extraer 
+campos de los datos registrados, incluidas las dimensiones personalizadas creadas por su servicio Azure Machine Learning.
+
+Por ejemplo, la siguiente consulta devuelve los campos **timestamp** y **customDimensions**. Content de las trazas de 
+registro que tienen un valor de campo **message** de **STDOUT** (que indica que los datos están en el registro de salida 
+estándar) y un valor de campo **customDimensions**.["Service Name"] demy-svc.
+
+```
+traces
+|where message == "STDOUT"
+  and customDimensions.["Service Name"] = "my-svc"
+| project  timestamp, customDimensions.Content
+```
+
+Esta consulta devuelve los datos registrados en forma de tabla:
+
+| **timestamp** |                   **customDimension_Content**                   |
+|:-------------:|:---------------------------------------------------------------:|
+|   01/02/2020  | Datos:[[1, 2, 2,5, 3,1], [0, 1, 1,7, 2,1]] - Predicciones:[0 1] |
+|   01/02/2020  |           Datos:[[3, 2, 1,7, 2,0]] - Predicciones:[0]           |
+
+
 ## 14 Exercise Monitor a model
 [< Back to Local Index](#14-index)
+
+> Nota: 
+> el notebook de esta clase está en: [16 - Monitor a Model.ipynb](ims%2FC14%2Fnotebooks%2F16%20-%20Monitor%20a%20Model.ipynb)
+
+No pude correr éxitosamente el notebook, pero adjunto los pasos que pude cumplir:
+
+![s1.gif](ims%2FC14%2Fgifs%2Fs1.gif)
+
+![s2.gif](ims%2FC14%2Fgifs%2Fs2.gif)
+
+![s3.gif](ims%2FC14%2Fgifs%2Fs3.gif)
+
+![s4.gif](ims%2FC14%2Fgifs%2Fs4.gif)
+
+![s5.gif](ims%2FC14%2Fgifs%2Fs5.gif)
+
+![s6.gif](ims%2FC14%2Fgifs%2Fs6.gif)
+
+
 ## 14 Exercise quiz
 [< Back to Local Index](#14-index)
+
+![0.png](ims%2FC14%2Ftests%2F0.png)
+
 ## 14 Knowledge Check
 [< Back to Local Index](#14-index)
+
+![q1.png](ims%2FC14%2Ftests%2Fq1.png)
+
+![q2.png](ims%2FC14%2Ftests%2Fq2.png)
+
+![q3.png](ims%2FC14%2Ftests%2Fq3.png)
+
 ## 14 Lesson summary
 [< Back to Local Index](#14-index)
+
+![1.png](ims%2FC14%2Ftests%2F1.png)
+
+En este módulo, ha aprendido a supervisar modelos con Azure Machine Learning. Más concretamente, ha aprendido a 
+
+- Habilitar la supervisión de Application Insights para un servicio web de Azure Machine Learning
+- Capturar y ver telemetría de modelos. 
+
+Para obtener más información sobre la supervisión de modelos con Azure Machine Learning, consulte supervisar y recopilar 
+datos de puntos finales del servicio web ML en la documentación de Azure Machine Learning. 
+
+![2.png](ims%2FC14%2Ftests%2F2.png)
+
+Puede encontrar un enlace a estos recursos desde las lecturas adicionales al final de esta lección.
+[Monitor and collect data from ML web service endpoints](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-enable-app-insights)
+
+
 ## 14 Additional Reading
 [< Back to Local Index](#14-index)
+
+**Monitor and collect data**
+[Monitor and collect data from ML web service endpoints](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-enable-app-insights)
 
 # 15 Monitor data drift with Azure Machine Learning
 
