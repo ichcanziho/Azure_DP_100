@@ -6048,21 +6048,210 @@ Puede encontrar un enlace a estos recursos desde las lecturas adicionales al fin
 
 ## 15 Lesson introduction
 [< Back to Local Index](#15-index)
+
+![1.png](ims%2FC15%2Fims%2F1%2F1.png)
+
+Hola, en esta lección, aprenderás a monitorear la deriva de datos. Con el aprendizaje automático de Azure, normalmente se 
+entrena un aprendizaje automático modele utilizando un conjunto de datos históricos que sea representativo de los datos 
+nuevos que su modelo recibirá para inferir.
+
+Sin embargo, con el tiempo puede haber tendencias que cambian el perfil de los datos y hacen que el modelo sea menos preciso.
+
+![2.png](ims%2FC15%2Fims%2F1%2F2.png)
+
+Por ejemplo, supongamos que un modelo está entrenado para predecir el consumo de combustible esperado de un automóvil en 
+función del número de cilindros, tamaño del motor, peso y otras características. Con el tiempo, como fabricación de 
+automóviles y motores las tecnologías mejoran la eficiencia de combustible típica de los vehículos podría mejorar 
+drásticamente, siguiendo las predicciones del modelo entrenados con datos más antiguos son menos precisos. 
+
+![3.png](ims%2FC15%2Fims%2F1%2F3.png)
+
+Este cambio en los perfiles de datos entre entrenar e influir se conoce como deriva de datos y puede ser un problema 
+importante para los modelos predictivos utilizados en la producción. Por lo tanto, es importante poder para monitorear 
+la variación de los datos a lo largo del tiempo y volver a entrenar los modelos según sea necesario para mantener la 
+precisión predictiva. 
+
+![4.png](ims%2FC15%2Fims%2F1%2F4.png)
+
+En esta lección, aprenderá cómo 
+ 
+- crear un monitor de desviación de datos
+- monitoreo programado de la desviación de datos 
+- ver los resultados del monitoreo de la desviación de datos.
+
 ## 15 Create a data drift monitor
 [< Back to Local Index](#15-index)
+
+![5.png](ims%2FC15%2Fims%2F1%2F5.png)
+
+Azure Machine Learning admite la supervisión de la deriva de datos mediante el uso de conjuntos de datos. Puede capturar 
+nuevos datos de características en un conjunto de datos y compararlos con el conjunto de datos con el que se entrenó el 
+modelo. Es habitual que las organizaciones sigan recopilando nuevos datos después de haber entrenado un modelo. 
+
+![6.png](ims%2FC15%2Fims%2F1%2F6.png) 
+
+Por ejemplo, una clínica de salud podría utilizar mediciones diagnósticas de pacientes anteriores para entrenar un modelo 
+que predice la probabilidad de diabetes, pero seguir recogiendo las mismas mediciones diagnósticas de todos los pacientes 
+nuevos. 
+
+![7.png](ims%2FC15%2Fims%2F1%2F7.png)
+
+Los científicos de datos de la clínica podrían entonces comparar periódicamente la creciente colección de datos nuevos con 
+los datos de entrenamiento originales, e identificar cualquier cambio en las tendencias de los datos que pudiera afectar a 
+la precisión del modelo. Para controlar la deriva de los datos utilizando conjuntos de datos registrados, es necesario 
+registrar dos conjuntos de datos:
+
+![8.png](ims%2FC15%2Fims%2F1%2F8.png)
+
+Un conjunto de datos de referencia, que suelen ser los datos de entrenamiento originales, y un conjunto de datos objetivo 
+que se comparará con el de referencia en función de intervalos de tiempo. 
+
+![9.png](ims%2FC15%2Fims%2F1%2F9.png)
+
+Este conjunto de datos requiere una columna para cada característica que desee comparar y una columna de marca de tiempo, 
+para poder medir la velocidad de deriva de los datos. 
+
+Es importante tener en cuenta que puede configurar un servicio desplegado para recopilar nuevos datos enviados al modelo 
+para la inferencia, que se guardan en Azure Blob Storage, y pueden utilizarse como conjunto de datos de destino para 
+la supervisión de la deriva de datos.
+
+![10.png](ims%2FC15%2Fims%2F1%2F10.png)
+
+Consulte recopilar datos de modelos en producción en la documentación de Azure Machine Learning para obtener más información. 
+Puede encontrar un enlace a este recurso en las lecturas adicionales al final de esta lección. 
+
+![11.png](ims%2FC15%2Fims%2F1%2F11.png)
+
+Después de crear estos conjuntos de datos, puede definir un monitor de conjunto de datos para detectar la deriva de datos y 
+activar alertas si la tasa de deriva supera un umbral especificado. 
+
+![12.png](ims%2FC15%2Fims%2F1%2F12.png)
+
+Puede crear monitores de conjuntos de datos utilizando la interfaz visual de Azure Machine Learning Studio, o utilizando 
+la clase del detector de desviación de datos en el SDK de Azure Machine Learning.
+
+
+![13.png](ims%2FC15%2Fims%2F1%2F13.png)
+
+Tras crear el monitor de conjuntos de datos, puede rellenar el monitor para comparar inmediatamente el conjunto de datos 
+de referencia con los datos existentes en el conjunto de datos de destino, que rellena el monitor basándose en los cambios 
+semanales en los datos de las seis semanas anteriores.
+
 ## 15 Scheduling alerts
 [< Back to Local Index](#15-index)
+
+![14.png](ims%2FC15%2Fims%2F1%2F14.png)
+
+Cuando define un monitor de datos, especifica un horario en el que debe ejecutarse. Además, puede especificar un umbral 
+para la tasa de deriva de datos y una dirección de correo electrónico del operador para recibir notificaciones si se 
+supera este umbral. 
+
+![15.png](ims%2FC15%2Fims%2F1%2F15.png)
+
+La deriva de datos y la monitorización funcionan ejecutando una comparación con la frecuencia programada y calculando las 
+métricas de deriva de datos para las características del conjunto de datos que desea monitorizar. Puede definir un horario 
+para que se ejecute cada día, semana o mes. 
+
+![16.png](ims%2FC15%2Fims%2F1%2F16.png)
+
+La deriva de datos se mide utilizando una magnitud calculada de cambio en la distribución estadística de los valores de 
+las características a lo largo del tiempo. Puede esperar cierta variación aleatoria natural entre los conjuntos de datos 
+de referencia y de destino, pero debe vigilar los grandes cambios que podrían indicar una deriva de datos significativa. 
+
+![17.png](ims%2FC15%2Fims%2F1%2F17.png)
+
+Puede definir un umbral para la magnitud de la deriva de datos por encima del cual desea que se notifique a y configurar 
+las notificaciones de alerta por correo electrónico. 
+
+![18.png](ims%2FC15%2Fims%2F1%2F18.png)
+
+Por ejemplo, utilizando código Python, puede programar un monitor de deriva de datos para que se ejecute cada semana y 
+envíe una alerta si la magnitud de la deriva es superior a 0,3.
+
 ## 15 Exercise Monitor data drift
 [< Back to Local Index](#15-index)
+
+> Nota:
+> El notebook de esta clase está en: [17 - Monitor Data Drift.ipynb](ims%2FC15%2Fnotebooks%2F17%20-%20Monitor%20Data%20Drift.ipynb)
+
+1. Primero instalamos `azureml-datadrift` y nos conectamos a nuestro `ws`:
+   ![s1.gif](ims%2FC15%2Fgifs%2Fs1.gif)
+
+2. Ahora creamos nuestro `baseline` de `dataset`(este en principio es con el que entrenamos nuestro modelo)
+
+   ![s2.gif](ims%2FC15%2Fgifs%2Fs2.gif)
+
+3. Vamos a crear una variación sintética de nuestro dataset para simular unos datos `nuevos`. Este dataset tendrá como nombre la fecha
+   en la que se tomaron los datos nuevos.
+
+   ![s3.gif](ims%2FC15%2Fgifs%2Fs3.gif)
+
+4. El siguiente paso es crear el COMPUTE target, pero como ya teníamos una hecha la vamos a utilizar:
+
+   ![s4.gif](ims%2FC15%2Fgifs%2Fs4.gif)
+
+5. Ahora viene la parte más tardada, que es comparar los resultados entre el dataset de baseline - el dataset nuevo, con una diferencia de 6 semanas.
+
+   ![s5.gif](ims%2FC15%2Fgifs%2Fs5.gif)
+
+   Los resultados son:
+
+   ![s6.gif](ims%2FC15%2Fgifs%2Fs6.gif)
+
+
 ## 15 Exercise quiz
 [< Back to Local Index](#15-index)
+
+![0.png](ims%2FC15%2Ftests%2F0.png)
+
 ## 15 Knowledge Check
 [< Back to Local Index](#15-index)
+
+![q1.png](ims%2FC15%2Ftests%2Fq1.png)
+
+![q2.png](ims%2FC15%2Ftests%2Fq2.png)
+
+![q3.png](ims%2FC15%2Ftests%2Fq3.png)
+
 ## 15 Test prep
 [< Back to Local Index](#15-index)
+
+![t1.png](ims%2FC15%2Ftests%2Ft1.png)
+
+![t2.png](ims%2FC15%2Ftests%2Ft2.png)
+
+![t3.png](ims%2FC15%2Ftests%2Ft3.png)
+
+![t4.png](ims%2FC15%2Ftests%2Ft4.png)
+
+![t5.png](ims%2FC15%2Ftests%2Ft5.png)
+
+![t6.png](ims%2FC15%2Ftests%2Ft6.png)
+
 ## 15 Lesson summary
 [< Back to Local Index](#15-index)
+
+![1.png](ims%2FC15%2Ftests%2F1.png)
+
+En esta lección, ha aprendido a supervisar el desvío de datos con el aprendizaje automático de Azure. Más concretamente, 
+ha aprendido a 
+
+- crear un monitor de desvío de datos
+- programar la supervisión del desvío de datos 
+- ver los resultados de la supervisión del desvío de datos. 
+
+
+![2.png](ims%2FC15%2Ftests%2F2.png)
+
+Para obtener más información sobre la supervisión de la deriva de datos en el aprendizaje automático de Azure, consulte detectar la deriva de datos en conjuntos de datos y detectar la deriva de datos en modelos desplegados en el servicio Azure Kubernetes o AKS.
+
+En la documentación del aprendizaje automático de Azure, puede encontrar un enlace a estos recursos desde las lecturas adicionales al final de esta lección.
+
 ## 15 Additional Reading
 [< Back to Local Index](#15-index)
 
+**Monitoring data drift in Azure machine Learning**
 
+[Collect data from models in production](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-enable-data-collection)
+
+[Detect data drift (preview) on datasets](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-monitor-datasets?tabs=python)
