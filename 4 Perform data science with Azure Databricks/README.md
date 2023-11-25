@@ -29,11 +29,184 @@
 ## 1 Introduction to the course
 [< Back to index 1](#index-1)
 
+![1.png](modules%2F1%2Fims%2F1%2F1.png)
+
+Hola y bienvenidos a este curso, realiza ciencia de datos con Azure Databricks. En este curso aprenderás cómo realice 
+ciencia de datos con Azure Dataricks. Este curso está compuesto de los siguientes módulos.
+
+![2.png](modules%2F1%2Fims%2F1%2F2.png)
+
+1. Introducción a Azure Databricks. 
+2. Trabajar con datos en Azure Databricks. 
+3. Procesamiento de datos en Azure Databricks. 
+4. Comience a usar Azure Databricks y aprendizaje automático. 
+5. Gestione los ciclos de vida del aprendizaje automático y modelos afinados. 
+6. Entrena una red neuronal distribuida y sirva modelos con el aprendizaje automático de Azure.
+
+
+![3.png](modules%2F1%2Fims%2F1%2F3.png)
+
+Comencemos con el primer módulo. **Introducción a Azure Databricks**. En este módulo, describirá como tus Databricks 
+y Apache Spark para procesar archivos de gran tamaño y describe los fundamentos de la arquitectura de Spark. 
+
+![4.png](modules%2F1%2Fims%2F1%2F4.png)
+
+En el siguiente módulo, **trabajarás con datos en Azure Databricks.** Use Azure Databricks para leer varios archivos 
+tipos con y sin esquema. Combina entradas de archivos y almacenes de datos como la base de datos Azure CQL. Transforme 
+y almacene esos datos para análisis avanzados. Procese datos en Azure Databricks definiendo marcos de datos para leer 
+y procesar los datos. Y realice transformaciones de datos en marcos de datos y ejecuta acciones para mostrar los datos 
+transformados hacia arriba.
+
+![5.png](modules%2F1%2Fims%2F1%2F5.png)
+
+A continuación, aprenderá cómo **procesar datos en Azure Databricks**. En este módulo aprenderás cómo crear y consulta 
+un Delta Lake. 
+
+![6.png](modules%2F1%2Fims%2F1%2F6.png)
+
+A continuación, **comenzarás con Azure Databricks y el aprendizaje automático**. En este módulo entenderás los conceptos 
+básicos del aprendizaje automático y el flujo de trabajo del aprendizaje automático. Este módulo cubrirá el rendimiento de la máquina aprender con Azure Databricks y aprender a capacitarse un modelo de aprendizaje automático.
+
+![7.png](modules%2F1%2Fims%2F1%2F7.png)
+
+A continuación, aprenderás a gestionar ciclos de vida de aprendizaje automático y modelos ajustados. En este módulo, 
+aprenderás cómo trabajar con Mlflow en Azure Databricks y realizar una selección de modelos con hiperajuste de 
+parámetros.
+
+![8.png](modules%2F1%2Fims%2F1%2F8.png)
+
+Esto incluirá cómo usar los módulos de Biblioteca de aprendizaje automático PySparks para ajustar hiperparámetros.
+
+![9.png](modules%2F1%2Fims%2F1%2F9.png)
+
+A continuación, aprenderás a entrenar una red neuronal distribuida y modelos de servicio con el aprendizaje automático 
+de Azure. En este módulo entenderás en profundidad aprender con Haravad para una formación distribuida y cómo 
+trabajar con Azure aprendizaje automático para implementar modelos de servicio. 
+
+![10.png](modules%2F1%2Fims%2F1%2F10.png)
+
+Además, a lo largo de este curso tendrá la oportunidad de crear y trabajar con Azure Databricks a través de ejercicios 
+interactivos y ejemplos del mundo real de la ciencia de datos en acción, comprobaciones de conocimientos y exámenes de 
+práctica. 
+
+![11.png](modules%2F1%2Fims%2F1%2F11.png)
+
+Por último, te prepararás para el programa Microsoft Certified Associate realicé la prueba realizando un examen de 
+práctica. Le deseamos el mayor de los éxitos como usted comience este viaje de aprendizaje.
+
 ## 1 Course syllabus
 [< Back to index 1](#index-1)
 
+### Realice ciencia de datos con Azure Databricks - Programa del curso 
+
+En este curso, aprenderá a aprovechar la potencia de Apache Spark y los potentes clústeres que se ejecutan en la 
+plataforma Azure Databricks para ejecutar cargas de trabajo de ciencia de datos en la nube.
+
+### Módulo 1 - Introducción a Azure Databricks
+
+En este módulo, descubrirá las capacidades de Azure Databricks y del cuaderno Apache Spark para procesar archivos 
+enormes. Llegará a comprender la plataforma Azure Databricks e identificará los tipos de tareas más adecuados para 
+Apache Spark. También conocerá la arquitectura de un clúster Azure Databricks Spark y los trabajos Spark.
+
+### Módulo 2 - Trabajar con datos en Azure Databricks
+
+Azure Databricks soporta funciones cotidianas de manejo de datos, como lecturas, escrituras y consultas. En este módulo, 
+trabajará con grandes cantidades de datos procedentes de múltiples fuentes en diferentes formatos sin procesar. También 
+aprenderá a utilizar la clase de columna DataFrame Azure Databricks para aplicar transformaciones a nivel de columna, 
+como **ordenaciones**, **filtros** y **agregaciones**. También utilizará operaciones avanzadas de funciones **DataFrame** 
+para **manipular datos, aplicar agregados y realizar operaciones de fecha y hora** en Azure Databricks.
+
+### Módulo 3 - Procesamiento de datos en Azure Databricks
+
+Azure Databricks soporta una serie de funciones SQL incorporadas, sin embargo, a veces tendrá que escribir una función 
+personalizada, conocida como **Función Definida por el Usuario (UDF)**. En este módulo, aprenderá a registrar e invocar UDFs. 
+También aprenderá a utilizar **Delta Lake** para **crear, añadir y subir datos a tablas de Apache Spark**, aprovechando 
+la fiabilidad y las optimizaciones incorporadas.
+
+### Módulo 4 - Empezar con Databricks y el aprendizaje automático
+
+En este módulo, aprenderá a utilizar el paquete de **aprendizaje automático de PySpark** para construir componentes 
+clave de los flujos de trabajo de aprendizaje automático que incluyen el **análisis exploratorio de datos**, el 
+**entrenamiento de modelos y la evaluación de modelos**. También aprenderá a construir **pipelines** para tareas 
+comunes de **featurización** de datos.
+
+### Módulo 5 - Gestionar los ciclos de vida del aprendizaje automático y ajustar los modelos
+
+En este módulo, aprenderá a utilizar **MLflow** para realizar un seguimiento de los experimentos de aprendizaje 
+automático y a utilizar módulos de la biblioteca de aprendizaje automático de Spark para el ajuste de hiperparámetros 
+y la selección de modelos.
+
+### Módulo 6 - Entrenar una red neuronal distribuida y servir modelos con Azure Machine Learning
+
+En este módulo, aprenderá a utilizar el **marco Horovod de Uber** junto con la biblioteca **Petastorm** para ejecutar 
+trabajos de **entrenamiento distribuidos de aprendizaje profundo en Spark** utilizando conjuntos de datos de 
+entrenamiento en el formato **Apache Parquet**. También aprenderá a utilizar **MLflow** y el servicio Azure Machine 
+Learning para registrar, empaquetar y desplegar un modelo entrenado tanto en **Azure Container Instance**, como en 
+**Azure Kubernetes Service** como servicio web de puntuación
+
 ## 1 How to be successful in this course
 [< Back to index 1](#index-1)
+
+Hacer un curso en línea puede resultar abrumador. ¿Cómo puede aprender a su propio ritmo y alcanzar con éxito sus objetivos?
+
+He aquí algunos consejos generales que pueden ayudarle a mantenerse centrado y en el buen camino:
+
+#### 1: Fíjese objetivos diarios de estudio
+Pregúntese qué espera conseguir en su curso cada día. Establecer un objetivo claro puede ayudarle a mantenerse motivado y 
+a vencer la procrastinación. El objetivo debe ser específico y fácil de medir, como "Veré todos los vídeos del módulo 2 
+y completaré la primera tarea de programación" Y no olvide recompensarse cuando avance hacia su objetivo.
+
+### 2: Cree un espacio dedicado al estudio
+Es más fácil recordar la información si se está en el mismo lugar donde se aprendió por primera vez, por lo que tener un 
+espacio dedicado en casa para tomar cursos en línea puede hacer que su aprendizaje sea más eficaz. Elimine cualquier 
+distracción del espacio y, si es posible, sepárelo de su cama o sofá. Una clara distinción entre el lugar donde estudia 
+y el lugar donde se toma los descansos puede ayudarle a concentrarse.
+
+### 3: Programe tiempo para estudiar en su calendario
+Abra su calendario y elija un horario predecible y fiable que pueda dedicar a ver las clases y completar las tareas. 
+Esto le ayudará a asegurarse de que sus cursos no se conviertan en la última cosa de su lista de tareas.
+
+> Consejo: Puede añadir las fechas límite de un curso de Coursera su calendario de Google, al calendario de Apple o a otra aplicación de calendario.
+
+### 4: Hágase responsable
+Cuénteles a sus amigos los cursos que está realizando, publique sus logros en sus cuentas de las redes sociales o publique 
+en un blog sus tareas. Contar con una comunidad y una red de apoyo de amigos y familiares que le animen marca la diferencia.
+
+### 5: Tome notas activamente
+Tomar apuntes puede fomentar el pensamiento activo, impulsar la comprensión y ampliar su capacidad de atención. Es una 
+buena estrategia para interiorizar los conocimientos tanto si aprende en línea como en el aula. Así pues, coja un cuaderno 
+o encuentre la aplicación digital que mejor se adapte a usted y empiece a sintetizar los puntos clave.
+
+> Consejo: Mientras ve una clase en Coursera, puede hacer clic en el botón "Guardar nota" situado debajo del vídeo para guardar una captura de pantalla en sus notas del curso y añadir sus propios comentarios.
+
+### 6: Únase a la discusión
+Los foros de discusión del curso son un lugar estupendo para hacer preguntas sobre las tareas, discutir temas, compartir 
+recursos y hacer amigos. Nuestras investigaciones demuestran que los alumnos que participan en los foros de debate tienen 
+un 37% más de probabilidades de completar un curso. Así que ¡haga un post hoy mismo!
+
+### 7: Haga una cosa cada vez
+La multitarea es menos productiva que centrarse en una sola tarea a la vez. Investigadores de la Universidad de Stanford 
+descubrieron que "las personas que son bombardeadas regularmente con varios flujos de información electrónica no pueden 
+prestar atención, recordar información o cambiar de un trabajo a otro tan bien como los que completan una tarea a la vez" 
+Concéntrese en una cosa cada vez. Absorberá más información y completará las tareas con mayor productividad y facilidad 
+que si intentara hacer muchas cosas a la vez.
+
+### 8: Tómese descansos
+Descansar el cerebro después de aprender es fundamental para un alto rendimiento. Si se encuentra trabajando en un problema 
+difícil sin avanzar mucho durante una hora, tómese un descanso. Caminar al aire libre, darse una ducha o hablar con un amigo 
+puede re-energizarle e incluso darle nuevas ideas sobre cómo abordar ese proyecto.
+
+¡Su viaje de aprendizaje de Microsoft Azure comienza ahora!
+Mientras se prepara para el examen o trabaja en la consecución de sus objetivos de aprendizaje, le animamos a:
+
+- Revise las directrices del examen y las habilidades medidas como punto de partida.
+- Trabaje a través de cada lección del itinerario de aprendizaje. 
+- Intente no saltarse ninguna actividad o lección a menos que esté seguro de que ya conoce esta información lo suficientemente bien como para seguir adelante.
+- Aproveche la oportunidad para volver atrás y ver un vídeo o leer la información adicional que se le proporcione antes de pasar a la siguiente lección o módulo.
+- Complete todos los cuestionarios, las preguntas de práctica del examen y los ejercicios. Durante las sesiones de práctica, tendrá la oportunidad de volver a repasar las preguntas para asegurarse de que está satisfecho con su progreso.
+- Lea atentamente los comentarios cuando responda a los cuestionarios o a los exámenes prácticos, ya que le ayudarán a reforzar lo que está aprendiendo.
+
+Aproveche el entorno de aprendizaje práctico que le proporcionan los ejercicios. Podrá obtener un refuerzo sustancial de su aprendizaje mediante la aplicación paso a paso de sus conocimientos.
 
 # 2 Describe Azure Databricks
 
