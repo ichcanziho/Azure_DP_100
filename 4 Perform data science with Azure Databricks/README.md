@@ -225,23 +225,418 @@ Aproveche el entorno de aprendizaje práctico que le proporcionan los ejercicios
 ## 2 Explain Azure Databricks
 [< Back to index 2](#index-2)
 
+![1.png](modules%2F2%2Fims%2F1%2F1.png)
+
+Bienvenido a la segunda lección de este módulo. Esta lección se centra en cómo Azure Databricks funciona con Apache Spark Notebook.
+
+![2.png](modules%2F2%2Fims%2F1%2F2.png)
+
+En esta lección, desarrollará: 
+
+- Una comprensión de la plataforma Azure Databricks. 
+- Cree su propio espacio de trabajo Azure Databricks. 
+- Cree un Notebook dentro de su carpeta de inicio en Databricks. 
+- Comprender los fundamentos de Apache Spark Notebook. 
+- Crear o adjuntar a un clúster Spark
+- Identificar los tipos de tareas bien adaptados al motor de análisis unificado, Apache Spark. 
+
+![3.png](modules%2F2%2Fims%2F1%2F3.png)
+
+Comencemos con un vistazo a la plataforma Azure Databricks. Azure Databricks proporciona un entorno de espacio de trabajo 
+Apache Spark como servicio orientado a Notebook. 
+
+Ofrece a los equipos de ciencia de datos e ingeniería una única plataforma para gestionar clústeres y explorar datos de forma interactiva.
+
+![4.png](modules%2F2%2Fims%2F1%2F4.png)
+
+Azure Databricks combina la potencia de Data bricks y la plataforma Apache Spark gestionada de extremo a extremo optimizada 
+para la nube y la escala empresarial y la seguridad de la plataforma Microsoft Azure. 
+
+![5.png](modules%2F2%2Fims%2F1%2F5.png)
+
+Con el fin de simplificar la ejecución de cargas de trabajo Spark a gran escala, Databricks fue fundada por los creadores 
+de Apache Spark, Delta Lake, y MLflow para capacitar a los desarrolladores para acelerar la IA y la innovación 
+simplificando el proceso de construcción de aplicaciones de datos de producción de nivel empresarial.
+
+![6.png](modules%2F2%2Fims%2F1%2F6.png)
+
+En la actualidad, más de 2.000 empresas de todo el mundo utilizan la plataforma Databricks en todo el ciclo de vida de Big Data y Machine Learning. 
+
+![7.png](modules%2F2%2Fims%2F1%2F7.png)
+
+La visión de Databricks es acelerar la innovación unificando la ciencia de datos, la ingeniería de datos y el negocio 
+utilizando la plataforma de análisis de Big Data como solución. 
+
+![8.png](modules%2F2%2Fims%2F1%2F8.png)
+
+El propósito de Azure Databricks es abordar los problemas encontrados en otras plataformas de Big Data. Para evitarlos, 
+Azure Databricks se optimizó desde cero centrándose en el rendimiento y la eficiencia de costes en la nube
+
+![9.png](modules%2F2%2Fims%2F1%2F9.png)
+
+El tiempo de ejecución de Databricks añade varias capacidades clave a las cargas de trabajo de Apache Spark que pueden 
+aumentar el rendimiento y reducir los costes en hasta 10 o 100 veces los de otras plataformas que no se ejecutarían en 
+Azure. 
+
+![10.png](modules%2F2%2Fims%2F1%2F10.png)
+
+Estas capacidades incluyen: 
+
+- Conectores de alta velocidad a servicios de almacenamiento Azure como Azure Blob Store y Azure Data Lake.
+- autoescalado y terminación de auditoría de clústeres Spark para minimizar costes.
+- almacenamiento en caché e indexación.
+- optimización avanzada de consultas. 
+
+![11.png](modules%2F2%2Fims%2F1%2F11.png)
+
+Al proporcionar un entorno optimizado, fácil de aprovisionar y configurar, Azure Databricks ofrece a los desarrolladores 
+una plataforma rentable que les permite dedicar más tiempo a la creación de aplicaciones y menos tiempo a la gestión de 
+clústeres e infraestructura
+
+![12.png](modules%2F2%2Fims%2F1%2F12.png)
+
+Echemos un vistazo más de cerca a cómo Azure Databricks funciona con el resto de la plataforma. 
+
+![13.png](modules%2F2%2Fims%2F1%2F13.png)
+
+Como motor informático, Azure Databricks se sitúa en el centro de su plataforma de software basada en Azure y proporciona 
+integración nativa con Azure Data Services, aprendizaje automático, integraciones de gestión del ciclo de vida, y 
+tiempo de ejecución de aprendizaje automático. 
+
+![14.png](modules%2F2%2Fims%2F1%2F14.png)
+
+Una de las ventajas clave de Databricks es las numerosas ofertas que no son Spark de código abierto. Estas ofertas incluyen 
+
+- el espacio de trabajo Databricks para ciencia de datos interactiva y colaboración
+- flujos de trabajo Databricks para trabajos de producción y automatización de flujos de trabajo
+- tiempo de ejecución Databricks
+- Databricks IO o DBIO, que es una capa de acceso a datos optimizada
+- Databricks Serverless, una plataforma de autoajuste totalmente gestionada
+- seguridad empresarial Databricks, también conocida como DBES, que proporciona seguridad y conformidad de extremo a extremo. 
+
+![15.png](modules%2F2%2Fims%2F1%2F15.png)
+
+A continuación, veamos cómo funciona Apache Spark con Azure Databricks. 
+
+![16.png](modules%2F2%2Fims%2F1%2F16.png)
+
+Spark es un motor de procesamiento unificado que puede: 
+
+**analizar big data utilizando SQL**
+
+En su núcleo se encuentra el motor Spark. La API de marcos de datos proporciona una abstracción por encima de los 
+conjuntos de datos distribuidos resistentes o RDD, al tiempo que mejora el rendimiento 5-20 veces por encima de los 
+RDD tradicionales con su optimizador Catalyst. 
+
+**aprendizaje automático**
+
+Spark ML proporciona algoritmos de aprendizaje automático de alta calidad y finalmente sintonizados para el procesamiento de big data.
+
+**Procesamiento de grafos**
+
+La API de procesamiento de grafos proporciona una API fácilmente accesible para modelar relaciones por pares entre personas, objetos o nodos de la red. 
+
+**Análisis de flujos en tiempo real.** 
+
+Por último, las API de streaming ofrecen una tolerancia a fallos de extremo a extremo con semántica de exactamente una vez 
+y la posibilidad de una latencia de submilisegundos.
+
+![17.png](modules%2F2%2Fims%2F1%2F17.png)
+
+Además de ejecutarse en muchos entornos, Apache Spark también es compatible con varios lenguajes. 
+
+- Scala es el lenguaje principal de Apache Spark. 
+- La plataforma también ejecuta Python, que se conoce más comúnmente como PySpark. 
+- También existe soporte para R, conocido como SparkR o R on Spark, 
+- Java 
+- SQL.
+
+![18.png](modules%2F2%2Fims%2F1%2F18.png)
+
+Tenga en cuenta que SQL se acerca más al cumplimiento de NC SQL 2003. Ahora ejecuta las 99 evaluaciones comparativas 
+del Transaction Process Performance Council Decision Support o consultas TPC-DS. 
+
+Ofrece un nuevo analizador sintáctico conforme a las nuevas normas con buenos mensajes de error, subconsultas, tanto 
+correlacionadas como no correlacionadas, y estadísticas agregadas aproximadas
+
+![19.png](modules%2F2%2Fims%2F1%2F19.png)
+
+Por último, con Dataframes API, las diferencias de rendimiento entre lenguajes son casi inexistentes, especialmente para Scala, Java y Python.
+
 ## 2 Create an Azure Databricks Workspace and cluster
 [< Back to index 2](#index-2)
+
+> Nota: En esta lectura puede ver los pasos implicados en el proceso de creación de un espacio de trabajo y un clúster de Azure Databricks.
+
+Cuando hablamos del espacio de trabajo de Azure Databricks, nos referimos a dos cosas diferentes. 
+
+La primera referencia es el entorno lógico de Azure Databricks en el que se crean los clústeres, se almacenan los datos 
+(a través de DBFS) y en el que se alojan los recursos del servidor. 
+
+La segunda referencia es la más común utilizada en el contexto de Azure Databricks. Se trata de la carpeta raíz especial para todos los activos de Databricks de su organización, incluidos cuadernos, bibliotecas y cuadros de mando, como se muestra a continuación:
+
+![1.png](modules%2F2%2Fims%2F2%2F1.png)
+
+El primer paso para utilizar Azure Databricks es crear y desplegar un espacio de trabajo Databricks, que es el entorno lógico. 
+Puede hacerlo en el portal de Azure.
+
+### Desplegar un espacio de trabajo Azure Databricks
+
+1. Abra el portal Azure
+
+   ![s1.gif](modules%2F2%2Fims%2F2%2Fs1.gif)
+
+2. Haga clic en **Crear un recurso** en la parte superior izquierda
+
+3. Busque "Databricks"
+
+4. Seleccione **Azure Databricks**
+
+5. En la página Azure Databricks seleccioné Crear
+
+6. Proporcione los valores necesarios para crear su espacio de trabajo Azure Databricks:
+
+   ![s2.gif](modules%2F2%2Fims%2F2%2Fs2.gif)
+
+    - **Suscripción**: Elija la suscripción Azure en la que desplegar el espacio de trabajo.
+    
+    - **Grupo de recursos**: UtiliceCrear nuevo y proporcioné un nombre para el nuevo grupo de recursos.
+    
+    - **Ubicación**: Seleccione una ubicación cercana para el despliegue. Para ver la lista de regiones compatibles con Azure Databricks, consulte
+    Servicios Azure disponibles por región.
+    
+    - **Nombre del espacio de trabajo**: Proporcione un nombre único para su espacio de trabajo.
+    
+    - **Nivel de precio:Prueba (Premium - 14 días de DBU gratuitos)**. Debe seleccionar esta opción al crear su espacio de trabajo o se le cobrará. El espacio de trabajo se suspenderá automáticamente después de 14 días. Cuando finalice el periodo de prueba podrá convertir el espacio de trabajo aPremium, pero entonces se le cobrará por su uso.
+
+7. Seleccione **Revisar + Crear**.
+
+8. Seleccione **Crear**.
+
+La creación del espacio de trabajo tarda unos minutos. Durante la creación del espacio de trabajo, aparecerá el mosaico
+Envío de despliegue para Azure Databricks en la parte derecha del portal. Es posible que tenga que desplazarse hacia la 
+derecha en su tablero para ver el mosaico. También aparece una barra de progreso cerca de la parte superior de la pantalla. 
+Puede observar el progreso en cualquiera de las dos áreas.
+
+![3.png](modules%2F2%2Fims%2F2%2F3.png)
+
+
+### ¿Qué es un clúster?
+
+Los cuadernos están respaldados por clústeres, u ordenadores conectados en red, que trabajan juntos para procesar sus 
+datos. El primer paso es crear un clúster.
+
+### Crear un clúster
+
+1. Cuando haya finalizado la creación de su espacio de trabajo Azure Databricks, seleccione el enlace para ir al recurso.
+
+   ![s3.gif](modules%2F2%2Fims%2F2%2Fs3.gif)
+
+2. Seleccione **Lanzar espacio de trabajo** para abrir su espacio de trabajo Databricks en una nueva pestaña.
+
+3. En el menú de la izquierda de su espacio de trabajo Databricks, seleccione **Clusters**.
+
+4. Seleccione **Crear clúster** para añadir un nuevo clúster.
+
+    ![2.png](modules%2F2%2Fims%2F2%2F2.png)
+
+5. Introduzca un nombre para su cluster. Utilice su nombre o sus iniciales para diferenciar fácilmente su cluster de los de sus compañeros.
+
+   ![s4.gif](modules%2F2%2Fims%2F2%2Fs4.gif)
+
+6. Seleccione el **modo de clúster**:Nodo único.
+
+7. Seleccione el **Databricks Runtime Version**:Runtime: 7.3 LTS (Scala 2.12, Spark 3.0.1).
+
+8. En O**pciones de piloto automático**, dejem arcada la casilla y en el cuadro de texto introduzca **45**.
+
+9. Seleccione el **Tipo de nodo**: Standard_DS3_v2.
+
+10. Seleccione **Crear clúster**.
+
+![4.png](modules%2F2%2Fims%2F2%2F4.png)
 
 ## 2 Create and execute a notebook
 [< Back to index 2](#index-2)
 
+> Nota: En esta lectura puede ver los pasos que intervienen en el proceso de creación y ejecución de un cuaderno.
+
+Después de crear su espacio de trabajo Databricks, es hora de crear su primer cuaderno. Para ejecutar su cuaderno, 
+adjuntará el clúster que creó en el ejercicio anterior.
+
+### ¿Qué es un cuaderno Apache Spark?
+
+Un cuaderno es una colección de celdas. Estas celdas se ejecutan para ejecutar código, renderizar texto formateado o 
+mostrar visualizaciones gráficas.
+
+### Crear un cuaderno
+
+1. En el portal Azure, haga clic en el menú Todos los recursos de la parte izquierda de la navegación y seleccione el espacio de trabajo Databricks que creó en la última unidad.
+
+2. Seleccione **Lanzar espacio de trabajo** para abrir su espacio de trabajo Databricks en una nueva pestaña.
+
+3. En el menú de la izquierda de su espacio de trabajo Databricks, seleccione **Inicio**.
+
+4. Haga clic con el botón derecho en su carpeta de inicio.
+
+   ![s1.gif](modules%2F2%2Fims%2F3%2Fs1.gif)
+
+5. Seleccione **Crear**.
+
+6. Seleccione **Cuaderno**.
+
+7. Nombre su cuaderno **Primer cuaderno**.
+
+8. Establezca el Idioma en **Python**.
+
+9. Seleccione el cluster al que adjuntar este cuaderno.
+
+   > Nota: Esta opción sólo aparece cuando hay un cluster en funcionamiento. Todavía puede crear su bloc de notas y 
+   > adjuntarlo a un cluster más tarde.
+
+10. Seleccione Crear.
+
+Ahora que ha creado su bloc de notas, vamos a utilizarlo para ejecutar algo de código.
+
+### Acoplar y desacoplar su bloc de notas
+
+Para utilizar su bloc de notas para ejecutar un código, debe adjuntarlo a un clúster. También puede desacoplar su bloc de notas de un clúster y acoplarlo a otro en función de los requisitos de su organización.
+
+![s2.gif](modules%2F2%2Fims%2F3%2Fs2.gif)
+
+Si su portátil está unido a un clúster, puede
+
+- Separar su portátil del cluster
+- Reiniciar el clúster
+- Adjuntarlo a otro clúster
+- Abrir la interfaz de usuario de Spark
+- Ver los archivos de registro del controlador
+
 ## 2 Exercise: Work with Notebooks
 [< Back to index 2](#index-2)
+
+> Nota: Para ejecutar su cuaderno, adjuntará el clúster que creó en el ejercicio anterior.
+
+Puede utilizar los cuadernos Apache Spark para:
+
+- Leer y procesar archivos y conjuntos de datos enormes
+- Consultar, explorar y visualizar conjuntos de datos
+- Unir conjuntos de datos dispares que se encuentran en lagos de datos
+- Entrenar y evaluar modelos de aprendizaje automático
+- Procesar flujos de datos en directo
+- Realizar análisis en grandes conjuntos de datos gráficos y redes sociales
+
+Para obtener más información sobre el uso de cuadernos, clone el archivo de laboratorios donde se proporcionan cuadernos 
+de muestra. Estos cuadernos le ayudarán a comprender cómo utilizar los cuadernos para sus tareas cotidianas.
+
+### Clone el archivo Databricks
+
+1. En el portal Azure, navegue hasta su espacio de trabajo Azure Databricks desplegado y seleccione Lanzar espacio de 
+trabajo.
+
+2. En el panel izquierdo, seleccione Espacio de trabajo>Usuarios, y seleccione su nombre de usuario (la entrada con el 
+icono de la casa).
+
+3. En el panel que aparece, seleccione la flecha situada junto a su nombre y seleccione Importar.
+
+   ![s1.gif](modules%2F2%2Fims%2F4%2Fs1.gif)
+
+4. En el cuadro de diálogoImportar cuadernos, seleccione la dirección URL y pegue la siguiente:
+
+   > https://github.com/solliancenet/microsoft-learning-paths-databricks-notebooks/blob/master/data-engineering/DBC/01-Introduction-to-Azure-Databricks.dbc?raw=true
+
+5. Seleccione Importar.
+
+   ![s2.gif](modules%2F2%2Fims%2F4%2Fs2.gif)
+
+6. Seleccione la carpeta01-Introduction-to-Azure-Databricks que aparece.
+
+7. Utilice el conjunto de cuadernos de esta carpeta para completar este laboratorio.
+
+### Complete el siguiente cuaderno
+
+**01-Entorno Databricks**- Este cuaderno ilustra los fundamentos de un cuaderno Databricks.
+
+![s1.gif](modules%2F2%2Fims%2F5%2Fs1.gif)
+
+![s2.gif](modules%2F2%2Fims%2F5%2Fs2.gif)
+
+![s3.gif](modules%2F2%2Fims%2F5%2Fs3.gif)
+
+![s4.gif](modules%2F2%2Fims%2F5%2Fs4.gif)
+
+![s5.gif](modules%2F2%2Fims%2F5%2Fs5.gif)
 
 ## 2 Exercise quiz
 [< Back to index 2](#index-2)
 
+![1.png](modules%2F2%2Fims%2F4%2F1.png)
+
 ## 2 Knowledge check
 [< Back to index 2](#index-2)
 
+![1.png](modules%2F2%2Ftest%2F1.png)
+
+![2.png](modules%2F2%2Ftest%2F2.png)
+
+![3.png](modules%2F2%2Ftest%2F3.png)
+
+![4.png](modules%2F2%2Ftest%2F4.png)
+
+![5.png](modules%2F2%2Ftest%2F5.png)
+
 ## 2 Lesson summary
 [< Back to index 2](#index-2)
+
+![1.png](modules%2F2%2Fims%2F6%2F1.png)
+
+En esta lección, tú descubrió los conceptos básicos del espacio de trabajo de Databrick y Cuadernos Apache Spark. 
+Dediquemos un momento a recapitulemos lo que aprendimos.
+
+![2.png](modules%2F2%2Fims%2F6%2F2.png)
+
+Azure Databricks ofrece a los equipos de ciencia e ingeniería de datos una plataforma única para administrar clústeres 
+y explorar datos de forma interactiva. Databricks impulsa a Apache Genere cargas de trabajo aumentando el rendimiento 
+y, al mismo tiempo, reducir los costos otras capacidades. 
+
+![3.png](modules%2F2%2Fims%2F6%2F3.png)
+
+Sitio de Azure Databricks en el centro de la plataforma basada en Azure plataforma de software y proporciona integración nativa con los servicios de Azure.
+
+![4.png](modules%2F2%2Fims%2F6%2F4.png)
+
+Los cuadernos permiten la interacción con diferentes tipos de datos. Se pueden usar para 
+
+- procesar archivos de datos de gran tamaño
+- consulta, lee y escribe datos desde diferentes fuentes
+- entrene modelos de aprendizaje automático 
+- procese flujos de datos en tiempo real.
+
+![5.png](modules%2F2%2Fims%2F6%2F5.png)
+
+Puede ejecutar código Python, Scala , SQL y R en una celda de cuaderno. 
+
+![6.png](modules%2F2%2Fims%2F6%2F6.png)
+
+Es posible crear un clúster Spark y conectarlo y desconectarlo hacia o desde un cuaderno.
+
+![7.png](modules%2F2%2Fims%2F6%2F7.png)
+
+Azure Databricks desempeña un papel clave en el ecosistema de Azure. El sistema de archivos de Databricks, también 
+conocido como DBFS, funciona para presentar Blob El almacenamiento como sistema de archivos.
+
+![8.png](modules%2F2%2Fims%2F6%2F8.png)
+
+Si planea completar otros Los módulos de Azure Databricks, no elimines tu Azure Instancia de Databricks todavía. 
+Puedes usar el mismo entorno para los demás módulos. Sin embargo, si desea eliminar el Azure Instancia de Databricks 
+y, a continuación, complete el siguientes pasos. 
+
+![s0.gif](modules%2F2%2Fims%2F6%2Fs0.gif)
+
+Navegue hasta el portal de recursos y abrir grupos de recursos. Busque y seleccione el grupo de recursos requerido. 
+Abra el requerido grupo de recursos y seleccione «Eliminar grupo de recursos» Escriba el nombre del grupo de recursos 
+que desea eliminar para confirme la eliminación. Azure Studio confirma su confirmación y elimina el grupo de recursos 
+seleccionado.
 
 # 3 Spark Architecture Fundamentals
 
