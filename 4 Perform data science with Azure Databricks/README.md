@@ -654,20 +654,277 @@ seleccionado.
 ## 3 Lesson introduction
 [< Back to index 3](#index-3)
 
+![1.png](modules%2F3%2Fims%2F1%2F1.png)
+
+Bienvenido a la tercera y última lección de este módulo. En esta lección, se familiarizará con los fundamentos básicos de 
+la arquitectura Spark. 
+
+Al final de esta lección: 
+
+- Comprenderá la arquitectura de un clúster Azure Databricks Spark
+- Entenderá la arquitectura de un trabajo Spark. 
+
+![2.png](modules%2F3%2Fims%2F1%2F2.png)
+
+Comencemos con una visión general de el entorno Azure Databricks y las características de big data. Como ya sabrá por 
+lecciones anteriores, Azure Databricks proporciona un entorno de espacio de trabajo Apache Spark as a service orientado 
+a cuadernos. Es el servicio alojado con más funciones disponible para ejecutar cargas de trabajo Spark en Azure, un motor 
+analítico unificado para el procesamiento de datos a gran escala y el aprendizaje automático. 
+
+![3.png](modules%2F3%2Fims%2F1%2F3.png)
+
+Veamos un ejemplo de cuándo la arquitectura Spark puede ser de ayuda. Supongamos que trabaja con big data como ingeniero 
+de datos o científico de datos, su trabajo implicará el procesamiento de datos que contengan una o más de las siguientes 
+características. 
+
+- Alto volumen, procesando un volumen extremadamente grande de datos y escalando su equipo en consecuencia. 
+- Alta velocidad, desplegando, streaming y capacidades de procesamiento en tiempo real. 
+- Variedad, utilizando una gran variedad de tipos de datos, desde conjuntos de datos relacionales estructurados y transacciones financieras hasta datos no estructurados como mensajes de chat y SMS, dispositivos IoT, imágenes, registros y resonancias magnéticas. 
+
+![4.png](modules%2F3%2Fims%2F1%2F4.png)
+
+Estas características suelen denominarse las tres V de los big data. Cuando se trata de trabajar con big data de forma 
+unificada, tanto si los procesa en tiempo real a medida que llegan o por lotes.
+
+![5.png](modules%2F3%2Fims%2F1%2F5.png)
+
+Apache Spark proporciona un motor rápido y capaz que también admite procesos de ciencia de datos como aprendizaje automático 
+y análisis avanzados.
+
 ## 3 Understand the Architecture of Azure Databricks Spark Cluster
 [< Back to index 3](#index-3)
+
+![1.png](modules%2F3%2Fims%2F2%2F1.png)
+
+Para comprender mejor cómo desarrollar con Azure Databricks, es importante entender primero la arquitectura subyacente. 
+Dos aspectos que veremos incluyen el servicio Azure Databricks y Apache spark clusters. 
+
+![2.png](modules%2F3%2Fims%2F2%2F2.png)
+
+Desde un alto nivel el servicio Azure Databrick lanza y gestiona Apache spark clusters dentro de su suscripción Azure. 
+Apache spark clusters o grupos de ordenadores que son tratados como un único ordenador y manejan la ejecución de comandos 
+emitidos desde notebooks. 
+
+Y utilizando una arquitectura de tipo master worker los clusters permiten que el procesamiento de datos se paralelice a 
+través de muchos ordenadores con el fin de mejorar la escala y el rendimiento. 
+
+Y el cluster Apache spark consiste en un controlador spark que se conoce como Master. En Databricks la interfaz del bloc 
+de notas es el programa controlador o Master. Contiene el bucle principal para el programa y crea conjuntos de datos 
+distribuidos en el cluster. 
+
+![3.png](modules%2F3%2Fims%2F2%2F3.png)
+
+Databricks también consiste en clusters spark o conjuntos de datos también conocidos como workers. Databrick suministra 
+operaciones en forma de transformaciones y acciones a los clústeres. Normalmente, esto implica que el nodo controlador 
+envíe trabajo o tareas a los nodos trabajadores. Esto asigna trabajo a las ranuras, ordenándoles que extraigan datos de 
+una fuente de datos especificada. 
+
+![4.png](modules%2F3%2Fims%2F2%2F4.png)
+
+Los programas controladores acceden a Apache spark a través de un objeto de sesión spark independientemente de la ubicación 
+de despliegue. 
+
+![5.png](modules%2F3%2Fims%2F2%2F5.png)
+
+Microsoft Azure gestiona el clúster autoescalándolo según sea necesario basándose tanto en su uso como en 
+la configuración utilizada al configurar el clúster. 
+
+![6.png](modules%2F3%2Fims%2F2%2F6.png)
+
+También se puede habilitar la terminación automática. Esto permite a Azure terminar el clúster después de un número especificado 
+de minutos de inactividad. 
+
+![7.png](modules%2F3%2Fims%2F2%2F7.png)
+
+Ahora echemos un vistazo más de cerca bajo el capó de la plataforma Databricks. Cuando usted crea un servicio Azure databricks, 
+un dispositivo databricks desplegado como un recurso Azure en su suscripción y en el momento de la creación del cluster 
+usted especifica los tipos y tamaños de las máquinas virtuales, también conocidas como VMS, a utilizar tanto para el 
+controlador como para los nodos trabajadores. 
+
+![8.png](modules%2F3%2Fims%2F2%2F8.png)
+
+Pero como su Databricks gestiona todos los demás aspectos del clúster, también tiene la opción de utilizar un pool sin 
+servidor. Un pool sin servidor es un pool autogestionado de recursos en la nube que se autoconfigura para cargas de trabajo 
+interactivas de Spark. Usted proporciona el número mínimo y máximo de trabajadores y el tipo de trabajador y, a continuación, Databricks aprovisiona la computación y el almacenamiento local en función de su uso. 
+
+![9.png](modules%2F3%2Fims%2F2%2F9.png)
+
+El dispositivo Databricks se despliega en Azure como un grupo de recursos gestionados dentro de su suscripción. Este grupo 
+de recursos contiene **el controlador** y **el VMS** trabajador junto con otros recursos necesarios, incluyendo 
+**una red virtual** y **un grupo de seguridad** y **una cuenta de almacenamiento**. 
+
+![10.png](modules%2F3%2Fims%2F2%2F10.png)
+
+Todos los metadatos de su clúster, como los trabajos programados, se almacenan en una base de datos Azure con replicación 
+Geo para tolerancia a fallos. Internamente se utiliza Azure Kubernetes Service o AKS para ejecutar el plano de control y 
+los planos de datos de Azure Databricks a través de contenedores. 
+
+![11.png](modules%2F3%2Fims%2F2%2F11.png)
+
+Estos contenedores se ejecutan en la última generación de hardware Azure conocida como DV 3VMS. Este hardware se basa en 
+memorias no volátiles exprés o SSD NVMe capaces de una latencia fulgurante de 100 microsegundos en E/S. Esto hace que el 
+rendimiento de E/S de Databricks sea aún mejor. Y la red acelerada proporciona la infraestructura de red virtualizada más 
+rápida en la nube. Azure Databricks utiliza estas características para mejorar aún más el rendimiento de chispa. 
+
+![12.png](modules%2F3%2Fims%2F2%2F12.png)
+
+Una vez que los servicios dentro de este grupo de recursos gestionados ya, a continuación, puede gestionar el clúster 
+Databricks a través de la Azure databricks UI y a través de características tales como auto-escalado y auto-terminación. 
+Los usuarios pueden integrar Databricks con una serie de servicios de Microsoft Azure
+
+![13.png](modules%2F3%2Fims%2F2%2F13.png)
+
+El plano de control se integra con el gestor de recursos de Azure, donde puede acceder a los servicios de almacenamiento, 
+red informática y RP de Microsoft Databricks. Los usuarios también pueden interactuar con Databricks UX, que se integra 
+con los clústeres y DBFS. Los clústeres y DBFS proporcionan acceso al espacio de trabajo de Databricks y desde aquí se 
+integran con Vinet y el almacenamiento blob y el Gestor de recursos de Azure también puede integrarse con el espacio de 
+trabajo de Databricks.
 
 ## 3 Understand the architecture of spark job
 [< Back to index 3](#index-3)
 
+![1.png](modules%2F3%2Fims%2F3%2F1.png)
+
+En la unidad anterior, hablamos sobre los Azure Databricks en general y añadimos algo de contexto en torno a la arquitectura 
+de un clúster de Spark. Antes de desglosarlos componentes en detalle, vamos a resumir los fundamentos de una arquitectura 
+Spark.
+
+![2.png](modules%2F3%2Fims%2F3%2F2.png)
+
+Como ya sabrá, Spark es una computación distribuida el entorno y la unidad de distribución es un clúster de Spark. 
+Cada clúster tiene un controlador y uno o más ejecutores o trabajadores, se denominan JVM o máquinas virtuales java. 
+
+![3.png](modules%2F3%2Fims%2F3%2F3.png)
+
+Trabajo presentado a el clúster se divide en otros tantos independientes trabajos según sea necesario. Así es como se 
+distribuye el trabajo los clústeres, los nodos. Los trabajos enviados por el conductor se subdividen a su vez en tareas. 
+
+La entrada a un trabajo se divide en una o más particiones, estas particiones son unidad de trabajo para cada ranura. Entre 
+tareas, es posible que sea necesario reorganizar las particiones y compartido a través de la red. Vamos a explorar el 
+agrupar con más detalle.
+
+![4.png](modules%2F3%2Fims%2F3%2F4.png)
+
+El secreto de Spark es increíble el rendimiento es el paralelismo. Esta es la capacidad de escalar tareas o trabajos 
+horizontalmente a paralelizados o acciones distribuidas. Esto significa que podemos simplemente añadir nuevos nodos al 
+clúster de forma casi infinita sin tener que preocuparse por las limitaciones de la memoria y potencia de procesamiento.
+
+![5.png](modules%2F3%2Fims%2F3%2F5.png)
+
+Anteriormente, habríamos tenido para escalar tareas verticalmente, pero el escalado vertical se limita a un número finito 
+cantidad de RAM , subprocesos y velocidades de CPU. 
+
+![6.png](modules%2F3%2Fims%2F3%2F6.png)
+
+Paralelizamos en dos niveles. El primero de los cuales es el ejecutor, esta es una máquina virtual de Java o una JVM que 
+se ejecuta en un nodo. Una JVM normalmente se ejecuta a una velocidad de una instancia por nodo.
+
+![7.png](modules%2F3%2Fims%2F3%2F7.png)
+
+El segundo nivel de la paralelización es la ranura, que tiene cada ejecutor varias ranuras a las que el conductor puede 
+asignar tareas para ejecución en paralelo.
+
+El número de ranuras es determinado por el número de núcleos y CPU de cada nodo. 
+
+![8.png](modules%2F3%2Fims%2F3%2F8.png)
+
+El controlador es la JVM en en el que se ejecuta nuestra aplicación. La JVM es, naturalmente tiene varios subprocesos, 
+pero una sola JVM, como nuestro controlador, tiene un límite superior finito. 
+
+Sin embargo, el controlador puede evitar estos límites mediante ranuras. El conductor asigna tareas a ranuras para su ejecución en paralelo con el fin de superar los límites de escalamiento vertical. 
+En otras palabras, el conductor escala horizontalmente mediante ranuras. 
+
+Dependiendo del trabajo requerido, se pueden crear varios puestos de trabajo, cada uno de los cuales puede ser desglosado 
+en etapas.
+
+![9.png](modules%2F3%2Fims%2F3%2F9.png)
+
+ En otras palabras, el conductor escala horizontalmente mediante ranuras. Dependiendo del trabajo requerido, se pueden 
+ crear varios puestos de trabajo, cada uno de los cuales puede ser desglosado en etapas.
+
+![10.png](modules%2F3%2Fims%2F3%2F10.png)
+
+Además, el conductor también debe decidir cómo particionar los datos para que pueda distribuirse para procesamiento en 
+paralelo. En consecuencia, el controlador asigna una partición de datos a cada tarea. De esta manera, cada tarea sabe qué 
+dato es procesar. Una vez iniciado, cada la tarea recuperará de la fuente de datos original la partición de los datos 
+asignada a ella. Los resultados de cada trabajo son luego regresó al conductor.
+
+![11.png](modules%2F3%2Fims%2F3%2F11.png)
+
+Veamos cómo funciona Spark administra estos clústeres. En un nivel mucho más bajo, Spark Core emplea un administrador de 
+clústeres responsable del aprovisionamiento nodos dentro del clúster. En cada uno de estos escenarios, el controlador se 
+ejecuta en se ejecuta un nodo 
+
+![12.png](modules%2F3%2Fims%2F3%2F12.png)
+
+de cada uno de los ejecutores su propio nodo individual. 
+
+![13.png](modules%2F3%2Fims%2F3%2F13.png)
+
+Sin embargo, gracias a Azure Databricks, no es necesario preocúpese por la gestión de clústeres como Databricks proporciona 
+una solución robusta y de alto rendimiento administrador de clústeres como parte de su oferta general. 
+
+![14.png](modules%2F3%2Fims%2F3%2F14.png)
+
+ Desde la perspectiva de un desarrollador, su enfoque principal debería estar en lo siguiente: 
+ 
+- el número de particiones en la que sus datos estan divididos.
+- el número de ranuras que tienes disponibles pare la ejecución paralela, 
+- cuántos trabajos son seleccionados
+- las etapas en la que los trabajos se dividen.
+
 ## 3 Knowledge check
 [< Back to index 3](#index-3)
+
+![1.png](modules%2F3%2Ftest%2F1.png)
+
+![2.png](modules%2F3%2Ftest%2F2.png)
+
+![3.png](modules%2F3%2Ftest%2F3.png)
+
+![4.png](modules%2F3%2Ftest%2F4.png)
+
+![5.png](modules%2F3%2Ftest%2F5.png)
+
+![6.png](modules%2F3%2Ftest%2F6.png)
 
 ## 3 Test prep
 [< Back to index 3](#index-3)
 
+![q1.png](modules%2F3%2Ftest%2Fq1.png)
+
+![q2.png](modules%2F3%2Ftest%2Fq2.png)
+
+![q3.png](modules%2F3%2Ftest%2Fq3.png)
+
+![q4.png](modules%2F3%2Ftest%2Fq4.png)
+
+![q5.png](modules%2F3%2Ftest%2Fq5.png)
+
+![q6.png](modules%2F3%2Ftest%2Fq6.png)
+
+![q7.png](modules%2F3%2Ftest%2Fq7.png)
+
+![q8.png](modules%2F3%2Ftest%2Fq8.png)
+
+![q9.png](modules%2F3%2Ftest%2Fq9.png)
+
+![q10.png](modules%2F3%2Ftest%2Fq10.png)
+
 ## 3 Lesson summary
 [< Back to index 3](#index-3)
+
+![1.png](modules%2F3%2Fims%2F4%2F1.png)
+
+![2.png](modules%2F3%2Fims%2F4%2F2.png)
+
+![3.png](modules%2F3%2Fims%2F4%2F3.png)
+
+![4.png](modules%2F3%2Fims%2F4%2F4.png)
+
+![5.png](modules%2F3%2Fims%2F4%2F5.png)
+
+
 
 # 4 Use Azure Databricks to Prepare the Data for Advanced Analytics and Machine Learning Operations
 
@@ -690,32 +947,191 @@ seleccionado.
 ## 4 Lesson introduction
 [< Back to index 4](#index-4)
 
+![1.png](modules%2F4%2Fims%2F1%2F1.png)
+
+Bienvenido al segundo módulo de este curso. Este módulo se centra en cómo leer y escribir datos utilizando Azure Databricks. 
+
+En este módulo, usted; 
+
+- utilizará Azure Databricks para leer múltiples tipos de archivos, tanto con como sin esquema 
+- combinará entradas de archivos y almacenes de datos como Azure SQL Database
+- transformará y almacenará esos datos para análisis avanzados. 
+
+![2.png](modules%2F4%2Fims%2F1%2F2.png)
+
+¿Por qué es importante poder leer y escribir datos con la plataforma Azure Databricks? Considere el siguiente ejemplo. 
+Suponga que trabaja para una empresa emergente de análisis de datos que se está expandiendo junto con su creciente base 
+de clientes, la empresa recibe grandes cantidades de datos de clientes de múltiples fuentes en diferentes formatos sin procesar. 
+
+![3.png](modules%2F4%2Fims%2F1%2F3.png)
+
+Para manejar eficientemente estos datos, la empresa invierte en Azure Databricks. Su equipo analiza cómo Databricks soporta 
+las funciones cotidianas de manejo de datos como lecturas, escrituras y consultas. Su equipo también realiza estas lecturas, 
+escrituras y consultas para preparar los datos para operaciones avanzadas de análisis y aprendizaje automático. 
+
+![4.png](modules%2F4%2Fims%2F1%2F4.png)
+
+Este módulo le ayudará a descubrir más sobre cómo leer, escribir, y consultar estas diversas formas de datos a través de 
+una serie de lecturas y ejercicios. Necesitará una suscripción a Azure para acceder a los ejercicios. Si no dispone de 
+una suscripción a Azure, visite azure.microsoft.com/free para crear una cuenta gratuita.
+
+
 ## 4 Read data in CSV format
 [< Back to index 4](#index-4)
+
+> Nota: En esta lectura puede ver los pasos que intervienen en el proceso de lectura de datos en formato CSV.
+
+### Clone el archivo Databricks
+
+1. Si actualmente no tiene abierto su espacio de trabajo Azure Databricks: en el portal Azure, navegue hasta su espacio de trabajo Azure Databricks desplegado y seleccioneLanzar espacio de trabajo.
+
+   ![a1.gif](modules%2F4%2Fims%2F2%2Fa1.gif)
+
+2. En el panel izquierdo, seleccione Espacio detrabajo > Usuarios y seleccione su nombre de usuario (la entrada con el icono 
+de la casa).
+
+3. En el panel que aparece, seleccione la flecha situada junto a su nombre y seleccione Importar.
+
+4. En el cuadro de diálogoImportar cuadernos, seleccione la dirección URL y pegue la siguiente:
+   
+   > https://github.com/solliancenet/microsoft-learning-paths-databricks-notebooks/blob/master/data-engineering/DBC/03-Reading-and-writing-data-in-Azure-Databricks.dbc?raw=true
+
+5. Seleccione **Importar**.
+
+6. Seleccione la carpeta **03-Reading-and-writing-data-in-Azure-Databricks** que aparece.
+
+### Complete el siguiente cuaderno
+
+Abra el cuaderno **1.Lectura de datos - CSV.** Asegúrese de adjuntar su cluster al cuaderno antes de seguir las 
+instrucciones y ejecutar las celdas que contiene.
+
+![a2.gif](modules%2F4%2Fims%2F2%2Fa2.gif)
+
+Dentro del cuaderno, usted
+
+- Empezará a trabajar con la documentación de la API
+
+- Introducir la claseSparkSession y otros puntos de entrada
+
+- Introducir la claseDataFrameReader
+
+- Leer datos de:
+  - CSV sin un esquema
+  - CSV con un esquema
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 4 Read data in JSON format
 [< Back to index 4](#index-4)
 
+> Nota: En esta lectura puede ver los pasos implicados en el proceso de lectura de datos en formato JSON.
+
+En su espacio de trabajo Azure Databricks, abra la carpeta03-Reading-and-writing-data-in-Azure-Databricks que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno2.Lectura de datos - JSON. Asegúrese de conectar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, leerá datos de:
+
+- JSON sin un esquema
+
+- JSON con un esquema
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
 ## 4 Read data in Parquet format
 [< Back to index 4](#index-4)
+
+> Nota: En esta lectura puede ver los pasos implicados en el proceso de lectura de datos en formato Parquet.
+
+En su espacio de trabajo Azure Databricks, abra la carpeta03-Reading-and-writing-data-in-Azure-Databricks que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno 3.Lectura de datos - Parquet. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted
+
+Introducir el formato de archivo Parquet
+
+Leer datos de:
+- Archivos Parquet sin un esquema
+- Archivos Parquet con un esquema
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el paso siguiente.
 
 ## 4 Read data stored in tables and views
 [< Back to index 4](#index-4)
 
+> Nota: En esta lectura puede ver los pasos implicados en el proceso de lectura de datos almacenados en tablas y vistas.
+
+En su espacio de trabajo Azure Databricks, abra la carpeta03-Reading-and-writing-data-in-Azure-Databricks que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno4.Lectura de datos - Tablas y vistas. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted
+
+- Demostrará cómo registrar previamente fuentes de datos en Azure Databricks
+
+- Introducir vistas temporales sobre archivos
+
+- Leerá datos de tablas/vistas
+
+Una vez que haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
 ## 4 Write data
 [< Back to index 4](#index-4)
+
+> Nota: En esta lectura puede ver los pasos del proceso de escritura de datos.
+
+En su espacio de trabajo AzureDatabricks, abra la carpeta03-Reading-and-writing-data-in-Azure-Databricks que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno 5.Escritura de datos. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted hará lo siguiente
+
+- Escribirá datos en un archivo Parquet
+
+- Leerá de nuevo el archivo Parquet y mostrará los resultados
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 4 Exercise: Read and Write Data
 [< Back to index 4](#index-4)
 
+En su espacio de trabajo AzureDatabricks, abra la carpeta03-Reading-and-writing-data-in-Azure-Databricks que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno6. Lecturade datos - Cuaderno delaboratorio. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+El objetivo de este ejercicio es poner en práctica parte de lo que ha aprendido sobre la lectura de datos con Apache Spark. Las instrucciones se proporcionan dentro del cuaderno, junto con celdas vacías para que realice su trabajo. En la parte inferior del cuaderno hay celdas adicionales que le ayudarán a verificar que su trabajo es correcto.
+
+> Nota: Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
 ## 4 Exercise quiz
 [< Back to index 4](#index-4)
+
+![0.png](modules%2F4%2Ftest%2F0.png)
 
 ## 4 Knowledge check
 [< Back to index 4](#index-4)
 
+![q1.png](modules%2F4%2Ftest%2Fq1.png)
+
+![q2.png](modules%2F4%2Ftest%2Fq2.png)
+
 ## 4 Lesson summary
 [< Back to index 4](#index-4)
+
+![1.png](modules%2F4%2Fims%2F3%2F1.png)
+
+En esta lección, ha explorado cómo leer y escribir datos en Azure Databricks. Tómese un momento para repasar lo que ha 
+aprendido. Leer y escribir datos en Azure Databricks requiere estar familiarizado con los formatos de archivo CSV, JSON y 
+Parquet. 
+
+![2.png](modules%2F4%2Fims%2F3%2F2.png)
+
+También es importante poder escribir archivos Parquet en el sistema de archivos Databricks o DBFS con opciones de compresión, 
+y el mismo método dataframe.write puede utilizarse para dar salida a otros formatos. Ha completado este módulo y ahora sabe 
+cómo leer y escribir datos en Azure Databricks. Bien hecho.
 
 # 5 Work with DataFrames in Azure Databricks
 
@@ -736,26 +1152,158 @@ seleccionado.
 ## 5 Lesson introduction
 [< Back to index 5](#index-5)
 
+![1.png](modules%2F5%2Fims%2F1%2F1.png)
+
+Bienvenido al tercer módulo de este curso. La primera lección explora el trabajo con DataFrames y Azure Databricks. En 
+esta lección, utilizará el método count para contar filas en un DataFrame. Utilice la función display para mostrar un 
+DataFrame en el cuaderno. Almacene en caché un DataFrame para realizar operaciones más rápidas si se necesitan los datos 
+por segunda vez, y utilice la función limitar para mostrar un pequeño conjunto de filas de un DataFrame más grande.
+
+![2.png](modules%2F5%2Fims%2F1%2F2.png)
+
+ También utilizará la función seleccionar para seleccionar un subconjunto de columnas de un DataFrame. Utilice las funciones 
+ distinct y drop duplicates para filtrar los datos duplicados, y utilice el método drop para eliminar columnas de un DataFrame. 
+
+![3.png](modules%2F5%2Fims%2F1%2F3.png)
+
+ ¿Por qué es importante poder trabajar con DataFrames en la plataforma Azure Databricks? Considere el siguiente ejemplo. 
+ Suponga que trabaja para una startup de análisis de datos que se está expandiendo junto con su creciente base de clientes, 
+ la empresa recibe grandes cantidades de datos de clientes de múltiples fuentes en diferentes formatos sin procesar.
+
+![4.png](modules%2F5%2Fims%2F1%2F4.png)
+
+Para manejar eficientemente estos datos la empresa invierte en Azure Databricks. Su equipo es responsable de analizar 
+cómo Databricks soporta las funciones diarias de manejo de datos como lecturas, escrituras y consultas. Usted desea ir 
+más allá de las simples funciones de manejo de datos y descubrir cómo simplificar la exploración de datos y realizar 
+transformaciones de datos. Las tareas de exploración y transformación de datos ayudan a su equipo a realizar análisis 
+avanzados y aprendizaje automático en etapas posteriores de la canalización de datos. 
+
+![5.png](modules%2F5%2Fims%2F1%2F5.png)
+
+Esta lección le ayudará a descubrir más sobre cómo trabajar con DataFrames a través de funciones y transformaciones. 
+Explorará estas funciones y transformaciones con una serie de lecturas y ejercicios. 
+
 ## 5 Describe a DataFrame
 [< Back to index 5](#index-5)
+
+Abra el cuaderno1.Describir-un-marco-de-datos. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted
+
+Familiarizarse con las API deDataFrame
+
+Aprenderá las clases...
+SparkSession
+DataFrame(también conocidas comoDataset[Row])
+
+Aprenderá las acciones...
+count()
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 5 Use common DataFrame Methods
 [< Back to index 5](#index-5)
 
+Nota: En esta lectura puede ver los pasos implicados en el proceso de utilización de los métodos comunes de DataFrame.
+
+En su espacio de trabajo Azure Databricks, abra la carpeta04-Working-With-Dataframes que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno2.Use-common-dataframe-methods. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted
+
+Familiarizarse con las API deDataFrame
+
+Utilizará métodos comunes de DataFrame para mejorar el rendimiento
+
+Explorará la documentación de las API de Spark
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
+
+
 ## 5 Use the display function
 [< Back to index 5](#index-5)
+
+Nota: En esta lectura puede ver los pasos implicados en el proceso de utilización de la función de visualización.
+
+En su espacio de trabajo Azure Databricks, abra la carpeta04-Working-With-Dataframes que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno3.Función de visualización. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, aprenderá las transformaciones
+
+limit(..)
+
+select(..)
+
+drop(..)
+
+distinct()
+
+dropDuplicates(..)
+
+y aprenderá las acciones:
+
+show(..)
+
+display(..)
+
+Una vez que haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 5 Exercise: Distinct Articles
 [< Back to index 5](#index-5)
 
+En su espacio de trabajo Azure Databricks, abra la carpeta04-Working-With-Dataframes que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno 4.Ejercicio: Artículos Distintos notebook. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+En este ejercicio, leerá los archivos Parquet, aplicará las transformaciones necesarias, realizará un recuento total de registros y, a continuación, comprobará que todos los datos se han cargado correctamente. 
+
+Como extra, intente definir un esquema que se ajuste a los datos y actualice la operación de lectura para utilizar el esquema.
+
+Nota: Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
+
+
 ## 5 Knowledge check
 [< Back to index 5](#index-5)
+
+![q1.png](modules%2F5%2Fims%2Ftest%2Fq1.png)
+
+![q2.png](modules%2F5%2Fims%2Ftest%2Fq2.png)
+
+![q3.png](modules%2F5%2Fims%2Ftest%2Fq3.png)
 
 ## 5 Test prep
 [< Back to index 5](#index-5)
 
+![t1.png](modules%2F5%2Fims%2Ftest%2Ft1.png)
+
+![t2.png](modules%2F5%2Fims%2Ftest%2Ft2.png)
+
+![t3.png](modules%2F5%2Fims%2Ftest%2Ft3.png)
+
+![t4.png](modules%2F5%2Fims%2Ftest%2Ft4.png)
+
+![t5.png](modules%2F5%2Fims%2Ftest%2Ft5.png)
+
 ## 5 Lesson summary
 [< Back to index 5](#index-5)
+
+![1.png](modules%2F5%2Fims%2F2%2F1.png)
+
+En esta lección, aprendiste cómo trabaje con marcos de datos, columnas y Azure Databricks. Repasemos la clave puntos de esta lección. Hay una sintaxis específica para especificar los valores de las columnas para el filtrado y las agregaciones. 
+
+![2.png](modules%2F5%2Fims%2F2%2F2.png)
+
+ Es importante que todos los usuarios de Azure Databricks entiende cómo usar correctamente la clase de columna. Todos los usuarios también deben saber cómo ordenar y filtrar un marco de datos en función de los valores de las columnas.
+
+![3.png](modules%2F5%2Fims%2F2%2F3.png)
+
+Por último, los usuarios de Azure Databricks deben saber cómo usar, recopilar y realizar transformaciones para regresar graba desde un marco de datos y los envía al controlador del clúster. Ha llegado al final de esta lección sobre cómo trabajar con columnas de marcos de datos y Azure Databricks. Bien hecho. 
 
 # 6 Build and Query a Delta Lake
 
@@ -776,29 +1324,374 @@ seleccionado.
 ## 6 Describe the open source Delta Lake
 [< Back to index 6](#index-6)
 
+![1.png](modules%2F6%2Fims%2F1%2F1.png)
+
+Bienvenido a la lección sobre construcción y consulta de un Delta Lake. Después de completar este módulo, usted será capaz 
+de describir las características clave y casos de uso de Delta Lake. Utilice Delta Lake para crear, anexar y tablas absurdas, 
+realizar optimizaciones en Delta Lake y comparar diferentes versiones de una tabla Delta utilizando la máquina del tiempo.
+
+![2.png](modules%2F6%2Fims%2F1%2F2.png)
+
+ ¿Por qué es importante saber cómo construir y consultar un Delta Lake? Considere un escenario en el que usted trabaja 
+ como ingeniero de datos o científico de datos para una gran tienda minorista. Su organización utiliza Azure Data Lake 
+ para almacenar todos sus datos de compras en línea. 
+
+![3.png](modules%2F6%2Fims%2F1%2F3.png)
+
+Sin embargo, a medida que aumenta el volumen de datos, actualizar y consultar la información del almacenamiento es cada 
+vez más lento. Su responsabilidad es investigar el problema y encontrar una solución. Necesita una solución que se adapte 
+a Data Lake en escalabilidad pero que también sea fiable y rápida. Delta Lake puede resolver su problema.
+
+![4.png](modules%2F6%2Fims%2F1%2F4.png)
+
+ Delta Lake es un formato de archivo que se integra con Spark y tiene ofertas tanto de código abierto como gestionadas. 
+
+
+![5.png](modules%2F6%2Fims%2F1%2F5.png)
+
+ Delta Lake se proporciona como oferta gestionada como parte de su cuenta Azure Databricks y le ayuda a combinar las mejores 
+ capacidades de data lake, data warehousing y un sistema de ingestión de streaming. 
+
+![6.png](modules%2F6%2Fims%2F1%2F6.png)
+
+Al final de esta lección, habrá desarrollado los conjuntos de habilidades necesarios para construir y consultar un Delta Lake. 
+Comencemos describiendo la oferta de código abierto de Delta Lake. Delta Lake es una capa de almacenamiento transaccional 
+diseñada específicamente para trabajar con Apache Spark y el sistema de archivos de Databricks, DBFS.  Mantiene un registro de transacciones que realiza un seguimiento eficiente de los cambios en la tabla. 
+
+![7.png](modules%2F6%2Fims%2F1%2F7.png)
+
+Un lago de datos es un repositorio de almacenamiento que almacena de forma económica una gran cantidad de datos en bruto 
+tanto actuales como históricos. Los datos se almacenan en formatos nativos como XML, JSON, CSV y Parquet. 
+
+Puede contener bases de datos relacionales operativas con datos transaccionales en vivo. 
+
+![8.png](modules%2F6%2Fims%2F1%2F8.png)
+
+Las empresas gastan millones de dólares en introducir datos en los lagos de datos con Apache Spark. La aspiración es hacer 
+ciencia de datos y aprendizaje automático en todos esos datos usando Apache Spark. 
+
+![9.png](modules%2F6%2Fims%2F1%2F9.png)
+
+Pero los datos no están listos para ciencia de datos y aprendizaje automático. La mayoría de estos proyectos están fracasando debido a datos poco fiables. ¿Por qué estos proyectos luchan con la fiabilidad y el rendimiento? El reto consiste en extraer información significativa de los lagos de datos. 
+
+![10.png](modules%2F6%2Fims%2F1%2F10.png)
+
+ Para hacerlo de forma fiable, debe resolver problemas como la aplicación del esquema cuando se introducen nuevas tablas, 
+ la reparación de tablas cuando se inserta cualquier dato nuevo en el lago de datos, la actualización frecuente de metadatos, 
+ los cuellos de botella de los archivos de pequeño tamaño para los cálculos distribuidos y la dificultad para ordenar 
+ los datos mediante un índice si los datos están repartidos en muchos archivos y particionados.
+
+![11.png](modules%2F6%2Fims%2F1%2F11.png)
+
+Los lagos de datos también plantean problemas de fiabilidad de los datos. Los trabajos de producción fallidos dejan los 
+datos en un estado corrupto que requiere una recuperación tediosa. La falta de esquema y de aplicación crea datos 
+incoherentes y de baja calidad. La falta de coherencia hace casi imposible mezclar anexos y lecturas, lotes y streaming.
+
+![12.png](modules%2F6%2Fims%2F1%2F12.png)
+
+Por muy buenos que sean los lagos de datos para almacenar de forma económica nuestros datos en bruto, también conllevan 
+problemas de rendimiento. Demasiados archivos pequeños o muy grandes significa más tiempo abriendo y cerrando archivos 
+en lugar de leyendo contenidos. Esto es aún peor con el streaming. El particionamiento, también conocido como indexación 
+de los pobres, se rompe si se eligen los campos equivocados o cuando los datos tienen muchas dimensiones, columnas de 
+alta cardinalidad. No hay almacenamiento en caché. El rendimiento del almacenamiento en la nube es bajo. El almacenamiento 
+de objetos en la nube es de 20-50 megabits por segundo núcleo frente a los 300 megabits por segundo núcleo de una fuente local. 
+
+![13.png](modules%2F6%2Fims%2F1%2F13.png)
+
+Delta Lake es un formato de archivo que puede ayudarle a construir un lago de datos compuesto por una o muchas tablas en 
+formato Delta Lake. Delta Lake se integra estrechamente con Apache Spark y utiliza un formato abierto que se basa en 
+Parquet. Al tratarse de un formato de código abierto, Delta Lake también es compatible con otras plataformas de datos, 
+incluida Azure Synapse Analytics. 
+
+![14.png](modules%2F6%2Fims%2F1%2F14.png)
+
+Delta Lake se especializa en preparar los datos para el análisis. Delta Lake es una capa de almacenamiento de código 
+abierto que aporta transacciones ácidas a Apache Spark y a las cargas de trabajo de big data. 
+
+![15.png](modules%2F6%2Fims%2F1%2F15.png)
+
+ Puede leer y escribir datos que estén almacenados en Delta Lake utilizando las API de flujo y lote SQL de Apache Spark. 
+ Se trata de las mismas API conocidas que utiliza para trabajar con tablas Hive o directorios DBFS. 
+
+![16.png](modules%2F6%2Fims%2F1%2F16.png)
+
+Echemos un vistazo a la funcionalidad que proporciona Delta Lake. Los lagos de datos suelen tener múltiples conductos 
+de datos, que leen y escriben datos de forma concurrente. Los ingenieros de datos deben pasar por un tedioso proceso 
+para garantizar la integridad de los datos debido a la falta de transacciones.
+
+![17.png](modules%2F6%2Fims%2F1%2F17.png)
+
+ Delta Lake aporta transacciones ácidas a sus lagos de datos. Proporciona serializabilidad que es el nivel de aislamiento 
+ más fuerte. En big data, incluso los propios metadatos pueden ser big data.
+
+![18.png](modules%2F6%2Fims%2F1%2F18.png)
+
+Delta Lake puede aprovechar el manejo escalable de metadatos que trata los metadatos igual que los datos. Para ello, 
+aprovecha la potencia de procesamiento distribuida de Sparks para manejar todos sus metadatos. Como resultado, Delta Lake 
+puede manejar eficazmente tablas a escala de petabytes con miles de millones de particiones y archivos. 
+
+![19.png](modules%2F6%2Fims%2F1%2F19.png)
+
+ La capacidad de deshacer un cambio o volver a una versión anterior es una de las características clave de las transacciones.
+
+![20.png](modules%2F6%2Fims%2F1%2F20.png)
+
+ Con su función de viaje en el tiempo, Delta Lake proporciona instantáneas de los datos que le permiten volver a versiones anteriores de los datos para auditorías, rollbacks, o para reproducir experimentos.
+
+![21.png](modules%2F6%2Fims%2F1%2F21.png)
+
+Apache Parquet es el formato de base para Delta Lake, permitiéndole aprovechar los eficientes esquemas de compresión y codificación que son nativos del formato.
+
+![22.png](modules%2F6%2Fims%2F1%2F22.png)
+
+Una tabla en Delta Lake es tanto una tabla por lotes como una fuente y un sumidero de flujo. 
+
+![23.png](modules%2F6%2Fims%2F1%2F23.png)
+
+ La ingesta de datos de flujo, el relleno histórico por lotes y las consultas interactivas todo funciona sin más. 
+
+![24.png](modules%2F6%2Fims%2F1%2F24.png)
+
+La aplicación de esquemas ayuda a garantizar que los tipos de datos son correctos y las columnas requeridas están presentes, evitando que los datos erróneos causen incoherencias en los datos.
+
+![25.png](modules%2F6%2Fims%2F1%2F25.png)
+
+Delta Lake le permite realizar cambios en el esquema de una tabla que pueden aplicarse automáticamente sin tener que escribir DDL de migración.
+
+![26.png](modules%2F6%2Fims%2F1%2F26.png)
+
+El registro de transacciones de Delta Lake registra detalles sobre cada cambio realizado en los datos proporcionando una pista de auditoría completa de los cambios
+
+![27.png](modules%2F6%2Fims%2F1%2F27.png)
+
+ Delta Lake es compatible con las API de Scala, Java, Python y SQL para una gran variedad de funcionalidades. La compatibilidad con operaciones de fusión, actualización, y eliminación le ayuda a cumplir los requisitos de conformidad. 
+
+![28.png](modules%2F6%2Fims%2F1%2F28.png)
+
+Los desarrolladores pueden utilizar Delta Lake con sus canalizaciones de datos existentes con cambios mínimos, ya que es totalmente compatible con las implementaciones existentes de Spark.
+
+![29.png](modules%2F6%2Fims%2F1%2F29.png)
+
+Para una documentación completa de las principales características, consulte la página de documentación de Delta Lake y el proyecto Delta Lake en GitHub.
+
+![30.png](modules%2F6%2Fims%2F1%2F30.png)
+
+Al final de este módulo, hay una lectura de recursos adicionales que le ofrece todos los enlaces que necesita, incluidos enlaces a fragmentos de código para los comandos DML de fusión, actualización y eliminación.
+
 ## 6 Get started with Delta using Spark APIs
 [< Back to index 6](#index-6)
+
+> Nota: En esta lectura podrá ver los pasos necesarios en el proceso de configuración de Delta mediante las API de Spark.
+
+Delta Lake se incluye con Azure Databricks. Puede empezar a utilizarlo hoy mismo. Para empezar rápidamente con Delta Lake, haga lo siguiente:
+
+En lugar deparquet...
+
+
+```commandline
+CREATE TABLE ...
+USING parquet
+...
+
+dataframe
+    .write
+    .format("parquet")
+    .save("/data")
+```
+
+diga simplemente delta
+
+```commandline
+CREATE TABLE ...
+USING parquet
+...
+
+dataframe
+    .write
+    .format("delta")
+    .save("/data")
+```
+
+### Utilización de Delta con sus tablas Parquet existentes
+
+Paso 1: ConviertaParquet en tablasDelta:
+
+```commandline
+CONVERT TO DELTA parquet.`path/to/table` [NO STATISTICS]
+[PARTITIONED BY (col_name1 col_type1, col_name2 col_type2, ...)]
+```
+
+Paso 2: Optimizar el diseño para consultas rápidas:
+
+```commandline
+OPTIMIZE events
+WHERE date >= current_timestamp() - INTERVAL 1 day
+ZORDER BY (eventType)
+```
+
+### Sintaxis básica
+
+Dos de las características principales de Delta Lake son la realización de upserts (inserciones/actualizaciones) y las operaciones de Time Travel. Exploraremos más estos conceptos en los cuadernos de este módulo.
+
+UPSERT significa "UPdate" (actualizar) e "inSERT" (insertar). En otras palabras, UPSERT son literalmente DOS operaciones. No está soportado en los lagos de datos tradicionales, ya que ejecutar un UPDATE podría invalidar los datos a los que accede la operación INSERT posterior.
+
+Con Delta Lake, sin embargo, podemos hacer UPSERTS. Delta Lake combina estas operaciones para garantizar la atomicidad para
+
+- INSERTAR una fila
+
+- si la fila ya existe, UPDATE la fila.
+
+### Sintaxis Upsert
+
+Upserting, o fusión, en Delta Lake proporciona actualizaciones de grano fino de sus datos. La siguiente sintaxis muestra cómo realizar un Upsert:
+
+```sql
+MERGE INTO customers -- Delta table
+USING updates
+ON customers.customerId = source.customerId
+WHEN MATCHED THEN
+    UPDATE SET address = updates.address
+WHEN NOT MATCHED
+    THEN INSERT (customerId, address) VALUES (updates.customerId, updates.address)
+```
+
+Consulte
+[la documentación sobre sintaxis de actualización de datos de tablas](https://docs.delta.io/latest/quick-start.html#update-table-data)
+
+### Sintaxis de desplazamiento en el tiempo
+
+Debido a que Delta Lake está controlado por versiones, usted tiene la opción de consultar versiones pasadas de los datos. 
+
+Utilizando un único sistema de almacenamiento de archivos, ahora tiene acceso a varias versiones de sus datos históricos, lo que garantiza que sus analistas de datos podrán replicar sus informes (y comparar los cambios agregados a lo largo del tiempo) y sus científicos de datos podrán replicar sus experimentos.
+
+Otros casos de uso del viaje en el tiempo son:
+
+- Re-creación de análisis, informes o salidas (por ejemplo, la salida de un modelo de aprendizaje automático). Esto podría ser útil para depurar o auditar, especialmente en industrias reguladas.
+
+- Escribir consultas temporales complejas.
+
+- Corregir errores en los datos.
+
+- Proporcionar aislamiento instantáneo a un conjunto de consultas para tablas que cambian rápidamente.
+
+Ejemplo de uso del viaje en el tiempo para reproducir experimentos e informes:
+
+```commandline
+SELECT count(*) FROM events
+TIMESTAMP AS OF timestamp
+
+SELECT count(*) FROM events
+VERSION AS OF version
+```
+
+```commandline
+spark.read.format("delta").option("timestampAsOf", timestamp_string).load("/events/")
+```
+
+Si necesita revertir escrituras accidentales o erróneas:
+
+```commandline
+INSERT INTO my_table
+    SELECT * FROM my_table TIMESTAMP AS OF
+    date_sub( current_date(), 1)
+```
+
+Consulte
+[la documentación sobre la sintaxis](https://docs.delta.io/latest/quick-start.html#read-older-versions-of-data-using-time-travel)
+ de los viajes en el tiempo.
 
 ## 6 Exercise: Work with basic Delta Lake functionality
 [< Back to index 6](#index-6)
 
+En su espacio de trabajo Azure Databricks, abra la carpeta09-Building-And-Querying-A-Delta-Lake que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno2.Delta-Lake-Basics-Lab-1. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+En este ejercicio, usted:
+
+- Creará un nuevo lago Delta a partir de los datos agregados de un lago Delta existente.
+
+- Insertará registros en un lago Delta.
+
+- Añadir nuevos datos a un lago Delta existente.
+
+Las instrucciones se proporcionan dentro del cuaderno, junto con celdas vacías para que realice su trabajo. En la parte inferior del cuaderno hay celdas adicionales que le ayudarán a verificar que su trabajo es correcto.
+
+> Nota: Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
+
 ## 6 Exercise quiz 1
 [< Back to index 6](#index-6)
+
+![1.png](modules%2F6%2Fims%2F2%2F1.png)
 
 ## 6 Describe how Azure Databricks manages Delta Lake
 [< Back to index 6](#index-6)
 
+> Nota: En esta lectura puede ver los pasos implicados en el proceso de utilización de Azure Databricks para gestionar Data Lake.
+
+En su espacio de trabajo Azure Databricks, abra la carpeta09-Building-And-Querying-A-Delta-Lake que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno3.Managed-Delta-Lake. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, descubrirá las características clave de Delta Lake que permiten la optimización de las consultas y la recogida de basura, lo que se traduce en una mejora del rendimiento.
+
+Una vez que haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
 ## 6 Exercise: Use the Delta Lake Time Machine and perform optimization
 [< Back to index 6](#index-6)
+
+En su espacio de trabajo Azure Databricks, abra la carpeta09-Building-And-Querying-A-Delta-Lake que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno4.Delta-Time-Machine-and-Optimization-Lab-2. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+En este ejercicio, usted:
+
+- Comparará diferentes versiones de una tabla Delta utilizando Time Machine.
+
+- Optimizará su lago Delta para aumentar la velocidad y reducir el número de archivos.
+
+Las instrucciones se proporcionan dentro del cuaderno, junto con celdas vacías para que realice su trabajo. En la parte inferior del cuaderno hay celdas adicionales que le ayudarán a verificar que su trabajo es correcto.
+
+> Nota: Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
 
 ## 6 Exercise quiz 2
 [< Back to index 6](#index-6)
 
+![2.png](modules%2F6%2Fims%2F2%2F2.png)
+
 ## 6 Knowledge check
 [< Back to index 6](#index-6)
 
+![q1.png](modules%2F6%2Ftest%2Fq1.png)
+
+![q2.png](modules%2F6%2Ftest%2Fq2.png)
+
+![q3.png](modules%2F6%2Ftest%2Fq3.png)
+
+![q4.png](modules%2F6%2Ftest%2Fq4.png)
+
+
 ## 6 Lesson summary
 [< Back to index 6](#index-6)
+
+![3.png](modules%2F6%2Fims%2F2%2F3.png)
+
+Ahora ya sabe cómo construir y limpiar un Delta Lake. Si busca un sistema de gestión de datos que sea rápido, fiable y 
+capaz de manejar grandes volúmenes de datos en diferentes formatos rob, Delta Lake es la solución.
+
+![4.png](modules%2F6%2Fims%2F2%2F4.png)
+
+Delta Lake se especializa en preparar los datos para el análisis. Le proporciona lo mejor de los sistemas de lago de datos, almacenamiento de datos e ingestión de datos en streaming, bien hecho. Está en camino de dominar Delta Lake. 
+
+![5.png](modules%2F6%2Fims%2F2%2F5.png)
+
+En la próxima lección, verá cómo procesar datos en batch y en streaming y aprenderá cómo la arquitectura de Delta Lake permite la analítica unificada en streaming y en batch. 
 
 # 7 Work with user-defined functions
 
