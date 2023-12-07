@@ -1712,26 +1712,127 @@ En la próxima lección, verá cómo procesar datos en batch y en streaming y ap
 ## 7 Lesson introduction
 [< Back to index 7](#index-7)
 
+![1.png](modules%2F7%2Fims%2F1%2F1.png)
+
+Suponga que trabaja para una startup de análisis de datos que se está expandiendo junto con su creciente base de clientes. 
+Usted recibe datos de clientes de múltiples fuentes en diferentes formatos sin procesar. Para manejar eficientemente 
+enormes cantidades de datos de clientes, su empresa ha decidido invertir en Azure Databricks.
+
+![2.png](modules%2F7%2Fims%2F1%2F2.png)
+
+ Su equipo es responsable de preparar los datos para análisis avanzados y operaciones de aprendizaje automático. 
+
+![3.png](modules%2F7%2Fims%2F1%2F3.png)
+
+ Como parte de la ingeniería de funciones, hay transformaciones específicas a nivel de columna que necesita realizar y 
+ que no son compatibles con las funciones integradas.
+
+![4.png](modules%2F7%2Fims%2F1%2F4.png)
+
+Está buscando ver cómo las funciones definidas por el usuario o UDF, pueden ayudarle a lograr su lógica de procesamiento 
+de datos compleja y personalizada. 
+
+![5.png](modules%2F7%2Fims%2F1%2F5.png)
+
+Estos módulos de laboratorio pueden completarse de forma gratuita utilizando la prueba de 14 días de Databricks, 
+pero no puede utilizar la suscripción de prueba gratuita de Azure para crear un espacio de trabajo de prueba de 
+Databricks Para cambiar una suscripción de prueba gratuita a Pay-As-You-Go, vaya a su perfil y cambie la suscripción 
+ofrecida a Pay-As-You-Go. 
+
+![6.png](modules%2F7%2Fims%2F1%2F6.png)
+
+Cuando cree su espacio de trabajo Azure Databricks, puede seleccionar el nivel de precios de prueba premium 14 días 
+unidades Databricks gratuitas o DBUs para dar acceso al espacio de trabajo premium gratuito como sus DBUs Databricks 
+durante 14 días. Tenga en cuenta que, con un espacio de trabajo gratuito y DBUs gratuitas, sigue siendo responsable 
+de los costes de computación. En muchos casos, esto significa que querrá crear clusters con un máximo de una nota, 
+independientemente de las instrucciones de los laboratorios individuales. 
+
+![7.png](modules%2F7%2Fims%2F1%2F7.png)
+
+En esta lección, aprenderá a crear funciones definidas por el usuario o UDFs, y a articular las ventajas de rendimiento de las UDFs vectorizadas en python. 
+
+![8.png](modules%2F7%2Fims%2F1%2F8.png)
+
+Antes de empezar, asegúrese de que dispone de una suscripción a Azure. Si no dispone de una suscripción a Azure, cree 
+una cuenta gratuita desde el sitio web de Microsoft. Hay un enlace a este recurso desde las lecturas adicionales al final 
+de este módulo.
+
 ## 7 Write user defined functions
 [< Back to index 7](#index-7)
+
+Complete el siguiente cuaderno
+
+Abra el [1. User Defined Functions.ipynb](modules%2F7%2Fnotebooks%2F1.%20User%20Defined%20Functions.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted:
+
+- Crear, registrar e invocar UDFs
+
+- Crear, registrar e invocar UDF vectorizadas
+
+Una vez que haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 7 Exercise: Perform Extract, Transform, Load (ETL) operations using user-defined functions
 [< Back to index 7](#index-7)
 
+En su espacio de trabajo Azure Databricks, abra la carpeta udf que importó dentro de su carpeta de usuario.
+
+Abra el [2. Exercise User Defined Functions.ipynb](modules%2F7%2Fnotebooks%2F2.%20Exercise%20User%20Defined%20Functions.ipynb). Ejercitar funciones definidas por el usuario. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+En este ejercicio, creará UDFs para hacer ETL. El conjunto de datos tiene registros duplicados y el formato de los números de la seguridad social es incoherente. El trabajo del ETL es eliminar los registros duplicados y estandarizar el formato para los números de la seguridad social.
+
+>Nota
+Encontrará el cuaderno correspondiente dentro de [2. Exercise User Defined Functions ans.ipynb](modules%2F7%2Fnotebooks%2F2.%20Exercise%20User%20Defined%20Functions%20ans.ipynb). Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el paso siguiente.
+
+
 ## 7 Exercise quiz
 [< Back to index 7](#index-7)
+
+![0.png](modules%2F7%2Ftest%2F0.png)
 
 ## 7 Knowledge check
 [< Back to index 7](#index-7)
 
+![q1.png](modules%2F7%2Ftest%2Fq1.png)
+
+![q2.png](modules%2F7%2Ftest%2Fq2.png)
+
+![q3.png](modules%2F7%2Ftest%2Fq3.png)
+
 ## 7 Test prep
 [< Back to index 7](#index-7)
+
+![t1.png](modules%2F7%2Ftest%2Ft1.png)
+
+![t2.png](modules%2F7%2Ftest%2Ft2.png)
+
+![t3.png](modules%2F7%2Ftest%2Ft3.png)
+
+
 
 ## 7 Lesson summary
 [< Back to index 7](#index-7)
 
+![9.png](modules%2F7%2Fims%2F1%2F9.png)
+
+Las funciones definidas por el usuario en Azure Databricks le ayudan a ir más allá de las funciones incorporadas en la 
+biblioteca de funciones de punto de secuela. Las UDF le permiten encapsular su lógica de procesamiento de datos compleja 
+y personalizada. Como resultado, las UDFS hacen que la lógica personalizada sea reutilizable, fácil de entender, mantener 
+y depurar.
+
+![10.png](modules%2F7%2Fims%2F1%2F10.png)
+
+Ahora que ha concluido esta lección, debería saber cómo escribir, registrar e invocar UDFS derecho registrar e invocar 
+UDF vectorizadas, y articular las ventajas de rendimiento de las UDF vectorizadas.
+
 ## 7 Additional resources
 [< Back to index 7](#index-7)
+
+Si no dispone de una suscripción a Azure, cree una
+[cuenta gratuita](https://azure.microsoft.com/free)
+
 
 # 8 Perform Machine Learning with Azure Databricks
 
@@ -1756,38 +1857,211 @@ En la próxima lección, verá cómo procesar datos en batch y en streaming y ap
 ## 8 Lesson introduction
 [< Back to index 8](#index-8)
 
+![1.png](modules%2F8%2Fims%2F1%2F1.png)
+
+Imagine que trabaja como científico de datos para una tienda minorista en línea. Su organización utiliza Azure Data Lake 
+para almacenar todos sus datos de compras en línea, y el equipo de ingeniería de datos ya está utilizando Azure Databricks 
+para las operaciones cotidianas de manejo de datos. 
+
+![2.png](modules%2F8%2Fims%2F1%2F2.png)
+
+Se ha encargado a su equipo que explore técnicas de aprendizaje automático para mejorar los modelos predictivos de rotación de clientes.
+
+![3.png](modules%2F8%2Fims%2F1%2F3.png)
+
+Su responsabilidad es educar al resto del equipo sobre los fundamentos del aprendizaje automático, establecer un proceso 
+de desarrollo que el equipo debería adoptar al embarcarse en este nuevo proyecto. 
+
+![4.png](modules%2F8%2Fims%2F1%2F4.png)
+
+Estos módulos de laboratorio pueden completarse gratuitamente utilizando la versión de prueba de 14 días de Databricks, 
+pero no puede utilizar una suscripción de prueba gratuita de Azure para crear un espacio de trabajo de prueba de Databricks.
+
+![5.png](modules%2F8%2Fims%2F1%2F5.png)
+
+En esta lección, comprenderá los fundamentos del aprendizaje automático, entenderá el flujo de trabajo del aprendizaje 
+automático, y aprenderá a utilizar Azure Databricks y la biblioteca PySpark para implementar partes clave del flujo de 
+trabajo del aprendizaje automático, análisis exploratorio de datos, modelado y evaluación. 
+
 ## 8 Understand Machine Learning
 [< Back to index 8](#index-8)
+
+### Clone el archivo Databricks
+
+1. Si actualmente no tiene abierto su espacio de trabajo Azure Databricks: en el portal Azure, navegue hasta su espacio de trabajo Azure Databricks desplegado y seleccioneLanzar espacio de trabajo.
+
+2. En el panel izquierdo, seleccione Espacio detrabajo>Usuarios y seleccione su nombre de usuario (la entrada con el icono de la casa).
+
+3. En el panel que aparece, seleccione la flecha situada junto a su nombre y seleccioneImportar.
+
+   ![6.png](modules%2F8%2Fims%2F1%2F6.png)
+
+4. En el cuadro de diálogoImportar cuadernos, seleccione la dirección URL y pegue la siguiente:
+
+   > https://github.com/MicrosoftDocs/mslearn_databricks/blob/main/ml/1.1.0/Labs.dbc
+
+5. SeleccioneImportar.
+
+6. Seleccione la carpeta ml que aparece.
+
+### Complete el siguiente cuaderno
+
+Abra el cuaderno1. [1. What is Machine Learning.ipynb](modules%2F8%2Fnotebooks%2F1.%20What%20is%20Machine%20Learning.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted
+
+- Definir el aprendizaje automático
+
+- Diferenciará las tareas supervisadas de las no supervisadas
+
+- Identificará las tareas de regresión y clasificación
+
+- Entrenar un modelo, interpretar los resultados y crear predicciones
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 8 Exercise: Train a Model and Create Predictions
 [< Back to index 8](#index-8)
 
+En su espacio de trabajo Azure Databricks, abra la carpetaml que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno2. [2. Exercise Train a Model and Create Predictions.ipynb](modules%2F8%2Fnotebooks%2F2.%20Exercise%20Train%20a%20Model%20and%20Create%20Predictions.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+En este ejercicio, entrenará un modelo utilizando el conjunto de datos de viviendas de Boston para predecir el precio de una vivienda. Utilizará el modelo entrenado para predecir el precio de la vivienda en los datos de prueba.
+
+> Nota
+> Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
 ## 8 Exercise quiz 1
 [< Back to index 8](#index-8)
+
+![0.png](modules%2F8%2Fims%2Ftest%2F0.png)
 
 ## 8 Understand Data Using Exploratory Data Analysis
 [< Back to index 8](#index-8)
 
+En su espacio de trabajo Azure Databricks, abra la carpetaml que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno3. [3. Exploratory Analysis.ipynb](modules%2F8%2Fnotebooks%2F3.%20Exploratory%20Analysis.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted:
+
+- Identificar los objetivos principales del análisis exploratorio
+
+- Calcular momentos estadísticos para determinar el centro y la dispersión de los datos
+
+- Crear gráficos de datos, incluidos histogramas y diagramas de dispersión
+
+- Calcular correlaciones entre variables
+
+- Explorar gráficos más avanzados para visualizar la relación entre variables
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
 ## 8 Exercise: Perform Exploratory Data Analysis
 [< Back to index 8](#index-8)
+
+En su espacio de trabajo Azure Databricks, abra la carpetaml que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno4. [4. Exercise Exploratory Analysis.ipynb](modules%2F8%2Fnotebooks%2F4.%20Exercise%20Exploratory%20Analysis.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+En este ejercicio, realizará un análisis exploratorio sobre el conjunto de datos del uso compartido de bicicletas calculando e interpretando estadísticas de resumen, creando gráficos básicos y calculando correlaciones.
+
+> Nota
+>
+> Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 8 Exercise quiz 2
 [< Back to index 8](#index-8)
 
+![1.png](modules%2F8%2Fims%2Ftest%2F1.png)
+
 ## 8 Describe Machine Learning Workflows
 [< Back to index 8](#index-8)
+
+En su espacio de trabajo Azure Databricks, abra la carpetaml que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno5. [5. ML Workflows.ipynb](modules%2F8%2Fnotebooks%2F5.%20ML%20Workflows.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted podrá:
+
+- Definir el ciclo de desarrollo del análisis de datos
+
+- Motivar y realizar una división entre datos de entrenamiento y de prueba
+
+- Entrenar un modelo de referencia
+
+- Evaluar el rendimiento de un modelo de referencia y mejorarlo
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
+### INFORMACIÓN CONTENIDA EN EL NOTEBOOK
+
+
+Los científicos de datos siguen un flujo de trabajo iterativo que mantiene su trabajo estrechamente alineado tanto con los problemas comerciales como con sus datos. Este ciclo comienza con una comprensión exhaustiva del problema comercial y de los datos en sí, un proceso llamado análisis exploratorio de datos. Una vez que se comprenden la pregunta comercial motivadora y los datos, el siguiente paso es preparar los datos para el modelado. Esto incluye eliminar o imputar valores faltantes y valores atípicos, así como crear características para entrenar el modelo. La mayor parte del trabajo de un científico de datos se realiza en estos pasos iniciales.
+
+Después de preparar las características de manera que el modelo pueda beneficiarse de ellas, la etapa de modelado utiliza esas características para determinar la mejor manera de representar los datos. Los diversos modelos se evalúan y todo este proceso se repite hasta que se desarrolla y despliega la mejor solución en producción.
+
+![7.png](modules%2F8%2Fims%2F1%2F7.png)
+
+Para implementar el ciclo de desarrollo detallado anteriormente, los científicos de datos dividen primero sus datos de manera aleatoria en dos subconjuntos. Esto permite evaluar el modelo en datos no vistos.
+
+- El conjunto de entrenamiento se utiliza para entrenar el modelo.
+- El conjunto de prueba se utiliza para probar qué tan bien se desempeña el modelo en datos no vistos.
+
+Esta división evita la memorización de datos, conocida como sobreajuste (overfitting). El sobreajuste ocurre cuando nuestro modelo aprende patrones causados por azar en lugar de señales verdaderas. Al evaluar el rendimiento del modelo en datos no vistos, podemos minimizar el sobreajuste.
+
+La división de datos de entrenamiento y prueba debe hacerse de manera que la cantidad de datos en el conjunto de prueba sea una buena muestra de los datos en general. Una división del 80% de sus datos en el conjunto de entrenamiento y del 20% en el conjunto de prueba es un buen punto de partida.
+
+![8.png](modules%2F8%2Fims%2F1%2F8.png)
 
 ## 8 Exercise: Build and evaluate a baseline machine learning model
 [< Back to index 8](#index-8)
 
+En su espacio de trabajo Azure Databricks, abra la carpetaml que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno6. [6. Exercise ML Workflows.ipynb](modules%2F8%2Fnotebooks%2F6.%20Exercise%20ML%20Workflows.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+En este ejercicio, usted promulgará partes del flujo de trabajo de Aprendizaje Automático, como hacer la división entrenamiento-prueba en un conjunto de datos, y luego construir y evaluar un modelo de línea de base. Opcionalmente, puede intentar superar el modelo de línea base entrenando un modelo de regresión lineal.
+
+> Nota
+>
+> Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
 ## 8 Exercise quiz 3
 [< Back to index 8](#index-8)
+
+![2.png](modules%2F8%2Fims%2Ftest%2F2.png)
 
 ## 8 Knowledge check
 [< Back to index 8](#index-8)
 
+![q1.png](modules%2F8%2Fims%2Ftest%2Fq1.png)
+
+![q2.png](modules%2F8%2Fims%2Ftest%2Fq2.png)
+
+![q3.png](modules%2F8%2Fims%2Ftest%2Fq3.png)
+
+![q4.png](modules%2F8%2Fims%2Ftest%2Fq4.png)
+
+![q5.png](modules%2F8%2Fims%2Ftest%2Fq5.png)
+
 ## 8 Lesson summary
 [< Back to index 8](#index-8)
+
+![9.png](modules%2F8%2Fims%2F1%2F9.png)
+
+![10.png](modules%2F8%2Fims%2F1%2F10.png)
+
+![11.png](modules%2F8%2Fims%2F1%2F11.png)
+
+![12.png](modules%2F8%2Fims%2F1%2F12.png)
 
 # 9 Train a Machine Learning Model
 
@@ -1811,35 +2085,176 @@ En la próxima lección, verá cómo procesar datos en batch y en streaming y ap
 ## 9 Lesson introduction
 [< Back to index 9](#index-9)
 
+![1.png](modules%2F9%2Fims%2F1%2F1.png)
+
+Imagine que trabaja como científico de datos para una empresa de bicicletas compartidas. Su organización utiliza Azure 
+Data Lake para almacenar todos sus datos históricos de uso para la ciudad de Nueva York.
+
+![2.png](modules%2F9%2Fims%2F1%2F2.png)
+
+Usted es responsable de desarrollar un modelo de regresión basado en aprendizaje automático para predecir la demanda 
+estacional de alquiler de bicicletas para la ciudad de Nueva York. 
+
+![3.png](modules%2F9%2Fims%2F1%2F3.png)
+
+Los laboratorios de este módulo pueden completarse gratuitamente utilizando la versión de prueba de 14 días de Databricks, 
+pero no puede utilizar una suscripción de prueba gratuita de Azure para crear un espacio de trabajo de prueba de Databricks
+
+![4.png](modules%2F9%2Fims%2F1%2F4.png)
+
+En esta lección, aprenderá a comprender los tres bloques de construcción principales en la biblioteca de aprendizaje 
+automático pice box, transformadores, estimadores y pipelines. Aprenda a construir pipelines para tareas comunes de 
+featurización de datos y profundice en el modelado de regresión. Eso incluye el entrenamiento y la interpretación de un 
+modelo de regresión entrenado.
+
 ## 9 Perform featurization of the dataset
 [< Back to index 9](#index-9)
+
+### Clone el archivo Databricks
+
+1. Si actualmente no tiene abierto su espacio de trabajo Azure Databricks: en el portal Azure, navegue hasta su espacio de trabajo Azure Databricks desplegado y seleccioneLanzar espacio de trabajo.
+
+2. En el panel izquierdo, seleccione Espacio detrabajo>Usuarios y seleccione su nombre de usuario (la entrada con el icono de la casa).
+
+3. En el panel que aparece, seleccione la flecha situada junto a su nombre y seleccioneImportar.
+
+   ![6.png](modules%2F8%2Fims%2F1%2F6.png)
+
+4. En el cuadro de diálogoImportar cuadernos, seleccione la dirección URL y pegue la siguiente:
+
+   > https://github.com/MicrosoftDocs/mslearn_databricks/blob/main/ml-model/1.1.0/Labs.dbc
+
+5. SeleccioneImportar.
+
+6. Seleccione la carpeta ml que aparece.
+
+### Complete el siguiente cuaderno
+Abra el cuaderno1. [1. Featurization.ipynb](modules%2F9%2Fnotebooks%2F1.%20Featurization.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted deberá:
+
+- Diferenciará los transformadores, estimadores y canalizaciones de Spark
+
+- Codificar características categóricas
+
+- Imputar los datos que faltan
+
+- Combinará diferentes etapas de featurización en una canalización
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 9 Exercise: Finish featurization of the dataset
 [< Back to index 9](#index-9)
 
+En su espacio de trabajo Azure Databricks, abra la carpetaml-model que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno2. [2. Exercise Featurization.ipynb](modules%2F9%2Fnotebooks%2F2.%20Exercise%20Featurization.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+En este ejercicio va a featurizar datos categóricos dividiéndolos en bins. También eliminará los registros con valores de datos incorrectos y normalizará la columna de etiquetas.
+
+> Nota 
+> 
+> Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
 ## 9 Exercise quiz 1
 [< Back to index 9](#index-9)
+
+![0.png](modules%2F9%2Fims%2Ftests%2F0.png)
 
 ## 9 Understanding regression modeling
 [< Back to index 9](#index-9)
 
+En su espacio de trabajo Azure Databricks, abra la carpetaml-model que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno3. [3. Regression Modeling.ipynb](modules%2F9%2Fnotebooks%2F3.%20Regression%20Modeling.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted
+
+- Motivará el uso de la regresión lineal
+
+- Entrenar un modelo de regresión simple
+
+- Interpretar modelos de regresión
+
+- Entrenar un modelo de regresión multivariante
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
 ## 9 Exercise: Build and interpret a regression model
 [< Back to index 9](#index-9)
+
+En su espacio de trabajo Azure Databricks, abra la carpetaml-model que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno4. [4. Exercise Regression Modeling.ipynb](modules%2F9%2Fnotebooks%2F4.%20Exercise%20Regression%20Modeling.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+En este ejercicio, entrenará un modelo de regresión utilizando el conjunto de datos de viviendas de Boston para predecir el precio de una vivienda e interpretará la significación estadística de los coeficientes del modelo entrenado.
+
+>Nota
+>
+>Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 9 Exercise quiz 2
 [< Back to index 9](#index-9)
 
+![1.png](modules%2F9%2Fims%2Ftests%2F1.png)
+
 ## 9 Knowledge check
 [< Back to index 9](#index-9)
+
+![q1.png](modules%2F9%2Fims%2Ftests%2Fq1.png)
+
+![q2.png](modules%2F9%2Fims%2Ftests%2Fq2.png)
+
+![q3.png](modules%2F9%2Fims%2Ftests%2Fq3.png)
+
+![q4.png](modules%2F9%2Fims%2Ftests%2Fq4.png)
+
+![q5.png](modules%2F9%2Fims%2Ftests%2Fq5.png)
 
 ## 9 Test prep
 [< Back to index 9](#index-9)
 
+![t1.png](modules%2F9%2Fims%2Ftests%2Ft1.png)
+
+![t2.png](modules%2F9%2Fims%2Ftests%2Ft2.png)
+
+![t3.png](modules%2F9%2Fims%2Ftests%2Ft3.png)
+
+![t4.png](modules%2F9%2Fims%2Ftests%2Ft4.png)
+
+![t5.png](modules%2F9%2Fims%2Ftests%2Ft5.png)
+
+![t6.png](modules%2F9%2Fims%2Ftests%2Ft6.png)
+
+![t7.png](modules%2F9%2Fims%2Ftests%2Ft7.png)
+
 ## 9 Lesson summary
 [< Back to index 9](#index-9)
 
+![5.png](modules%2F9%2Fims%2F1%2F5.png)
+
+En esta lección, tú aprendió a usar la máquina PySparks paquete de aprendizaje para crear funcionalidades canaliza e 
+interpreta un modele una regresión simple y entrene un multivariante modelo de regresión. 
+
+Ahora que tienes Al concluir esta lección, debes saber cómo diferencie los transformadores Spark, los estimadores y 
+las tuberías. Codificación en un solo paso características categóricas, imputa los datos faltantes y combina diferentes 
+caracterizaciones etapas de una canalización. 
+
+![6.png](modules%2F9%2Fims%2F1%2F6.png)
+
+También aprendiste a entrenar un modelo de regresión simple, interpretar los modelos de regresión y entrenar un 
+multivariante modelo de regresión. 
+
 ## 9 Additional resources
 [< Back to index 9](#index-9)
+
+Si no dispone de una suscripción a Azure, cree una
+[cuenta gratuita](https://azure.microsoft.com/free)
+
 
 # 10 Work with MLFlow in Azure Databricks
 
