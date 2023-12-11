@@ -2273,20 +2273,100 @@ Si no dispone de una suscripción a Azure, cree una
 ## 10 Lesson introduction
 [< Back to index 10](#index-10)
 
+![1.png](modules%2F10%2Fims%2F1%2F1.png)
+
+Imagine que trabaja como científico de datos para una empresa de bicicletas compartidas. Su equipo ha empezado a experimentar 
+con algoritmos de aprendizaje automático para predecir la demanda estacional de alquiler de bicicletas.
+
+![img.png](modules%2F10%2Fims%2F1%2Fimg.png)
+
+Su equipo se da cuenta de que gestionar el flujo de trabajo del aprendizaje automático es todo un reto debido a la 
+dificultad para realizar el seguimiento de varios experimentos, garantizar que los experimentos sean reproducibles, 
+y proporcionar una forma estándar de empaquetar y desplegar modelos entrenados. 
+
+![img_1.png](modules%2F10%2Fims%2F1%2Fimg_1.png)
+
+Se le ha encomendado la tarea de investigar marcos para gestionar el ciclo de vida del aprendizaje automático con cambios 
+mínimos para integrarse con su base de código existente. 
+
+![img_2.png](modules%2F10%2Fims%2F1%2Fimg_2.png)
+
+Los laboratorios de este módulo pueden completarse gratuitamente utilizando la prueba de 14 días de Databricks.
+
+![img_3.png](modules%2F10%2Fims%2F1%2Fimg_3.png)
+
+En esta lección, aprenderá a utilizar ML flow para rastrear experimentos, registrar métricas y comparar ejecuciones. 
+Antes de comenzar, asegúrese de tener una suscripción a Azure. 
+
 ## 10 Use MLFlow to track experiments, log metrics, and compare runs
 [< Back to index 10](#index-10)
+
+### Clone el archivo Databricks
+
+1. Si actualmente no tiene abierto su espacio de trabajo Azure Databricks: en el portal Azure, navegue hasta su espacio de trabajo Azure Databricks desplegado y seleccioneLanzar espacio de trabajo.
+
+2. En el panel izquierdo, seleccione Espacio detrabajo>Usuarios y seleccione su nombre de usuario (la entrada con el icono de la casa).
+
+3. En el panel que aparece, seleccione la flecha situada junto a su nombre y seleccioneImportar.
+
+   ![6.png](modules%2F8%2Fims%2F1%2F6.png)
+
+4. En el cuadro de diálogoImportar cuadernos, seleccione la dirección URL y pegue la siguiente:
+
+   > https://github.com/MicrosoftDocs/mslearn_databricks/blob/main/mlflow/1.1.0/Labs.dbc
+
+5. SeleccioneImportar.
+
+6. Seleccione la carpeta ml que aparece.
+
+### Complete el siguiente cuaderno
+Abra el cuaderno1. [1. MLflow.ipynb](modules%2F10%2Fnotebooks%2F1.%20MLflow.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted:
+
+- Utilizar MLflow para realizar un seguimiento de los experimentos, registrar métricas y comparar ejecuciones
+
+Una vez que haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 10 Exercise: Work with MLFlow to track experiment metrics, parameters, artifacts and models
 [< Back to index 10](#index-10)
 
+En su espacio de trabajo Azure Databricks, abra la carpetamlflow que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno2. [2. Exercise MLflow.ipynb](modules%2F10%2Fnotebooks%2F2.%20Exercise%20MLflow.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+En este ejercicio, utilizará el conjunto de datos de diabetes en scikit-learn y predecirá la métrica de progresión (una medida cuantitativa de la progresión de la enfermedad al cabo de un año) basándose en el IMC y la presión arterial. Utilizará el modelo de regresión lineal ElasticNet de scikit-learn, en el que variará los parámetros alfa y l1_ratio para su ajuste. Utilizará MLflow para registrar las métricas, los parámetros, los artefactos y el modelo.
+
+> Nota
+>
+> Encontrará un cuaderno correspondiente dentro de la subcarpeta de soluciones. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
 ## 10 Exercise quiz
 [< Back to index 10](#index-10)
+
+![img_4.png](modules%2F10%2Fims%2F1%2Fimg_4.png)
 
 ## 10 Knowledge check
 [< Back to index 10](#index-10)
 
+![q1.png](modules%2F10%2Fims%2Ftests%2Fq1.png)
+
+![q2.png](modules%2F10%2Fims%2Ftests%2Fq2.png)
+
+![q3.png](modules%2F10%2Fims%2Ftests%2Fq3.png)
+
+![q4.png](modules%2F10%2Fims%2Ftests%2Fq4.png)
+
 ## 10 Lesson summary
 [< Back to index 10](#index-10)
+
+![img_5.png](modules%2F10%2Fims%2F1%2Fimg_5.png)
+
+En esta lección, ha aprendido a trabajar con MLflow en Azure Databricks. O, más concretamente, a utilizar MLflow para 
+realizar un seguimiento de los experimentos, registrar métricas y comparar ejecuciones. 
 
 # 11 Perform Model Selection with Hyperparameter Tuning
 
@@ -2310,23 +2390,109 @@ Si no dispone de una suscripción a Azure, cree una
 ## 11 Describe model selection and hyperparameter tuning
 [< Back to index 11](#index-11)
 
+### Clone el archivo Databricks
+
+1. Si actualmente no tiene abierto su espacio de trabajo Azure Databricks: en el portal Azure, navegue hasta su espacio de trabajo Azure Databricks desplegado y seleccioneLanzar espacio de trabajo.
+
+2. En el panel izquierdo, seleccione Espacio detrabajo>Usuarios y seleccione su nombre de usuario (la entrada con el icono de la casa).
+
+3. En el panel que aparece, seleccione la flecha situada junto a su nombre y seleccioneImportar.
+
+   ![6.png](modules%2F8%2Fims%2F1%2F6.png)
+
+4. En el cuadro de diálogoImportar cuadernos, seleccione la dirección URL y pegue la siguiente:
+
+   > https://github.com/MicrosoftDocs/mslearn_databricks/blob/main/hyperparameter/1.1.0/Labs.dbc
+
+5. SeleccioneImportar.
+
+6. Seleccione la carpeta ml que aparece.
+
+### Complete el siguiente cuaderno
+Abra el cuaderno1. [1. Model Selection.ipynb](modules%2F11%2Fnotebooks%2F1.%20Model%20Selection.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted:
+
+- Definir los hiperparámetros y motivar su papel en el aprendizaje automático
+
+- Ajustar los hiperparámetros utilizando la búsqueda en cuadrícula
+
+- Validar el rendimiento del modelo utilizando la validación cruzada
+
+- Guardar un modelo entrenado y sus predicciones
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
 ## 11 Exercise: Select optimal model by tuning hyperparameters
 [< Back to index 11](#index-11)
+
+En su espacio de trabajo Azure Databricks, abra la carpeta dehiperparámetros que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno2. [2. Exercise Model Selection.ipynb](modules%2F11%2Fnotebooks%2F2.%20Exercise%20Model%20Selection.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+En este ejercicio, utilizará la búsqueda en cuadrícula y la validación cruzada para ajustar los hiperparámetros de un modelo de regresión logística.
+
+> Nota
+>
+> Encontrará un cuaderno correspondiente dentro de la subcarpeta de soluciones. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 11 Exercise quiz
 [< Back to index 11](#index-11)
 
+![img_5.png](modules%2F11%2Fims%2F1%2Fimg_5.png)
+
 ## 11 Knowledge check
 [< Back to index 11](#index-11)
+
+![q1.png](modules%2F11%2Fims%2Ftest%2Fq1.png)
+
+![q2.png](modules%2F11%2Fims%2Ftest%2Fq2.png)
+
+![q3.png](modules%2F11%2Fims%2Ftest%2Fq3.png)
+
+![q4.png](modules%2F11%2Fims%2Ftest%2Fq4.png)
+
+![q5.png](modules%2F11%2Fims%2Ftest%2Fq5.png)
 
 ## 11 Test prep
 [< Back to index 11](#index-11)
 
+![t1.png](modules%2F11%2Fims%2Ftest%2Ft1.png)
+
+![t2.png](modules%2F11%2Fims%2Ftest%2Ft2.png)
+
+![t3.png](modules%2F11%2Fims%2Ftest%2Ft3.png)
+
+![t4.png](modules%2F11%2Fims%2Ftest%2Ft4.png)
+
+![t5.png](modules%2F11%2Fims%2Ftest%2Ft5.png)
+
+![t6.png](modules%2F11%2Fims%2Ftest%2Ft6.png)
+
+![t7.png](modules%2F11%2Fims%2Ftest%2Ft7.png)
+
 ## 11 Lesson summary
 [< Back to index 11](#index-11)
 
+![img_6.png](modules%2F11%2Fims%2F1%2Fimg_6.png)
+
+En este módulo, ha aprendido sobre la Biblioteca PySparks de Aprendizaje Automático para ajuste de hiperparámetros y 
+técnicas de validación para ayudar a seleccionar el modelo de mejor rendimiento. Ahora que ha concluido este módulo, 
+debería saber cómo: 
+
+- Definir hiperparámetros y modificar su función en el Aprendizaje Automático. 
+- Ajuste los hiperparámetros utilizando la búsqueda en cuadrícula.
+- Valide el rendimiento del modelo utilizando la validación cruzada. 
+- Guarde un modelo entrenado y sus predicciones.
+
 ## 11 Additional resources
 [< Back to index 11](#index-11)
+
+Si no dispone de una suscripción a Azure, cree una
+[cuenta gratuita](https://azure.microsoft.com/free)
+
 
 # 12 Deep Learning with Horovod for distributed training
 
@@ -2346,23 +2512,128 @@ Si no dispone de una suscripción a Azure, cree una
 ## 12 Lesson introduction
 [< Back to index 12](#index-12)
 
+![img.png](modules%2F12%2Fims%2F1%2Fimg.png)
+
+Bienvenido. Imagine que trabaja como científico de datos para una gran tienda minorista en línea. Ha entrenado un 
+modelo de aprendizaje profundo utilizando TensorFlow en un subconjunto de los datos de entrenamiento disponibles en una 
+máquina GPU de un solo nodo para predecir la pérdida de clientes. 
+
+![img_1.png](modules%2F12%2Fims%2F1%2Fimg_1.png)
+
+Ahora, está listo para entrenar la siguiente iteración de el modelo utilizando todos los datos de entrenamiento disponibles. 
+Sin embargo, se da cuenta de que el tiempo de entrenamiento en un solo nodo será del orden de semanas. 
+
+![img_2.png](modules%2F12%2Fims%2F1%2Fimg_2.png)
+
+Su siguiente tarea es buscar marcos de trabajo de código abierto que soporten el entrenamiento distribuido de modelos de 
+aprendizaje profundo que sea a la vez de alto rendimiento y fácil de usar. 
+
+![img_3.png](modules%2F12%2Fims%2F1%2Fimg_3.png)
+
+Los laboratorios de este módulo pueden completarse gratuitamente utilizando la prueba de 14 días de Databricks, pero no 
+puede utilizar una suscripción de prueba gratuita de Azure para crear un espacio de trabajo de prueba de Databricks.
+
+![img_4.png](modules%2F12%2Fims%2F1%2Fimg_4.png)
+
+En esta lección, aprenderá cómo utilizar Azure Databricks y 
+
+- ejecutar trabajos de entrenamiento de aprendizaje profundo distribuidos de larga duración en Spark 
+- utilizar Petastorm para permitir el entrenamiento y la evaluación de modelos de aprendizaje profundo a partir de conjuntos de datos en formato Apache Parquet.
+
 ## 12 Use Horovod to train a Deep Learning Model
 [< Back to index 12](#index-12)
+
+1. Si actualmente no tiene abierto su espacio de trabajo Azure Databricks: en el portal Azure, navegue hasta su espacio de trabajo Azure Databricks desplegado y seleccioneLanzar espacio de trabajo.
+
+2. En el panel izquierdo, seleccione Espacio detrabajo>Usuarios y seleccione su nombre de usuario (la entrada con el icono de la casa).
+
+3. En el panel que aparece, seleccione la flecha situada junto a su nombre y seleccioneImportar.
+
+   ![6.png](modules%2F8%2Fims%2F1%2F6.png)
+
+4. En el cuadro de diálogoImportar cuadernos, seleccione la dirección URL y pegue la siguiente:
+
+   > https://github.com/solliancenet/microsoft-learning-paths-databricks-notebooks/blob/master/data-science/11-Deep-Learning.dbc?raw=true
+
+5. SeleccioneImportar.
+
+6. Seleccione la carpeta ml que aparece.
+
+### Complete el siguiente cuaderno
+Abra el cuaderno1. [1. Horovod.ipynb](modules%2F12%2Fnotebooks%2F1.%20Horovod.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted:
+
+Utilizar Horovod para entrenar una red neuronal distribuida
+
+Una vez que haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 12 Use Petastorm to read in Apache Parquet format with Horovod for distributed model training
 [< Back to index 12](#index-12)
 
+En su espacio de trabajo Azure Databricks, abra la carpeta11-Deep-Learning que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno2. [2. Horovod Petastorm.ipynb](modules%2F12%2Fnotebooks%2F2.%20Horovod%20Petastorm.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+**Dentro del cuaderno, usted:**
+
+- Utilizar Horovod para entrenar una red neuronal distribuida utilizando archivos Parquet + Petastorm
+
+Una vez que haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
+
 ## 12 Exercise: Work with Horovod and Petastorm for training a deep learning model
 [< Back to index 12](#index-12)
+
+En su espacio de trabajo Azure Databricks, abra la carpeta11-Deep-Learning que importó dentro de su carpeta de usuario.
+
+Abra el cuaderno3. [3. Exercise Horovod Petastorm.ipynb](modules%2F12%2Fnotebooks%2F3.%20Exercise%20Horovod%20Petastorm.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+En este ejercicio construirá un modelo sobre el conjunto de datos de viviendas de Boston y distribuirá el proceso de entrenamiento de aprendizaje profundo utilizando tanto HorovodRunner como Petastorm.
+
+> Nota 
+>
+> Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las casillas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+
+Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 12 Exercise quiz
 [< Back to index 12](#index-12)
 
+![img.png](modules%2F12%2Fims%2Ftests%2Fimg.png)
+
 ## 12 Knowledge check
 [< Back to index 12](#index-12)
 
+![img_1.png](modules%2F12%2Fims%2Ftests%2Fimg_1.png)
+
+![img_2.png](modules%2F12%2Fims%2Ftests%2Fimg_2.png)
+
+![img_3.png](modules%2F12%2Fims%2Ftests%2Fimg_3.png)
+
+![img_4.png](modules%2F12%2Fims%2Ftests%2Fimg_4.png)
+
+![img_5.png](modules%2F12%2Fims%2Ftests%2Fimg_5.png)
+
 ## 12 Lesson summary
 [< Back to index 12](#index-12)
+
+![img_5.png](modules%2F12%2Fims%2F1%2Fimg_5.png)
+
+En esta lección, aprendió a utilizar Azure Databricks y HorovodRunner para ejecutar cargas de trabajo distribuidas de 
+aprendizaje profundo. Aprendió a fragmentar los datos de entrenamiento utilizando tanto Pandas dataframe como archivos 
+Parquet con Petastorm. 
+
+![img_6.png](modules%2F12%2Fims%2F1%2Fimg_6.png)
+
+ Por último, puso sus conocimientos a prueba completando un ejercicio que requería que construyera un modelo y distribuyera 
+ el proceso de entrenamiento de aprendizaje profundo utilizando tanto HorovodRunner como Petastorm. 
+
+![img_7.png](modules%2F12%2Fims%2F1%2Fimg_7.png)
+
+Ahora que ha concluido esta lección, debería saber cómo 
+
+- utilizar Horovod para entrenar una red neuronal distribuida y utilizar Horovod para entrenar una red neuronal distribuida 
+- utilizando archivos Parquet y Petastorm
 
 # 13 Work with Azure Machine Learning to deploy serving models
 
@@ -2380,17 +2651,127 @@ Si no dispone de una suscripción a Azure, cree una
 ## 13 Lesson introduction
 [< Back to index 13](#index-13)
 
+![img.png](modules%2F13%2Fims%2F1%2Fimg.png)
+
+Imagine que trabaja como científico de datos para una gran tienda minorista en línea. Su equipo realizó una investigación 
+y decidió adoptar Azure Machine Learning como la plataforma para la gestión del ciclo de vida del aprendizaje automático.
+
+![img_1.png](modules%2F13%2Fims%2F1%2Fimg_1.png)
+
+Se le ha encomendado la tarea de comprender cómo Azure Machine Learning soporta la operacionalización de los modelos de 
+aprendizaje automático. 
+
+![img_2.png](modules%2F13%2Fims%2F1%2Fimg_2.png)
+
+Quiere investigar enfoques para desplegar y probar sus modelos como un servicio web de puntuación tanto en desarrollo 
+como en producción. También quiere entender cómo actualizar modelos que ya están desplegados en producción. 
+
+![img_3.png](modules%2F13%2Fims%2F1%2Fimg_3.png)
+
+Los laboratorios de este módulo pueden completarse de forma gratuita utilizando la versión de prueba de 14 días de 
+Databricks, pero no puede utilizar una suscripción de prueba gratuita de Azure para crear un espacio de trabajo de prueba de Databricks. 
+
+![img_4.png](modules%2F13%2Fims%2F1%2Fimg_4.png)
+
+En esta lección, utilizará el paquete mlflow.azureml, un kit de desarrollo de software Azure Machine Learning Python o 
+SDK para crear o cargar el espacio de trabajo Azure machine learning o ML. Registre el modelo de flujo ML con Azure ML y 
+cree el despliegue de la imagen del contenedor. Despliegue el modelo en Azure Container Instances o ACI. Despliegue el 
+modelo en Azure Kubernetes Service o AKS. Pruebe el despliegue de su modelo y actualice el despliegue del modelo en AKS. 
+Antes de comenzar, asegúrese de tener una suscripción a Azure. 
+
 ## 13 Use Azure Machine Learning to Deploy Serving Models
 [< Back to index 13](#index-13)
+
+1. Si actualmente no tiene abierto su espacio de trabajo Azure Databricks: en el portal Azure, navegue hasta su espacio de trabajo Azure Databricks desplegado y seleccioneLanzar espacio de trabajo.
+
+2. En el panel izquierdo, seleccione Espacio detrabajo>Usuarios y seleccione su nombre de usuario (la entrada con el icono de la casa).
+
+3. En el panel que aparece, seleccione la flecha situada junto a su nombre y seleccioneImportar.
+
+   ![6.png](modules%2F8%2Fims%2F1%2F6.png)
+
+4. En el cuadro de diálogoImportar cuadernos, seleccione la dirección URL y pegue la siguiente:
+
+   > https://github.com/MicrosoftDocs/mslearn_databricks/blob/main/azure-ml/1.1.0/Labs.dbc
+
+5. SeleccioneImportar.
+
+6. Seleccione la carpeta ml que aparece.
+
+### Complete el siguiente cuaderno
+
+Abra el cuaderno1. [1. Serving Models with Microsoft Azure ML.ipynb](modules%2F13%2Fnotebooks%2F1.%20Serving%20Models%20with%20Microsoft%20Azure%20ML.ipynb). Asegúrese de conectar su clúster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+
+Dentro del cuaderno, usted deberá:
+
+Crear o cargar un Azure ML Workspace
+
+Construirá una imagen de contenedor Azure para el despliegue del modelo
+
+Desplegar el modelo en "dev" utilizando ACI
+
+Consultará el modelo desplegado en "dev"
+
+Desplegar el modelo en producción utilizando AKS
+
+Consulte el modelo desplegado en producción
+
+Actualice el despliegue en producción
+
+Limpie los despliegues
+
+Una vez que haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
 ## 13 Knowledge check
 [< Back to index 13](#index-13)
 
+![q1.png](modules%2F13%2Fims%2Ftests%2Fq1.png)
+
+![q2.png](modules%2F13%2Fims%2Ftests%2Fq2.png)
+
+![q3.png](modules%2F13%2Fims%2Ftests%2Fq3.png)
+
+![q4.png](modules%2F13%2Fims%2Ftests%2Fq4.png)
+
+![q5.png](modules%2F13%2Fims%2Ftests%2Fq5.png)
+
+
 ## 13 Test prep
 [< Back to index 13](#index-13)
+
+![img.png](modules%2F13%2Fims%2Ftests%2Fimg.png)
+
+![img_1.png](modules%2F13%2Fims%2Ftests%2Fimg_1.png)
+
+![img_2.png](modules%2F13%2Fims%2Ftests%2Fimg_2.png)
+
+![img_3.png](modules%2F13%2Fims%2Ftests%2Fimg_3.png)
+
+![img_4.png](modules%2F13%2Fims%2Ftests%2Fimg_4.png)
 
 ## 13 Lesson summary
 [< Back to index 13](#index-13)
 
+![img_5.png](modules%2F13%2Fims%2F1%2Fimg_5.png)
+
+En esta lección, ha aprendido a utilizar Azure Databricks, ML flow, y Azure Machine Learning Python SDK para registrar 
+modelos entrenados con el servicio Azure Machine Learning
+
+Ha aprendido a construir imágenes de contenedor que pueden desplegarse como un servicio web de puntuación en ACI para 
+desarrollo y pruebas, y posteriormente en AKS para dar soporte a aplicaciones de producción. 
+
+![img_6.png](modules%2F13%2Fims%2F1%2Fimg_6.png)
+
+A medida que desarrolle nuevas versiones de su modelo, también habrá aprendido a actualizar un despliegue AKS existente.
+
+![img_7.png](modules%2F13%2Fims%2F1%2Fimg_7.png)
+
+Ahora que ha concluido esta lección, debería saber cómo servir modelos con Azure Machine Learning. 
+
 ## 13 Additional resources
 [< Back to index 13](#index-13)
+
+Si no dispone de una suscripción a Azure, cree una
+[cuenta gratuita](https://azure.microsoft.com/free)
+
+
