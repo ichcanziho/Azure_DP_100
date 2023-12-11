@@ -555,7 +555,7 @@ icono de la casa).
 
 ### Complete el siguiente cuaderno
 
-**01-Entorno Databricks**- Este cuaderno ilustra los fundamentos de un cuaderno Databricks.
+[01-The-Databricks-Environment.ipynb](modules%2F2%2Fnotebooks%2F01-The-Databricks-Environment.ipynb)- Este cuaderno ilustra los fundamentos de un cuaderno Databricks.
 
 ![s1.gif](modules%2F2%2Fims%2F5%2Fs1.gif)
 
@@ -1002,7 +1002,7 @@ de la casa).
 
 ### Complete el siguiente cuaderno
 
-Abra el cuaderno **1.Lectura de datos - CSV.** Asegúrese de adjuntar su cluster al cuaderno antes de seguir las 
+Abra el cuaderno [1.Reading Data - CSV.ipynb](modules%2F4%2Fnotebooks%2F1.Reading%20Data%20-%20CSV.ipynb) Asegúrese de adjuntar su cluster al cuaderno antes de seguir las 
 instrucciones y ejecutar las celdas que contiene.
 
 ![a2.gif](modules%2F4%2Fims%2F2%2Fa2.gif)
@@ -1028,7 +1028,7 @@ Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el si
 
 En su espacio de trabajo Azure Databricks, abra la carpeta03-Reading-and-writing-data-in-Azure-Databricks que importó dentro de su carpeta de usuario.
 
-Abra el cuaderno2.Lectura de datos - JSON. Asegúrese de conectar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+Abra el cuaderno2.[2.Reading Data - JSON.ipynb](modules%2F4%2Fnotebooks%2F2.Reading%20Data%20-%20JSON.ipynb). Asegúrese de conectar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
 
 Dentro del cuaderno, leerá datos de:
 
@@ -1045,7 +1045,7 @@ Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el si
 
 En su espacio de trabajo Azure Databricks, abra la carpeta03-Reading-and-writing-data-in-Azure-Databricks que importó dentro de su carpeta de usuario.
 
-Abra el cuaderno 3.Lectura de datos - Parquet. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+Abra el cuaderno 3.[3.Reading Data - Parquet.ipynb](modules%2F4%2Fnotebooks%2F3.Reading%20Data%20-%20Parquet.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
 
 Dentro del cuaderno, usted
 
@@ -1064,7 +1064,7 @@ Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el pa
 
 En su espacio de trabajo Azure Databricks, abra la carpeta03-Reading-and-writing-data-in-Azure-Databricks que importó dentro de su carpeta de usuario.
 
-Abra el cuaderno4.Lectura de datos - Tablas y vistas. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+Abra el cuaderno4.[4.Reading Data - Tables and Views.ipynb](modules%2F4%2Fnotebooks%2F4.Reading%20Data%20-%20Tables%20and%20Views.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
 
 Dentro del cuaderno, usted
 
@@ -1083,7 +1083,7 @@ Una vez que haya completado el cuaderno, vuelva a esta pantalla y continúe con 
 
 En su espacio de trabajo AzureDatabricks, abra la carpeta03-Reading-and-writing-data-in-Azure-Databricks que importó dentro de su carpeta de usuario.
 
-Abra el cuaderno 5.Escritura de datos. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+Abra el cuaderno 5.[5.Writing Data.ipynb](modules%2F4%2Fnotebooks%2F5.Writing%20Data.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
 
 Dentro del cuaderno, usted hará lo siguiente
 
@@ -1098,11 +1098,11 @@ Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el si
 
 En su espacio de trabajo AzureDatabricks, abra la carpeta03-Reading-and-writing-data-in-Azure-Databricks que importó dentro de su carpeta de usuario.
 
-Abra el cuaderno6. Lecturade datos - Cuaderno delaboratorio. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+Abra el cuaderno6. [6.Reading Data - Lab.ipynb](modules%2F4%2Fnotebooks%2F6.Reading%20Data%20-%20Lab.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
 
 El objetivo de este ejercicio es poner en práctica parte de lo que ha aprendido sobre la lectura de datos con Apache Spark. Las instrucciones se proporcionan dentro del cuaderno, junto con celdas vacías para que realice su trabajo. En la parte inferior del cuaderno hay celdas adicionales que le ayudarán a verificar que su trabajo es correcto.
 
-> Nota: Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+> Nota: Encontrará un cuaderno [Solution - Reading Data 8 - Lab.ipynb](modules%2F4%2Fnotebooks%2FSolution%20-%20Reading%20Data%208%20-%20Lab.ipynb) correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
 
 Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
@@ -1186,7 +1186,7 @@ Explorará estas funciones y transformaciones con una serie de lecturas y ejerci
 ## 5 Describe a DataFrame
 [< Back to index 5](#index-5)
 
-Abra el cuaderno1.Describir-un-marco-de-datos. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+Abra el cuaderno1. [1.Describe-a-dataframe.ipynb](modules%2F5%2Fnotebooks%2F1.Describe-a-dataframe.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
 
 Dentro del cuaderno, usted
 
@@ -1208,19 +1208,17 @@ Nota: En esta lectura puede ver los pasos implicados en el proceso de utilizaci�
 
 En su espacio de trabajo Azure Databricks, abra la carpeta04-Working-With-Dataframes que importó dentro de su carpeta de usuario.
 
-Abra el cuaderno2.Use-common-dataframe-methods. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+Abra el cuaderno2.[2.Use-common-dataframe-methods.ipynb](modules%2F5%2Fnotebooks%2F2.Use-common-dataframe-methods.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
 
 Dentro del cuaderno, usted
 
-Familiarizarse con las API deDataFrame
+- Familiarizarse con las API deDataFrame
 
-Utilizará métodos comunes de DataFrame para mejorar el rendimiento
+- Utilizará métodos comunes de DataFrame para mejorar el rendimiento
 
-Explorará la documentación de las API de Spark
+- Explorará la documentación de las API de Spark
 
 Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
-
-
 
 ## 5 Use the display function
 [< Back to index 5](#index-5)
@@ -1229,25 +1227,25 @@ Nota: En esta lectura puede ver los pasos implicados en el proceso de utilizaci�
 
 En su espacio de trabajo Azure Databricks, abra la carpeta04-Working-With-Dataframes que importó dentro de su carpeta de usuario.
 
-Abra el cuaderno3.Función de visualización. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+Abra el cuaderno3. [3.Display-function.ipynb](modules%2F5%2Fnotebooks%2F3.Display-function.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
 
 Dentro del cuaderno, aprenderá las transformaciones
 
-limit(..)
+- limit(..)
 
-select(..)
+- select(..)
 
-drop(..)
+- drop(..)
 
-distinct()
+- distinct()
 
-dropDuplicates(..)
+- dropDuplicates(..)
 
 y aprenderá las acciones:
 
-show(..)
+- show(..)
 
-display(..)
+- display(..)
 
 Una vez que haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
@@ -1256,13 +1254,13 @@ Una vez que haya completado el cuaderno, vuelva a esta pantalla y continúe con 
 
 En su espacio de trabajo Azure Databricks, abra la carpeta04-Working-With-Dataframes que importó dentro de su carpeta de usuario.
 
-Abra el cuaderno 4.Ejercicio: Artículos Distintos notebook. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+Abra el cuaderno 4.Ejercicio: [Solution - Exercise_ Distinct Articles.ipynb](modules%2F5%2Fnotebooks%2FSolution%20-%20Exercise_%20Distinct%20Articles.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
 
 En este ejercicio, leerá los archivos Parquet, aplicará las transformaciones necesarias, realizará un recuento total de registros y, a continuación, comprobará que todos los datos se han cargado correctamente. 
 
 Como extra, intente definir un esquema que se ajuste a los datos y actualice la operación de lectura para utilizar el esquema.
 
-Nota: Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+> Nota: Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
 
 Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
@@ -1605,7 +1603,7 @@ Consulte
 
 En su espacio de trabajo Azure Databricks, abra la carpeta09-Building-And-Querying-A-Delta-Lake que importó dentro de su carpeta de usuario.
 
-Abra el cuaderno2.Delta-Lake-Basics-Lab-1. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+Abra el cuaderno2.[1.Open-Source-Delta-Lake.ipynb](modules%2F6%2Fnotebooks%2F1.Open-Source-Delta-Lake.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
 
 En este ejercicio, usted:
 
@@ -1617,7 +1615,7 @@ En este ejercicio, usted:
 
 Las instrucciones se proporcionan dentro del cuaderno, junto con celdas vacías para que realice su trabajo. En la parte inferior del cuaderno hay celdas adicionales que le ayudarán a verificar que su trabajo es correcto.
 
-> Nota: Encontrará un cuaderno correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
+> Nota: Encontrará un cuaderno [Solution - Delta-Lake-Basics-Lab-1.ipynb](modules%2F6%2Fnotebooks%2FSolution%20-%20Delta-Lake-Basics-Lab-1.ipynb) correspondiente dentro de la subcarpetaSolutions. Éste contiene las celdas completadas para el ejercicio. Consulte el cuaderno si se queda atascado o simplemente quiere ver la solución.
 
 Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el siguiente paso.
 
@@ -1634,7 +1632,7 @@ Cuando haya completado el cuaderno, vuelva a esta pantalla y continúe con el si
 
 En su espacio de trabajo Azure Databricks, abra la carpeta09-Building-And-Querying-A-Delta-Lake que importó dentro de su carpeta de usuario.
 
-Abra el cuaderno3.Managed-Delta-Lake. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+Abra el cuaderno3. [3.Managed-Delta-Lake.ipynb](modules%2F6%2Fnotebooks%2F3.Managed-Delta-Lake.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
 
 Dentro del cuaderno, descubrirá las características clave de Delta Lake que permiten la optimización de las consultas y la recogida de basura, lo que se traduce en una mejora del rendimiento.
 
@@ -1645,7 +1643,7 @@ Una vez que haya completado el cuaderno, vuelva a esta pantalla y continúe con 
 
 En su espacio de trabajo Azure Databricks, abra la carpeta09-Building-And-Querying-A-Delta-Lake que importó dentro de su carpeta de usuario.
 
-Abra el cuaderno4.Delta-Time-Machine-and-Optimization-Lab-2. Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
+Abra el cuaderno4.[Solution - Delta-Time-Machine-and-Optimization-Lab-2.ipynb](modules%2F6%2Fnotebooks%2FSolution%20-%20Delta-Time-Machine-and-Optimization-Lab-2.ipynb). Asegúrese de adjuntar su cluster al cuaderno antes de seguir las instrucciones y ejecutar las celdas que contiene.
 
 En este ejercicio, usted:
 
