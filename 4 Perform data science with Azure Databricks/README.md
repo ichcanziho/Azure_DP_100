@@ -1,5 +1,25 @@
 # Perform Data Science with Azure Databricks
 
+Este curso es parte del [Certificado Profesional de Microsoft Azure Data Scientist Associate (DP-100)](https://www.coursera.org/professional-certificates/azure-data-scientist).
+
+![cover.png](cover.png)
+
+Al inscribirte en [este curso](https://www.coursera.org/learn/perform-data-science-with-azure-databricks?specialization=azure-data-scientist), también estarás inscrito en este Certificado Profesional.
+- Aprende nuevos conceptos de expertos de la industria.
+- Obtén una comprensión fundamental de un tema o herramienta.
+- Desarrolla habilidades relevantes para el trabajo con proyectos prácticos.
+- Obtén un certificado profesional compartible de Microsoft.
+
+# INTRODUCTION
+
+En este curso, aprenderás cómo aprovechar el poder de Apache Spark y potentes clústeres que se ejecutan en la plataforma Azure Databricks para ejecutar cargas de trabajo de ciencia de datos en la nube.
+
+Este es el cuarto curso en un programa de cinco cursos que te prepara para realizar el examen de certificación DP-100: Designing and Implementing a Data Science Solution on Azure.
+
+El examen de certificación es una oportunidad para demostrar conocimientos y experiencia en la operación de soluciones de aprendizaje automático a escala en la nube utilizando Azure Machine Learning. Esta especialización te enseña a aprovechar tus conocimientos existentes de Python y aprendizaje automático para gestionar la ingestión y preparación de datos, el entrenamiento y la implementación de modelos, y la supervisión de soluciones de aprendizaje automático en Microsoft Azure. Cada curso te enseña los conceptos y habilidades que se evalúan en el examen.
+
+Esta especialización está diseñada para científicos de datos con conocimientos previos de Python y marcos de aprendizaje automático como Scikit-Learn, PyTorch y Tensorflow, que desean construir y operar soluciones de aprendizaje automático en la nube. Enseña a los científicos de datos cómo crear soluciones de extremo a extremo en Microsoft Azure. Los estudiantes aprenderán a gestionar los recursos de Azure para el aprendizaje automático; ejecutar experimentos y entrenar modelos; implementar y operacionalizar soluciones de aprendizaje automático, e implementar un aprendizaje automático responsable. También aprenderán a utilizar Azure Databricks para explorar, preparar y modelar datos; e integrar los procesos de aprendizaje automático de Databricks con Azure Machine Learning.
+
 ## INDEX 0
 
 - [1 Welcome to the Course](#1-welcome-to-the-course)

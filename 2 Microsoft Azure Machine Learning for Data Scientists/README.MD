@@ -1,5 +1,25 @@
 # Microsoft Azure Machine Learning for Data Scientists
 
+Este curso es parte del [Certificado Profesional de Microsoft Azure Data Scientist Associate (DP-100)](https://www.coursera.org/professional-certificates/azure-data-scientist).
+
+![cover.png](cover.png)
+
+Al inscribirte en [este curso](https://www.coursera.org/learn/microsoft-azure-machine-learning-for-data-scientist?specialization=azure-data-scientist), también estarás inscrito en este Certificado Profesional.
+- Aprende nuevos conceptos de expertos de la industria.
+- Obtén una comprensión fundamental de un tema o herramienta.
+- Desarrolla habilidades relevantes para el trabajo con proyectos prácticos.
+- Obtén un certificado profesional compartible de Microsoft.
+
+# INTRODUCTION
+
+El aprendizaje automático está en el núcleo de la inteligencia artificial, y muchas aplicaciones y servicios modernos dependen de modelos predictivos de aprendizaje automático. Entrenar un modelo de aprendizaje automático es un proceso iterativo que requiere tiempo y recursos informáticos. El aprendizaje automático automatizado puede facilitar este proceso. En este curso, aprenderás cómo utilizar Azure Machine Learning para crear y publicar modelos sin necesidad de escribir código.
+
+Este es el segundo curso en un programa de cinco cursos que te prepara para realizar el examen de certificación DP-100: Designing and Implementing a Data Science Solution on Azure.
+
+El examen de certificación es una oportunidad para demostrar conocimientos y experiencia en la operación de soluciones de aprendizaje automático a escala en la nube utilizando Azure Machine Learning. Esta especialización te enseña a aprovechar tus conocimientos existentes de Python y aprendizaje automático para gestionar la ingestión y preparación de datos, el entrenamiento y la implementación de modelos, y la supervisión de soluciones de aprendizaje automático en Microsoft Azure. Cada curso te enseña los conceptos y habilidades que se evalúan en el examen.
+
+Esta especialización está destinada a científicos de datos con conocimientos previos de Python y marcos de aprendizaje automático como Scikit-Learn, PyTorch y Tensorflow, que desean construir y operar soluciones de aprendizaje automático en la nube. Enseña a los científicos de datos cómo crear soluciones de extremo a extremo en Microsoft Azure. Los estudiantes aprenderán a gestionar los recursos de Azure para el aprendizaje automático; ejecutar experimentos y entrenar modelos; implementar y operacionalizar soluciones de aprendizaje automático, e implementar un aprendizaje automático responsable. También aprenderán a utilizar Azure Databricks para explorar, preparar y modelar datos; e integrar los procesos de aprendizaje automático de Databricks con Azure Machine Learning.
+
 ## 0 INDICE:
 
 - [1 Welcome to the Course](#1-welcome-to-the-course)
