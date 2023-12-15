@@ -1310,29 +1310,233 @@ tensorflow useful for?
 ## 5.1 Lesson Introduction
 [<- Return to INDEX 5](#index-5)
 
+![img.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg.png)
 
 Hola de nuevo y bienvenido a esta lección. A lo largo de este curso, ha aprendido los principios fundamentales del aprendizaje automático en Azure.
 
+![img_1.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_1.png)
 
 Ha aprendido a aprovechar las capacidades del aprendizaje automático de Azure para entrenar e implementar un modelo predictivo. 
 
+![img_2.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_2.png)
 
 También exploró escenarios de aprendizaje automático de regresión, clasificación y agrupación.
 
+![img_3.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_3.png)
 
 A continuación, recapitulará los temas y conceptos clave tratados en el curso Aprendizaje automático de Microsoft Azure para científicos de datos. 
 
+![img_4.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_4.png)
 
 Por último, al final de la recapitulación del curso, tendrá la oportunidad de realizar un examen de práctica.
 
 ## 5.2 Recap of topics and key concepts covered in Create no-code predictive models with Azure Machine Learning
 [<- Return to INDEX 5](#index-5)
 
-![img_5.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_5.png)
+![img_5.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_5.png)
 
+Hola y bienvenidos a este resumen del curso de aprendizaje automático de Microsoft Azure para científicos de datos. A 
+lo largo de este curso, comprenderás los aspectos fundamentales principios del aprendizaje automático en Azure. 
+Comencemos por revisar lo que cubierto en tu primer módulo
+
+![img_6.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_6.png)
+
+Utilice el aprendizaje automático automatizado en Azure Machine Learning. Aquí exploras la clave conceptos de aprendizaje 
+automático e identificamos tipos comunes de aprendizaje automático. Te presentaron la regresión, modelos de clasificación 
+y agrupamiento. Y usted debería poder describir los capacidades del aprendizaje automático sin código con Azure Machine 
+Learning Studio. 
+
+![img_7.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_7.png)
+
+El aprendizaje automático es una rama de la IA que usa datos para entrenar un modelo.
+
+![img_8.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_8.png)
+
+El aprendizaje automático es una rama de la IA que usa datos para entrenar un modelo. Descubriste que este modelo entrena 
+sí mismo para identificar patrones dentro de los datos, predecir información desconocida y tomar decisiones basadas en 
+sus predicciones. 
+
+![img_9.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_9.png)
+
+Muchas aplicaciones, servicios e industrias modernas dependen de la predicción modelos de aprendizaje automático. 
+
+![img_10.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_10.png)
+
+A lo largo del curso, aprenderás a identificar diferentes tipos de modelos de aprendizaje automático y utilice las 
+funciones de aprendizaje automático automatizadas de Azure Machine Learning para entrenar e implementar un modelo 
+predictivo.
+
+![img_11.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_11.png)
+
+También tuvo la oportunidad de completar varios ejercicios sobre estos temas. Incluían 
+
+- crear un espacio de trabajo de Azure Machine Learning, 
+- la creación de recursos informáticos y 
+- la exploración de datos y entrenar un modelo de aprendizaje automático y, por último, 
+- implementar un modelo como servicio. 
+
+![img_12.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_12.png)
+
+En tu próximo módulo, aprendió a entrenar y publicar un modelo de regresión con diseñador de Azure Machine Learning. 
+Descubriste esa regresión los modelos se ajustan a las combinaciones de características de un conjunto particular de 
+características para crear una etiqueta.
+
+![img_13.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_13.png)
+
+Con una idea de la creación de un A continuación, entrena su propio modelo con datos para predecir un valor numérico 
+etiqueta basada en las características de un elemento.
+
+![img_14.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_14.png)
+
+El aprendizaje automático de Microsoft Azure ayudó para completar este ejercicio sin necesidad de escribir ningún código. 
+
+![img_15.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_15.png)
+
+Has practicado la creación de una canalización 
+
+![img_16.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_16.png)
+
+y también transformó los datos y evaluó su modelo de regresión.
+
+![img_17.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_17.png)
+
+A continuación, exploró los modelos de clasificación. Y nuevamente, capacitó y publicó un modelo predictivo utilizando 
+Azure Machine Learning. Descubriste que este tipo de modelo ajusta las combinaciones de funciones a la etiqueta. 
+
+Un modelo usa datos que incluyen las características y los valores conocidos y, a continuación, predice qué categoría 
+o clase y artículo a los que pertenecen. Esto, a su vez, genera una etiqueta. 
+
+![img_18.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_18.png)
+
+Con los datos de la clínica de salud, aplicaste el principios del modelo de clasificación: aprendizaje automático 
+para explorar conjunto de datos relacionados con la diabetes. 
+
+![img_19.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_19.png)
+
+Luego entrenaste y evaluaste el modelo creado.
+
+![img_20.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_20.png)
+
+A continuación, creó una canalización de inferencia y, posteriormente, se implementó un servicio predictivo.
+
+![img_21.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_21.png)
+
+En el módulo final, aprendiste a entrenar y publicar un modelo de agrupamiento con Aprendizaje automático de Microsoft 
+Azure. En el aprendizaje automático de Microsoft Azure, Los datos del entrenamiento de modelos y otras operaciones 
+suelen estar encapsulados en un objeto llamado conjunto de datos. 
+
+![img_22.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_22.png)
+
+Los elementos se separan en grupos únicamente en función de sus características o funciones. No hay ningún valor de 
+clúster conocido anteriormente o etiqueta a partir de la cual entrenar el modelo.
+
+![img_23.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_23.png)
+
+En esta lección, usó Azure Machine Diseñador de aprendizaje para crear un modelo de agrupamiento basado en un conjunto de datos de pingüinos. 
+
+![img_24.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_24.png)
+
+Además, creaste una inferencia canalizó el conjunto de datos de Penguin y volvió a implementar un servicio predictivo.
+
+![img_25.png](modules%2F5%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_25.png)
+
+Con esto concluye su revisión de este curso. Antes de su examen de práctica, usted ahora debería tener una idea de los 
+principios fundamentales del aprendizaje automático en Azure. 
+
+Y de regresión, clasificación y agrupar escenarios de aprendizaje automático. Ya está listo para revisar, preparar y 
+realizar el examen práctico para poner a prueba tus conocimientos. buena suerte.
 
 ## 5.3 Practice exam covering Course 2: Create no-code predictive models with Azure Machine Learning
 [<- Return to INDEX 5](#index-5)
+
+1. **Question 1:** In a machine learning algorithm, what method should you use to split data for training and evaluation?
+
+- A: Use features for training and labels for evaluation
+ 
+ 
+  - B: Randomly split the data into rows for training and rows for evaluation
+ 
+ 
+  - C: Randomly split the data into rows for training and columns for evaluation
+ 
+ 
+  - D: Use labels for training and features for evaluation
+ 
+  > **Correct B:**
+  In Azure Machine Learning, the percentage split is the available technique to split the data. In this technique, random data of a given percentage will be split to train and test data.
+
+2. **Question 2:** Let’s suppose you want to create an AI system that can predict how many minutes late a flight will arrive based on the amount of snowfall at an airport. Which machine learning type should you use?
+
+- A: Regression
+- B: Classification
+- C: Clustering
+
+ > **Correct Answer: A**
+ Regression is a supervised machine learning technique used to predict numeric values.
+
+3. **Question 3:** Imagine you work for a government institution that wants to predict the sea level in meters for the following 10 years. Which type of machine learning should you use?
+
+- A: Classification
+- B: Regression
+- C: Clustering
+
+> **Correct Answer: B**
+Regression is a supervised machine learning technique used to predict numeric values.
+
+4. **Question 4:** Azure Machine Learning designer lets you visually connect datasets and modules on an interactive canvas to create machine learning models. Which two components can be dragged-and-dropped onto the canvas?
+
+- A: Compute
+- B: Pipeline
+- C: Dataset
+- D: Module
+
+> **Correct Answers: C and D**
+The two components that can be dragged-and-dropped onto the canvas are datasets and modules.
+
+6. **Question 6:** Predicting whether someone uses a bicycle to travel to work based on the distance from home to work is a use case for?
+
+- A: Clustering
+- B: Regression
+- C: Classification
+
+> **Correct Answer: C**
+Classification is a supervised machine learning technique used to predict categories or classes.
+
+7. **Question 7:** Which of the following metrics is used to evaluate a classification model?
+
+- A: Mean absolute error (MAE)
+- B: True positive rate
+- C: Coefficient of determination (R2)
+- D: Root mean squared error (RMSE)
+
+> **Correct Answer: B**
+The best metric to evaluate a classification model is by looking at the true positive rate.
+
+8. **Question 8:** True or False? Automated machine learning can automatically infer the training data from the use case provided.
+
+- True
+- False
+
+> **Correct Answer: False**
+Automated machine learning cannot automatically infer the training data from the use case provided.
+
+9. **Question 9:** True or False? Azure Machine Learning designer provides a drag-and-drop visual canvas to build, test, and deploy machine learning models.
+
+- True
+- False
+
+> **Correct Answer: True**
+Azure Machine Learning provides a drag-and-drop visual canvas to build, test, and deploy machine learning models.
+
+10. **Question 10:** You want to create a CRM application that uses AI to segment customers into different groups to support a marketing department. Which machine learning type should you use?
+
+- A: Clustering
+- B: Classification
+- C: Regression
+
+> **Correct Answer: A**
+Clustering is an unsupervised machine learning technique used to group similar entities based on their features.
+
 
 # 6 Recap on machine learning solutions
 
