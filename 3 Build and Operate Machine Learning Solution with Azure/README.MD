@@ -10,7 +10,7 @@ Al inscribirte en [este curso](https://www.coursera.org/learn/build-and-operate-
 - Desarrolla habilidades relevantes para el trabajo con proyectos prácticos.
 - Obtén un certificado profesional compartible de Microsoft.
 
-# INTRODUCTION
+## INTRODUCTION
 
 Azure Machine Learning es una plataforma en la nube para entrenar, implementar, gestionar y supervisar modelos de aprendizaje automático. En este curso, aprenderás a utilizar el kit de desarrollo de software (SDK) de Python de Azure Machine Learning para crear y gestionar soluciones de aprendizaje automático listas para empresas.
 

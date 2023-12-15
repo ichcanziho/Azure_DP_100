@@ -10,7 +10,7 @@ Al inscribirte en [este curso](https://www.coursera.org/learn/microsoft-azure-ma
 - Desarrolla habilidades relevantes para el trabajo con proyectos prácticos.
 - Obtén un certificado profesional compartible de Microsoft.
 
-# INTRODUCTION
+## INTRODUCTION
 
 El aprendizaje automático está en el núcleo de la inteligencia artificial, y muchas aplicaciones y servicios modernos dependen de modelos predictivos de aprendizaje automático. Entrenar un modelo de aprendizaje automático es un proceso iterativo que requiere tiempo y recursos informáticos. El aprendizaje automático automatizado puede facilitar este proceso. En este curso, aprenderás cómo utilizar Azure Machine Learning para crear y publicar modelos sin necesidad de escribir código.
 

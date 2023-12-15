@@ -10,7 +10,7 @@ Al inscribirte en [este curso](https://www.coursera.org/learn/create-machine-lea
 - Desarrolla habilidades relevantes para el trabajo con proyectos prácticos.
 - Obtén un certificado profesional compartible de Microsoft.
 
-# INTRODUCTION
+## INTRODUCTION
 
 El aprendizaje automático es la base para la modelización predictiva y la inteligencia artificial. Si deseas aprender tanto sobre los conceptos subyacentes como sobre cómo comenzar a construir modelos con las herramientas más comunes de aprendizaje automático, este camino es para ti. En este curso, aprenderás los principios fundamentales del aprendizaje automático y cómo utilizar herramientas y marcos comunes para entrenar, evaluar y utilizar modelos de aprendizaje automático.
 
