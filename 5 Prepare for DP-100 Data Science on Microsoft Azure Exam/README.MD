@@ -1019,13 +1019,13 @@ https://home.pearsonvue.com/op/OnVUE-min-specs-Network-Admin-Requirements
 ## 4.1 Lesson Introduction
 [<- Return to INDEX 4](#index-4)
 
-![img.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg.png)
+![img.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg.png)
 
 Hola de nuevo y bienvenidos a esta lección. A lo largo de este curso, tienes que familiarizarte con la creación de 
 aprendizaje automático modelos en Microsoft Azure. El aprendizaje automático es la base del modelado predictivo y 
 inteligencia artificial. 
 
-![img_1.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_1.png)
+![img_1.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_1.png)
 
  En esta lección, repasarás los conceptos clave y realizarás un examen práctico sobre los temas incluidos en el curso, 
  cree aprendizaje automático modelos en Microsoft Azure.
@@ -1033,58 +1033,58 @@ inteligencia artificial.
 ## 4.2 Recap on topics and key concepts covered in Create machine learning models
 [<- Return to INDEX 4](#index-4)
 
-![img_2.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_2.png)
+![img_2.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_2.png)
 
 En esta parte, resumirás los temas y los conceptos clave tratados en el curso. A estas alturas ya deberías tener un buen 
 comprensión de los conceptos básicos del mundo de la ciencia de datos de Azure. Para ayudarlo a prepararse para el examen 
 práctico, ahora resumiremos los temas que se trataron en el curso: crea una máquina modelos de aprendizaje en Microsoft 
 Azure.
 
-![img_3.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_3.png)
+![img_4.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_4.png)
 
 En el primer módulo, exploras los datos y creó modelos para predecir valores numéricos. Empezamos la lección explorando y 
 analizando datos con Python y cómo puede usarlos para explorar, visualizar y manipular datos. 
 
-![img_4.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_4.png)
+![img_5.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_5.png)
 
 Continuaste analizando el entrenamiento y evaluar los modelos de regresión. Y cómo funciona al establecer un relación 
 entre las variables de los datos que representan características de lo que se observa y de la variable que estamos 
 intentando predecir. 
 
-![img_5.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_5.png)
+![img_6.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_6.png)
 
 También descubriste que la regresión es una técnica estadística de importancia fundamental para la ciencia. 
 Por su facilidad de interpretación, robustez y rapidez en el cálculo. Los modelos de regresión proporcionan una excelente 
 base para entender cómo funcionan las técnicas de aprendizaje automático más complejas. En situaciones del mundo real, 
 particularmente cuando hay pocos datos disponibles, los modelos de regresión son muy útiles para hacer predicciones. 
 
-![img_6.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_6.png)
+![img_7.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_7.png)
 
 Aprendiste que luego usas el scikit aprenda un marco en Python para entrenar y evaluar un modelo de regresión. Y cómo 
 también puedes crear soluciones de aprendizaje automático para la regresión utilizando las herramientas gráficas en 
 Microsoft Azure Machine Learning. 
 
-![img_7.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_7.png)
+![img_8.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_8.png)
 
 Para ayudarlo a prepararse para el examen, también completó tres ejercicios de este módulo, que abarcan explore datos 
 con NumPy y Pandas, visualice datos con Matlotlib y examina datos del mundo real.
 
-![img_8.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_8.png)
+![img_9.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_9.png)
 
  A continuación, exploraste cómo entrenar y evalúe los modelos de clasificación y agrupamiento y cómo son un formulario 
  de aprendizaje automático en el que se entrena un modelo para predecir qué categoría o clase y artículo a los que pertenecen.
 
-![img_9.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_9.png)
+![img_10.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_10.png)
 
 Descubriste que una clasificación El algoritmo se usa para ajustar los datos de un subconjunto a una función que puede 
 calcular la probabilidad. 
 
-![img_10.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_10.png)
+![img_11.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_11.png)
 
 A continuación, pasó a descubriendo cómo la agrupación en clústeres es una forma de aprendizaje automático no supervisado, 
 en la que las observaciones se agrupan en clústeres basados en similitudes.
 
-![img_11.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_11.png)
+![img_12.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_12.png)
 
 En este módulo, tuvo la oportunidad de completar varios ejercicios, como 
 
@@ -1094,46 +1094,49 @@ En este módulo, tuvo la oportunidad de completar varios ejercicios, como
 - Entrene y evalúe un modelo de agrupamiento. 
 - Y entrena y evalúe los modelos avanzados de agrupamiento en clústeres. 
 
-![img_12.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_12.png)
+![img_13.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_13.png)
 
 En el módulo final, aprendió a entrenar y evaluar los modelos de aprendizaje profundo. 
 
-![img_13.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_13.png)
+![img_14.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_14.png)
 
 En la primera lección, exploraste cómo entrenar una red neuronal profunda. 
  Y aprendí que el aprendizaje profundo es una forma avanzada de aprendizaje automático que intenta emular el camino el 
  cerebro humano aprende.
 
-![img_14.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_14.png)
+![img_15.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_15.png)
 
 Luego exploras lo básico principios del aprendizaje profundo. También aprendiste a entrenar una red neuronal profunda o 
 DNN usando PyTorch o Tensorflow. 
 
-![img_15.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_15.png)
+![img_16.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_16.png)
 
 Finalmente, completaste una neurona profunda establezca una red utilizando un cuaderno Júpiter mediante la definición 
 de múltiples iteraciones también llamadas épocas. 
 
-![img_16.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_16.png)
+![img_17.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_17.png)
 
 En la siguiente lección aprendiste cómo para entrenar una red neuronal convolucional o CNN. 
 
-![img_17.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_17.png)
+![img_18.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_18.png)
 
  Una CNN normalmente funciona extrayendo características de las imágenes y, a continuación, introducir esas características en un sistema totalmente conectado red neuronal para generar una predicción. 
 
-![img_18.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_18.png)
+![img_19.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_19.png)
 
 Primer paso, aprendiste a entrenar una red neuronal convolucional CNN, usando PyTorch o Tensorflow. 
+
+![img_20.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_20.png)
+
 Luego aprendiste a usar la transferencia aprendiendo a entrenar una red neuronal convolucional (CNN) con PyTorch o Tensorflow. 
 
-![img_19.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_19.png)
+![img_21.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_21.png)
 
 Finalmente, como parte de este módulo, tenías la oportunidad de completar ejercicios que le ayudarán a comprender de 
 redes neuronales profundas. Cubre el entrenamiento de una red neuronal profunda, el entrenamiento de una neurona 
 convolucional establecer redes y utilizar el aprendizaje por transferencia. 
 
-![img_20.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_20.png)
+![img_22.png](modules%2F4%20Recap%20on%20create%20machine%20learning%20models%2Fims%2Fimg_22.png)
 
 Ahora ha resumido este curso y debería poder revisar los conceptos clave y realizar un examen práctico sobre los temas 
 tratados en el curso, crean aprendizaje automático modelos en Microsoft Azure. Ya está listo para realizar un examen 
@@ -1142,6 +1145,156 @@ práctico, buena suerte.
 ## 4.3 Practice exam covering Course 1: Create machine learning models
 [<- Return to INDEX 4](#index-4)
 
+
+**Question 1**
+Your manager has asked you to create a binary classification model to predict whether a person has a disease. You need to detect possible classification errors.
+
+Which error type should you choose for the following description?
+
+“A person has a disease. The model classifies the case as having a disease”.
+
+- False negatives
+- True positives
+- True negatives
+- False positives
+
+*Correct: A true positive is an outcome where the model correctly predicts the positive class.*
+
+
+**Question 2**
+Your manager has asked you to create a binary classification model to predict whether a person has a disease. You need to detect possible classification errors.
+
+Which error type should you choose for the following description?
+
+“A person has a disease. The model classifies the case as having no disease”.
+
+- True negatives
+- True positives
+- False negatives
+- False positives
+
+*Correct: A false negative is an outcome where the model incorrectly predicts the negative class.*
+
+
+**Question 3**
+You are tasked to analyze a dataset containing historical data from a local taxi company. You are developing a regression model for this. Your goal is to predict the fare of a taxi trip. You need to select performance metrics to correctly evaluate the regression model.
+
+Which two metrics can you use?
+
+- An R-Squared value close to 0
+- An R-Squared value close to 1
+- An F1 score that is low
+- A Root Mean Square Error value that is low
+
+*Correct: RMSE and R2 are both metrics for regression models. Root mean squared error (RMSE) creates a single value that summarizes the error in the model.
+An R-Squared value close to 1: RMSE and R2 are both metrics for regression models. Coefficient of determination, often referred to as R2, represents the predictive power of the model as a value between 0 and 1.*
+
+
+**Question 4**
+You are creating a binary classification by using a two-class logistic regression model. You need to evaluate the model results for imbalance. Which evaluation metric should you use?
+
+- AUC Curve
+- Relative Absolute Error
+- Relative Squared Error
+- Mean Absolute Error
+
+*Correct: One can inspect the true positive rate vs. the false positive rate in the Receiver Operating Characteristic (ROC) curve and the corresponding Area Under the Curve (AUC) value.*
+
+**Question 5**
+Your manager has provided you a dataset created for multiclass classification tasks that contains a normalized numerical feature set with 10,000 data points and 150 features. You use 75 percent of the data points for training and 25 percent for testing.
+
+| Name    | Description            |
+|---------|------------------------|
+| X_train | Training feature set   |
+| Y_train | Training class labels  |
+| x_train | Testing feature set    |
+| y_train | Testing class labels   |
+
+You need to apply the Principal Component Analysis (PCA) method to reduce the dimensionality of the feature set to 10 features in both training and testing sets.
+
+You are using the scikit-learn machine learning library in Python.
+
+You use `X` to denote the feature set and `Y` to denote class labels.
+
+You create the following Python data frames:
+
+```python
+from sklearn.decomposition import PCA
+
+pca = PCA(n_components=___)
+x_train = ___.fit_transform(X_train)
+x_test = pca.___(X_test)
+```
+How should you complete the code segment?
+
+- Box1: PCA(n_components=10000); Box2: pca; Box3: X_train
+- Box1: PCA(n_components=150); Box2: pca; Box3: x_test
+- Box1: PCA(n_components=10); Box2: model; Box3: transform(x_test)
+- Box1: PCA(n_components=10); Box2: pca; Box3: transform(x_test)
+
+Correct: Box 1: PCA(n_components = 10). Need to reduce the dimensionality of the feature set to 10 features in both 
+training and testing sets. B
+ox 2: pca fit_transform(X) fits the model with X and applies the dimensionality reduction on X. 
+Box 3: transform(x_test) transforms(X) applies dimensionality reduction to X.
+
+
+**Question 6**
+You are creating a model to predict the price of a student’s artwork depending on the following variables: the student’s length of education, degree type, and art form.
+
+You start by creating a linear regression model. You need to evaluate the linear regression model.
+
+Solution: Use the following metrics: Mean Absolute Error, Root Mean Absolute Error, Relative Absolute Error, Accuracy, Precision, Recall, F1 score, and AUC:
+
+Does the solution meet the goal?
+
+- Yes
+- No
+
+*Correct: No. Accuracy, Precision, Recall, F1 score, and AUC are metrics for evaluating classification models; Mean Absolute Error, Root Mean Absolute Error, Relative Absolute Error are OK for the linear regression model.*
+
+
+**Question 7**
+What happens when a NumPy array is multiplied by 5?
+
+- A: The new array will be 5 times longer, with the sequence repeated 5 times.
+- B: Array stays the same size, but each element is multiplied by 5.
+- C: The new array will be 5 times longer, with the sequence repeated 5 times and also all the elements are also multiplied by 5.
+
+*Correct: B, This is how a list behaves when multiplied.*
+
+
+**Question 8**
+You are creating a model and you want to evaluate it. For this, you take a look at a specific metric which is directly proportional to how well the model fits.
+
+Which evaluation model is described?
+
+- Root Mean Square Error (RMSE)
+- Coefficient of Determination (known as R-squared or R2)
+- Mean Square Error (MSE)
+
+*Correct: Coefficient of Determination (known as R-squared or R2). This is the described metric. In essence, this metric represents how much of the variance between predicted and actual label values the model is able to explain.*
+
+
+**Question 9**
+Complete the sentence:
+Decision trees algorithms are examples of machine learning __________ type model.
+
+- Clustering
+- Regression
+- Classification
+
+*Correct:Regression, Decision trees take a step-by-step approach to predicting a variable.*
+
+**Question 10**
+It is well known that Python provides extensive functionality with powerful and statistical numerical libraries. What is 
+tensorflow useful for?
+
+- Providing attractive data visualizations
+- Offering simple and effective predictive data analysis
+- Supplying machine learning and deep learning capabilities
+- Analyzing and manipulating data
+
+*Correct: TensorFlow supplies machine learning and deep learning capabilities.*
 
 
 # 5 Recap on create no-code models
@@ -1157,8 +1310,26 @@ práctico, buena suerte.
 ## 5.1 Lesson Introduction
 [<- Return to INDEX 5](#index-5)
 
+
+Hola de nuevo y bienvenido a esta lección. A lo largo de este curso, ha aprendido los principios fundamentales del aprendizaje automático en Azure.
+
+
+Ha aprendido a aprovechar las capacidades del aprendizaje automático de Azure para entrenar e implementar un modelo predictivo. 
+
+
+También exploró escenarios de aprendizaje automático de regresión, clasificación y agrupación.
+
+
+A continuación, recapitulará los temas y conceptos clave tratados en el curso Aprendizaje automático de Microsoft Azure para científicos de datos. 
+
+
+Por último, al final de la recapitulación del curso, tendrá la oportunidad de realizar un examen de práctica.
+
 ## 5.2 Recap of topics and key concepts covered in Create no-code predictive models with Azure Machine Learning
 [<- Return to INDEX 5](#index-5)
+
+![img_5.png](modules%2F4%20Recap%20on%20create%20no-code%20models%2Fims%2Fimg_5.png)
+
 
 ## 5.3 Practice exam covering Course 2: Create no-code predictive models with Azure Machine Learning
 [<- Return to INDEX 5](#index-5)
