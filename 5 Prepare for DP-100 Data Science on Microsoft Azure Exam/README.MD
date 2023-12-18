@@ -2112,8 +2112,207 @@ Enhorabuena, ya ha completado la recapitulación del curso cuatro. Debería ser 
 ## 8.1 Lesson Introduction
 [<- Return to INDEX 8](#index-8)
 
+![img.png](modules%2F8%20Full%20practice%20exam%2Fims%2Fimg.png)
+
+Hola y bienvenidos. En esta lección tendrás una oportunidad para demostrar el dominio de las habilidades evaluadas en el examen, DP 100, diseño e implementación de un dato solución científica en Azure.
+
+![img_1.png](modules%2F8%20Full%20practice%20exam%2Fims%2Fimg_1.png)
+
+Repasarás los temas clave y conceptos cubiertos en esta especialización 
+
+![img_2.png](modules%2F8%20Full%20practice%20exam%2Fims%2Fimg_2.png)
+
+y descubra cómo son los conceptos básicos se ponderan y se miden las habilidades.
+
+A continuación, realizará el examen práctico completo.
+
 ## 8.2 Weighted Core Concepts - Skills Measured
 [<- Return to INDEX 8](#index-8)
+
+> NOTA: Las viñetas que aparecen debajo de cada una de las destrezas medidas pretenden ilustrar cómo estamos evaluando esa destreza. Esta lista NO es definitiva ni exhaustiva. 
+
+> NOTA: La mayoría de las preguntas cubren características que son de Disponibilidad General (GA). El examen puede contener preguntas sobre características Preview si dichas características se utilizan habitualmente.
+
+### Gestionar los recursos de Azure para el aprendizaje automático (25-30%)
+**Crear un espacio de trabajo de Azure Machine Learning**
+- crear un espacio de trabajo de Azure Machine Learning
+
+- configurar los ajustes del espacio de trabajo
+
+- gestionar un espacio de trabajo utilizando Azure Machine Learning studio
+
+**Gestionar los datos en un espacio de trabajo de Azure Machine Learning**
+- seleccionar los recursos de almacenamiento de Azure
+
+- registrar y mantener almacenes de datos
+
+- crear y gestionar conjuntos de datos
+
+**Gestionar la computación para experimentos en Azure Machine Learning**
+- determinar las especificaciones informáticas adecuadas para una carga de trabajo de entrenamiento
+
+- crear objetivos de cálculo para experimentos y formación
+
+- configurar los recursos informáticos adjuntos, incluidos los Azure Databricks
+
+- supervisar la utilización de la computación
+
+**Implementar la seguridad y el control de acceso en Azure Machine Learning**
+- determinar los requisitos de acceso y asignar los requisitos a roles incorporados
+
+- crear roles personalizados
+
+- gestionar la pertenencia a roles
+
+- gestionar credenciales utilizando Azure Key Vault
+
+**Configurar un entorno de desarrollo de Azure Machine Learning**
+- crear instancias de cálculo
+
+- compartir instancias de cálculo
+
+- acceder a los espacios de trabajo de Azure Machine Learning desde otros entornos de desarrollo
+
+**Configurar un espacio de trabajo Azure Databricks**
+- crear un espacio de trabajo Azure Databricks
+
+- crear un clúster Azure Databricks
+
+- crear y ejecutar cuadernos en Azure Databricks
+
+- vincule un espacio de trabajo Azure Databricks a un espacio de trabajo Azure Machine Learning
+
+### Ejecutar experimentos y entrenar modelos (20-25%)
+**Cree modelos utilizando el diseñador de Azure Machine Learning**
+- cree un pipeline de entrenamiento utilizando el diseñador de Azure Machine Learning
+
+- ingiera datos en un pipeline de diseñador
+
+- utilice módulos del diseñador para definir el flujo de datos de un pipeline
+
+- utilice módulos de código personalizados en el diseñador
+
+**Ejecutar scripts de entrenamiento de modelos**
+- cree y ejecute un experimento utilizando el SDK de Azure Machine Learning
+
+- configurar los ajustes de ejecución de un script
+
+- consumir datos de un conjunto de datos en un experimento utilizando el SDK de Azure Machine Learning
+
+- ejecutar un script de entrenamiento en el ordenador Azure Databricks
+
+- ejecutar código para entrenar un modelo en un cuaderno Azure Databricks
+
+**Genere métricas a partir de la ejecución de un experimento**
+- registrar métricas de la ejecución de un experimento
+
+- recupere y visualice los resultados del experimento
+
+- utilice los registros para solucionar errores de ejecución de experimentos
+
+- utilizar MLflow para rastrear experimentos
+
+- realizar un seguimiento de los experimentos que se ejecutan en Azure Databricks
+
+**Utilice el aprendizaje automático automatizado para crear modelos óptimos**
+- utilice la interfaz de ML Automatizado en Azure Machine Learning studio
+
+- utilice Automated ML desde el SDK de Azure Machine Learning
+
+- seleccione las opciones de preprocesamiento
+
+- seleccione los algoritmos a buscar
+
+- defina una métrica principal
+
+- obtener datos para una ejecución de Automated ML recuperar el mejor modelo
+
+**Ajuste los hiperparámetros con Azure Machine Learning**
+- seleccionar un método de muestreo
+
+- definir el espacio de búsqueda
+
+- definir la métrica primaria
+
+- defina las opciones de terminación anticipada
+
+- encontrar el modelo que tenga valores óptimos de hiperparámetros
+
+### Desplegar y hacer operativas las soluciones de aprendizaje automático (35-40%)
+**Seleccionar la computación para el despliegue del modelo**
+- considere la seguridad de los servicios desplegados
+
+- evalúe las opciones de computación para el despliegue
+
+**Despliegue de un modelo como servicio**
+- configurar los ajustes de despliegue
+
+- desplegar un modelo registrado
+
+- desplegar un modelo entrenado en Azure Databricks en un punto final de Azure Machine Learning
+
+- consumir un servicio desplegado
+
+- solucionar problemas del contenedor de despliegue
+
+**Gestionar modelos en Azure Machine Learning**
+- registrar un modelo entrenado
+
+- supervisar el uso del modelo
+
+- supervisar la deriva de los datos
+
+**Crear una canalización de Azure Machine Learning para la inferencia por lotes**
+- configurar un ParallelRunStep
+
+- configurar el cálculo para una canalización de inferencia por lotes
+
+- publicar una canalización de inferencia por lotes
+
+- ejecutar una canalización de inferencia por lotes y obtener salidas
+
+- obtener salidas de un ParallelRunStep
+
+**Publicar una canalización de diseño de Azure Machine Learning como un servicio web**
+- crear un recurso informático de destino
+
+- configurar una canalización de inferencia
+
+- consumir un endpoint desplegado
+
+**Implementar canalizaciones utilizando el SDK de Azure Machine Learning**
+- crear una canalización
+
+- pasar datos entre los pasos de una canalización
+
+- ejecutar una canalización
+
+- monitorizar la ejecución de un pipeline
+
+**Aplicar prácticas de ML Ops**
+- desencadenar un pipeline de Azure Machine Learning desde Azure DevOps
+
+- automatizar el reentrenamiento de modelos basado en nuevas adiciones de datos o cambios en los datos
+
+- refactorizar cuadernos en scripts
+
+- implementar control de código fuente para scripts
+
+### Implemente el aprendizaje automático responsable (5-10%)
+**Utilizar explicadores de modelos para interpretar modelos**
+- seleccione un intérprete de modelos
+
+- generar datos de importancia de características
+
+**Describa las consideraciones de equidad de los modelos**
+- evaluar la equidad de los modelos en función de la disparidad de las predicciones
+
+- mitigar la injusticia de los modelos
+
+**Describir las consideraciones relativas a la privacidad de los datos**
+- describir los principios de la privacidad diferencial
+
+- especificar los niveles aceptables de ruido en los datos y los efectos sobre la privacidad
 
 ## 8.3 Full Practice Exam
 [<- Return to INDEX 8](#index-8)
@@ -2135,20 +2334,231 @@ Enhorabuena, ya ha completado la recapitulación del curso cuatro. Debería ser 
 ## 9.1 Career Support Information
 [<- Return to INDEX 9](#index-9)
 
+![img.png](modules%2F9%20Take%20the%20exam%2Fims%2Fimg.png)
+
+Enhorabuena. Ha completado el examen práctico completo. Ahora está preparado para realizar el examen DP-100, diseñar e 
+implementar una solución de ciencia de datos en Azure. 
+
+Antes de hacerlo, recapitulemos a qué puede conducir una certificación de Asociado en Ciencia de Datos de Microsoft Azure
+
+![img_1.png](modules%2F9%20Take%20the%20exam%2Fims%2Fimg_1.png)
+
+Los científicos de datos convierten los datos brutos en información significativa que las organizaciones pueden utilizar para influir en los objetivos empresariales.
+
+![img_2.png](modules%2F9%20Take%20the%20exam%2Fims%2Fimg_2.png)
+
+Es un puesto altamente técnico que requiere experiencia y habilidades en la extracción, análisis, e interpretación de grandes cantidades de datos de una gama de fuentes utilizando algoritmos, minería de datos, inteligencia artificial, aprendizaje automático, y herramientas estadísticas en con el fin de hacerlos accesibles a las empresas. 
+
+![img_3.png](modules%2F9%20Take%20the%20exam%2Fims%2Fimg_3.png)
+
+Los científicos de datos también necesitan habilidades blandas para involucrar a otros y comunicar claramente los resultados para ayudar a la empresa a hacer uso de los datos que se procesan.
+
+![img_4.png](modules%2F9%20Take%20the%20exam%2Fims%2Fimg_4.png)
+
+Conseguir una certificación de nivel Asociado de Microsoft es un gran logro y le garantizará una ventaja competitiva en el mercado laboral. 
+
+![img_5.png](modules%2F9%20Take%20the%20exam%2Fims%2Fimg_5.png)
+
+Existe una amplia gama de certificaciones de Microsoft Azure en oferta. 
+
+![img_6.png](modules%2F9%20Take%20the%20exam%2Fims%2Fimg_6.png)
+
+Una vez que haya decidido los siguientes pasos que mejor se adapten a su carrera profesional o a sus objetivos de aprendizaje, 
+también puede explorar las certificaciones de nivel experto de Microsoft, que requieren alrededor de cinco años de experiencia laboral. 
+
+![img_7.png](modules%2F9%20Take%20the%20exam%2Fims%2Fimg_7.png)
+
+Ahora que ha realizado el examen de práctica completo, podrá medir su preparación para realizar el examen proctored de 
+Microsoft Certified Azure Data Scientist associate.
+
+![img_8.png](modules%2F9%20Take%20the%20exam%2Fims%2Fimg_8.png)
+
+Su siguiente paso es programar el examen proctored a través de Pearson VUE. Encontrará más información sobre cómo hacerlo 
+en la siguiente parte. Buena suerte con su preparación.
+
 ## 9.2 Congratulations - What's Next?
 [<- Return to INDEX 9](#index-9)
+
+Enhorabuena! por aprobar el examen DP 100
+
+Ahora, usted es un Asociado Certificado de Microsoft Azure Data Scientist.
+
+Con esta certificación de Asociado en la mano, es posible que desee avanzar en su carrera y perseguir una certificación de nivel Experto. 
+
+Esto requiere 3 años de experiencia trabajando en el campo y mejorará su posición como Experto en Azure Data Scientist.
+
+Las oportunidades son infinitas.
+Le deseamos la mejor de las suertes en su carrera como profesional certificado Azure Data Scientist de Microsoft.
 
 ## 9.3 Sign-up for the Proctored Exam
 [<- Return to INDEX 9](#index-9)
 
+### Código de cupón del 50% de descuento para los exámenes de certificación de Microsoft
+Una vez que haya completado con éxito este programa de especialización y haya obtenido sus certificados, estará listo para programar el examen Microsoft Certified: DP-100 Azure Data Scientist Associate.
+
+Recibirá una notificación por correo electrónico que le dará la oportunidad de desbloquear un código de vale de certificación con descuento. Una vez desbloqueado el código, podrá utilizarlo para registrarse y programar el examen a través de Pearson Vue.
+
+Además de un correo electrónico, los alumnos recibirán una notificación en la plataforma sobre el código de descuento cuando inicien sesión en Coursera.
+
+### Canjee su vale
+
+Le recomendamos encarecidamente que canjee su vale de descuento en un plazo de tres meses a partir de la recepción del código. Se trata de una oportunidad perfecta para obtener la certificación y avanzar en su carrera profesional en TI al tiempo que ahorra dinero.
+
+### En persona o en línea
+Una vez que esté listo para programar el examen supervisado, puede realizar los exámenes de certificación de Microsoft con Pearson VUE en persona en un Centro de Pruebas Autorizado, o en línea en la comodidad de su hogar u oficina mientras es supervisado por un supervisor externo.obtenga
+[más información](https://home.pearsonvue.com/microsoft/op).
+
+### Inscripción y programación
+La programación de un examen de certificación de Microsoft con Pearson VUE comienza con la creación de un perfil de certificación de 
+Microsoft. El registro es gratuito y sólo lleva unos minutos.obtenga [más información](https://aka.ms/certdashboard).
+
+Para crear un perfil de Certificación Microsoft, inicie sesión en
+[Microsoft Learning](https://docs.microsoft.com/en-us/learn/certifications/)
+utilizando una Cuenta Microsoft o MSA y rellene el formulario. (NOTA: El nombre de su perfil de Certificación Microsoft debe coincidir exactamente con el nombre que aparece en el documento de identidad emitido por el gobierno que presentará para acceder al examen).
+
+Antes de programar o acceder a un examen de certificación de Microsoft, asegúrese de haber iniciado sesión en su
+[panel de certificación](https://www.microsoft.com/en-us/learning/dashboard.aspx)
+de Microsoft utilizando el correo electrónico asociado a su perfil de certificación de Microsoft.
+
+Si tiene problemas para acceder a su panel de certificación de
+[Microsoft](https://www.microsoft.com/en-us/learning/dashboard.aspx)
+al programar o acceder a un examen de certificación, póngase en contacto con 
+[el soporte de certificación de Microsoft](https://trainingsupport.microsoft.com/en-us/mcp/forum)y un moderador de soporte le ayudará en un plazo de 24 horas.
+
+Los pasos para registrarse y canjear su vale se han proporcionado a continuación para facilitar su consulta, junto con los términos y condiciones para utilizar el código de vale de descuento del 50%.
+
+### Pasos para inscribirse en un examen y canjear su código de vale de descuento
+
+1. Haga clic en el enlace del examen que desee. En la página del examen de certificación, desplácese hacia abajo y haga clic en el enlace "Programar con Pearson VUE".
+
+2. Complete su "Perfil de certificación", acepte las Condiciones de uso y verifique su información. (NOTA: Compruebe en la esquina superior derecha de la página su número "MCID" autoasignado).
+
+3. "EXAM DISCOUNTS page": Salte esta página haciendo clic en el botón "Schedule Exam". Esto le llevará a la plataforma de Pearson VUE para completar el registro y la compra de su examen.
+
+4. Seleccione las opciones de examen que prefiera y haga clic en " Siguiente".
+
+5. Acepte las políticas de examen. Haga clic en Siguiente.
+
+6. Seleccione el idioma de examen que prefiera. Haga clic en Siguiente.
+
+7. Seleccione el idioma que prefiere que hable su supervisor. Haga clic en Siguiente.
+
+8. Seleccione la fecha y hora de su cita. Haga clic en Siguiente.
+
+9. Revise su "carrito" de pedido de exámenes; a continuación, Proceda al pago.
+
+10. Introduzca sus datos de pago y facturación, haga clic en Siguiente.
+
+11. Introduzca su código de vale en la pantalla final de pago antes de enviar su pedido. El coste de su examen reflejará el descuento del 50%.
+
+### Código del vale de descuento del 50% para los exámenes de certificación de Microsoft
+
+**TÉRMINOS Y CONDICIONES**
+
+Los códigos de vales de descuento para exámenes de certificación se rigen por las siguientes condiciones:
+
+- Límite de un vale/código por persona- en ningún caso se distribuirá más de un vale a un mismo candidato.
+
+- La aceptación del vale implica que, al aprobar un examen, acepta asociarse con su empleador, si procede, en el
+[Centro de Socios de Microsoft](https://support.microsoft.com/en-us/help/4499930/partner-center-overview)
+y declarar su ID de correo electrónico de Microsoft Learning (el utilizado para programar el examen) en el Centro de Socios de Microsoft. Las instrucciones para ello se detallan en este
+[blog](https://nam06.safelinks.protection.outlook.com/?url=https%3A%2F%2Fsupport.microsoft.com%2Fen-us%2Fhelp%2F2966380%2Fprocedure-partner-center-link-or-unlink-a-microsoft-certified-professi&data=04%7C01%7Cv-mojane%40microsoft.com%7C5b6388d186974b0d802208d88a66daaf%7C72f988bf86f141af91ab2d7cd011db47%7C1%7C0%7C637411522399454593%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C1000&sdata=pmT93pvTtYiwEDyLzBYmrXDP%2BWf8qOgo6yL2G4%2FijVo%3D&reserved=0)
+.
+
+- Debe canjear el código de vale y realizar el examen antes de la Fecha de caducidad, que es de seis (6) meses a partir de la fecha de emisión.
+
+- Cada código de vale sólo podrá canjearse una vez para realizar un examen de Certificación de Microsoft.
+
+- Los códigos de vales son específicos del programa y, en algunos casos, específicos del examen y no pueden utilizarse para ninguna otra oferta.
+
+- Los códigos de vale no pueden canjearse por dinero en efectivo, créditos o reembolsos.
+
+- Los códigos de vale caducados, robados o perdidos no serán reemplazados.
+
+- Cualquier venta o transferencia de este código de vale está expresamente prohibida y constituye un fraude.
+
+- Este código de vale es nulo si se altera de cualquier forma.
+
+- El código de vale no podrá aplicarse a exámenes que ya se hayan realizado.
+
+- Microsoft, Pearson VUE y los centros de examen VUE no se responsabilizan de la pérdida o el robo de los códigos de cupón.
+
+- Para inscribirse en un examen, visite la página
+[Certificaciones Microsoft](https://docs.microsoft.com/en-us/learn/certifications/exams/az-204)
+website.
+
+- Deberá proporcionarse un código de vale al inscribirse en el examen de Certificación de Microsoft.
+
+- Las personas que (a) no se presenten a su cita programada para el examen, o (b) cancelen o reprogramen su cita para realizar un examen con setenta y dos horas o menos de antelación a la hora programada pueden perder su código de vale (el código de vale no se puede volver a utilizar).
+
+- Los impuestos, si los hubiera, son responsabilidad exclusiva del beneficiario.
+
 ## 9.4 COVID-19 relief for taking the exam
 [<- Return to INDEX 9](#index-9)
+
+Los solicitantes de empleo que hayan completado una formación para funciones técnicas específicas de Microsoft y puedan 
+acreditar que han estado desempleados o en paro debido a la COVID-19 podrán obtener una Certificación de Microsoft reconocida 
+por la industria con un descuento de 15 USD. Los candidatos al examen podrán programarloantes del 30 de diciembre de 2021 y 
+tendrán hasta el 31 de diciembre de 2021 para presentarse y completar el examen.
+
+Puede consultar los
+[términos y condiciones aquí](https://docs.microsoft.com/en-us/learn/certifications/skillingoffer#terms-conditions)
+.
 
 ## 9.5 Additional Reading
 [<- Return to INDEX 9](#index-9)
 
+Los recursos que figuran a continuación le proporcionarán más información sobre las certificaciones de Microsoft, más concretamente en lo que se refiere a las funciones en los servicios de datos de Microsoft Azure. 
+
+Certificación Microsoft: Administrador Asociado de Base de Datos Azure
+https://docs.microsoft.com/en-us/learn/certifications/azure-database-administrator-associate/
+
+Certificado por Microsoft: Azure Data Engineer Associate
+https://docs.microsoft.com/en-us/learn/certifications/azure-data-engineer/
+
+Certificado por Microsoft: Azure Data Scientist Associate
+https://docs.microsoft.com/en-us/learn/certifications/azure-data-scientist/
+
+Certificaciones Microsoft:
+Certificaciones Microsoft | Microsoft Docs
+
+Microsoft Azure Core Skill:
+https://aka.ms/AzureCerts_Poster 
+
 ## 9.6 Course Review
 [<- Return to INDEX 9](#index-9)
 
+Tómese un momento para reflexionar sobre lo que ha aprendido en este programa y lo que piensa hacer a continuación. 
+
+Ahora que ha completado el programa Azure Data Scientist, comparta qué áreas del curso le interesaron más 
+
+Además, ¿cuáles son sus próximos pasos? ¿Cuáles son sus planes profesionales? ¿Hay alguna oportunidad potencial que esté explorando?
+
+Comparta sus pensamientos y puntos de vista con sus compañeros de clase y vea lo que piensan otras personas sobre la realización de su examen y lo que están considerando como el siguiente paso en su carrera y educación profesional.
+
+La participación es opcional
+
 ## 9.7 What to Expect Next
 [<- Return to INDEX 9](#index-9)
+
+¡Enhorabuena!¡Bien hecho!
+
+Ha completado este curso, que completa el programa completo de Microsoft Azure Data Scientist Associate
+
+Este curso forma parte de su preparación para el examen DP-100: Diseño e implementación de una solución de Ciencia de Datos en Azure.ahora debería tener los conocimientos y habilidades para conseguir su Certificación Microsoft.
+
+Cuando apruebe el examen, obtendrá la certificación Microsoft Certified Azure Data Scientist Associate.
+
+Acaba de repasar los conceptos clave del programa y de realizar exámenes de práctica.los temas incluidos se corresponden con las cuatro áreas de dominio del examen DP-100: Diseñar e implementar una solución de Ciencia de Datos en Azure:
+
+- Gestionar los recursos de Azure para el aprendizaje automático
+
+- Ejecutar experimentos y entrenar modelos
+
+- Desplegar y poner en funcionamiento soluciones de aprendizaje automático
+
+- Implementar el aprendizaje automático responsable
+
+Si está satisfecho con su revisión y su rendimiento en los exámenes prácticos, ya está listo para programar el examen DP-100 Microsoft Certified: Azure Data Scientist Associate examen a través de PearsonVue.
+
+¡El equipo de Coursera le desea la mejor de las suertes en su examen!
