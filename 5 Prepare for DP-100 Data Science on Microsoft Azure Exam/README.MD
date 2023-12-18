@@ -2317,6 +2317,940 @@ A continuación, realizará el examen práctico completo.
 ## 8.3 Full Practice Exam
 [<- Return to INDEX 8](#index-8)
 
+
+- Your task is to predict if a person suffers from a disease by setting up a binary classification model. Your solution needs to be able to detect the classification errors that may appear. 
+
+   Considering the below description, which of the following would be the best error type?
+
+   “A person suffers from a disease. Your model classifies the case as having no disease”.
+
+   - [ ] True negatives
+   - [x] False negatives
+   - [ ] False positives
+   - [ ] True positives
+
+   > Correct
+   A false negative is an outcome where the model incorrectly predicts the negative class.
+
+- Your company is asking you to analyze a dataset that contains historical data obtained from a local car-sharing company. For this task, you decide to develop a regression model and you want to be able to foretell what price a trip will be. For the correct evaluation of the regression model, you have to use performance metrics.
+
+   In this scenario, what are the best two metrics?
+
+   - [ ] An R-Squared value close to 0
+   - [ ] An F1 score that is low
+   - [x] A Root Mean Square Error value that is low
+   - [x] An R-Squared value close to 1
+
+   > Correct
+   RMSE and R2 are both metrics for regression models. Root mean squared error (RMSE) creates a single value that summarizes the error in the model.
+
+   > Correct
+   RMSE and R2 are both metrics for regression models. Coefficient of determination, often referred to as R2, represents the predictive power of the model as a value between 0 and 1. Zero means the model is random (explains nothing); 1 means there is a perfect fit.
+   
+- You have a dataset that can be used for multiclass classification tasks. The dataset provided contains a normalized numerical feature set with 20,000 data points and 300 features. For training purposes, you need 75 percent of the data points and for testing purposes you need 25 percent.
+
+   **Name**                | **Description**
+   ------------------------|---------------------
+   X_train                 | Training feature set
+   Y_train                 | Training class labels
+   x_train                 | Testing feature set
+   y_train                 | Testing class labels
+
+   Your goal is to use the method of Principal Component Analysis (PCA) to reduce the feature set dimensionality to 20 features for both training and testing sets. You decide to apply the scikit-learn machine learning library in Python.
+
+   Your Python data frames include the below code segment:
+
+  ```python
+    from sklearn.decomposition import PCA
+
+    pca – […]
+    
+    x_train=[…].fit_transform(X_train)
+    
+    x_test = pca.[…]
+
+  ```
+  How would you complete the missing brackets for the code snippet presented?
+
+  - [ ] ```
+        Box1: PCA(n_components=10000); 
+        Box2: pca; 
+        Box3: X_train
+    ```
+  - [ ] ```
+        Box1: PCA(n_components=10);
+        Box2: model;
+        Box3: transform(x_test)
+    ```
+  - [X] ```
+        Box1: PCA(n_components=10);
+        Box2: pca; 
+        Box3: transform(x_test)
+    ``` 
+ - [ ] ```
+         Box1: PCA(n_components=150);
+         Box2: pca; 
+         Box3: X_test;
+     ```
+
+  > Correct
+  Box 1: PCA(n_components = 10) Need to reduce the dimensionality of the feature set to 10 features in both training and testing sets. Box 2: pca fit_transform(X[, y])fits the model with X and apply the dimensionality reduction on X. Box 3: transform(x_test) transform(X) applies dimensionality reduction to X. 
+
+- Your task is to create and evaluate a model. You decide to use a specific metric that provides you a direct proportionality with how well the model fits.
+
+   What is the evaluation model described above?
+
+   - [x] Coefficient of Determination (known as R-squared or R2)
+   - [ ] Mean Square Error (MSE)
+   - [ ] Root Mean Square Error (RMSE)
+
+   > Correct
+   This is the evaluation metric described. In essence, this metric represents how much of the variance between predicted and actual label values the model is able to explain.
+
+- Python is commonly known to ensure extensive functionality with powerful and statistical numerical libraries. What are the utilities of TensorFlow?
+
+   - [ ] Offering simple and effective predictive data analysis
+   - [ ] Analyzing and manipulating data
+   - [x] Supplying machine learning and deep learning capabilities
+   - [ ] Providing attractive data visualizations
+
+   > Correct
+   TensorFlow supplies machine learning and deep learning capabilities.
+
+- Your NumPy array has the shape (2,35). Considering this, what information can you get about the elements?
+
+   - [X] The array is two dimensional, consisting of two arrays with 35 elements each.
+   - [ ] The array contains 2 elements with the values of 2 and 35.
+   - [ ] The array contains 35 elements, all with the value 2.
+
+   > Correct
+   A shape of (2,35) indicates a multidimensional array with two arrays, each containing 35 elements.
+
+- You decided to use the LinearRegression class from the scikit-learn library to create your model object.
+
+   If you want to train the model, what should your next step be?
+
+   - [ ] Call the score() method of the model object, specifying the training feature and test feature arrays
+   - [x] Call the fit() method of the model object, specifying the training feature and label arrays
+   - [ ] Call the predict() method of the model object, specifying the training feature and label arrays
+
+   > Correct
+   To train the model, use the fit() method.
+
+- Which are two appropriate ways to approach a problem when using multiclass classification?
+
+   - [ ] Rest minus One
+   - [x] One vs Rest
+   - [x] One vs One
+   - [ ] One and Rest
+
+   > Correct
+   - One vs Rest (OVR), in which a classifier is created for each possible class value, with a positive outcome for cases where the prediction is this class, and negative predictions for cases where the prediction is any other class.
+   - One vs One (OVO), in which a classifier for each possible pair of classes is created.
+
+- Your deep neural network is in the process of training. You decided to set 30 epochs to the training process configuration.
+
+   In this scenario, what would happen to the model’s behavior?
+
+   - [ ] The first 30 rows of data are used to train the model, and the remaining rows are used to validate it
+   - [x] The entire training dataset is passed through the network 30 times
+   - [ ] The training data is split into 30 subsets, and each subset is passed through the network
+
+   > Correct
+   The number of epochs determines the number of training passes for the full dataset.
+
+- The layer described below is used to reduce the number of feature values that are extracted from images, while still retaining the key differentiating features.
+
+    - [x] Pooling layer
+    - [ ] Convolutional layer
+    - [ ] Flattening layer
+
+   > Correct
+   After extracting feature values from images, pooling (or downsampling) layers are used to reduce the number of feature values while retaining the key differentiating features that have been extracted.
+
+- You are using an Azure Machine Learning service for your data science project. In order to deploy the project, you have to choose a compute target. For this scenario, which of the following Azure services is the most suitable?
+
+   - [ ] Azure Data Lake Analytics
+   - [ ] Apache Spark for HDInsight
+   - [ ] Azure Container Instances
+   - [ ] Azure Databricks
+
+   > Incorrect
+   La respuesta correcta no ha sido seleccionada. ¿Te gustaría intentar de nuevo?
+
+- You have a set of CSV files that contain sales records. Your CSV files follow an identical data schema.
+
+    The sales record for a certain month are held in one of the CSV files and the filename is sales.csv. For every file there is a corresponding storage folder that shows the month and the year for the data recording. In an Azure Machine Learning workspace has been set up a datastore for the folders kept in an Azure blob container. The parent folder entitled sales contains the folders organized to create the hierarchical structure below:
+
+    /sales
+
+    /01-2019
+
+    /sales.csv
+
+    /02-2019
+
+    /sales.csv
+
+    /03-2019
+
+    /sales.csv
+
+    ...
+
+    In the sales folder is added a new folder with a certain month’s sales every time that month has ended. You want to train a machine learning model by using the sales data while complying with the requirements below:
+
+    - All of your sales data have to be loaded to date by a dataset and into a structure that enables easy conversion to a dataframe.
+
+    - You have to ensure that experiments can be done by using only the data created until a specific previous month, disregarding any data added after the month selected.
+
+    - You have to keep the number of registered datasets to the minimum possible.
+
+    Considering that the sales data have to be registered as a dataset in the Azure Machine Learning service workspace, what actions should you take?
+
+    - [ ] Create a new tabular dataset that references the datastore and explicitly specifies each 'sales/mm-yyyy/sales.csv' file every month. Register the dataset with the name sales_dataset_MM-YYYY each month with appropriate MM and YYYY values for the month and year. Use the appropriate month-specific dataset for experiments.
+
+    - [ ] Create a tabular dataset that references the datastore and specifies the path 'sales/*/sales.csv', register the dataset with the name sales_dataset and a tag named month indicating the month and year it was registered, and use this dataset for all experiments.
+
+    - [x] Create a tabular dataset that references the datastore and explicitly specifies each 'sales/mm-yyyy/sales.csv' file every month. Register the dataset with the name sales_dataset each month as a new version and with a tag named month indicating the month and year it was registered. Use this dataset for all experiments, identifying the version to be used based on the month tag as necessary.
+
+    - [ ] Create a tabular dataset that references the datastore and explicitly specifies each 'sales/mm-yyyy/sales.csv' file every month. Register the dataset with the name sales_dataset each month, replacing the existing dataset and specifying a tag named month indicating the month and year it was registered. Use this dataset for all experiments.
+
+   > Correct
+   This is the correct approach to this scenario.
+
+- You are in the process of training a machine learning model. Your model has to be configured for testing as a real-time inference service. For the service you have to ensure low CPU utilization and less than 48 MB of RAM. While keeping cost and administrative overhead to a minimum, you have to make sure that the compute target for the deployed service is initialized in an automatic manner.
+
+   In this scenario, what is the most appropriate compute target?
+
+   - [ ] Azure Kubernetes Service (AKS) inference cluster
+   - [ ] Attached Azure Databricks cluster
+   - [x] Azure Container Instance (ACI)
+   - [ ] Azure Machine Learning compute cluster
+
+   > Correct
+   Azure Container Instances (ACI) are suitable only for small models less than 1 GB in size. Use it for low-scale CPU-based workloads that require less than 48 GB of RAM. Note: Microsoft recommends using single-node Azure Kubernetes Service (AKS) clusters for dev-test of larger models.
+
+- In order to define a pipeline with multiple steps, you decide to use the Azure Machine Learning Python SDK. You notice that some steps of the pipeline do not run. Instead of running the steps, the pipeline uses a cached output from a previous run. Your task is to make sure that the pipeline runs every step, even when the parameters and contents of the source directory are the same with the ones from the previous run.
+
+   From the following list, which two ways are able to return the expected result? Keep in mind that every correct answer presents a complete solution.
+
+   - [x] Set the `regenerate_outputs` property of the pipeline to True.
+     > Correct
+     If `regenerate_outputs` is set to True, a new submit will always force generation of all step outputs, and disallow data reuse for any step of this run. Once this run is complete, however, subsequent runs may reuse the results of this run.
+
+   - [x] Set the `allow_reuse` property of each step in the pipeline to False.
+     > Correct
+     Keep the following in mind when working with pipeline steps, input/output data, and step reuse. - If data used in a step is in a datastore and `allow_reuse` is True, then changes to the data change won't be detected. If the data is uploaded as part of the snapshot (under the step's `source_directory`), though this is not recommended, then the hash will change and will trigger a rerun.
+
+   - [ ] Set the `outputs` property of each step in the pipeline to True.
+   - [ ] Restart the compute cluster where the pipeline experiment is configured to run.
+   - [ ] Use a `PipelineData` object that references a datastore other than the default datastore.
+
+- In order to train models, you decide to use an Azure Machine Learning compute resource. You set up the compute resource in the following manner: - Minimum nodes: 1 - Maximum nodes: 5. You have to decrease the minimum number of nodes and to increase the maximum number of nodes to the following values: - Minimum nodes: 0 - Maximum nodes: 8
+
+   Considering that you have to reconfigure the compute resource, which three ways are able to return the expected result? Keep in mind that every correct answer presents a complete solution.
+
+   - [ ] Run the `refresh_state()` method of the `BatchCompute` class in the Python SDK.
+   - [x] Use the Azure portal.
+     > Correct
+     To change the nodes in the cluster, use the UI for your cluster in the Azure portal.
+   - [x] Use the Azure Machine Learning studio.
+     > Correct
+     You can manage assets and resources in the Azure Machine Learning studio.
+   - [ ] Use the Azure Machine Learning designer.
+   - [x] Run the `update` method of the `AmlCompute` class in the Python SDK.
+     > Correct
+     The `update(min_nodes=None, max_nodes=None, idle_seconds_before_scaledown=None)` of the `AmlCompute` class updates the `ScaleSettings` for this AmlCompute target.
+
+- What Python command should you choose in order to view the models previously registered in the Azure ML studio by using the Model object?
+
+   - [ ] ```
+         from azureml.core import Model
+
+         for model in Model.object(ws):
+
+         print(model.name, 'version:', model.version)
+     ```
+   - [x] ```
+         from azureml.core import Model
+
+         for model in Model.list(ws):
+
+         print(model.name, 'version:', model.version)
+     ```
+   - [ ] ```
+         from azureml.core import Model
+
+         for model in List.Model(ws):
+
+         print(model.name, 'version:', model.version)
+     ```
+   - [ ] ```
+         from azureml.core import Model
+
+         for model in Model.list(ws):
+
+         get(model.name, 'version:', model.version)
+     ```
+
+   > Correct
+   This is the correct command for this request.
+
+- You decided to use the `from_files` method of the `Dataset.File` class to configure a file dataset.
+
+   You then want to register the file dataset with the title `img_files` in a workspace.
+
+   What SDK commands should you choose for this task?
+
+   - [ ] ```
+         from azureml.core import Dataset
+
+         blob_ds = ws.get_default_datastore()
+
+         file_ds = Dataset.File.from_files(path=(blob_ds, 'data/files/images/*.jpg'))
+     ```
+   - [x] ```
+         from azureml.core import Dataset
+
+         blob_ds = ws.get_default_datastore()
+
+         file_ds = Dataset.File.from_files(path=(blob_ds, 'data/files/images/*.jpg'))
+
+         file_ds = file_ds.register(workspace=ws, name='img_files')
+     ```
+   - [ ] ```
+         from azureml.core import Dataset
+
+         file_ds = Dataset.File.from_files(path=(blob_ds, 'data/files/images/*.jpg'))
+
+         file_ds = file_ds.register(workspace=ws, name='img_files')
+     ```
+   - [ ] ```
+         from azureml.core import Dataset
+
+         blob_ds = ws.get_default_datastore()
+
+         file_ds = Dataset.File.from_files(path=(blob_ds, 'data/files/images'))
+
+         file_ds = file_ds.register(workspace=ws, name='img_files')
+     ```
+
+   > Correct
+   This is the correct and complete command for this scenario.
+
+- What are the most appropriate SDK commands you should choose if you want to publish the pipeline that you created?
+
+   - [ ] ```
+         published.pipeline = pipeline.publish(name='training_pipeline',
+        
+         description='Model training pipeline',
+        
+         version='1.0')
+     ```
+   - [x] ```
+         published_pipeline = pipeline.publish(name='training_pipeline',
+        
+         description='Model training pipeline',
+        
+         version='1.0')
+     ```
+   - [ ] ```
+         published.pipeline = pipeline_publish(name='training_pipeline',
+        
+         description='Model training pipeline',
+        
+         version='1.0')
+     ```
+   - [ ] ```
+         publishedpipeline = pipeline_publish(name='training_pipeline',
+        
+         description='Model training pipeline',
+        
+         version='1.0')
+     ```
+
+   > Correct
+   This is the correct command for publishing a pipeline using the SDK.
+
+- What object needs to be defined if your task is to create a schedule for your pipeline?
+
+   - [X] ScheduleRecurrence
+   - [ ] ScheduleTimer
+   - [ ] ScheduleSync
+   - [ ] ScheduleConfig
+
+   > Correct
+   To schedule a pipeline to run at periodic intervals, you must define a `ScheduleRecurrence` that determines the run frequency, and use it to create a `Schedule`.
+
+- If you want to set up a parallel run step, which of the SDK commands below should you choose?
+
+   - [ ] ```
+         parallelrun_step = ParallelRunStep(
+
+         name='batch-score',
+
+         parallel_run_config=parallel.run.config,
+
+         inputs=[batch_data_set.as_named_input('batch_data')],
+
+         output=output_dir,
+
+         arguments=[],
+
+         allow_reuse=True
+     ```
+   - [x] ```
+         parallelrun_step = ParallelRunStep(
+
+         name='batch-score',
+
+         parallel_run_config=parallel_run_config,
+
+         inputs=[batch_data_set.as_named_input('batch_data')],
+
+         output=output_dir,
+
+         arguments=[],
+
+         allow_reuse=True
+     ```
+   - [ ] ```
+         parallelrun.step = ParallelRunStep(
+
+         name='batch-score',
+
+         parallel_run_config=parallel_run_config,
+
+         inputs=[batch_data_set.as_named_input('batch_data')],
+
+         output=output_dir,
+
+         arguments=[],
+
+         allow_reuse=True
+     ```
+   - [ ] ```
+         parallelrun_step = ParallelRunStep(
+
+         name='batch-score',
+
+         parallel.run.config=parallel_run_config,
+
+         inputs=[batch_data_set.as_named_input('batch_data')],
+
+         output=output_dir,
+
+         arguments=[],
+
+         allow_reuse=True
+     ```
+
+   > Correct
+   These are the correct commands.
+
+- What Python code should you write if your goal is to extract the primary metric for a regression task?
+
+   - [ ] ```
+         from azureml.train.automl.utilities import catch_primary_metrics
+
+         catch_primary_metrics('regression')
+     ```
+   - [ ] ```
+         from azureml.train.automl.utilities import feed_primary_metrics
+
+         feed_primary_metrics('regression')
+     ```
+   - [X] ```
+         from azureml.train.automl.utilities import get_primary_metrics
+
+         get_primary_metrics('regression')
+     ```
+   - [ ] ```
+         from azureml.train.automl.utilities import pull_primary_metrics
+
+         pull_primary_metrics('regression')
+     ```
+
+   > Correct
+   This is the correct code expression.
+
+- Your task is to extract local feature importance from a TabularExplainer.
+
+    What code should you write in the SDK to achieve this goal?
+
+   - [x] ```
+         local_tab_explanation = tab_explainer.explain_local(X_test[0:5])
+
+         local_tab_features = local_tab_explanation.get_ranked_local_names()
+
+         local_tab_importance = local_tab_explanation.get_ranked_local_values()
+     ```
+   - [ ] ```
+         local.tab_explanation = tab_explainer_explain_local(X_test[0:5])
+
+         local_tab_features = local_tab_explanation.get_ranked_local_names()
+
+         local_tab_importance = local_tab_explanation.get_ranked_local_values()
+     ```
+   - [ ] ```
+         local_tab_explanation = tab_explainer.explain_local(X_test[0:5])
+
+         local_tab_features = local_tab_explanation.get_feature_importance_dict()
+
+         local_tab_importance = local_tab_explanation.get_ranked_local_values()
+     ```
+   - [ ] ```
+         local_tab_explanation = tab_explainer.explain_local(X_test[0:5])
+
+         local_tab_features = local_tab_explanation.get_feature_local_names()
+
+         local_tab_importance = local_tab_explanation.get_ranked_local_values()
+     ```
+
+   > Correct
+   This is the correct code for this task.
+
+- If you want to minimize disparity in the selection rate across sensitive feature groups, what is the most suitable parity constraint that you should choose to use with any of the mitigation algorithms?
+
+   - [X] Demographic parity
+   - [ ] Equalized odds
+   - [ ] Bounded group loss
+   - [ ] Error rate parity
+
+   > Correct
+   This is the parity constraint described. For example, in a binary classification scenario, this constraint tries to ensure that an equal number of positive predictions are made in each group.
+
+- You decided to preprocess and filter down only the relevant columns for your AirBnB housing dataframe.
+
+   The columns that you kept are: id, host_name, bedrooms, neighbourhood_cleansed, price.
+
+   In order to obtain the first initial from the host_name column, you have written the following function that you entitled `firstInitialFunction`:
+
+   ```python
+   def firstInitialFunction(name):
+       return name[0]
+
+   firstInitialFunction("George")
+   ```
+   
+   Considering that Python UDFs are much slower than Scala UDFs, your goal is to create a Vectorized UDF in Python in order to speed up the computation.
+   
+   In this scenario, what code should you write?
+
+   - [X] ```python
+           from pyspark.sql.functions import pandas_udf
+
+           @pandas_udf("string")
+
+           def vectorizedUDF(name):
+
+           return name.str[0]
+     ```
+   - [ ] ```python
+           from pyspark.sql.functions import pandas_udf
+
+           @pandas_udf("string")
+
+           def vectorizedUDF(host_name):
+
+           get name.str[0]
+     ```
+   - [ ] ```python
+           
+         from pyspark.sql.functions import pandas_udf
+
+         # We have a string input/output
+
+         @pandas_udf("string")
+
+         create vectorizedUDF(name):
+
+         return name.str[0]
+     ```
+   - [ ] ```python
+           from pyspark.sql.functions import pandas_udf
+
+           @pandas_udf("int")
+
+           def vectorizedUDF(name):
+
+           return name.str[0]
+     ```
+
+   > Correct
+   This is the correct code for the task. We used string as an argument because we have a string input/output.
+
+- You decided to use the AirBnB Housing dataset and the Linear Regression algorithm for which you want to tune the Hyperparameters. 
+
+   At this point, for the Boston data set you have executed a test split and for the linear regression you have built a pipeline. 
+
+   You now want to test the maximum number of iterations by using the `ParamGridBuilder()` and you can do this no matter if you want to use an intercept with the y axis or if you want to standardize the features.
+
+   Considering this scenario, what code should you write?
+
+ - [X] ```python
+       from pyspark.ml.tuning import ParamGridBuilder
+
+       paramGrid = (ParamGridBuilder()
+           .addGrid(lr.maxIter, [1, 10, 100])
+           .addGrid(lr.fitIntercept, [True, False])
+           .addGrid(lr.standardization, [True, False])
+           .build()
+       )
+       ```
+  - [ ] ```python
+         from pyspark.ml.tuning import ParamGridBuilder
+
+         paramGrid = (ParamGridBuilder(lr)
+             .addGrid(lr.maxIter, [1, 10, 100])
+             .addGrid(lr.fitIntercept, [True, False])
+             .addGrid(lr.standardization, [True, False])
+             .create()
+         )
+         ```
+  - [ ] ```python
+         from pyspark.ml.tuning import ParamGridBuilder
+
+         paramGrid = (ParamGridBuilder()
+             .addGrid(lr.maxIter, [1, 10, 100])
+             .addGrid(lr.fitIntercept, [True, False])
+             .addGrid(lr.standardization, [True, False])
+             .search()
+         )
+         ```
+  - [ ] ```python
+         from pyspark.ml.tuning import ParamGridBuilder
+
+         paramGrid = (ParamGridBuilder(lr)
+             .addGrid(lr.maxIter, [1, 10, 100])
+             .addGrid(lr.fitIntercept, [True, False])
+             .addGrid(lr.standardization, [True, False])
+             .run()
+         )
+         ```
+
+   > Correct
+  This is the correct code for this task.
+
+- You decided to use Azure Machine Learning to create machine learning models. You want to use multiple compute contexts to train and score models.
+
+   Moreover, you want to use Azure Databricks cluster to train models.
+
+   Considering this scenario, what compute type is the most suitable to use for Azure Databricks?
+
+   - [ ] Inference cluster
+   - [X] Attached compute
+   - [ ] Compute cluster
+
+   > Correct
+   This compute type can be used by Azure Databricks (for use in machine learning pipelines), Azure Data Lake Analytics (for use in machine learning pipelines), and Azure HDInsight.
+
+- Choose from the list below the supervised learning problem type that usually outputs quantitative values.
+
+   - [ ] Clustering
+   - [X] Regression
+   - [ ] Classification
+
+   > Correct
+   This would be the algorithm used because you would predict a label based on numerical values.
+
+- One of the categorical variables of your AirBnB dataset is room type. 
+
+   You have three room types, as follows: private room, entire home/apt, and shared room.
+
+   In order for the machine learning model to know how to handle the room types, you have to firstly encode every unique string into a number. 
+
+   What code should you write to achieve this goal?
+
+    - [X] ```python
+       from pyspark.ml.feature import StringIndexer
+
+       uniqueTypesDF = airbnbDF.select("room_type").distinct() 
+
+       indexer = StringIndexer(inputCol="room_type", outputCol="room_type_index") 
+
+       indexerModel = indexer.fit(uniqueTypesDF)
+
+       indexedDF = indexerModel.transform(uniqueTypesDF)
+
+       display(indexedDF)
+       ```
+   - [ ] ```python
+          from pyspark.ml.feature import StringIndexer
+
+          uniqueTypesDF = airbnbDF.select("room_type").distinct() 
+
+          indexer = StringIndexer(inputCol="room_type", outputCol="room_type_index") 
+
+          indexerModel = indexer.transform(uniqueTypesDF)
+
+          indexedDF = indexerModel.transform(uniqueTypesDF)
+
+          display(indexedDF)
+          ```
+   - [ ] ```python
+          from pyspark.ml.feature import Indexer
+
+          uniqueTypesDF = airbnbDF.select("room_type").distinct() 
+
+          indexer = StringIndexer(inputCol="room_type", outputCol="room_type_index") 
+
+          indexerModel = indexer.fit(uniqueTypesDF)
+
+          indexedDF = indexerModel.transform(uniqueTypesDF)
+
+          display(indexedDF)
+          ```
+   - [ ] ```python
+          from pyspark.ml.feature import StringIndexer
+
+          uniqueTypesDF = airbnbDF.select("room_type").distinct() 
+
+          indexer = StringIndexer(inputCol="room_type") 
+
+          indexerModel = indexer.fit(uniqueTypesDF)
+
+          indexedDF = indexerModel.transform(uniqueTypesDF)
+
+          display(indexedDF)
+          ```
+  > Correct
+   Take the unique values of room_type and index them to a numerical value. Fit the StringIndexer estimator to the unique room types using the .fit() method and by passing in the data.
+   The trained `StringIndexer` model then becomes a transformer. Use it to transform the results using the `.transform()` method and by passing in the data.
+
+- One of the categorical variables of your AirBnB dataset is room type. 
+
+    You have three room types, as follows: private room, entire home/apt, and shared room.
+
+    Every room is assigned with a unique numerical value because you have encoded every unique string into a number. 
+
+    In order for the machine learning algorithm to effect every category, you have to one-hot encode every one of the values to a location in an array. 
+
+    What code should you write to achieve this goal?
+
+   - [X] ```python
+            from pyspark.ml.feature import OneHotEncoder
+
+            encoder = OneHotEncoder(inputCols=["room_type_index"], outputCols=["encoded_room_type"])
+
+            encoderModel = encoder.fit(indexedDF)
+
+            encodedDF = encoderModel.transform(indexedDF)
+
+            display(encodedDF)
+     ```
+   - [ ] ```python
+            from pyspark.ml.feature import OneHotEncoder
+
+            encoder = OneHotEncoder(inputCols=["room_type_index"], outputCols=["encoded_room_type"])
+
+            encoderModel = encoder.fit(indexedDF)
+
+            encodedDF = encoderModel.fit (indexedDF)
+
+            display(encodedDF)
+     ```
+   - [ ] ```python
+            from pyspark.ml.feature import OneHotEncoder
+
+            encoder = OneHotEncoder(inputCols=["room_type_index"], outputCols=["encoded_room_type"])
+
+            encoderModel = encoder.fit(indexedDF)
+
+            encodedDF = encoderModel(indexedDF)
+
+            display(encodedDF)
+     ```
+   - [ ] ```python
+            from pyspark.ml.feature import OneHotEncoder
+
+            encoder = OneHotEncoder(inputCols=["room_type_index"], outputCols=["encoded_room_type"])
+
+            encoderModel = encoder.fit(indexedDF)
+
+            encodedDF = encoderModel_transform()
+
+            display(encodedDF)
+     ```
+
+   > Correct
+   This is the correct code. You need to change these values to a binary yes/no value if a listing is for a shared room, entire home, or private room. Do this by training and fitting the OneHotEncoderEstimator, which only operates on numerical values (this is why we needed to use StringIndexer first).
+
+- Choose from the list below the cross-validation technique that belongs to the exhaustive type.
+
+   - [ ] K-fold cross-validation
+   - [X] Leave-p-out cross-validation
+   - [X] Leave-one-out cross-validation
+   - [ ] Holdout cross-validation
+
+   > Correct
+   - Leave-p-out cross-validation (LpO CV) is an exhaustive type of cross-validation technique. It involves using p observations as the validation set and the remaining observations as the training set. This is repeated on all ways to cut the original sample on a validation set of p observations and a training set.
+   - Leave-one-out cross-validation (LOOCV) is a particular case of leave-p-out cross-validation with p = 1, which makes it an exhaustive type of cross-validation.
+
+- True or False?
+  
+  In order to differentiate multiple images, convolutional filters and pooling are used by the feature extraction layers to emphasize edges, corners, and other patterns. 
+
+  This solution is supposed to work for any other group of images that have the same dimensions set as the network input layer.   
+
+   - [X] True
+   - [ ] False
+
+   > Correct
+   The feature extraction layers apply convolutional filters and pooling to emphasize edges, corners, and other patterns in the images that can be used to differentiate them, and in theory should work for any set of images with the same dimensions as the input layer of the network.
+
+- You create a machine learning model by using the Azure Machine Learning designer. You publish the model as a real-time service on an Azure Kubernetes Service (AKS) inference compute cluster. You make no change to the deployed endpoint configuration. 
+
+   You need to provide application developers with the information they need to consume the endpoint. Which two values should you provide to application developers? Each correct answer presents part of the solution.
+
+   - [X] The key for the endpoint
+   - [X] The URL of the endpoint
+   - [ ] The name of the inference pipeline for the endpoint
+   - [ ] The name of the AKS cluster where the endpoint is hosted
+   - [ ] The run ID of the inference pipeline experiment for the endpoint
+
+   > Correct
+   When authentication is enabled, you can also use the SDK to get the authentication keys or tokens. You can get the URL of the endpoint from the scoring_uri.
+
+- You decided to use Parquet files and Petastorm to train a distributed neural network by using Horovod.
+
+    Your housing prices dataset from California is entitled cal_housing.
+
+    In order to concatenate the features and labels of the model after you load the data, you decide to configure from the Pandas DataFrame a Spark DataFrame.
+
+    What code should you write in Python to achieve this?
+
+    - [ ] ```python
+          data = pd.concat([pd.DataFrame(X_train, columns=cal_housing.feature_names), pd.DataFrame(y_train, columns=["label"])], axis=1)
+          
+          trainDF = spark.DataFrame(data)
+          
+          display(trainDF)
+      ```
+
+    - [X] ```python
+          data = pd.concat([pd.DataFrame(X_train, columns=cal_housing.feature_names), pd.DataFrame(y_train, columns=["label"])], axis=1)
+          
+          trainDF = spark.createDataFrame(data)
+          
+          display(trainDF)
+      ```
+
+    - [ ] ```python
+          data = pd.concat([pd.DataFrame(X_train, columns=cal_housing.feature_names), pd.DataFrame(y_train, columns=["label"])])
+          
+          trainDF = spark.createDataFrame(data)
+          
+          display(trainDF)
+      ```
+
+    - [ ] ```python
+          data = pd.concat([pd.DataFrame(X_train, columns=cal_housing.feature_names), pd.DataFrame(y_train, columns=["label"])], axis=1)
+          
+          trainDF = spark.createDataFrame()
+          
+          display(trainDF)
+      ```
+
+    > Correct
+    This is the correct code for the job.
+
+- Your hyperparameter tuning needs to have a search space defined. The values of the `batch_size` hyperparameter can be 128, 256, or 512, and the normal distribution values for the `learning_rate` hyperparameter can have a mean of 10 and a standard deviation of 3.
+
+    What Python code should you write in order to achieve this goal?
+
+    - [ ] ```python
+          from azureml.train.hyperdrive import choice, normal
+          
+          param_space = {
+              '--batch_size': choice(128, 256, 512),
+              '--learning_rate': lognormal(10, 3)
+          }
+      ```
+
+    - [ ] ```python
+          from azureml.train.hyperdrive import choice, normal
+          
+          param_space = {
+              '--batch_size': choice(128, 256, 512),
+              '--learning_rate': qnormal(10, 3)
+          }
+      ```
+
+    - [X] ```python
+          from azureml.train.hyperdrive import choice, normal
+          
+          param_space = {
+              '--batch_size': choice(128, 256, 512),
+              '--learning_rate': normal(10, 3)
+          }
+      ```
+
+    - [ ] ```python
+          from azureml.train.hyperdrive import choice, uniform
+          
+          param_space = {
+              '--batch_size': choice(128, 256, 512),
+              '--learning_rate': uniform(10, 3)
+          }
+      ```
+
+    > Correct
+    This is the correct code for this scenario.
+
+- You usually take the following steps when you use `HorovodRunner` in order to develop a distributed training program:
+
+    1. Configure a `HorovodRunner` instance that is initialized with the nodes number.
+
+    2. While using the methods described in Horovod usage, define a Horovod training method for which you want to ensure that import statements are added inside the method.
+
+    What code should you write in Python to achieve this?
+
+    - [ ] ```python
+          hr = HorovodRunner(tf)
+          
+          def train():
+              import tensorflow as np
+              hvd.init(2)
+          
+          hr.run(train)
+      ```
+
+    - [ ] ```python
+          hr = HorovodRunner()
+          
+          def train():
+              import tensorflow as tf
+              hvd.init(np)
+          
+          hr.run(train)
+      ```
+
+    - [ ] ```python
+          hr = HorovodRunner(np)
+          
+          def train():
+              import tensorflow as tf
+              hvd.init()
+          
+          hr.run(train)
+      ```
+
+    - [X] ```python
+          hr = HorovodRunner(np=2)
+          
+          def train():
+              import tensorflow as tf
+              hvd.init()
+          
+          hr.run(train)
+      ```
+
+    > Correct
+    This would be the correct code syntax.
+
+
 # 9 Take the exam
 
 ## INDEX 9
