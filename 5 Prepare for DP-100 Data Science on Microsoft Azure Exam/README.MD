@@ -1551,8 +1551,167 @@ Clustering is an unsupervised machine learning technique used to group similar e
 ## 6.1 Lesson Introduction
 [<- Return to INDEX 6](#index-6)
 
+![img.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg.png)
+
+Hola de nuevo. Bienvenido a esta lección. A lo largo de este curso, ha aprendido a construir y operar soluciones de aprendizaje automático con Azure Machine Learning. 
+
+![img_1.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_1.png)
+
+Azure Machine Learning es una plataforma en la nube para formar, desplegar, gestionar, y supervisar modelos de aprendizaje automático. 
+
+![img_2.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_2.png)
+
+ En esta lección, repasará conceptos clave y realizará un examen práctico sobre los temas tratados en el curso. Construya y opere soluciones de aprendizaje automático con Azure Machine Learning.
+
 ## 6.2 Recap of topics and key concepts covered in Build and operate machine learning solutions with Azure Machine Learning
 [<- Return to INDEX 6](#index-6)
+
+![img_3.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_3.png)
+
+En esta parte, recapitulará los temas y conceptos clave tratados en el curso. A estas alturas, debería tener una buena comprensión de los conceptos básicos en el mundo de la ciencia de datos de Azure. Para ayudarle a prepararse para el examen práctico, recapitularemos ahora los temas tratados en el curso, construir. Y operar soluciones de aprendizaje automático con Azure machine learning.
+
+![img_4.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_4.png)
+
+En el primer módulo, utilizará el SDK de Azure Machine Learning para entrenar un modelo. Primero se le presentó el SDK de Azure Machine learning y descubrió que se trata de una herramienta basada en web para gestionar y Azure machine learning workspace.
+
+![img_5.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_5.png)
+
+Eso le permitió crear, gestionar y ver todos los activos de su espacio de trabajo y proporcionar herramientas gráficas.
+
+
+![img_6.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_6.png)
+
+A continuación, aprendió cómo entrenar un modelo de aprendizaje automático puede ser tan fácil como cargar datos y ejecutar una línea de código utilizando paquetes como psychic learn. 
+
+![img_7.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_7.png)
+
+Después pasó a ver cómo utilizar un script, run, config para ejecutar un script de entrenamiento de un modelo como experimento de aprendizaje automático de Azure. Cree scripts de entrenamiento parametrizados reutilizables y modelos entrenados registrados. 
+
+![img_8.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_8.png)
+
+Por último, en este módulo, para ayudar a su comprensión del SDK de aprendizaje automático , tuvo la oportunidad de completar ejercicios. Permitiéndole ejecutar experimentos y también entrenar y registrar un modelo.
+
+![img_9.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_9.png)
+
+En el siguiente módulo, aprendió a trabajar con datos y computación en el aprendizaje automático de Azure. Aquí, exploró el trabajo con datos en el aprendizaje automático de Azure y descubrió que en los almacenes de datos del aprendizaje automático de Azure son abstracciones para las fuentes de datos en la nube.
+
+![img_10.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_10.png)
+
+Y cómo cada espacio de trabajo tiene dos almacenes de datos incorporados.
+
+![img_11.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_11.png)
+
+A continuación vio cómo trabajar con computación en el aprendizaje automático. Donde aprendió sobre la creación de entornos utilizando entornos creando objetivos de computación y utilizando objetivos de computación.
+
+![img_12.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_12.png)
+
+Aprendió cómo crear entornos en contenedores docker. Para ayudar a su comprensión del trabajo con datos y computación
+
+![img_13.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_13.png)
+
+tuvo la oportunidad de completar ejercicios en este módulo. Permitiéndole trabajar con datos y trabajar con contextos de computación. 
+
+![img_14.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_14.png)
+
+En el siguiente módulo, aprenderá a orquestar pipelines y desplegar aprendizaje automático en tiempo real con Azure Machine learning. Comenzó viendo la orquestación del aprendizaje automático con pipelines y descubrió cómo crear, publicar y programar pipelines en un proceso de ciencia de datos empresarial.
+Y cómo utilizar una canalización de inferencia por lotes para generar predicciones. 
+
+![img_15.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_15.png)
+
+Aprendió que primero debe definir un hiperparámetro para crear una canalización antes de pasar a configurar el muestreo de hiperparámetros. 
+
+![img_16.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_16.png)
+
+A continuación, ha visto cómo desplegar servicios de aprendizaje automático en tiempo real soluciones de influencia para desplegar un modelo. Y cómo consumir un servicio de influencia en tiempo real en plataformas como servicio Azure Kubernetes o AKS.
+
+![img_17.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_17.png)
+
+También ha visto cómo solucionar problemas de despliegue de servicios. 
+
+![img_18.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_18.png)
+
+Por último, en este módulo, tendrá la oportunidad de completar ejercicios que le permitirán crear una canalización y desplegar un modelo como servicio en tiempo real.
+
+![img_19.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_19.png)
+
+En el siguiente módulo, aprendió a desplegar canalizaciones de inferencia por lotes y ajustar hiperparámetros con el aprendizaje automático de Azure. Trabajó sobre cómo publicar y utilizar una canalización de inferencia por lotes para modelos entrenados y para generar predicciones. 
+
+![img_20.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_20.png)
+
+Esto se hizo dentro del aprendizaje automático de Azure, donde implementó soluciones de influencia por lotes mediante la creación de una canalización. 
+
+![img_21.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_21.png)
+
+A continuación, continuó con el ajuste de hiperparámetros. Aquí, aprendió a definir y configurar hiperparámetros. Esto se hizo mediante el entrenamiento de múltiples modelos utilizando el mismo algoritmo.
+
+![img_22.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_22.png)
+
+También analizó la configuración de una política de finalización anticipada que abandona las ejecuciones. 
+
+![img_23.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_23.png)
+
+Por último, como parte de este módulo, tuvo la oportunidad de completar ejercicios que le permitieron crear una canalización de inferencia por lotes y ajustar hiperparámetros.
+
+![img_24.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_24.png)
+
+En el siguiente módulo, analizó la selección de modelos y la protección de datos confidenciales. Aquí, exploró la automatización de la selección de modelos de aprendizaje automático y descubrió que el aprendizaje automático de Azure puede determinar el algoritmo de mejor rendimiento mediante la automatización.
+
+Aprendió que puede utilizar el aprendizaje automático para preprocesar datos para el entrenamiento y ejecutar un experimento automatizado.
+
+![img_25.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_25.png)
+
+A continuación, pasó a explorar la privacidad diferencial y examinó la articulación del problema de la privacidad de los datos y la comprensión de qué detalles personales deberían mantenerse privados. 
+
+![img_26.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_26.png)
+
+Exploró cómo funciona la privacidad diferencial y cómo configurar los parámetros. 
+
+![img_27.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_27.png)
+
+A continuación, pasó a explicar los modelos de aprendizaje automático con Azure machine learning. Descubrió que explicar los modelos es difícil debido a la variedad de tipos de algoritmos de aprendizaje automático. 
+Pero la interoperabilidad de los modelos se ha convertido en clave para las explicaciones de los modelos. 
+
+![img_28.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_28.png)
+
+También aprendió que la importancia global de las características cuantifica la importancia relativa de cada característica en el conjunto de datos de prueba como un todo. Y la importancia local de las características mide la influencia del valor de cada característica para una predicción individual específica. 
+
+![img_29.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_29.png)
+
+ A continuación, aprendió que puede utilizar el SDK de aprendizaje automático de Azure para visualizar explicaciones de modelos y crear explicaciones de modelos en un experimento de entrenamiento. 
+
+![img_30.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_30.png)
+
+Por último, con el fin de ayudarle a preparar su examen, tuvo la oportunidad de completar los siguientes ejercicios en este módulo. Utilizar el aprendizaje automático automatizado utilizando la privacidad diferencial y cómo interpretar los modelos. 
+
+![img_31.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_31.png)
+
+En el último módulo de este curso, examinó la supervisión de las implantaciones de aprendizaje automático. Y cómo se utilizan cada vez más para fundamentar las decisiones que afectan a la vida de las personas. 
+
+Aprendió a detectar y mitigar la injusticia en los modelos con el aprendizaje automático de Azure utilizándolo para supervisar la equidad. Y aprendió cómo se entrena este modelo utilizando características que reflejan al solicitante.
+
+![img_32.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_32.png)
+
+A continuación, descubrió que una forma de empezar a evaluar la imparcialidad de un modelo es comparar las predicciones para cada grupo dentro de una característica sensible. 
+
+![img_33.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_33.png)
+
+A continuación, examinó la aplicación insights y comprendió cómo le permite supervisar los modelos con Azure machine learning
+
+![img_34.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_34.png)
+
+Por último, aprendió a supervisar la deriva de los datos con Azure machine learning, empezó explorando la captura y visualización de la telemetría del modelo.
+
+![img_35.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_35.png)
+
+También vio cómo programar la deriva de datos, la supervisión y ver los resultados de la supervisión de la deriva de datos. 
+
+![img_36.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_36.png)
+
+Por último, para ayudarle en su aprendizaje de este módulo. Tuvo la oportunidad de completar tres ejercicios que cubrían el uso de la feria aprender con el aprendizaje automático de Azure. Monitorización de un modelo y monitorización de la deriva de datos. 
+
+![img_37.png](modules%2F6%20Recap%20on%20machine%20learnning%20solutions%2Fims%2Fimg_37.png)
+
+En esta lección, ha repasado conceptos clave y realizaremos un examen práctico sobre los temas tratados en el curso. Construya y opere soluciones de aprendizaje automático con Azure machine learning, ahora está preparado para realizar un examen práctico. Buena suerte.
 
 ## 6.3 Practice exam covering Course 3: Build and Operate Machine Learning Solutions with Azure Machine Learning
 [<- Return to INDEX 6](#index-6)
@@ -1570,11 +1729,375 @@ Clustering is an unsupervised machine learning technique used to group similar e
 ## 7.1 Lesson Introduction
 [<- Return to INDEX 7](#index-7)
 
+![img.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg.png)
+
+Hola de nuevo y bienvenido a los exámenes de práctica de la Especialización de Científicos de Datos. En esta lección, tendrá la oportunidad de recapitular los temas clave y realizar un examen de práctica sobre el curso para realizar ciencia de datos con Azure Batabricks.
+
+![img_1.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_1.png)
+
+Azure Databricks proporciona un entorno de espacio de trabajo de Apache Spark as a Service orientado a cuadernos
+Ofrece a los equipos de ciencia de datos e ingeniería, una única plataforma para gestionar clusters y explorar datos de forma interactiva. 
+
+![img_2.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_2.png)
+
+En esta lección, repasará los conceptos clave que se trataron en el curso y realizará un examen práctico sobre estos temas.
+
 ## 7.2 Recap of topics and key concepts covered in Perform data science with Azure Databricks
 [<- Return to INDEX 7](#index-7)
 
+![img_3.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_3.png)
+
+Hola y bienvenidos en esta parte se recapitularán los temas y conceptos clave cubiertos en el curso, realizado señales de datos con Azure databricks. En este curso usted aprendió cómo aprovechar el poder de Apache Spark y potentes clusters que se ejecutan en la plataforma Azure databricks para ejecutar señales de datos cargas de trabajo en la nube.
+
+![img_4.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_4.png)
+
+Este curso comenzó con una introducción a Azure Databricks. En la primera lección aprendió sobre las capacidades de Azure Databricks y el cuaderno Apache Spark para procesar archivos enormes.
+
+![img_5.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_5.png)
+
+ Exploró la plataforma Databricks para identificar los tipos de tareas más adecuados para Apache Spark 
+![img_6.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_6.png)
+
+y la arquitectura de un clúster Azure Databricks spark y spark jobs.
+
+![img_7.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_7.png)
+
+Finalmente tuvo la oportunidad de completar un ejercicio en el que trabajó con cuadernos.
+
+![img_8.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_8.png)
+
+En el siguiente módulo exploró el trabajo con datos en Azure Databricks. 
+
+![img_9.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_9.png)
+
+En la primera lección aprendió a utilizar Azure Databricks para leer varios tipos de archivos con y sin esquema y combinar entradas de archivos y almacenes de datos como la base de datos Azure sequel. 
+
+
+![img_10.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_10.png)
+
+A continuación exploró cómo transformar y almacenar esos datos para realizar análisis avanzados.
+
+
+![img_11.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_11.png)
+
+En la siguiente lección aprendió a trabajar con marcos de datos en Azure Databricks. Aquí exploró cómo procesar datos en Azure Databricks definiendo marcos de datos para leer y procesar los datos realizó transformaciones de datos en marcos de datos. 
+Y ejecutar acciones para mostrar los datos transformados. 
+
+![img_12.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_12.png)
+
+El siguiente módulo exploró el procesamiento de datos en Azure Databricks. Donde comenzó aprendiendo a escribir funciones definidas por el usuario y realizar operaciones de extracción, transformación y carga o ETL utilizando funciones definidas por el usuario.
+
+![img_13.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_13.png)
+
+Continuó aprendiendo sobre las características clave de Delta Lake y cómo utilizarlo para crear una pluma y tablas absurdas. 
+
+![img_14.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_14.png)
+
+Luego aprendió sobre optimizaciones en Delta Lake y cómo comparar diferentes versiones utilizando time machine.
+
+![img_15.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_15.png)
+
+En el siguiente módulo Empezar con Databricks un aprendizaje automático, aprendió a realizar aprendizaje automático con Azure 
+Databricks. Aquí en la primera lección aprendió a utilizar Azure Pyspark y Databricks para implementar partes clave del 
+flujo de trabajo de aprendizaje automático. 
+
+![img_16.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_16.png)
+
+En la siguiente lección aprendió a entrenar un modelo de aprendizaje automático. Exploró cómo construir pipelines para 
+tareas comunes de featurización de datos y completó un ejercicio para construir e interpretar un modelo de regresión.
+
+![img_17.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_17.png)
+
+En el siguiente módulo analizó la gestión de los ciclos de vida del aprendizaje automático y el ajuste fino de modelos. 
+
+En la primera lección aprendió a trabajar con MLflow y a utilizarlo para realizar el seguimiento de experimentos, registrar 
+métricas y comparar ejecuciones.
+
+![img_18.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_18.png)
+
+A continuación aprendió a realizar la selección de modelos con el ajuste de hiperparámetros. Comprendió el ajuste de hiperparámetros y su papel en el aprendizaje automático. 
+Después aprendió a utilizar modelos de la biblioteca de aprendizaje automático de PySpark para el ajuste de hiperparámetros y la selección de modelos. 
+
+![img_19.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_19.png)
+
+ En el último módulo vio cómo entrenar una red neuronal distribuida y servir modelos con el aprendizaje automático de Azure. En la primera lección exploró el aprendizaje profundo con Horovod para el entrenamiento distribuido. 
+
+![img_20.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_20.png)
+
+Después aprendió cómo puede utilizar Azure Databricks y cómo ejecutar trabajos de entrenamiento de aprendizaje profundo distribuido de larga duración en Spark. 
+
+![img_21.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_21.png)
+
+En la siguiente lección trabajó con el aprendizaje automático de Azure para desplegar modelos de servicio. Exploró el uso de Petastorm para permitir el entrenamiento y la evaluación de modelos de aprendizaje profundo a partir de conjuntos de datos en formato parquet de Apache. 
+
+![img_22.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_22.png)
+
+Y, por último, exploró cómo servir modelos con el aprendizaje automático de Azure. 
+
+![img_23.png](modules%2F7%20Recap%20on%20Azure%20Databricks%2Fims%2Fimg_23.png)
+
+Enhorabuena, ya ha completado la recapitulación del curso cuatro. Debería ser capaz de repasar los conceptos clave que se trataron en el curso, realizar señales de datos con Azure Databricks y estar preparado para realizar el examen práctico sobre estos temas.
+
 ## 7.3 Practice exam covering Course 4: Perform data science with Azure Databricks
 [<- Return to INDEX 7](#index-7)
+
+1. **Question 1:**
+
+    You have an AirBnB housing dataframe which you preprocessed and filtered down to only the relevant columns.
+
+    The columns are: id, host_name, bedrooms, neighbourhood_cleansed, price.
+
+    You’ve written the function below named `firstInitialFunction` that returns the first initial from the `host_name` column:
+
+    ```python
+    def firstInitialFunction(name):
+        return name[0]
+    ```
+
+    Because Python UDFs are much slower than Scala UDFs, you now want to create a Vectorized UDF in Python to speed up the computation.
+
+    How would you code that?
+
+    - A:
+      ```python
+      
+      from pyspark.sql.functions import pandas_udf
+      # We have a string input/output
+      @pandas_udf("string")
+      create vectorizedUDF(name):
+      
+      return name.str[0]
+      ```
+   
+    - B: Correct
+      ```python
+      from pyspark.sql.functions import pandas_udf
+
+      @pandas_udf("string")
+      def vectorizedUDF(name):
+          return name.str[0]
+      ```
+
+    - C:
+      ```python
+      from pyspark.sql.functions import pandas_udf
+
+      @pandas_udf("int")
+      def vectorizedUDF(name):
+          return name.str[0]
+      ```
+
+    - D:
+      ```python
+      from pyspark.sql.functions import pandas_udf
+
+      @pandas_udf("string")
+      def vectorizedUDF(host_name):
+          get name.str[0]
+      ```
+   > Correct
+   This is the correct code for the task. We used string as an argument because we have a string input/output.
+
+2. **Question 2:**
+
+    You have a Boston Housing dataset where you find a median value for a number of variables such as the number of rooms, per capita crime, and economic status of residents.
+
+    You want to use Linear Regression to predict the median home value based on the average number of rooms.
+
+    You’ve imported the dataset and created a column named features that has a single input variable named rm by using VectorAssembler.
+
+    You now want to fit the Linear Regression model.
+
+    How should you code that?
+
+    - A:
+      ```python
+      from pyspark.ml import LinearRegression
+
+      lr = LinearRegression(featuresCol="rm ", labelCol="medv")
+
+      lrModel = lr_fit(bostonFeaturizedDF)
+      ```
+
+    - B:
+      ```python
+      from pyspark import LinearRegression
+
+      lr = LinearRegression(featuresCol="features", labelCol="medv")
+
+      lrModel = lr.fit(bostonFeaturizedDF)
+      ```
+
+    - C: Correct
+      ```python
+      from pyspark.ml.regression import LinearRegression
+
+      lr = LinearRegression(featuresCol="features", labelCol="medv")
+
+      lrModel = lr.fit(bostonFeaturizedDF)
+      ```
+
+    - D:
+      ```python
+      from pyspark.ml.regression import LinearRegression
+
+      lr = LinearRegression(featuresCol="rm", labelCol="medv")
+
+      lrModel = lr_fit(bostonFeaturizedDF)
+      ```
+
+  > Correct
+   This is the correct code for the task.
+
+3. **Question 3:**
+
+    You’re working with the Boston Housing dataset, and you want to tune the Hyperparameters for the Linear Regression algorithm you’re using.
+
+    You’ve performed a test split on the Boston dataset and built a pipeline for linear regression.
+
+    Now you want to use `ParamGridBuilder()` to test the maximum number of iterations, no matter whether you want to use an intercept with the y-axis, or whether you want to standardize the features.
+
+    How should you code that?
+
+    - A:
+      ```python
+      from pyspark.ml.tuning import ParamGridBuilder
+
+      paramGrid = (ParamGridBuilder(lr)
+          .addGrid(lr.maxIter, [1, 10, 100])
+          .addGrid(lr.fitIntercept, [True, False])
+          .addGrid(lr.standardization, [True, False])
+          .create())
+      ```
+
+    - B: Correct
+      ```python
+      from pyspark.ml.tuning import ParamGridBuilder
+
+      paramGrid = (ParamGridBuilder()
+          .addGrid(lr.maxIter, [1, 10, 100])
+          .addGrid(lr.fitIntercept, [True, False])
+          .addGrid(lr.standardization, [True, False])
+          .build())
+      ```
+
+    - C:
+      ```python
+      from pyspark.ml.tuning import ParamGridBuilder
+
+      paramGrid = (ParamGridBuilder(lr)
+          .addGrid(lr.maxIter, [1, 10, 100])
+          .addGrid(lr.fitIntercept, [True, False])
+          .addGrid(lr.standardization, [True, False])
+          .run())
+      ```
+
+    - D:
+      ```python
+      from pyspark.ml.tuning import ParamGridBuilder
+
+      paramGrid = (ParamGridBuilder()
+          .addGrid(lr.maxIter, [1, 10, 100])
+          .addGrid(lr.fitIntercept, [True, False])
+          .addGrid(lr.standardization, [True, False])
+          .search())
+      ```
+
+   > Correct
+   This is the correct code for this task.
+
+4. **Question 4:**
+
+    You are running Python code interactively in a Conda environment. The environment includes all required Azure Machine Learning SDK and MLflow packages.
+
+    You must use MLflow to log metrics in an Azure Machine Learning experiment named mlflow-experiment.
+
+    To answer, replace the bolded comments in the code with the appropriate code options in the answer area.
+
+    How should you complete the code?
+
+    ```python
+    import mlflow
+    from azureml.core import Workspace
+    ws = Workspace.from_config()
+    #1 Set the MLflow logging target
+    #2 Configure the experiment
+    with #3 Begin the experiment run
+        #4 Log my_metric with value 1.00 (‘my_metric’, 1.00)
+    print(“Finished!”)
+    ```
+
+    - A: Correct
+      ```python
+      #1 mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri()), #2 mlflow.set_experiment('mlflow-experiment'), #3 mlflow.start_run(), #4 mlflow.log_metric
+      ```
+
+    - B:
+      ```python
+      #1 mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri()), #2 mlflow.get_run('mlflow-experiment'), #3 mlflow.start_run(), #4 run.log()
+      ```
+
+    - C:
+      ```python
+      #1 mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri()), #2 mlflow.get_run('mlflow-experiment'), #3 mlflow.start_run(), #4 mlflow.log_metric
+      ```
+
+    - D:
+      ```python
+      #1 mlflow.tracking.client = ws, #2 mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri()), #3 mlflow.active_run(), #4 mlflow.log_metric
+      ```
+
+   > Correct
+   This is the correct code for this task.
+
+5. **Question 5:**
+
+    You create machine learning models by using Azure Machine Learning. You plan to train and score models by using a variety of compute contexts.
+
+    You also plan to train models by using an Azure Databricks cluster.
+
+    Which compute type can you use for Azure Databricks?
+
+    - A: Attached compute
+
+    - B: Compute cluster
+
+    - C: Inference cluster
+
+    - D: Remote compute
+
+   > **Correct Answer: A**
+    This compute type can be used by Azure Databricks (for use in machine learning pipelines), Azure Data Lake Analytics (for use in machine learning pipelines), and Azure HDInsight.
+
+6. **Question 6:**
+
+    You use the following code to run a script as an experiment in Azure Machine Learning:
+
+    ```python
+    from azureml.core import Workspace, Experiment, Run 
+    from azureml.core import RunConfig, ScriptRunConfig 
+    ws = Workspace.from_config() 
+    run_config = RunConfiguration() 
+    run_config.target=’local’ 
+    script_config = ScriptRunConfig(source_directory=’./script’, script=’experiment.py’, run_config=run_config) 
+    experiment = Experiment(workspace=ws, name=’script experiment’) 
+    run = experiment.submit(config=script_config) 
+    run.wait_for_completion()
+    ```
+
+    You must identify the output files that are generated by the experiment run. You need to add code to retrieve the output file names. Which code segment should you add to the script?
+
+    - A: `files = run.get_properties()`
+    
+    - B: `files = run.get_file_names()`
+    
+    - C: `run.get_details_with_logs()`
+    
+    - D: `files = run.get_metrics()`
+
+    > **Correct Answer: B**
+    These are the correct commands for this task.
+
 
 # 8 Full practice exam
 
